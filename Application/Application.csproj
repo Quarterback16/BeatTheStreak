@@ -45,8 +45,11 @@
   <ItemGroup>
     <Compile Include="StattlleShipApi\BaseApiRequest.cs" />
     <Compile Include="StattlleShipApi\IStattleShipApi.cs" />
+    <Compile Include="StattlleShipApi\LineupRequest.cs" />
     <Compile Include="StattlleShipApi\Model\GameDto.cs" />
     <Compile Include="StattlleShipApi\Model\LeagueDto.cs" />
+    <Compile Include="StattlleShipApi\Model\LineupDto.cs" />
+    <Compile Include="StattlleShipApi\Model\LineupsDto.cs" />
     <Compile Include="StattlleShipApi\Model\OfficialDto.cs" />
     <Compile Include="StattlleShipApi\Model\PitcherDto.cs" />
     <Compile Include="StattlleShipApi\Model\PlayerDto.cs" />

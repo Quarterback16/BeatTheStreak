@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 
 namespace Application.StattlleShipApi.Model
@@ -7,7 +6,7 @@ namespace Application.StattlleShipApi.Model
     public class GameDto
     {
         [JsonProperty("id")]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         [JsonProperty("created_at")]
         public string CreatedAt { get; set; }
