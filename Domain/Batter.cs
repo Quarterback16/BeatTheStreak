@@ -16,9 +16,13 @@
 
         public string TeamId { get; set; }
 
+        public string TeamSlug { get; set; }
+
+        public string TeamName { get; set; }
+
         public override string ToString()
         {
-            return $"{BattingOrder} {Name} {PositionAbbreviation}";
+            return $"{BattingOrder} {Name} {PositionAbbreviation} {TeamName}";
         }
     }
 }

@@ -12,8 +12,8 @@ namespace BeatTheStreak.Tests
         {
             var sut = new LineupRequest();
             var result = sut.Submit(
-                queryDate: new DateTime(2018, 4, 26),
-                teamId: "mlb-tor");
+                queryDate: DateTime.Now.AddDays(-1),
+                teamId: "mlb-pit");
             sut.Dump();
             Assert.IsTrue(result.Count > 0, "No batters returned");
         }

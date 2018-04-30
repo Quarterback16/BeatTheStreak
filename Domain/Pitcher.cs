@@ -14,13 +14,17 @@
 
         public string TeamId { get; set; }
 
+        public string TeamName { get; set; }
+
         public string NextOpponent { get; set; }
 
         public string OpponentId { get; set; }
 
+        public string OpponentSlug { get; set; }
+
         public override string ToString()
         {
-            return $"{Name} {TeamId} ({Wins}-{Losses}) {Era:0.00} {NextOpponent} {OpponentId}";
+            return $"{Name} {TeamName} ({Wins}-{Losses}) {Era:0.00}";
         }
     }
 }

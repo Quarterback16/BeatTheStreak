@@ -34,15 +34,8 @@ namespace BeatTheStreak
 
                 Players = dto.Players;
                 Teams = dto.Teams;
-                var i = 0;
-                foreach (var item in dto.Teams)
-                {
-                    Console.WriteLine($"{++i} {item.Slug}");
-                };
                 Games = dto.Games;
 
-                Console.WriteLine(dto);
-                Debug.Write(dto);
                 foreach (var item in dto.Pitchers)
                 {
                     result.Add(MapDtoToPitcher(item));
@@ -54,15 +47,18 @@ namespace BeatTheStreak
 
         private Pitcher MapDtoToPitcher(PitcherDto dto)
         {
+            var oppId = OpponentTeamId(dto.GameId, dto.TeamId, Games);
             var pitcher = new Pitcher
             {
                 Name = GetName(dto.PlayerId, Players),
                 Wins = Int32.Parse(dto.Wins),
                 Losses = Int32.Parse(dto.Losses),
                 Era = Decimal.Parse(dto.Era),
-                TeamId = TeamFor(dto.TeamId, Teams),
+                TeamId = TeamSlugFor(dto.TeamId, Teams),
+                TeamName = TeamNameFor(dto.TeamId, Teams),
                 NextOpponent = GameFor(dto.GameId, Games),
-                OpponentId = OpponentTeamId(dto.GameId, dto.TeamId, Games)
+                OpponentId = oppId,
+                OpponentSlug = TeamSlugFor(oppId, Teams)
             };
             return pitcher;
         }
@@ -75,7 +71,7 @@ namespace BeatTheStreak
                 if (g.Id == gameId)
                 {
                     if (g.HomeTeamId == teamId)
-                        oppId = g.xAwayTeamId;
+                        oppId = g.AwayTeamId;
                     else
                         oppId = g.HomeTeamId;
                     break;
@@ -83,5 +79,6 @@ namespace BeatTheStreak
             }
             return oppId;
         }
+
     }
 }

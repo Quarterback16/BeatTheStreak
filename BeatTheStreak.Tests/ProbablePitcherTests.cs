@@ -11,7 +11,7 @@ namespace BeatTheStreak.Tests
         public void ProbablePitchers_ReturnsMultiplePitchers()
         {
             var sut = new ProbablePitcherRequest();
-            var result = sut.Submit(new DateTime(2018, 4, 29));
+            var result = sut.Submit(DateTime.Now);
             var i = 0;
             foreach (var pitcher in result)
             {

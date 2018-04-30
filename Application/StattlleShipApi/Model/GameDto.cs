@@ -129,7 +129,7 @@ namespace Application.StattlleShipApi.Model
         public string HomeTeamId { get; set; }
 
         [JsonProperty("away_team_id")]
-        public string xAwayTeamId { get; set; }
+        public string AwayTeamId { get; set; }
 
         [JsonProperty("winning_team_id")]
         public string WinningTeamId { get; set; }

@@ -84,5 +84,33 @@ namespace Application.StattlleShipApi
             }
             return name;
         }
+
+        public string TeamSlugFor(string teamId, List<TeamDto> teams)
+        {
+            var slug = string.Empty;
+            foreach (var item in teams)
+            {
+                if (item.TeamId == teamId)
+                {
+                    slug = item.Slug;
+                    break;
+                }
+            };
+            return slug;
+        }
+
+        public string TeamNameFor(string teamId, List<TeamDto> teams)
+        {
+            var name = string.Empty;
+            foreach (var item in teams)
+            {
+                if (item.TeamId == teamId)
+                {
+                    name = item.Name + " " + item.NickName;
+                    break;
+                }
+            };
+            return name;
+        }
     }
 }

@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Batter.cs" />
+    <Compile Include="Game.cs" />
     <Compile Include="Pitcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -36,8 +36,6 @@ namespace Application.StattlleShipApi
                 Teams = dto.Teams;
                 Games = dto.Games;
 
-                Console.WriteLine(dto);
-                Debug.Write(dto);
                 foreach (var item in dto.Lineups)
                 {
                     result.Add(MapDtoToBatter(item));
@@ -56,7 +54,9 @@ namespace Application.StattlleShipApi
                 BattingOrder = dto.BattingOrder,
                 LineupPosition = dto.LineupPosition,
                 PositionAbbreviation = dto.PositionAbbreviation,
-                Sequence = dto.Sequence
+                Sequence = dto.Sequence,
+                TeamSlug = TeamSlugFor(dto.TeamId, Teams),
+                TeamName = TeamNameFor(dto.TeamId, Teams)
             };
             return batter;
         }

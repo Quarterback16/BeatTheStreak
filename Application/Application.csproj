@@ -43,6 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Outputs\BatterReport.cs" />
+    <Compile Include="Outputs\Selection.cs" />
+    <Compile Include="PickBatters.cs" />
     <Compile Include="StattlleShipApi\BaseApiRequest.cs" />
     <Compile Include="StattlleShipApi\IStattleShipApi.cs" />
     <Compile Include="StattlleShipApi\LineupRequest.cs" />

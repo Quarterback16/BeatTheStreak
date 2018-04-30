@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LineupTests.cs" />
+    <Compile Include="PickBattersTests.cs" />
     <Compile Include="ProbablePitcherTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
