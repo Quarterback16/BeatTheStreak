@@ -7,9 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bts", "BeatTheStreak\bts.cs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{F753BA06-DB2A-4634-9412-7FB92A383399}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeatTheStreak.Tests", "BeatTheStreak.Tests\BeatTheStreak.Tests.csproj", "{5A55D3DE-8FAC-4401-9EB2-17FF5CA719C1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeatTheStreak.IntegrationTests", "BeatTheStreak.Tests\BeatTheStreak.IntegrationTests.csproj", "{5A55D3DE-8FAC-4401-9EB2-17FF5CA719C1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{F948ED1C-C645-4202-8242-31C42ED03F3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeatTheStreak.UnitTests", "BeatTheStreak.UnitTests\BeatTheStreak.UnitTests.csproj", "{9ACBC0B9-C075-424D-86AF-33A39FD3D10F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{F948ED1C-C645-4202-8242-31C42ED03F3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F948ED1C-C645-4202-8242-31C42ED03F3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F948ED1C-C645-4202-8242-31C42ED03F3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9ACBC0B9-C075-424D-86AF-33A39FD3D10F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9ACBC0B9-C075-424D-86AF-33A39FD3D10F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9ACBC0B9-C075-424D-86AF-33A39FD3D10F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9ACBC0B9-C075-424D-86AF-33A39FD3D10F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

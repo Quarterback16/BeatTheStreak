@@ -43,9 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IPickBatters.cs" />
     <Compile Include="Outputs\BatterReport.cs" />
     <Compile Include="Outputs\Selection.cs" />
     <Compile Include="PickBatters.cs" />
+    <Compile Include="Pickers\RegularPicker.cs" />
+    <Compile Include="Repositories\ILineupRepository.cs" />
+    <Compile Include="Repositories\IPitcherRepository.cs" />
+    <Compile Include="Repositories\LineupRepository.cs" />
+    <Compile Include="Repositories\PitcherRepository.cs" />
     <Compile Include="StattlleShipApi\BaseApiRequest.cs" />
     <Compile Include="StattlleShipApi\IStattleShipApi.cs" />
     <Compile Include="StattlleShipApi\LineupRequest.cs" />

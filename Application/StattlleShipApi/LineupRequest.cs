@@ -14,7 +14,7 @@ namespace Application.StattlleShipApi
     {
         public List<Batter> Batters { get; set; }
 
-        public List<Batter> Submit(DateTime queryDate, string teamId)
+        public List<Batter> Submit(DateTime queryDate, string teamSlug)
         {
             var strDate = UniversalDate(queryDate);
             var result = new List<Batter>();
@@ -23,7 +23,7 @@ namespace Application.StattlleShipApi
                 sport: "baseball",
                 league: "mlb",
                 apiRequest: "lineups",
-                queryParms: $"season_id=mlb-2018&on={strDate}&team_id={teamId}");
+                queryParms: $"season_id=mlb-2018&on={strDate}&team_id={teamSlug}");
 
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
 

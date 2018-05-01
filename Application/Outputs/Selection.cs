@@ -1,4 +1,5 @@
 ﻿using Domain;
+using System;
 
 namespace Application.Outputs
 {
@@ -7,6 +8,7 @@ namespace Application.Outputs
         public Batter Batter { get; set; }
         public Pitcher Pitcher { get; set; }
         public Game Game { get; set; }
+        public DateTime GameDate { get; set; }
 
         public override string ToString()
         {

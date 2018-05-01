@@ -13,7 +13,7 @@ namespace BeatTheStreak.Tests
             var sut = new LineupRequest();
             var result = sut.Submit(
                 queryDate: DateTime.Now.AddDays(-1),
-                teamId: "mlb-pit");
+                teamSlug: "mlb-pit");
             sut.Dump();
             Assert.IsTrue(result.Count > 0, "No batters returned");
         }

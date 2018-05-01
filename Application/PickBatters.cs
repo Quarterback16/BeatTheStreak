@@ -1,6 +1,5 @@
 ﻿using Application.Outputs;
-using Application.StattlleShipApi;
-using BeatTheStreak;
+using Application.Repositories;
 using Domain;
 using System;
 using System.Collections.Generic;
@@ -10,6 +9,20 @@ namespace Application
 {
     public class PickBatters
     {
+        private readonly IPickBatters _picker;
+        private readonly ILineupRepository _lineupRepository;
+        private readonly IPitcherRepository _pitcherRepository;
+
+        public PickBatters(
+            IPickBatters batterPicker,
+            ILineupRepository lineupRepository,
+            IPitcherRepository pitcherRepository)
+        {
+            _picker = batterPicker;
+            _lineupRepository = lineupRepository;
+            _pitcherRepository = pitcherRepository;
+        }
+
         public BatterReport Choose( DateTime gameDate, int numberRequired )
         {
             var report = new BatterReport(gameDate)
@@ -23,15 +36,13 @@ namespace Application
         {
             var batters = new List<Selection>();
             //  Get list of pitchers first
-            var request = new ProbablePitcherRequest();
-            var lineupRequest = new LineupRequest();
-            var pitchers = request.Submit(gameDate);
+            var pitchers = _pitcherRepository.Submit(gameDate);
             foreach (var pitcher in pitchers)
             {
                 var opponentTeam = pitcher.OpponentSlug;
-                var result = lineupRequest.Submit(
+                var result = _lineupRepository.Submit(
                     queryDate: gameDate.AddDays(-1),
-                    teamId: opponentTeam);
+                    teamSlug: opponentTeam);
                 var batter = result.FirstOrDefault();
                 if ( batter != null)
                 {
@@ -44,7 +55,9 @@ namespace Application
                             Title = pitcher.NextOpponent
                         }
                     };
-                    batters.Add(selection);
+                    //  could have multiple pickers
+                    if (_picker.Likes(selection))
+                        batters.Add(selection);
                 }
                 if (batters.Count == numberRequired)
                     break;
