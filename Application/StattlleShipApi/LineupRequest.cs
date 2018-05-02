@@ -38,7 +38,8 @@ namespace Application.StattlleShipApi
 
                 foreach (var item in dto.Lineups)
                 {
-                    result.Add(MapDtoToBatter(item));
+                    if (Int32.Parse(item.BattingOrder) > 0 )
+                        result.Add(MapDtoToBatter(item));
                 };
             }
             Batters = result.OrderBy(o => o.BattingOrder).ToList();

@@ -48,6 +48,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlwaysLikePicker.cs" />
     <Compile Include="LineupTests.cs" />
     <Compile Include="PickBattersTests.cs" />
     <Compile Include="ProbablePitcherTests.cs" />

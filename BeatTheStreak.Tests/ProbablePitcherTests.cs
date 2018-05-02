@@ -20,7 +20,7 @@ namespace BeatTheStreak.Tests
             var i = 0;
             foreach (var pitcher in result)
             {
-                Console.WriteLine($"{++i} {pitcher}");
+                Console.WriteLine($"{++i} {pitcher} {pitcher.NextOpponent}");
             }
             Assert.IsTrue(result.Count>0, "No pitchers returned");
         }

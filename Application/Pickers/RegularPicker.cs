@@ -17,12 +17,12 @@ namespace Application.Pickers
 
         public bool Likes(Selection selection)
         {
-            var lineup1 = _lineupRepository.Submit(
-                selection.GameDate,
-                selection.Batter.TeamSlug);
+            //var lineup1 = _lineupRepository.Submit(
+            //    selection.GameDate,
+            //    selection.Batter.TeamSlug);
 
-            if (!LineupHas(selection.Batter, lineup1))
-                return false;
+            //if (!LineupHas(selection.Batter, lineup1))
+            //    return false;
 
             return true;
         }

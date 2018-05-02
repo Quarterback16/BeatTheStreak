@@ -15,7 +15,7 @@ namespace BeatTheStreak.Tests
         {
             var pitcherRepo = new PitcherRepository();
             var lineupRepo = new LineupRepository();
-            var picker = new RegularPicker(lineupRepo);
+            var picker = new AlwaysLikePicker(lineupRepo);
             var sut = new PickBatters(picker,lineupRepo,pitcherRepo);
             var result = sut.Choose(DateTime.Now, 2);
             result.Dump();
