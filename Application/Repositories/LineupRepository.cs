@@ -1,23 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
+using Application.Outputs;
 using Application.StattlleShipApi;
-using Domain;
 
 namespace Application.Repositories
 {
     public class LineupRepository : ILineupRepository
     {
-        public List<Batter> Submit(DateTime queryDate, string teamSlug)
+        public LineupViewModel Submit(DateTime queryDate, string teamSlug)
         {
-            var lineup = new List<Batter>();
+            var result = new LineupViewModel
+            {
+                GameDate = queryDate
+            };
 
             var lineupRequest = new LineupRequest();
-
-            lineup = lineupRequest.Submit(
+            //Console.WriteLine($"requesting {teamSlug} lineup for {queryDate}");
+            result = lineupRequest.Submit(
                 queryDate: queryDate,
                 teamSlug: teamSlug);
 
-            return lineup;
+            return result;
         }
     }
 }

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using Domain;
 using System.Net;
 using System.IO;
-using System.Diagnostics;
 using System;
 using Application.StattlleShipApi.Model;
 using System.Linq;
+using Application.Outputs;
 
 namespace Application.StattlleShipApi
 {
@@ -14,10 +14,14 @@ namespace Application.StattlleShipApi
     {
         public List<Batter> Batters { get; set; }
 
-        public List<Batter> Submit(DateTime queryDate, string teamSlug)
+        public LineupViewModel Submit(DateTime queryDate, string teamSlug)
         {
+            var result = new LineupViewModel
+            {
+                GameDate = queryDate
+            };
             var strDate = UniversalDate(queryDate);
-            var result = new List<Batter>();
+            var lineup = new List<Batter>();
 
             var httpWebRequest = CreateRequest(
                 sport: "baseball",
@@ -39,11 +43,13 @@ namespace Application.StattlleShipApi
                 foreach (var item in dto.Lineups)
                 {
                     if (Int32.Parse(item.BattingOrder) > 0 )
-                        result.Add(MapDtoToBatter(item));
+                        lineup.Add(MapDtoToBatter(item));
                 };
             }
-            Batters = result.OrderBy(o => o.BattingOrder).ToList();
-            return Batters;
+            Batters = lineup.OrderBy(o => o.BattingOrder).ToList();
+            result.Lineup = Batters;
+            result.TeamName = teamSlug;
+            return result;
         }
 
         private Batter MapDtoToBatter(LineupDto dto)

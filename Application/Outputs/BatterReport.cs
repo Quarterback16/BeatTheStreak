@@ -17,6 +17,10 @@ namespace Application.Outputs
 
         public void Dump()
         {
+            Console.WriteLine("-----------------------------------------------------");
+            Console.WriteLine("COMPUTER PICKS");
+            Console.WriteLine("-----------------------------------------------------");
+
             Console.WriteLine(GameDate.ToLongDateString());
             Console.WriteLine();
             if (Selections != null)

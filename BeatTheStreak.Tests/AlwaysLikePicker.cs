@@ -13,8 +13,9 @@ namespace BeatTheStreak.Tests
             _lineupRepository = lineupRepository;
         }
 
-        public bool Likes(Selection selection)
+        public bool Likes(Selection selection, out string reasonForDislike)
         {
+            reasonForDislike = string.Empty;
             return true;
         }
 

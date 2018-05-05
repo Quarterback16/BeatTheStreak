@@ -1,20 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using Domain;
+using Application.Outputs;
 
 namespace BeatTheStreak
 {
     public class StattleShipApi : IStattleShipApi
     {
-        public List<Pitcher> GetProbablePitchers(DateTime queryDate)
+        public ProbablePitcherViewModel GetProbablePitchers(DateTime queryDate)
         {
-            var result = new List<Pitcher>();
-            // build request
+            var result = new ProbablePitcherViewModel();
             var request = new ProbablePitcherRequest();
-
-            // submit request
             result = request.Submit(queryDate);
-            // parse results
             return result;
         }
     }

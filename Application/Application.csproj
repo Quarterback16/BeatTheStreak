@@ -45,6 +45,8 @@
   <ItemGroup>
     <Compile Include="IPickBatters.cs" />
     <Compile Include="Outputs\BatterReport.cs" />
+    <Compile Include="Outputs\LineupViewModel.cs" />
+    <Compile Include="Outputs\ProbablePitcherViewModel.cs" />
     <Compile Include="Outputs\Selection.cs" />
     <Compile Include="PickBatters.cs" />
     <Compile Include="Pickers\RegularPicker.cs" />

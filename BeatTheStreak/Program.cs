@@ -1,9 +1,4 @@
-﻿using Domain;
-using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Net;
+﻿using System.IO;
 
 namespace BeatTheStreak
 {
@@ -11,7 +6,7 @@ namespace BeatTheStreak
     {
         static void Main(string[] args)
         {
-
+            var version = "0.0.2.0";
         }
 
         /// <summary>

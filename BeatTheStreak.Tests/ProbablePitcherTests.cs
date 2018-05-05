@@ -9,20 +9,17 @@ namespace BeatTheStreak.Tests
         [TestInitialize]
         public void Setup()
         {
-
         }
 
         [TestMethod]
         public void ProbablePitchers_ReturnsMultiplePitchers()
         {
             var sut = new ProbablePitcherRequest();
-            var result = sut.Submit(DateTime.Now);
-            var i = 0;
-            foreach (var pitcher in result)
-            {
-                Console.WriteLine($"{++i} {pitcher} {pitcher.NextOpponent}");
-            }
-            Assert.IsTrue(result.Count>0, "No pitchers returned");
+            var result = sut.Submit(new DateTime(2018,5,4));  // US
+            result.Dump();
+            Assert.IsTrue(
+                result.ProbablePitchers.Count > 0, 
+                "Should return some pitchers");
         }
 
     }

@@ -11,17 +11,20 @@ namespace BeatTheStreak.Tests
     {
 
         [TestMethod]
-        public void PickBatters_ReturnsTwoBatters()
+        public void PickBatters_ReturnsBestBatters()
         {
+            const int numberDesired = 2;
             var pitcherRepo = new PitcherRepository();
             var lineupRepo = new LineupRepository();
-            var picker = new AlwaysLikePicker(lineupRepo);
-            var sut = new PickBatters(picker,lineupRepo,pitcherRepo);
-            var result = sut.Choose(DateTime.Now, 2);
+            var picker = new RegularPicker(lineupRepo);
+            var sut = new PickBatters(picker, lineupRepo, pitcherRepo);
+            var result = sut.Choose(
+                gameDate: DateTime.Now.AddDays(-1),  // US Date
+                numberRequired: numberDesired);
             result.Dump();
             Assert.IsTrue(
-                result.Selections.Count == 2,
-                "There should be 2 batters returned");
+                result.Selections.Count == numberDesired,
+                $"There should be {numberDesired} batters returned");
             foreach (var selection in result.Selections)
             {
                 Assert.IsTrue(

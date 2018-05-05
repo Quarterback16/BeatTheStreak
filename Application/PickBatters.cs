@@ -35,19 +35,23 @@ namespace Application
         private List<Selection> SelectBatters(DateTime gameDate, int numberRequired)
         {
             var batters = new List<Selection>();
-            //  Get list of pitchers first
-            var pitchers = _pitcherRepository.Submit(gameDate);
-            foreach (var pitcher in pitchers)
+            ProbablePitcherViewModel pitchers = GetProbablePitchers(gameDate);
+            var i = 0;
+            foreach (var pitcher in pitchers.ProbablePitchers)
             {
+                ++i;
+                var printLine = $"{i.ToString(),2} {pitcher}";
                 var opponentTeam = pitcher.OpponentSlug;
+                var lineupQueryDate = gameDate.AddDays(-1);
                 var result = _lineupRepository.Submit(
-                    queryDate: gameDate.AddDays(-1),
+                    queryDate: lineupQueryDate,
                     teamSlug: opponentTeam);
-                var batter = result.FirstOrDefault();
-                if ( batter != null)
+                var batter = result.Lineup.FirstOrDefault();
+                if (batter != null)
                 {
                     var selection = new Selection
                     {
+                        GameDate = gameDate,
                         Batter = batter,
                         Pitcher = pitcher,
                         Game = new Game
@@ -56,13 +60,37 @@ namespace Application
                         }
                     };
                     //  could have multiple pickers
-                    if (_picker.Likes(selection))
+                    string reason = string.Empty;
+                    if (!_picker.Likes(selection, out reason))
+                        printLine += reason;
+                    else
+                    {
                         batters.Add(selection);
+                        printLine += "  " + selection.Batter.ToString();
+                    }
                 }
+                else
+                {
+                    printLine +=  
+                        $@"  skipped No {
+                            opponentTeam
+                            } lineups available for {
+                            lineupQueryDate.ToShortDateString()
+                            } team COLD";
+                }
+                Console.WriteLine(printLine);
                 if (batters.Count == numberRequired)
                     break;
             }
             return batters;
+        }
+
+        private ProbablePitcherViewModel GetProbablePitchers(DateTime gameDate)
+        {
+            Console.WriteLine($"GameDate {gameDate.ToLongDateString()} (US)");
+            var pitchers = _pitcherRepository.Submit(gameDate);
+            pitchers.Dump();
+            return pitchers;
         }
     }
 }

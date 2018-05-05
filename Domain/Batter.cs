@@ -22,7 +22,7 @@
 
         public override string ToString()
         {
-            return $"{BattingOrder} {Name} {PositionAbbreviation} {TeamName}";
+            return $"{BattingOrder} {Name,-25} {PositionAbbreviation,-2} {TeamName,-25}";
         }
     }
 }

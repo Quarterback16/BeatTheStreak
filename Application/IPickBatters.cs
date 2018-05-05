@@ -4,6 +4,6 @@ namespace Application
 {
     public interface IPickBatters
     {
-        bool Likes(Selection selection);
+        bool Likes(Selection selection, out string reasonForDislike);
     }
 }

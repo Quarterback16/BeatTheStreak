@@ -51,3 +51,7 @@ Basically the development process is one of designing Commands and testing them
  6.	Common (cross cutting concerns)
  7.	Specification (acceptance tests)
 
+## Development Notes
+ 1. Wrap calls to Statleship API with Repository Classes
+ 2. Repository classes should return view models
+ 3. Use US dates as this is what Statle ship uses

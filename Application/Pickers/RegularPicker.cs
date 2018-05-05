@@ -15,16 +15,38 @@ namespace Application.Pickers
             _lineupRepository = lineupRepository;
         }
 
-        public bool Likes(Selection selection)
+        public bool Likes(Selection selection, out string reasonForDislike)
         {
-            //var lineup1 = _lineupRepository.Submit(
-            //    selection.GameDate,
-            //    selection.Batter.TeamSlug);
-
-            //if (!LineupHas(selection.Batter, lineup1))
-            //    return false;
-
+            reasonForDislike = string.Empty;
+            for (int daysback = 1; daysback < 4; daysback++)
+            {
+                var queryDate = selection.GameDate.AddDays(-daysback);
+                if (NotInLineup(queryDate, selection.Batter))
+                {
+                    reasonForDislike = $@"  {selection.Batter.Name} was not in the {
+                        selection.Batter.TeamSlug
+                        } line up on {
+                        queryDate
+                        }";
+                        return false;
+                }
+            }
             return true;
+        }
+
+        private bool NotInLineup(
+            DateTime gameDate, 
+            Batter batter)
+        {
+            var lineup = _lineupRepository.Submit(
+                gameDate,
+                batter.TeamSlug).Lineup;
+
+            if (!LineupHas(batter, lineup))
+            {
+                return true;
+            }
+            return false;
         }
 
         private bool LineupHas(Batter batter, List<Batter> lineup)

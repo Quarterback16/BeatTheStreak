@@ -24,7 +24,8 @@
 
         public override string ToString()
         {
-            return $"{Name} {TeamName} ({Wins}-{Losses}) {Era:0.00}";
+            var era = string.Format("{0:#0.00}", Era);
+            return $"{Name,-25} {TeamName,-20} ({Wins}-{Losses}) {era,5}";
         }
     }
 }

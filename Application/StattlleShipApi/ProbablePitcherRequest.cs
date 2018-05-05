@@ -3,22 +3,29 @@ using System.Collections.Generic;
 using Domain;
 using System.Net;
 using System.IO;
-using System.Diagnostics;
 using System;
 using Application.StattlleShipApi.Model;
 using Application.StattlleShipApi;
 using System.Linq;
+using Application.Outputs;
 
 namespace BeatTheStreak
 {
     public class ProbablePitcherRequest : BaseApiRequest
     {
-        public List<Pitcher> Submit(DateTime queryDate)
+        public Dictionary<string,Pitcher> TeamList { get; set; }
+
+        public ProbablePitcherViewModel Submit(DateTime queryDate)
         {
+            var result = new ProbablePitcherViewModel
+            {
+                GameDate = queryDate
+            };
+
             var strDate = UniversalDate(queryDate);
             //url: "https://api.stattleship.com/baseball/mlb/probable_pitchers?season_id=mlb-2018&on=2018-04-26
-            var result = new List<Pitcher>();
-
+            var pitchers = new List<Pitcher>();
+            TeamList = new Dictionary<string,Pitcher>();
             var httpWebRequest = CreateRequest(
                 sport: "baseball",
                 league: "mlb",
@@ -38,11 +45,37 @@ namespace BeatTheStreak
 
                 foreach (var item in dto.Pitchers)
                 {
-                    result.Add(MapDtoToPitcher(item));
+                    // take the last pitcher
+                    TryAddPitcher(item);
                 };
             }
-            List<Pitcher> sortedByEra = result.OrderByDescending(o => o.Era).ToList();
-            return sortedByEra;
+            foreach (KeyValuePair<string, Pitcher> pair in TeamList)
+            {
+                pitchers.Add(pair.Value);
+            }
+            result.ProbablePitchers = pitchers.OrderByDescending(o => o.Era).ToList();
+            return result;
+        }
+
+        private Dictionary<string, Pitcher> InitaliseTeams(List<TeamDto> teams)
+        {
+            var d = new Dictionary<string, Pitcher>();
+            foreach (TeamDto item in teams)
+            {
+                d.Add(item.TeamId, new Pitcher());
+            }
+            return d;
+        }
+
+        private void TryAddPitcher( 
+            PitcherDto item)
+        {
+            var pitcher = MapDtoToPitcher(item);
+            if (TeamList.ContainsKey(item.TeamId))
+                TeamList[item.TeamId] = pitcher;
+            else
+
+                TeamList.Add(item.TeamId, pitcher);
         }
 
         private Pitcher MapDtoToPitcher(PitcherDto dto)

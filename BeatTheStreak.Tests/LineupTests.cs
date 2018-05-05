@@ -12,10 +12,11 @@ namespace BeatTheStreak.Tests
         {
             var sut = new LineupRequest();
             var result = sut.Submit(
-                queryDate: DateTime.Now.AddDays(-1),
-                teamSlug: "mlb-pit");
-            sut.Dump();
-            Assert.IsTrue(result.Count > 0, "No batters returned");
+                queryDate: new DateTime(2018,5,2),
+                teamSlug: "mlb-nyy");
+            result.DumpLineup();
+            Assert.IsTrue(result.Lineup.Count > 0, 
+                "Lineup request should return batters");
         }
     }
 }

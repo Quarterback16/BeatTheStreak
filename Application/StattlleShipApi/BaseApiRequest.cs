@@ -41,7 +41,12 @@ namespace Application.StattlleShipApi
         public static string UniversalDate(DateTime date)
         {
             var longDate = $"{date.Date:u}";
-            return longDate.Substring(0, 10);
+            var universalDate = longDate.Substring(0, 10);
+            var year = universalDate.Substring(0, 5);
+            var month = universalDate.Substring(5, 2);
+            var day = universalDate.Substring(8, 2);
+            var usUniversalDate = $"{year}-{day}-{month}";
+            return universalDate;
         }
 
         public string GetName(string playerId, List<PlayerDto> players)
@@ -107,7 +112,7 @@ namespace Application.StattlleShipApi
             {
                 if (item.TeamId == teamId)
                 {
-                    name = item.Name + " " + item.NickName;
+                    name = item.Name;
                     break;
                 }
             };
