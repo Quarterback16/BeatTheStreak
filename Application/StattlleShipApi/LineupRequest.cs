@@ -56,6 +56,7 @@ namespace Application.StattlleShipApi
         {
             var batter = new Batter
             {
+                PlayerSlug = GetPlayerSlug(dto.PlayerId, Players),
                 Name = GetName(dto.PlayerId, Players),
                 TeamId = TeamFor(dto.TeamId, Teams),
                 BattingOrder = dto.BattingOrder,
@@ -78,7 +79,7 @@ namespace Application.StattlleShipApi
                 {
                     if (lastPos == batter.BattingOrder)
                         pad = "   ";
-                    Console.WriteLine($"{pad} {batter}");
+                    Console.WriteLine($"{pad} {batter} {batter.PlayerSlug}");
                     lastPos = batter.BattingOrder;
                     pad = string.Empty;
                 }

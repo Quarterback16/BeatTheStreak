@@ -63,6 +63,20 @@ namespace Application.StattlleShipApi
             return name;
         }
 
+        public string GetPlayerSlug(string playerId, List<PlayerDto> players)
+        {
+            string name = "???";
+            foreach (var p in players)
+            {
+                if (p.Id == playerId)
+                {
+                    name = $"{p.Slug}";
+                    break;
+                }
+            }
+            return name;
+        }
+
         public string TeamFor(string teamId, List<TeamDto> teams)
         {
             string name = "???";

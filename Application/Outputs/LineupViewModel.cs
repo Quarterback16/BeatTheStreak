@@ -21,7 +21,7 @@ namespace Application.Outputs
                 {
                     if (lastPos == batter.BattingOrder)
                         pad = "   ";
-                    Console.WriteLine($"{pad} {batter}");
+                    Console.WriteLine($"{pad} {batter} {batter.PlayerSlug}");
                     lastPos = batter.BattingOrder;
                     pad = string.Empty;
                 }

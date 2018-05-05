@@ -2,6 +2,8 @@
 {
     public class Batter
     {
+        public string PlayerSlug { get; set; }
+
         public string BattingOrder { get; set; }
 
         public string Name { get; set; }

@@ -51,6 +51,7 @@
     <Compile Include="AlwaysLikePicker.cs" />
     <Compile Include="LineupTests.cs" />
     <Compile Include="PickBattersTests.cs" />
+    <Compile Include="PlayerStatsTests.cs" />
     <Compile Include="ProbablePitcherTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
