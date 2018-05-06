@@ -15,12 +15,22 @@ namespace BeatTheStreak
     {
         public Dictionary<string,Pitcher> TeamList { get; set; }
 
+        public PlayerStatsRequest PlayerStatsRequest { get; set; }
+
+        public DateTime GameDate { get; set; }
+
+        public ProbablePitcherRequest()
+        {
+            PlayerStatsRequest = new PlayerStatsRequest();
+        }
+
         public ProbablePitcherViewModel Submit(DateTime queryDate)
         {
             var result = new ProbablePitcherViewModel
             {
                 GameDate = queryDate
             };
+            GameDate = queryDate;
 
             var strDate = UniversalDate(queryDate);
             //url: "https://api.stattleship.com/baseball/mlb/probable_pitchers?season_id=mlb-2018&on=2018-04-26
@@ -53,7 +63,8 @@ namespace BeatTheStreak
             {
                 pitchers.Add(pair.Value);
             }
-            result.ProbablePitchers = pitchers.OrderByDescending(o => o.Era).ToList();
+            result.ProbablePitchers = pitchers.OrderByDescending(
+                o => o.OpponentsBattingAverage).ToList();
             return result;
         }
 
@@ -91,9 +102,19 @@ namespace BeatTheStreak
                 TeamName = TeamNameFor(dto.TeamId, Teams),
                 NextOpponent = GameFor(dto.GameId, Games),
                 OpponentId = oppId,
-                OpponentSlug = TeamSlugFor(oppId, Teams)
+                OpponentSlug = TeamSlugFor(oppId, Teams),
+                OpponentsBattingAverage = GetOpponentsBattingAverage(
+                    GetPlayerSlug(dto.PlayerId, Players) )
             };
             return pitcher;
+        }
+
+        private decimal GetOpponentsBattingAverage(string pitcherSlug)
+        {
+            var result = PlayerStatsRequest.Submit(
+                queryDate: GameDate,
+                playerSlug: pitcherSlug);
+            return result.OpponentsBattingAverage;
         }
 
         private string OpponentTeamId(string gameId, string teamId, List<GameDto> games)

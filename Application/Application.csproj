@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IPickBatters.cs" />
+    <Compile Include="Outputs\BaseReport.cs" />
     <Compile Include="Outputs\BatterReport.cs" />
     <Compile Include="Outputs\LineupViewModel.cs" />
     <Compile Include="Outputs\PlayerStatsViewModel.cs" />

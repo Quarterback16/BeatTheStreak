@@ -55,3 +55,4 @@ Basically the development process is one of designing Commands and testing them
  1. Wrap calls to Statleship API with Repository Classes
  2. Repository classes should return view models
  3. Use US dates as this is what Statle ship uses
+ 4. Version number in BaseReport.cs

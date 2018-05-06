@@ -1,10 +1,9 @@
-﻿using Domain;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Application.Outputs
 {
-    public class BatterReport
+    public class BatterReport : BaseReport
     {
         public DateTime GameDate { get; set; }
 
@@ -18,7 +17,7 @@ namespace Application.Outputs
         public void Dump()
         {
             Console.WriteLine("-----------------------------------------------------");
-            Console.WriteLine("COMPUTER PICKS");
+            Console.WriteLine($"COMPUTER PICKS   {VersionNo}");
             Console.WriteLine("-----------------------------------------------------");
 
             Console.WriteLine(GameDate.ToLongDateString());

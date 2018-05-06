@@ -8,7 +8,19 @@ namespace BeatTheStreak.Tests
     public class PlayerStatsTests
     {
         [TestMethod]
-        public void PlayerStatsRequest_Ok()
+        public void PlayerStatsRequest_PitcherOk()
+        {
+            var sut = new PlayerStatsRequest();
+            var result = sut.Submit(
+                queryDate: new DateTime(2018, 5, 4),
+                playerSlug: "mlb-jameson-taillon");
+            result.DumpPitcher();
+            //Assert.IsTrue(result.Lineup.Count > 0, 
+            //        "Lineup request should return batters");
+        }
+
+        [TestMethod]
+        public void PlayerStatsRequest_BatterOk()
         {
             var sut = new PlayerStatsRequest();
             var result = sut.Submit(

@@ -14,12 +14,23 @@ namespace Application.StattlleShipApi
     {
         public List<Batter> Batters { get; set; }
 
+        public PlayerStatsRequest PlayerStatsRequest { get; set; }
+
+        public DateTime GameDate { get; set; }
+
+        public LineupRequest()
+        {
+            PlayerStatsRequest = new PlayerStatsRequest();
+        }
+
         public LineupViewModel Submit(DateTime queryDate, string teamSlug)
         {
             var result = new LineupViewModel
             {
                 GameDate = queryDate
             };
+            GameDate = queryDate;
+
             var strDate = UniversalDate(queryDate);
             var lineup = new List<Batter>();
 
@@ -54,9 +65,10 @@ namespace Application.StattlleShipApi
 
         private Batter MapDtoToBatter(LineupDto dto)
         {
+            var playerSlug = GetPlayerSlug(dto.PlayerId, Players);
             var batter = new Batter
             {
-                PlayerSlug = GetPlayerSlug(dto.PlayerId, Players),
+                PlayerSlug = playerSlug,
                 Name = GetName(dto.PlayerId, Players),
                 TeamId = TeamFor(dto.TeamId, Teams),
                 BattingOrder = dto.BattingOrder,
@@ -64,9 +76,18 @@ namespace Application.StattlleShipApi
                 PositionAbbreviation = dto.PositionAbbreviation,
                 Sequence = dto.Sequence,
                 TeamSlug = TeamSlugFor(dto.TeamId, Teams),
-                TeamName = TeamNameFor(dto.TeamId, Teams)
+                TeamName = TeamNameFor(dto.TeamId, Teams),
+                BattingAverage = GetBattingAverage(playerSlug)
             };
             return batter;
+        }
+
+        private decimal GetBattingAverage(string batterSlug)
+        {
+            var result = PlayerStatsRequest.Submit(
+                queryDate: GameDate,
+                playerSlug: batterSlug);
+            return result.BattingAverage;
         }
 
         public void Dump()

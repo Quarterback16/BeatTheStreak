@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 
 namespace Application.StattlleShipApi
@@ -36,18 +35,46 @@ namespace Application.StattlleShipApi
 
                 Teams = dto.Teams;
                 PlayerStats = dto.PlayerStats;
-
             }
             result.Player = new Domain.Player
             {
                 Name = playerSlug
             };
+            if (PlayerStats.Count == 1)
+            {
+                SetBatterStats(result);
+                SetPitcherStats(result);
+            }
+            else
+            {
+                Console.WriteLine($"No Stats for {playerSlug}");
+            }
+
+            return result;
+        }
+
+        private void SetBatterStats(PlayerStatsViewModel result)
+        {
             if (PlayerStats[0].AtBats != null)
                 result.AtBats = Decimal.Parse(PlayerStats[0].AtBats);
             if (PlayerStats[0].Hits != null)
                 result.Hits = Int32.Parse(PlayerStats[0].Hits);
+            if (PlayerStats[0].BattingAverage != null)
+                result.BattingAverage = Decimal.Parse(PlayerStats[0].BattingAverage);
+        }
 
-            return result;
+        private void SetPitcherStats(PlayerStatsViewModel result)
+        {
+            if (PlayerStats[0].Era != null)
+                result.Era = Decimal.Parse(PlayerStats[0].Era);
+            if (PlayerStats[0].Wins != null)
+                result.Wins = Int32.Parse(PlayerStats[0].Wins);
+            if (PlayerStats[0].InningsPitched != null)
+                result.InningsPitched = Int32.Parse(PlayerStats[0].InningsPitched);
+            if (PlayerStats[0].OpponentsBattingAverage != null)
+                result.OpponentsBattingAverage = Decimal.Parse(PlayerStats[0].OpponentsBattingAverage);
+            if (PlayerStats[0].GroundBallToFlyBallRatio != null)
+                result.GroundBallTpFlyBallRatio = Decimal.Parse(PlayerStats[0].GroundBallToFlyBallRatio);
         }
     }
 }

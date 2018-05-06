@@ -10,6 +10,8 @@
 
         public decimal Era { get; set; }
 
+        public decimal OpponentsBattingAverage { get; set; }
+
         public string PlayerId { get; set; }
 
         public string TeamId { get; set; }
@@ -24,8 +26,9 @@
 
         public override string ToString()
         {
+            var oba = string.Format("{0:#0.000}", OpponentsBattingAverage);
             var era = string.Format("{0:#0.00}", Era);
-            return $"{Name,-25} {TeamName,-20} ({Wins}-{Losses}) {era,5}";
+            return $"{Name,-25} {TeamName,-20} ({Wins}-{Losses}) {oba,5} {era,5}";
         }
     }
 }

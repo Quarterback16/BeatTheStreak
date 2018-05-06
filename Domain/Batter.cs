@@ -22,9 +22,11 @@
 
         public string TeamName { get; set; }
 
+        public decimal BattingAverage { get; set; }
+
         public override string ToString()
         {
-            return $"{BattingOrder} {Name,-25} {PositionAbbreviation,-2} {TeamName,-25}";
+            return $"{BattingOrder} {Name,-25} {BattingAverage} {PositionAbbreviation,-2} {TeamName,-25}";
         }
     }
 }

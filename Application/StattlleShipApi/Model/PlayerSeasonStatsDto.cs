@@ -22,6 +22,12 @@ namespace Application.StattlleShipApi.Model
         [JsonProperty("hits")]
         public string Hits { get; set; }
 
+        [JsonProperty("doubles")]
+        public string Doubles { get; set; }
+
+        [JsonProperty("batting_average")]
+        public string BattingAverage { get; set; }
+
         [JsonProperty("plate_appearence")]
         public string PlateAppearances { get; set; }
 
@@ -33,5 +39,14 @@ namespace Application.StattlleShipApi.Model
 
         [JsonProperty("innings_pitched")]
         public string InningsPitched { get; set; }
+
+        [JsonProperty("ground_ball_to_fly_ball_ratio")]
+        public string GroundBallToFlyBallRatio { get; set; }
+
+        [JsonProperty("opponents_batting_average")]
+        public string OpponentsBattingAverage { get; set; }
+
+        [JsonProperty("whip")]
+        public string Whip { get; set; }
     }
 }

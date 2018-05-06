@@ -6,7 +6,6 @@ namespace BeatTheStreak
     {
         static void Main(string[] args)
         {
-            var version = "0.0.2.0";
         }
 
         /// <summary>
