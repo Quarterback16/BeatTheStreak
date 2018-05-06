@@ -112,7 +112,7 @@ namespace BeatTheStreak
         private decimal GetOpponentsBattingAverage(string pitcherSlug)
         {
             var result = PlayerStatsRequest.Submit(
-                queryDate: GameDate,
+                queryDate: GameDate.AddDays(-1),
                 playerSlug: pitcherSlug);
             return result.OpponentsBattingAverage;
         }
