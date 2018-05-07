@@ -88,7 +88,9 @@ namespace Application
         private ProbablePitcherViewModel GetProbablePitchers(DateTime gameDate)
         {
             Console.WriteLine($"GameDate {gameDate.ToLongDateString()} (US)");
-            var pitchers = _pitcherRepository.Submit(gameDate);
+            var pitchers = _pitcherRepository.Submit(
+                gameDate,
+                homeOnly: true);
             pitchers.Dump();
             return pitchers;
         }

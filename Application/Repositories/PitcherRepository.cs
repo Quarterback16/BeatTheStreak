@@ -1,16 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using Application.Outputs;
 using BeatTheStreak;
-using Domain;
 
 namespace Application.Repositories
 {
     public class PitcherRepository : IPitcherRepository
     {
-        public ProbablePitcherViewModel Submit(DateTime gameDate)
+        public ProbablePitcherViewModel Submit(
+            DateTime gameDate,
+            bool homeOnly = false)
         {
-            var pitcherRequest = new ProbablePitcherRequest();
+            var pitcherRequest = new ProbablePitcherRequest(homeOnly);
             var pitchers = pitcherRequest.Submit(gameDate);
             return pitchers;
         }

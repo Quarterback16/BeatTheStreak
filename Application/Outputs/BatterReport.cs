@@ -24,9 +24,11 @@ namespace Application.Outputs
             Console.WriteLine();
             if (Selections != null)
             {
+                var i = 0;
                 foreach (var selection in Selections)
                 {
-                    Console.WriteLine(selection);
+                    i++;
+                    Console.WriteLine($"{i}. {selection}");
                 }
             }
         }

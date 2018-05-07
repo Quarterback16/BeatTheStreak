@@ -5,6 +5,8 @@ namespace Application.Repositories
 {
     public interface IPitcherRepository
     {
-        ProbablePitcherViewModel Submit(DateTime gameDate);
+        ProbablePitcherViewModel Submit(
+            DateTime gameDate, 
+            bool homeOnly = false);
     }
 }

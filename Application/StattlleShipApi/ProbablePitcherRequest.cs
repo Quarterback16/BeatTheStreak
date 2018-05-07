@@ -19,16 +19,20 @@ namespace BeatTheStreak
 
         public DateTime GameDate { get; set; }
 
-        public ProbablePitcherRequest()
+        public bool HomeOnly { get; set; }
+
+        public ProbablePitcherRequest(bool homeOnly = false)
         {
             PlayerStatsRequest = new PlayerStatsRequest();
+            HomeOnly = homeOnly;
         }
 
         public ProbablePitcherViewModel Submit(DateTime queryDate)
         {
             var result = new ProbablePitcherViewModel
             {
-                GameDate = queryDate
+                GameDate = queryDate,
+                HomeOnly = HomeOnly
             };
             GameDate = queryDate;
 
@@ -61,7 +65,11 @@ namespace BeatTheStreak
             }
             foreach (KeyValuePair<string, Pitcher> pair in TeamList)
             {
-                pitchers.Add(pair.Value);
+                var p = pair.Value;
+                if (HomeOnly && p.Away)
+                   continue;
+                
+                pitchers.Add(p);
             }
             result.ProbablePitchers = pitchers.OrderByDescending(
                 o => o.OpponentsBattingAverage).ToList();
@@ -85,7 +93,6 @@ namespace BeatTheStreak
             if (TeamList.ContainsKey(item.TeamId))
                 TeamList[item.TeamId] = pitcher;
             else
-
                 TeamList.Add(item.TeamId, pitcher);
         }
 
@@ -104,9 +111,23 @@ namespace BeatTheStreak
                 OpponentId = oppId,
                 OpponentSlug = TeamSlugFor(oppId, Teams),
                 OpponentsBattingAverage = GetOpponentsBattingAverage(
-                    GetPlayerSlug(dto.PlayerId, Players) )
+                    GetPlayerSlug(dto.PlayerId, Players) ),
+                Away = IsAway(dto.TeamId, dto.GameId, Games)
             };
             return pitcher;
+        }
+
+        private bool IsAway(string teamId, string gameId, List<GameDto> games)
+        {
+            foreach (var g in games)
+            {
+                if (g.Id == gameId)
+                {
+                    if (g.AwayTeamId == teamId)
+                        return true;
+                }
+            }
+            return false;
         }
 
         private decimal GetOpponentsBattingAverage(string pitcherSlug)

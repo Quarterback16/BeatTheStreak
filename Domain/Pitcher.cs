@@ -24,6 +24,8 @@
 
         public string OpponentSlug { get; set; }
 
+        public bool Away { get; set; }
+
         public override string ToString()
         {
             var oba = string.Format("{0:#0.000}", OpponentsBattingAverage);

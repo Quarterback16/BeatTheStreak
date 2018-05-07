@@ -15,10 +15,21 @@ namespace BeatTheStreak.Tests
         public void ProbablePitchers_ReturnsMultiplePitchers()
         {
             var sut = new ProbablePitcherRequest();
-            var result = sut.Submit(new DateTime(2018,5,5));  // US
+            var result = sut.Submit(new DateTime(2018,5,6));  // US
             result.Dump();
             Assert.IsTrue(
                 result.ProbablePitchers.Count > 0, 
+                "Should return some pitchers");
+        }
+
+        [TestMethod]
+        public void ProbablePitchers_ReturnsMultipleHomePitchers()
+        {
+            var sut = new ProbablePitcherRequest(homeOnly:true);
+            var result = sut.Submit(new DateTime(2018, 5, 6));  // US
+            result.Dump();
+            Assert.IsTrue(
+                result.ProbablePitchers.Count > 0,
                 "Should return some pitchers");
         }
 

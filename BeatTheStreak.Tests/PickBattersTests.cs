@@ -13,7 +13,7 @@ namespace BeatTheStreak.Tests
         [TestMethod]
         public void PickBatters_ReturnsBestBatters()
         {
-            const int numberDesired = 2;
+            const int numberDesired = 4;
             var pitcherRepo = new PitcherRepository();
             var lineupRepo = new LineupRepository();
             var picker = new RegularPicker(lineupRepo);
