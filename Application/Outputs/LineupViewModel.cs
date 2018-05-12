@@ -1,6 +1,7 @@
 ﻿using Domain;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Application.Outputs
 {
@@ -9,6 +10,18 @@ namespace Application.Outputs
         public List<Batter> Lineup { get; set; }
         public DateTime GameDate { get; set; }
         public string TeamName { get; set; }
+
+        public Batter BattingAt( string battingOrder )
+        {
+            foreach (var batter in Lineup)
+            {
+                if (batter.BattingOrder.Equals(battingOrder)
+                    && batter.IsBatter()
+                    && ! batter.IsSub)
+                    return batter;
+            }
+            return Lineup.FirstOrDefault();
+        }
 
         public void DumpLineup()
         {

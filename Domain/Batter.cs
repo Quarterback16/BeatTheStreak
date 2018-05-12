@@ -1,4 +1,6 @@
-﻿namespace Domain
+﻿using System;
+
+namespace Domain
 {
     public class Batter
     {
@@ -21,6 +23,13 @@
         public string TeamSlug { get; set; }
 
         public string TeamName { get; set; }
+
+        public bool IsSub { get; set; }
+
+        public bool IsBatter()
+        {
+            return PositionAbbreviation != "P";
+        }
 
         public decimal BattingAverage { get; set; }
 

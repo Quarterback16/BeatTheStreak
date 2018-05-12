@@ -58,9 +58,26 @@ namespace Application.StattlleShipApi
                 };
             }
             Batters = lineup.OrderBy(o => o.BattingOrder).ToList();
+            SetSubs();
             result.Lineup = Batters;
             result.TeamName = teamSlug;
             return result;
+        }
+
+        private void SetSubs()
+        {
+            var lastPos = "X";
+            foreach (var batter in Batters)
+            {
+                if (Int32.Parse(batter.BattingOrder) > 0)
+                {
+                    if (lastPos == batter.BattingOrder)
+                    {
+                        batter.IsSub = true;
+                    }
+                    lastPos = batter.BattingOrder;
+                }
+            }
         }
 
         private Batter MapDtoToBatter(LineupDto dto)

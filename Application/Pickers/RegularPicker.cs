@@ -18,20 +18,56 @@ namespace Application.Pickers
         public bool Likes(Selection selection, out string reasonForDislike)
         {
             reasonForDislike = string.Empty;
-            for (int daysback = 1; daysback < 4; daysback++)
+            var choices = new List<Batter>();
+            var originalChoices = new List<Batter>
             {
-                var queryDate = selection.GameDate.AddDays(-daysback);
-                if (NotInLineup(queryDate, selection.Batter))
+                selection.Batter1,
+                selection.Batter2,
+                selection.Batter3
+            };
+            foreach (var batter in originalChoices)
+            {
+                if ( ! MissingFromLineup(batter, selection.GameDate))
                 {
-                    reasonForDislike = $@"  {selection.Batter.Name} was not in the {
-                        selection.Batter.TeamSlug
-                        } line up on {
-                        queryDate
-                        }";
-                        return false;
+                    choices.Add(batter);
                 }
             }
+            if (choices.Count == 0)
+            {
+                reasonForDislike = "  All top 3 batters had days off";
+                return false;
+            }
+            var bestAvg = 0.000M;
+            var batterWithBestAvg = new Batter();
+            foreach (var batter in choices)
+            {
+                if (batter.BattingAverage > bestAvg)
+                {
+                    batterWithBestAvg = batter;
+                    bestAvg = batter.BattingAverage;
+                }
+            }
+            selection.Batter = batterWithBestAvg;
             return true;
+        }
+
+        private bool MissingFromLineup(Batter batter, DateTime gameDate)
+        {
+            return false;
+            //for (int daysback = 1; daysback < 4; daysback++)
+            //{
+            //    var queryDate = gameDate.AddDays(-daysback);
+            //    if (NotInLineup(queryDate, batter))
+            //    {
+            //        //reasonForDislike = $@"  {batter.Name} was not in the {
+            //        //    batter.TeamSlug
+            //        //    } line up on {
+            //        //    queryDate
+            //        //    }";
+            //        return false;
+            //    }
+            //}
+            //return true;
         }
 
         private bool NotInLineup(

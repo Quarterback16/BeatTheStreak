@@ -47,7 +47,7 @@ namespace Application.StattlleShipApi
             }
             else
             {
-                Console.WriteLine($"No Stats for {playerSlug} : {strDate}");
+                //Console.WriteLine($"No Stats for {playerSlug} : {strDate}");
             }
 
             return result;

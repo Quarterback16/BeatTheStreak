@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasePicker.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="IPickBatters.cs" />
     <Compile Include="Outputs\BaseReport.cs" />
     <Compile Include="Outputs\BatterReport.cs" />
@@ -50,7 +52,7 @@
     <Compile Include="Outputs\PlayerStatsViewModel.cs" />
     <Compile Include="Outputs\ProbablePitcherViewModel.cs" />
     <Compile Include="Outputs\Selection.cs" />
-    <Compile Include="PickBatters.cs" />
+    <Compile Include="DefaultPicker.cs" />
     <Compile Include="Pickers\RegularPicker.cs" />
     <Compile Include="Repositories\ILineupRepository.cs" />
     <Compile Include="Repositories\IPitcherRepository.cs" />
