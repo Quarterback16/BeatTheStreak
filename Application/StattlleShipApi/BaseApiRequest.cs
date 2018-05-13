@@ -38,6 +38,42 @@ namespace Application.StattlleShipApi
             return httpWebRequest;
         }
 
+        public HttpWebRequest CreateGameLogRequest(
+            string queryParms)
+        {
+            var url = $@"https://api.stattleship.com/game_logs?{
+                queryParms
+                }";
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(
+                requestUriString: url);
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Accept = "application/vnd.stattleship.com; version=1";
+            httpWebRequest.Method = "GET";
+            httpWebRequest.Headers.Add(
+                "Authorization",
+                "35a160218fc36942348a14ddaec71d43");
+
+            return httpWebRequest;
+        }
+
+        public HttpWebRequest CreateRankingsRequest(
+            string queryParms)
+        {
+            var url = $@"https://api.stattleship.com/rankings?{
+                queryParms
+                }";
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(
+                requestUriString: url);
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Accept = "application/vnd.stattleship.com; version=1";
+            httpWebRequest.Method = "GET";
+            httpWebRequest.Headers.Add(
+                "Authorization",
+                "35a160218fc36942348a14ddaec71d43");
+
+            return httpWebRequest;
+        }
+
         public static string UniversalDate(DateTime date)
         {
             var longDate = $"{date.Date:u}";

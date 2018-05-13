@@ -19,12 +19,16 @@ namespace Application.StattlleShipApi
                 AsOf = queryDate
             };
             var strDate = UniversalDate(queryDate);
-
+            var qp = new System.Text.StringBuilder();
+            qp.Append("season_id=mlb-2018");
+            //qp.Append("&interval_type=today");
+            qp.Append($"&on={strDate}");
+            qp.Append($"&player_id={playerSlug}");
             var httpWebRequest = CreateRequest(
                 sport: "baseball",
                 league: "mlb",
                 apiRequest: "player_season_stats",
-                queryParms: $"season_id=mlb-2018&on={strDate}&player_id={playerSlug}");
+                queryParms: qp.ToString() );
 
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
 

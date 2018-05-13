@@ -13,14 +13,14 @@ namespace BeatTheStreak.Tests
         [TestMethod]
         public void DefaultPicker_ReturnsBestBatters()
         {
-            const int numberDesired = 4;
+            const int numberDesired = 2;
             var pitcherRepo = new PitcherRepository();
             var lineupRepo = new LineupRepository();
             var picker = new RegularPicker(lineupRepo);
             var options = new Dictionary<string, string>
             {
                 { Constants.Options.HomePitchersOnly, "on" },
-                { "dayOff", "Off" }
+                { "dayOff", "on" }
             };
             var sut = new DefaultPicker(options, picker, lineupRepo, pitcherRepo);
             var result = sut.Choose(
