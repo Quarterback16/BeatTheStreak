@@ -27,14 +27,18 @@ namespace Application.Pickers
             };
             foreach (var batter in originalChoices)
             {
-                if ( ! MissingFromLineup(batter, selection.GameDate))
+                if ( ! MissingFromLineup(
+                    batter, 
+                    selection.GameDate))
                 {
                     choices.Add(batter);
                 }
             }
             if (choices.Count == 0)
             {
-                reasonForDislike = "  All top 3 batters had days off";
+                reasonForDislike = $@"  All top 3 batters for {
+                    selection.Batter1.TeamSlug
+                    } had time off in the last 3 days";
                 return false;
             }
             var bestAvg = 0.000M;
@@ -51,23 +55,19 @@ namespace Application.Pickers
             return true;
         }
 
-        private bool MissingFromLineup(Batter batter, DateTime gameDate)
+        private bool MissingFromLineup(
+            Batter batter, 
+            DateTime gameDate)
         {
+            for (int daysback = 1; daysback < 4; daysback++)
+            {
+                var queryDate = gameDate.AddDays(-daysback);
+                if (NotInLineup(queryDate, batter))
+                {                 
+                    return true;
+                }
+            }
             return false;
-            //for (int daysback = 1; daysback < 4; daysback++)
-            //{
-            //    var queryDate = gameDate.AddDays(-daysback);
-            //    if (NotInLineup(queryDate, batter))
-            //    {
-            //        //reasonForDislike = $@"  {batter.Name} was not in the {
-            //        //    batter.TeamSlug
-            //        //    } line up on {
-            //        //    queryDate
-            //        //    }";
-            //        return false;
-            //    }
-            //}
-            //return true;
         }
 
         private bool NotInLineup(

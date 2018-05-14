@@ -30,13 +30,16 @@ namespace BeatTheStreak.UnitTests
                 .Setup(x => x.Submit(It.IsAny<DateTime>(), It.IsAny<string>()))
                 .Returns(new LineupViewModel {
                     Lineup = new List<Batter>()
-                });
+                });  // all lineup request will say no appearance
             string reasonForDislike = string.Empty;
             var result = _sut.Likes(
                 new Selection
                 {
-                    GameDate = new System.DateTime( 2018, 5, 1 ),
-                    Batter = new FakeBatter()
+                    GameDate = new DateTime( 2018, 5, 1 ),
+                    Batter = new FakeBatter(),
+                    Batter1 = new FakeBatter(.300M),
+                    Batter2 = new FakeBatter(.250M),
+                    Batter3 = new FakeBatter(.275M)
                 },
                 out reasonForDislike);
             Assert.IsFalse(
@@ -79,7 +82,10 @@ namespace BeatTheStreak.UnitTests
                 new Selection
                 {
                     GameDate = new DateTime(2018, 5, 1),
-                    Batter = new FakeBatter()
+                    Batter = new FakeBatter(),
+                    Batter1 = new FakeBatter(.300M),
+                    Batter2 = new FakeBatter(.250M),
+                    Batter3 = new FakeBatter(.275M)
                 },
                 out reasonForDislike);
             Assert.IsTrue(

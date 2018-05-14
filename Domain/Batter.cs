@@ -35,7 +35,7 @@ namespace Domain
 
         public override string ToString()
         {
-            return $"{BattingOrder} {Name,-25} {BattingAverage} {PositionAbbreviation,-2} {TeamName,-25}";
+            return $"{BattingOrder} {Name,-25} {BattingAverage,0:.000} {PositionAbbreviation,-2} {TeamName,-25}";
         }
     }
 }

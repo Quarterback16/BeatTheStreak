@@ -12,5 +12,15 @@ namespace BeatTheStreak.UnitTests.Fakes
             PositionAbbreviation = "3B";
             TeamName = "Pitsburgh Fakes";
         }
+
+        public FakeBatter(decimal battingAverage)
+        {
+            Name = "Steve";
+            BattingOrder = "1";
+            TeamSlug = "mlb-pit";
+            PositionAbbreviation = "3B";
+            TeamName = "Pitsburgh Fakes";
+            BattingAverage = battingAverage;
+        }
     }
 }
