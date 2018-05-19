@@ -17,6 +17,7 @@ namespace Application.StattlleShipApi
             string apiRequest,
             string queryParms)
         {
+            var apiKey = Environment.GetEnvironmentVariable("STATAPI");
             var url = $@"https://api.stattleship.com/{
                 sport
                 }/{
@@ -33,7 +34,7 @@ namespace Application.StattlleShipApi
             httpWebRequest.Method = "GET";
             httpWebRequest.Headers.Add(
                 "Authorization",
-                "35a160218fc36942348a14ddaec71d43");
+                apiKey);
 
             return httpWebRequest;
         }

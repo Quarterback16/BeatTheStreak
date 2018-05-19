@@ -59,14 +59,15 @@ namespace Application.Pickers
             Batter batter, 
             DateTime gameDate)
         {
-            for (int daysback = 1; daysback < 4; daysback++)
-            {
-                var queryDate = gameDate.AddDays(-daysback);
-                if (NotInLineup(queryDate, batter))
-                {                 
-                    return true;
-                }
-            }
+            //TODO: Make this optional
+            //for (int daysback = 1; daysback < 4; daysback++)
+            //{
+            //    var queryDate = gameDate.AddDays(-daysback);
+            //    if (NotInLineup(queryDate, batter))
+            //    {                 
+            //        return true;
+            //    }
+            //}
             return false;
         }
 
