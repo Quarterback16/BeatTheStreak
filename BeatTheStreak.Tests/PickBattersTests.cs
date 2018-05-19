@@ -16,13 +16,12 @@ namespace BeatTheStreak.Tests
             const int numberDesired = 2;
             var pitcherRepo = new PitcherRepository();
             var lineupRepo = new LineupRepository();
-            var picker = new RegularPicker(lineupRepo);
             var options = new Dictionary<string, string>
             {
                 { Constants.Options.HomePitchersOnly, "on" },
                 { "dayOff", "on" }
             };
-            var sut = new DefaultPicker(options, picker, lineupRepo, pitcherRepo);
+            var sut = new DefaultPicker(options, lineupRepo, pitcherRepo);
             var result = sut.Choose(
                 gameDate: DateTime.Now.AddDays(0),  // US Date
                 numberRequired: numberDesired);

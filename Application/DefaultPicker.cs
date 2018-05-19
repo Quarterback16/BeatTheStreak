@@ -6,20 +6,16 @@ using System.Collections.Generic;
 
 namespace Application
 {
-    public class DefaultPicker : BasePicker
+    public class DefaultPicker : BasePicker, IPicker
     {
-        private readonly IPickBatters _picker;
-
         public DefaultPicker(
             Dictionary<string,string> options,
-            IPickBatters batterPicker,
             ILineupRepository lineupRepository,
             IPitcherRepository pitcherRepository) 
             : base(lineupRepository, pitcherRepository)
         {
             PickerName = "Default Picker";
             PickerOptions = options;
-            _picker = batterPicker;
         }
 
         public BatterReport Choose( DateTime gameDate, int numberRequired )
@@ -66,7 +62,7 @@ namespace Application
                     };
                     //TODO:  could have multiple pickers
                     string reason = string.Empty;
-                    if (!_picker.Likes(selection, out reason))
+                    if (!Likes(selection, out reason))
                         printLine += reason;
                     else
                     {
@@ -109,6 +105,89 @@ namespace Application
                 homeOnly: OptionOn(Constants.Options.HomePitchersOnly));
             pitchers.Dump();
             return pitchers;
+        }
+
+        private bool Likes(Selection selection, out string reasonForDislike)
+        {
+            reasonForDislike = string.Empty;
+            var choices = new List<Batter>();
+            var originalChoices = new List<Batter>
+            {
+                selection.Batter1,
+                selection.Batter2,
+                selection.Batter3
+            };
+            foreach (var batter in originalChoices)
+            {
+                if (!MissingFromLineup(
+                    batter,
+                    selection.GameDate))
+                {
+                    choices.Add(batter);
+                }
+            }
+            if (choices.Count == 0)
+            {
+                reasonForDislike = $@"  All top 3 batters for {
+                    selection.Batter1.TeamSlug
+                    } had time off in the last 3 days";
+                return false;
+            }
+            var bestAvg = 0.000M;
+            var batterWithBestAvg = new Batter();
+            foreach (var batter in choices)
+            {
+                if (batter.BattingAverage > bestAvg)
+                {
+                    batterWithBestAvg = batter;
+                    bestAvg = batter.BattingAverage;
+                }
+            }
+            selection.Batter = batterWithBestAvg;
+            return true;
+        }
+
+        private bool MissingFromLineup(
+            Batter batter,
+            DateTime gameDate)
+        {
+            //TODO: Make this optional
+            //for (int daysback = 1; daysback < 4; daysback++)
+            //{
+            //    var queryDate = gameDate.AddDays(-daysback);
+            //    if (NotInLineup(queryDate, batter))
+            //    {                 
+            //        return true;
+            //    }
+            //}
+            return false;
+        }
+
+        private bool NotInLineup(
+            DateTime gameDate,
+            Batter batter)
+        {
+            var lineup = _lineupRepository.Submit(
+                gameDate,
+                batter.TeamSlug).Lineup;
+
+            if (!LineupHas(batter, lineup))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool LineupHas(Batter batter, List<Batter> lineup)
+        {
+            foreach (var b in lineup)
+            {
+                if (b.Name == batter.Name)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

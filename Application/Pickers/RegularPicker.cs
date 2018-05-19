@@ -6,7 +6,7 @@ using Domain;
 
 namespace Application.Pickers
 {
-    public class RegularPicker : IPickBatters
+    public class RegularPicker 
     {
         private readonly ILineupRepository _lineupRepository;
 
@@ -59,15 +59,14 @@ namespace Application.Pickers
             Batter batter, 
             DateTime gameDate)
         {
-            //TODO: Make this optional
-            //for (int daysback = 1; daysback < 4; daysback++)
-            //{
-            //    var queryDate = gameDate.AddDays(-daysback);
-            //    if (NotInLineup(queryDate, batter))
-            //    {                 
-            //        return true;
-            //    }
-            //}
+            for (int daysback = 1; daysback < 4; daysback++)
+            {
+                var queryDate = gameDate.AddDays(-daysback);
+                if (NotInLineup(queryDate, batter))
+                {
+                    return true;
+                }
+            }
             return false;
         }
 

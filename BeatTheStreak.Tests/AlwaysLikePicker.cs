@@ -4,7 +4,7 @@ using Application.Repositories;
 
 namespace BeatTheStreak.Tests
 {
-    public class AlwaysLikePicker : IPickBatters
+    public class AlwaysLikePicker 
     {
         private readonly ILineupRepository _lineupRepository;
 

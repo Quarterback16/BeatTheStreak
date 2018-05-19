@@ -45,7 +45,7 @@
   <ItemGroup>
     <Compile Include="BasePicker.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="IPickBatters.cs" />
+    <Compile Include="IPicker.cs" />
     <Compile Include="Outputs\BaseReport.cs" />
     <Compile Include="Outputs\BatterReport.cs" />
     <Compile Include="Outputs\LineupViewModel.cs" />

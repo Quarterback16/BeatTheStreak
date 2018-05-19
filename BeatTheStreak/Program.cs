@@ -1,4 +1,8 @@
-﻿using System.IO;
+﻿using Application;
+using Application.Repositories;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace BeatTheStreak
 {
@@ -6,19 +10,27 @@ namespace BeatTheStreak
     {
         static void Main(string[] args)
         {
-        }
-
-        /// <summary>
-        /// Copies the contents of input to output. Doesn't close either stream.
-        /// </summary>
-        public static void CopyStream(Stream input, Stream output)
-        {
-            byte[] buffer = new byte[8 * 1024];
-            int len;
-            while ((len = input.Read(buffer, 0, buffer.Length)) > 0)
+            var pitcherRepo = new PitcherRepository();
+            var lineupRepo = new LineupRepository();
+            var pickers = new Dictionary<string, IPicker>();
+            var options = new Dictionary<string, string>
             {
-                output.Write(buffer, 0, len);
+                { Constants.Options.HomePitchersOnly, "on" },
+                { "dayOff", "on" }
+            };
+
+            var dp = new DefaultPicker(options,lineupRepo,pitcherRepo);
+
+            pickers.Add(dp.PickerName, dp);
+
+            foreach (var picker in pickers)
+            {
+                var response = picker.Value.Choose(
+                    gameDate: DateTime.Now.AddDays(0), 
+                    numberRequired: 2);
+                response.Dump();
             }
         }
+
     }
 }
