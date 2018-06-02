@@ -1,4 +1,4 @@
-﻿using Application.StattlleShipApi;
+﻿using BeatTheStreak.Repositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
@@ -15,8 +15,6 @@ namespace BeatTheStreak.Tests
                 queryDate: new DateTime(2018, 5, 4),
                 playerSlug: "mlb-jameson-taillon");
             result.DumpPitcher();
-            //Assert.IsTrue(result.Lineup.Count > 0, 
-            //        "Lineup request should return batters");
         }
 
         [TestMethod]

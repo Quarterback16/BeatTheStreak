@@ -1,8 +1,8 @@
 ﻿using Application;
-using Application.Repositories;
+using BeatTheStreak.Interfaces;
+using BeatTheStreak.Repositories;
 using System;
 using System.Collections.Generic;
-using System.IO;
 
 namespace BeatTheStreak
 {

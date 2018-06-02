@@ -1,4 +1,5 @@
-﻿using Application.Repositories;
+﻿using BeatTheStreak.Interfaces;
+using System;
 using System.Collections.Generic;
 
 namespace Application
@@ -28,6 +29,16 @@ namespace Application
                 return true;
 
             return false;
+        }
+
+        protected int IntegerOption(string option)
+        {
+            int val = 0;
+            if (PickerOptions.ContainsKey(option))
+            {
+                val = Int32.Parse(PickerOptions[option]);
+            }
+            return val;
         }
     }
 }

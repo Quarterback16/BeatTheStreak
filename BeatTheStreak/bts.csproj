@@ -48,7 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IStattleShipApi.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestBuilder.cs" />
@@ -62,6 +61,18 @@
     <ProjectReference Include="..\Application\Application.csproj">
       <Project>{F948ED1C-C645-4202-8242-31C42ED03F3A}</Project>
       <Name>Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BeatTheStreak.Interfaces\BeatTheStreak.Interfaces.csproj">
+      <Project>{BA85A4E6-810D-4058-8E53-A25D7DAB712F}</Project>
+      <Name>BeatTheStreak.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BeatTheStreak.Models\BeatTheStreak.Models.csproj">
+      <Project>{7D93CB68-D680-4490-8888-4E55C45E4344}</Project>
+      <Name>BeatTheStreak.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BeatTheStreak.Repositories\BeatTheStreak.Repositories.csproj">
+      <Project>{8C497F7D-3CB9-4B64-B650-607FB1B53508}</Project>
+      <Name>BeatTheStreak.Repositories</Name>
     </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{f753ba06-db2a-4634-9412-7fb92a383399}</Project>

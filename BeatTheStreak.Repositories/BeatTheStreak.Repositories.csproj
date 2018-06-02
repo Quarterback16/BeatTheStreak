@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F948ED1C-C645-4202-8242-31C42ED03F3A}</ProjectGuid>
+    <ProjectGuid>{8C497F7D-3CB9-4B64-B650-607FB1B53508}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Application</RootNamespace>
-    <AssemblyName>Application</AssemblyName>
+    <RootNamespace>BeatTheStreak.Repositories</RootNamespace>
+    <AssemblyName>BeatTheStreak.Repositories</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,22 +30,56 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BasePicker.cs" />
-    <Compile Include="Constants.cs" />
-    <Compile Include="DefaultPicker.cs" />
+    <Compile Include="LineupRepository.cs" />
+    <Compile Include="PitcherRepository.cs" />
+    <Compile Include="PlayerStatsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StattlleShipApi\BaseApiRequest.cs" />
+    <Compile Include="StattlleShipApi\DailyRankingRequest.cs" />
+    <Compile Include="StattlleShipApi\GameLogRequest.cs" />
+    <Compile Include="StattlleShipApi\LineupRequest.cs" />
+    <Compile Include="StattlleShipApi\Model\ConferenceDto.cs" />
+    <Compile Include="StattlleShipApi\Model\DivisionDto.cs" />
+    <Compile Include="StattlleShipApi\Model\GameDto.cs" />
+    <Compile Include="StattlleShipApi\Model\GameLogDto.cs" />
+    <Compile Include="StattlleShipApi\Model\LeagueDto.cs" />
+    <Compile Include="StattlleShipApi\Model\LineupDto.cs" />
+    <Compile Include="StattlleShipApi\Model\LineupsDto.cs" />
+    <Compile Include="StattlleShipApi\Model\LogDto.cs" />
+    <Compile Include="StattlleShipApi\Model\OfficialDto.cs" />
+    <Compile Include="StattlleShipApi\Model\PitcherDto.cs" />
+    <Compile Include="StattlleShipApi\Model\PlayerDto.cs" />
+    <Compile Include="StattlleShipApi\Model\PlayerRankingDto.cs" />
+    <Compile Include="StattlleShipApi\Model\PlayerSeasonStatsDto.cs" />
+    <Compile Include="StattlleShipApi\Model\PlayerStatsDto.cs" />
+    <Compile Include="StattlleShipApi\Model\ProbablePitchersDto.cs" />
+    <Compile Include="StattlleShipApi\Model\SeasonDto.cs" />
+    <Compile Include="StattlleShipApi\Model\TeamDto.cs" />
+    <Compile Include="StattlleShipApi\Model\VenueDto.cs" />
+    <Compile Include="StattlleShipApi\PlayerStatsRequest.cs" />
+    <Compile Include="StattlleShipApi\ProbablePitcherRequest.cs" />
+    <Compile Include="StattlleShipApi\StattleShipApi.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="StattlleShipApi\Model\packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BeatTheStreak.Interfaces\BeatTheStreak.Interfaces.csproj">
@@ -58,9 +94,6 @@
       <Project>{f753ba06-db2a-4634-9412-7fb92a383399}</Project>
       <Name>Domain</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -62,7 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Fakes\FakeBatter.cs" />
-    <Compile Include="RegularPickerTests.cs" />
+    <Compile Include="DefaultPickerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +72,14 @@
     <ProjectReference Include="..\Application\Application.csproj">
       <Project>{f948ed1c-c645-4202-8242-31c42ed03f3a}</Project>
       <Name>Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BeatTheStreak.Interfaces\BeatTheStreak.Interfaces.csproj">
+      <Project>{ba85a4e6-810d-4058-8e53-a25d7dab712f}</Project>
+      <Name>BeatTheStreak.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BeatTheStreak.Models\BeatTheStreak.Models.csproj">
+      <Project>{7d93cb68-d680-4490-8888-4e55c45e4344}</Project>
+      <Name>BeatTheStreak.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{f753ba06-db2a-4634-9412-7fb92a383399}</Project>

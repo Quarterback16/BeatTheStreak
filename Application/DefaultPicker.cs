@@ -1,5 +1,5 @@
-﻿using Application.Outputs;
-using Application.Repositories;
+﻿using BeatTheStreak.Interfaces;
+using BeatTheStreak.Models;
 using Domain;
 using System;
 using System.Collections.Generic;
@@ -107,7 +107,7 @@ namespace Application
             return pitchers;
         }
 
-        private bool Likes(Selection selection, out string reasonForDislike)
+        public bool Likes(Selection selection, out string reasonForDislike)
         {
             reasonForDislike = string.Empty;
             var choices = new List<Batter>();
@@ -151,15 +151,19 @@ namespace Application
             Batter batter,
             DateTime gameDate)
         {
-            //TODO: Make this optional
-            //for (int daysback = 1; daysback < 4; daysback++)
-            //{
-            //    var queryDate = gameDate.AddDays(-daysback);
-            //    if (NotInLineup(queryDate, batter))
-            //    {                 
-            //        return true;
-            //    }
-            //}
+            if (OptionOn(Constants.Options.NoDaysOff))
+            {
+                for (int daysback = 1; 
+                    daysback < IntegerOption(Constants.Options.DaysOffDaysBack) + 1;
+                    daysback++)
+                {
+                    var queryDate = gameDate.AddDays(-daysback);
+                    if (NotInLineup(queryDate, batter))
+                    {
+                        return true;
+                    }
+                }
+            }
             return false;
         }
 

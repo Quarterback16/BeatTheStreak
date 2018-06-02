@@ -1,6 +1,5 @@
-﻿using Application;
-using Application.Outputs;
-using Application.Repositories;
+﻿using BeatTheStreak.Interfaces;
+using BeatTheStreak.Models;
 
 namespace BeatTheStreak.Tests
 {

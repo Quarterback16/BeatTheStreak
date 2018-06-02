@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using BeatTheStreak.Repositories;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
 namespace BeatTheStreak.Tests

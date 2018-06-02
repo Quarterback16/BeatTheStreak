@@ -1,6 +1,5 @@
 ﻿using Application;
-using Application.Pickers;
-using Application.Repositories;
+using BeatTheStreak.Repositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -19,7 +18,8 @@ namespace BeatTheStreak.Tests
             var options = new Dictionary<string, string>
             {
                 { Constants.Options.HomePitchersOnly, "on" },
-                { "dayOff", "on" }
+                { Constants.Options.NoDaysOff, "off" },
+                { Constants.Options.DaysOffDaysBack, "3" },
             };
             var sut = new DefaultPicker(options, lineupRepo, pitcherRepo);
             var result = sut.Choose(
