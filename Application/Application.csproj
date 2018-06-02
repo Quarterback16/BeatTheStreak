@@ -43,7 +43,11 @@
     <Compile Include="BasePicker.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="DefaultPicker.cs" />
+    <Compile Include="HotBatter.cs" />
+    <Compile Include="MissingInAction.cs" />
+    <Compile Include="PickerOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResultChecker.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BeatTheStreak.Interfaces\BeatTheStreak.Interfaces.csproj">

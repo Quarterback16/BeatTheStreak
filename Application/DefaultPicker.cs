@@ -8,15 +8,23 @@ namespace Application
 {
     public class DefaultPicker : BasePicker, IPicker
     {
+		private List<ILike> Tests;
+
         public DefaultPicker(
-            Dictionary<string,string> options,
+            IPickerOptions options,
             ILineupRepository lineupRepository,
-            IPitcherRepository pitcherRepository) 
+            IPitcherRepository pitcherRepository,
+			IPlayerStatsRepository playerStatsRepository) 
             : base(lineupRepository, pitcherRepository)
         {
             PickerName = "Default Picker";
             PickerOptions = options;
-        }
+			Tests = new List<ILike>
+			{
+				new MissingInAction(lineupRepository,playerStatsRepository,options),
+				new HotBatter(options),
+			};
+		}
 
         public BatterReport Choose( DateTime gameDate, int numberRequired )
         {
@@ -36,12 +44,16 @@ namespace Application
             {
                 ++i;
                 var printLine = $"{i.ToString(),2} {pitcher}";
+				Console.WriteLine($"Looking for a batter facing {pitcher}");
                 var lineupQueryDate = gameDate.AddDays(-1);
 
                 var opponents = GetOpponentsLineup(pitcher, lineupQueryDate);
 
-                if (opponents.Lineup.Count.Equals(0))
-                    continue;  //  cold team
+				if (opponents.Lineup.Count.Equals(0))
+				{
+					Console.WriteLine("  cold team - skip this pitcher");
+					continue;  //  cold team
+				}
 
                 var batter1 = opponents.BattingAt("1");
                 var batter2 = opponents.BattingAt("2");
@@ -60,11 +72,19 @@ namespace Application
                             Title = pitcher.NextOpponent
                         }
                     };
-                    //TODO:  could have multiple pickers
+					//  additive
+					var like = true;
                     string reason = string.Empty;
-                    if (!Likes(selection, out reason))
-                        printLine += reason;
-                    else
+					foreach (var test in Tests)
+					{
+						if (!test.Likes(selection, out reason))
+						{
+							printLine += reason;
+							like = false;
+							break;  // one strike and ur out
+						}
+					}
+                    if (like)
                     {
                         batters.Add(selection);
                         printLine += "  " + selection.Batter.ToString();
@@ -102,96 +122,50 @@ namespace Application
             Console.WriteLine($"GameDate {gameDate.ToLongDateString()} (US)");
             var pitchers = _pitcherRepository.Submit(
                 gameDate,
-                homeOnly: OptionOn(Constants.Options.HomePitchersOnly));
+                homeOnly: PickerOptions.OptionOn(Constants.Options.HomePitchersOnly));
             pitchers.Dump();
             return pitchers;
         }
 
-        public bool Likes(Selection selection, out string reasonForDislike)
-        {
-            reasonForDislike = string.Empty;
-            var choices = new List<Batter>();
-            var originalChoices = new List<Batter>
-            {
-                selection.Batter1,
-                selection.Batter2,
-                selection.Batter3
-            };
-            foreach (var batter in originalChoices)
-            {
-                if (!MissingFromLineup(
-                    batter,
-                    selection.GameDate))
-                {
-                    choices.Add(batter);
-                }
-            }
-            if (choices.Count == 0)
-            {
-                reasonForDislike = $@"  All top 3 batters for {
-                    selection.Batter1.TeamSlug
-                    } had time off in the last 3 days";
-                return false;
-            }
-            var bestAvg = 0.000M;
-            var batterWithBestAvg = new Batter();
-            foreach (var batter in choices)
-            {
-                if (batter.BattingAverage > bestAvg)
-                {
-                    batterWithBestAvg = batter;
-                    bestAvg = batter.BattingAverage;
-                }
-            }
-            selection.Batter = batterWithBestAvg;
-            return true;
-        }
+        //public bool Likes(Selection selection, out string reasonForDislike)
+        //{
+        //    reasonForDislike = string.Empty;
+        //    var choices = new List<Batter>();
+        //    var originalChoices = new List<Batter>
+        //    {
+        //        selection.Batter1,
+        //        selection.Batter2,
+        //        selection.Batter3
+        //    };
+        //    foreach (var batter in originalChoices)
+        //    {
+        //        if (!MissingFromLineup(
+        //            batter,
+        //            selection.GameDate))
+        //        {
+        //            choices.Add(batter);
+        //        }
+        //    }
+        //    if (choices.Count == 0)
+        //    {
+        //        reasonForDislike = $@"  All top 3 batters for {
+        //            selection.Batter1.TeamSlug
+        //            } had time off in the last 3 days";
+        //        return false;
+        //    }
+        //    var bestAvg = 0.000M;
+        //    var batterWithBestAvg = new Batter();
+        //    foreach (var batter in choices)
+        //    {
+        //        if (batter.BattingAverage > bestAvg)
+        //        {
+        //            batterWithBestAvg = batter;
+        //            bestAvg = batter.BattingAverage;
+        //        }
+        //    }
+        //    selection.Batter = batterWithBestAvg;
+        //    return true;
+        //}
 
-        private bool MissingFromLineup(
-            Batter batter,
-            DateTime gameDate)
-        {
-            if (OptionOn(Constants.Options.NoDaysOff))
-            {
-                for (int daysback = 1; 
-                    daysback < IntegerOption(Constants.Options.DaysOffDaysBack) + 1;
-                    daysback++)
-                {
-                    var queryDate = gameDate.AddDays(-daysback);
-                    if (NotInLineup(queryDate, batter))
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
-        private bool NotInLineup(
-            DateTime gameDate,
-            Batter batter)
-        {
-            var lineup = _lineupRepository.Submit(
-                gameDate,
-                batter.TeamSlug).Lineup;
-
-            if (!LineupHas(batter, lineup))
-            {
-                return true;
-            }
-            return false;
-        }
-
-        private bool LineupHas(Batter batter, List<Batter> lineup)
-        {
-            foreach (var b in lineup)
-            {
-                if (b.Name == batter.Name)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
     }
 }

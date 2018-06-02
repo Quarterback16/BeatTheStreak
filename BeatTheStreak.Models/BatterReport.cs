@@ -30,7 +30,23 @@ namespace BeatTheStreak.Models
                     i++;
                     Console.WriteLine($"{i}. {selection}");
                 }
-            }
+				HittingResults();
+			}
+
         }
-    }
+
+		private void HittingResults()
+		{
+			if ( GameDate < DateTime.Now.AddDays(-2))
+			{
+				var i = 0;
+				foreach (var selection in Selections)
+				{
+					i++;
+					var slug = selection.Batter.PlayerSlug;
+					Console.WriteLine($"{i}. {selection}");
+				}
+			}
+		}
+	}
 }

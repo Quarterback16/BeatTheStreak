@@ -12,14 +12,19 @@ namespace BeatTheStreak
         {
             var pitcherRepo = new PitcherRepository();
             var lineupRepo = new LineupRepository();
+			var statsRepo = new PlayerStatsRepository();
             var pickers = new Dictionary<string, IPicker>();
             var options = new Dictionary<string, string>
             {
                 { Constants.Options.HomePitchersOnly, "on" },
                 { "dayOff", "on" }
             };
-
-            var dp = new DefaultPicker(options,lineupRepo,pitcherRepo);
+			var pickerOptions = new PickerOptions(options);
+            var dp = new DefaultPicker(
+				pickerOptions, 
+				lineupRepo,
+				pitcherRepo,
+				statsRepo);
 
             pickers.Add(dp.PickerName, dp);
 

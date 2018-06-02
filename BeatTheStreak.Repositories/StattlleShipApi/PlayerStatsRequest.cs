@@ -1,4 +1,5 @@
-﻿using BeatTheStreak.Models;
+﻿using BeatTheStreak.Interfaces;
+using BeatTheStreak.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Net;
 
 namespace BeatTheStreak.Repositories
 {
-    public class PlayerStatsRequest : BaseApiRequest
+    public class PlayerStatsRequest : BaseApiRequest, IPlayerStatsRequest
     {
         public List<PlayerSeasonStatsDto> PlayerStats { get; set; }
 
@@ -33,8 +34,9 @@ namespace BeatTheStreak.Repositories
 
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
-                var dto = JsonConvert.DeserializeObject<PlayerStatsDto>(
-                    streamReader.ReadToEnd());
+				var json = streamReader.ReadToEnd();
+
+				var dto = JsonConvert.DeserializeObject<PlayerStatsDto>(json);
 
                 Teams = dto.Teams;
                 PlayerStats = dto.PlayerStats;
@@ -72,12 +74,18 @@ namespace BeatTheStreak.Repositories
                 result.Era = Decimal.Parse(PlayerStats[0].Era);
             if (PlayerStats[0].Wins != null)
                 result.Wins = Int32.Parse(PlayerStats[0].Wins);
-            if (PlayerStats[0].InningsPitched != null)
-                result.InningsPitched = Int32.Parse(PlayerStats[0].InningsPitched);
+			if (PlayerStats[0].HitsAllowed != null)
+				result.HitsAllowed = Int32.Parse(
+					PlayerStats[0].HitsAllowed);
+			if (PlayerStats[0].InningsPitched != null)
+                result.InningsPitched = Decimal.Parse(
+					PlayerStats[0].InningsPitched);
             if (PlayerStats[0].OpponentsBattingAverage != null)
-                result.OpponentsBattingAverage = Decimal.Parse(PlayerStats[0].OpponentsBattingAverage);
+                result.OpponentsBattingAverage = Decimal.Parse(
+					PlayerStats[0].OpponentsBattingAverage);
             if (PlayerStats[0].GroundBallToFlyBallRatio != null)
-                result.GroundBallTpFlyBallRatio = Decimal.Parse(PlayerStats[0].GroundBallToFlyBallRatio);
+                result.GroundBallTpFlyBallRatio = Decimal.Parse(
+					PlayerStats[0].GroundBallToFlyBallRatio);
         }
     }
 }

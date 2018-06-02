@@ -37,10 +37,16 @@ namespace BeatTheStreak.Repositories
         [JsonProperty("wins")]
         public string Wins { get; set; }
 
-        [JsonProperty("innings_pitched")]
+		[JsonProperty("hits_allowed")]
+		public string HitsAllowed { get; set; }
+
+		[JsonProperty("innings_pitched")]
         public string InningsPitched { get; set; }
 
-        [JsonProperty("ground_ball_to_fly_ball_ratio")]
+		[JsonProperty("innings_pitched_total_outs")]
+		public string InningsPitchedTotalOuts { get; set; }
+
+		[JsonProperty("ground_ball_to_fly_ball_ratio")]
         public string GroundBallToFlyBallRatio { get; set; }
 
         [JsonProperty("opponents_batting_average")]

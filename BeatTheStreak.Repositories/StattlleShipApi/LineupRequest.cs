@@ -87,6 +87,7 @@ namespace BeatTheStreak.Repositories
                 PlayerSlug = playerSlug,
                 Name = GetName(dto.PlayerId, Players),
                 TeamId = TeamFor(dto.TeamId, Teams),
+				Bats = GetBats(dto.PlayerId, Players ),
                 BattingOrder = dto.BattingOrder,
                 LineupPosition = dto.LineupPosition,
                 PositionAbbreviation = dto.PositionAbbreviation,

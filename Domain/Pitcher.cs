@@ -4,7 +4,9 @@
     {
         public string Name { get; set; }
 
-        public int Wins { get; set; }
+		public string Throws { get; set; }
+
+		public int Wins { get; set; }
 
         public int Losses { get; set; }
 
@@ -30,7 +32,7 @@
         {
             var oba = string.Format("{0:#0.000}", OpponentsBattingAverage);
             var era = string.Format("{0:#0.00}", Era);
-            return $"{Name,-25} {TeamName,-20} ({Wins}-{Losses}) {oba,5} {era,5}";
+            return $"{Name,-18} {Throws}  {TeamName,-15} ({Wins}-{Losses}) {oba,5} {era,5}";
         }
     }
 }

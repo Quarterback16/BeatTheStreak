@@ -10,17 +10,13 @@ namespace BeatTheStreak.UnitTests.Fakes
             BattingOrder = "1";
             TeamSlug = "mlb-pit";
             PositionAbbreviation = "3B";
-            TeamName = "Pitsburgh Fakes";
+            TeamName = "Pittsburgh Fakes";
+			PlayerSlug = "mlb-test-player";
         }
 
-        public FakeBatter(decimal battingAverage)
+        public FakeBatter(decimal battingAverage) : this()
         {
-            Name = "Steve";
-            BattingOrder = "1";
-            TeamSlug = "mlb-pit";
-            PositionAbbreviation = "3B";
-            TeamName = "Pitsburgh Fakes";
             BattingAverage = battingAverage;
-        }
+		}
     }
 }

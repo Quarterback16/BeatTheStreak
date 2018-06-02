@@ -8,7 +8,9 @@ namespace BeatTheStreak.Repositories
     {
         public PlayerStatsViewModel Submit(DateTime queryDate, string playerSlug)
         {
-            throw new NotImplementedException();
-        }
+			var statsRequest = new PlayerStatsRequest();
+			var result = statsRequest.Submit(queryDate,playerSlug);
+			return result;
+		}
     }
 }

@@ -99,7 +99,47 @@ namespace BeatTheStreak.Repositories
             return name;
         }
 
-        public string GetPlayerSlug(string playerId, List<PlayerDto> players)
+		public string GetHandedness(string playerId, List<PlayerDto> players)
+		{
+			string handedness = "???";
+			foreach (var p in players)
+			{
+				if (p.Id == playerId)
+				{
+					handedness = p.Handedness;
+					if (handedness == "unknown")
+						handedness = "?";
+					if (handedness.Length > 0)
+						handedness = handedness.Substring(0, 1).ToUpper();
+					break;
+				}
+			}
+			return handedness;
+		}
+
+		public string GetBats(string playerId, List<PlayerDto> players)
+		{
+			string bats = "?";
+			foreach (var p in players)
+			{
+				if (p.Id == playerId)
+				{
+					bats = p.Bats;
+					if (bats == "bats_right")
+						bats = "R";
+					else if (bats == "bats_left")
+						bats = "L";
+					else if (bats == "bats_switch")
+						bats = "S";
+					else 
+						bats = "?";
+					break;
+				}
+			}
+			return bats;
+		}
+
+		public string GetPlayerSlug(string playerId, List<PlayerDto> players)
         {
             string name = "???";
             foreach (var p in players)

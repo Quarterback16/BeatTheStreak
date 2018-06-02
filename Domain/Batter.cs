@@ -8,7 +8,9 @@
 
         public string Name { get; set; }
 
-        public string LineupPosition { get; set; }
+		public string Bats { get; set; }
+
+		public string LineupPosition { get; set; }
 
         public string PositionAbbreviation { get; set; }
 
@@ -33,7 +35,13 @@
 
         public override string ToString()
         {
-            return $"{BattingOrder} {Name,-25} {BattingAverage,0:.000} {PositionAbbreviation,-2} {TeamName,-25}";
+            return $@"{
+				BattingOrder
+				} {
+				Name,-18
+				} {Bats}  {BattingAverage,0:.000} {
+				PositionAbbreviation,-2
+				} {TeamName,-15}";
         }
     }
 }

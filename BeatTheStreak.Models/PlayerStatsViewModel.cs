@@ -15,11 +15,13 @@ namespace BeatTheStreak.Models
 
         public decimal Hits { get; set; }
 
-        public decimal BattingAverage { get; set; }
+		public int HitsAllowed { get; set; }
+
+		public decimal BattingAverage { get; set; }
 
         public decimal Era { get; set; }
 
-        public decimal Wins { get; set; }
+        public int Wins { get; set; }
 
         public decimal InningsPitched { get; set; }
 
@@ -41,9 +43,19 @@ namespace BeatTheStreak.Models
 
         public string PitcherLine()
         {
-            return $@"{Player?.Name} W:{Wins,-2} ERA:{Era,-5} IP:{InningsPitched,-4} GBR:{
-                GroundBallTpFlyBallRatio,-4
-                } OBA:{OpponentsBattingAverage}";
+            return $@"{
+				Player?.Name
+				} Asof: {
+				AsOf.ToShortDateString()
+				} W:{
+				Wins,-2
+				} ERA:{
+				Era,-5
+				} IP:{
+				InningsPitched,-4
+				} Hits Allowed: {
+				HitsAllowed,-5
+				} GBR:{ GroundBallTpFlyBallRatio:#.000} OBA:{OpponentsBattingAverage:#.000}";
         }
 
         public override string ToString()
@@ -57,7 +69,17 @@ namespace BeatTheStreak.Models
             else
                 bavg = " .000";
             var ab = (int) AtBats;
-            return $"{Player?.Name} {Hits,-2} for {ab,-3} {bavg,-5}";
+            return $@"{
+				Player?.Name
+				} Asof: {
+				AsOf.ToShortDateString(),10
+				} {
+				Hits,-2
+				} for {
+				ab,-3
+				} {
+				bavg,-5
+				}";
         }
     }
 }

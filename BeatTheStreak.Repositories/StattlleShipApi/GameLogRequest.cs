@@ -1,4 +1,5 @@
-﻿using BeatTheStreak.Models;
+﻿using BeatTheStreak.Interfaces;
+using BeatTheStreak.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Text;
 
 namespace BeatTheStreak.Repositories
 {
-    public class GameLogRequest : BaseApiRequest
+    public class GameLogRequest : BaseApiRequest, IGameLogRequest
     {
         public List<LogDto> Logs { get; set; }
 

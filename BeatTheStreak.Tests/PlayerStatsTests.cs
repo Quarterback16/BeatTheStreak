@@ -10,32 +10,44 @@ namespace BeatTheStreak.Tests
         [TestMethod]
         public void PlayerStatsRequest_PitcherOk()
         {
-            var sut = new PlayerStatsRequest();
+			var playerSlug = "mlb-jameson-taillon";
+
+			var sut = new PlayerStatsRequest();
             var result = sut.Submit(
-                queryDate: new DateTime(2018, 5, 4),
-                playerSlug: "mlb-jameson-taillon");
+                queryDate: new DateTime(2018, 5, 1),
+                playerSlug: playerSlug );
             result.DumpPitcher();
-        }
+			var result2 = sut.Submit(
+				queryDate: new DateTime(2018, 5, 31),
+				playerSlug: playerSlug);
+			result2.DumpPitcher();
+		}
 
         [TestMethod]
         public void PlayerStatsRequest_BatterOk()
         {
-            var sut = new PlayerStatsRequest();
+			var playerSlug = "mlb-josh-bell";
+
+			var sut = new PlayerStatsRequest();
             var result = sut.Submit(
                 queryDate: new DateTime(2018, 5, 4),
-                playerSlug: "mlb-josh-bell");
+                playerSlug: playerSlug);
             result.Dump();
             Assert.IsTrue(
                 result.BattingAverage.Equals(0.244M),
                 "Josh Bells Season Bavg on 2018-05-04 was .244");
-        }
+			var result2 = sut.Submit(
+				queryDate: new DateTime(2018, 5, 31),
+				playerSlug: playerSlug);
+			result2.Dump();
+		}
 
         [TestMethod]
         public void PlayerStatsRequestOneDay_BatterOk()
         {
             var sut = new GameLogRequest();
             var result = sut.Submit(
-                queryDate: new DateTime(2018, 5, 10),
+                queryDate: new DateTime(2018, 5, 11),
                 playerSlug: "mlb-josh-bell");
             result.Dump();
             Assert.IsTrue(

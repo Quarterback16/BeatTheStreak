@@ -42,10 +42,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IGameLogRequest.cs" />
+    <Compile Include="ILike.cs" />
     <Compile Include="ILineupRepository.cs" />
     <Compile Include="IPicker.cs" />
+    <Compile Include="IPickerOptions.cs" />
     <Compile Include="IPitcherRepository.cs" />
     <Compile Include="IPlayerStatsRepository.cs" />
+    <Compile Include="IPlayerStatsRequest.cs" />
     <Compile Include="IStattleShipApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
