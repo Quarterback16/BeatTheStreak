@@ -5,6 +5,7 @@ namespace BeatTheStreak.Models
 {
     public class Selection
     {
+		public string Result { get; set; }
         public Batter Batter { get; set; }
         public Batter Batter1 { get; set; }
         public Batter Batter2 { get; set; }
@@ -13,6 +14,10 @@ namespace BeatTheStreak.Models
         public Game Game { get; set; }
         public DateTime GameDate { get; set; }
 
+		public Selection()
+		{
+			Result = "     ";
+		}
         public override string ToString()
         {
             return $"{Batter} vs. {Pitcher} : {Game}";

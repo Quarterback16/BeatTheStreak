@@ -50,6 +50,7 @@
     <Compile Include="IPitcherRepository.cs" />
     <Compile Include="IPlayerStatsRepository.cs" />
     <Compile Include="IPlayerStatsRequest.cs" />
+    <Compile Include="IResultChecker.cs" />
     <Compile Include="IStattleShipApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -57,6 +58,10 @@
     <ProjectReference Include="..\BeatTheStreak.Models\BeatTheStreak.Models.csproj">
       <Project>{7d93cb68-d680-4490-8888-4e55c45e4344}</Project>
       <Name>BeatTheStreak.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{f753ba06-db2a-4634-9412-7fb92a383399}</Project>
+      <Name>Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

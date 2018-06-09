@@ -5,7 +5,7 @@ namespace BeatTheStreak.Models
 {
     public class PlayerStatsViewModel
     {
-        public DateTime AsOf { get; set; }
+		public DateTime AsOf { get; set; }
 
         public Player Player { get; set; }
 

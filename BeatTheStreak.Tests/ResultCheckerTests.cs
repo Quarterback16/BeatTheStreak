@@ -30,36 +30,58 @@ namespace BeatTheStreak.Tests
 		}
 
 		[TestMethod]
-		public void ResultChecker_OnAdamJonesJun7_ReturnsFalse()
+		public void ResultChecker_OnAdamJonesJun7_DidNotGetHit()
 		{
 			var batter = new Domain.Batter
 			{
 				PlayerSlug = "mlb-adam-jones"
 			};
-			var result = _sut.Check(batter, new System.DateTime(2018, 06, 07));
+			var result = _sut.GotHit(batter, new System.DateTime(2018, 06, 07));
 			Assert.IsFalse(result, "Adam Jones was 0 for 5 on Jun-7");
 		}
 
 		[TestMethod]
-		public void ResultChecker_OnAdamJonesJun6_ReturnsTrue()
+		public void ResultChecker_OnAdamJonesJun6_GotHit()
 		{
 			var batter = new Domain.Batter
 			{
 				PlayerSlug = "mlb-adam-jones"
 			};
-			var result = _sut.Check(batter, new System.DateTime(2018, 06, 06));
+			var result = _sut.GotHit(batter, new System.DateTime(2018, 06, 06));
 			Assert.IsTrue(result, "Adam Jones was 2 for 4 on Jun-6");
 		}
 
 		[TestMethod]
-		public void ResultChecker_OnFrederickFreeman_Jun5_ReturnsTrue()
+		public void ResultChecker_OnFrederickFreemanJun5_GotHit()
 		{
 			var batter = new Domain.Batter
 			{
 				PlayerSlug = "mlb-freddie-freeman"
 			};
-			var result = _sut.Check(batter, new System.DateTime(2018, 06, 05));
+			var result = _sut.GotHit(batter, new System.DateTime(2018, 06, 05));
 			Assert.IsTrue(result, "Freddie Freeman was 4 for 4 on Jun-5");
+		}
+
+		[TestMethod]
+		public void ResultChecker_OnBrettGardnerJun3_HadNoAtBat()
+		{
+			var batter = new Domain.Batter
+			{
+				PlayerSlug = "mlb-brett-gardner"
+			};
+			var result = _sut.HadAtBat(batter, new System.DateTime(2018, 06, 03));
+			Assert.IsFalse(result, "Brett Gardner had no official at bat on Jun-3");
+		}
+
+		[TestMethod]
+		public void ResultChecker_OnBrettGardnerJun2_HadAtBat()
+		{
+			var batter = new Domain.Batter
+			{
+				PlayerSlug = "mlb-brett-gardner"
+			};
+			var result = _sut.HadAtBat(batter, new System.DateTime(2018, 06, 02));
+			Assert.IsTrue(result, "Brett Gardner had an official at bat on Jun-2");
 		}
 
 	}

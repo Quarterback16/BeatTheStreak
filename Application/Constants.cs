@@ -18,7 +18,8 @@
 			//  how far back to go for stats
 			public const string HotBattersDaysBack = "HotBatter-DaysBack";
 			public const string HotBattersMendozaLine = "HotBatters-MendozaLine";
-
+			//  dont touch these pitchers
+			public const string PitchersMendozaLine = "Pitchers-MendozaLine";
 
 		}
 	}

@@ -9,7 +9,8 @@ namespace BeatTheStreak.Models
 
         public List<Selection> Selections { get; set; }
 
-        public BatterReport(DateTime gameDate)
+        public BatterReport(
+			DateTime gameDate)
         {
             GameDate = gameDate;
         }
@@ -28,25 +29,10 @@ namespace BeatTheStreak.Models
                 foreach (var selection in Selections)
                 {
                     i++;
-                    Console.WriteLine($"{i}. {selection}");
+                    Console.WriteLine($"{i}. {selection.Result} {selection}");
                 }
-				HittingResults();
 			}
 
         }
-
-		private void HittingResults()
-		{
-			if ( GameDate < DateTime.Now.AddDays(-2))
-			{
-				var i = 0;
-				foreach (var selection in Selections)
-				{
-					i++;
-					var slug = selection.Batter.PlayerSlug;
-					Console.WriteLine($"{i}. {selection}");
-				}
-			}
-		}
 	}
 }
