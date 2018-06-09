@@ -114,7 +114,15 @@ namespace Application
             var result = _lineupRepository.Submit(
                 queryDate: lineupQueryDate,
                 teamSlug: opponentTeam);
-            return result;
+			if (result.Lineup.Count.Equals(0))
+			{
+				//  go back one more day
+				result = _lineupRepository.Submit(
+								queryDate: lineupQueryDate.AddDays(-1),
+								teamSlug: opponentTeam);
+			}
+
+			return result;
         }
 
         private ProbablePitcherViewModel GetProbablePitchers(DateTime gameDate)

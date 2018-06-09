@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CachedLineupRepository.cs" />
+    <Compile Include="CachedPitcherRepository.cs" />
     <Compile Include="CachedPlayerStatsRepository.cs" />
     <Compile Include="LineupRepository.cs" />
     <Compile Include="PitcherRepository.cs" />

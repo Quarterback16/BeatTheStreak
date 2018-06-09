@@ -1,32 +1,36 @@
 ﻿using BeatTheStreak.Interfaces;
 using BeatTheStreak.Models;
+using Domain;
 using System;
 
 namespace Application
 {
 	public class ResultChecker
 	{
-		private readonly IGameLogRequest _gameLogRequest;
+		private readonly IPlayerStatsRepository _playerStatsRepository;
 
-		public ResultChecker(IGameLogRequest gameLogRequest)
+		public ResultChecker(IPlayerStatsRepository playerStatsRepository)
 		{
-			_gameLogRequest = gameLogRequest;
+			_playerStatsRepository = playerStatsRepository;
 		}
 
-		public void Check( BatterReport batterReport )
+		public bool Check( Batter batter, DateTime gameDate )
 		{
-			if ( batterReport.GameDate < DateTime.Now.AddDays(-2) )
+			var hit = false;
+			if ( gameDate < DateTime.Now.AddDays(-2) )
 			{
-				foreach (var selection in batterReport.Selections)
-				{
-					var result = _gameLogRequest.Submit(
-						queryDate: batterReport.GameDate,
-						playerSlug: selection.Batter.PlayerSlug);
-					result.Dump();
-				}
+				var statsAfterGame = _playerStatsRepository.Submit(
+					queryDate: gameDate.AddDays(1),
+					playerSlug: batter.PlayerSlug);
+				var statsBeforeGame = _playerStatsRepository.Submit(
+					queryDate: gameDate,
+					playerSlug: batter.PlayerSlug);
+				if (statsAfterGame.Hits > statsBeforeGame.Hits)
+					hit = true;
 			}
 			else
 				Console.WriteLine("Game too fresh");
+			return hit;
 		}
 	}
 }

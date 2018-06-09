@@ -1,5 +1,7 @@
 ﻿using Application;
 using BeatTheStreak.Repositories;
+using BeatTheStreak.Tests.Fakes;
+using Cache;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -12,10 +14,21 @@ namespace BeatTheStreak.Tests
         [TestMethod]
         public void DefaultPicker_ReturnsBestBatters()
         {
-            const int numberDesired = 2;
+			var cache = new RedisCacheRepository(
+				connectionString: "localhost,abortConnect=false",
+				environment: "local",
+				functionalArea: "bts",
+				serializer: new JsonSerialiser(),
+				logger: new FakeLogger(),
+				expire: false);
+			const int numberDesired = 2;
             var pitcherRepo = new PitcherRepository();
-            var lineupRepo = new LineupRepository();
-			var statsRepo = new PlayerStatsRepository();
+            var lineupRepo = new CachedLineupRepository(
+				new LineupRepository(),
+				cache);
+			var statsRepo = new CachedPlayerStatsRepository(
+				new PlayerStatsRepository(),
+				cache );
             var options = new Dictionary<string, string>
             {
                 { Constants.Options.HomePitchersOnly, "on" },

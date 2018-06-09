@@ -6,7 +6,7 @@
 
         public BaseReport()
         {
-            VersionNo = "0.0.7.0";
+            VersionNo = "0.0.8.0";
         }
     }
 }
