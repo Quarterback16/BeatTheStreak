@@ -49,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlwaysLikePicker.cs" />
+    <Compile Include="CachedPlayerStatsRepositoryIntegrationTests.cs" />
+    <Compile Include="Fakes\FakeLogger.cs" />
     <Compile Include="LineupTests.cs" />
     <Compile Include="PickBattersTests.cs" />
     <Compile Include="PlayerStatsTests.cs" />
@@ -89,6 +91,10 @@
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{f753ba06-db2a-4634-9412-7fb92a383399}</Project>
       <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="E:\FileSync\SyncProjects\Cache\Cache.csproj">
+      <Project>{85BB16A5-3C53-4E4F-A342-1103AA6F967E}</Project>
+      <Name>Cache</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

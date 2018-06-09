@@ -34,7 +34,7 @@ namespace BeatTheStreak.Repositories
             httpWebRequest.Headers.Add(
                 "Authorization",
                 apiKey);
-
+			Console.WriteLine($"url:{url}");
             return httpWebRequest;
         }
 
@@ -72,17 +72,6 @@ namespace BeatTheStreak.Repositories
                 "35a160218fc36942348a14ddaec71d43");
 
             return httpWebRequest;
-        }
-
-        public static string UniversalDate(DateTime date)
-        {
-            var longDate = $"{date.Date:u}";
-            var universalDate = longDate.Substring(0, 10);
-            var year = universalDate.Substring(0, 5);
-            var month = universalDate.Substring(5, 2);
-            var day = universalDate.Substring(8, 2);
-            var usUniversalDate = $"{year}-{day}-{month}";
-            return universalDate;
         }
 
         public string GetName(string playerId, List<PlayerDto> players)

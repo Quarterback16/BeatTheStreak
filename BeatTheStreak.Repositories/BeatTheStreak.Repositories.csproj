@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CachedPlayerStatsRepository.cs" />
     <Compile Include="LineupRepository.cs" />
     <Compile Include="PitcherRepository.cs" />
     <Compile Include="PlayerStatsRepository.cs" />
@@ -82,6 +83,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BeatTheStreak.Helpers\BeatTheStreak.Helpers.csproj">
+      <Project>{0cc0ef82-ad0a-4706-beeb-318dac74a932}</Project>
+      <Name>BeatTheStreak.Helpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BeatTheStreak.Interfaces\BeatTheStreak.Interfaces.csproj">
       <Project>{ba85a4e6-810d-4058-8e53-a25d7dab712f}</Project>
       <Name>BeatTheStreak.Interfaces</Name>
@@ -93,6 +98,10 @@
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{f753ba06-db2a-4634-9412-7fb92a383399}</Project>
       <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="E:\FileSync\SyncProjects\Cache\Cache.csproj">
+      <Project>{85bb16a5-3c53-4e4f-a342-1103aa6f967e}</Project>
+      <Name>Cache</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

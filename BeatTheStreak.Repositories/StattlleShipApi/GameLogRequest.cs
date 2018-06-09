@@ -1,4 +1,5 @@
-﻿using BeatTheStreak.Interfaces;
+﻿using BeatTheStreak.Helpers;
+using BeatTheStreak.Interfaces;
 using BeatTheStreak.Models;
 using Newtonsoft.Json;
 using System;
@@ -19,14 +20,13 @@ namespace BeatTheStreak.Repositories
             {
                 AsOf = queryDate
             };
-            var strDate = UniversalDate(queryDate);
+            var strDate = Utility.UniversalDate(queryDate);
             var qp = new StringBuilder();
-            //qp.Append($"season_id=mlb-2018");
-            //qp.Append($"&on={strDate}");
-            //qp.Append($"&status=ended");
-            //qp.Append($"&team_id=mlb-pit");
-            //qp.Append($"&player_id={playerSlug}");
-            var httpWebRequest = CreateRequest(
+            qp.Append($"season_id=mlb-2018");
+            qp.Append($"&on={strDate}");
+            qp.Append($"&player_id={playerSlug}");
+			qp.Append("&status=ended");
+			var httpWebRequest = CreateRequest(
                 sport: "baseball",
                 league: "mlb",
                 apiRequest: "game_logs",

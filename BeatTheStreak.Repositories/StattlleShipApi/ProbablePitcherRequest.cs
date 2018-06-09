@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using Domain;
 using BeatTheStreak.Models;
+using BeatTheStreak.Helpers;
 
 namespace BeatTheStreak.Repositories
 {
@@ -34,7 +35,7 @@ namespace BeatTheStreak.Repositories
             };
             GameDate = queryDate;
 
-            var strDate = UniversalDate(queryDate);
+            var strDate = Utility.UniversalDate(queryDate);
             //url: "https://api.stattleship.com/baseball/mlb/probable_pitchers?season_id=mlb-2018&on=2018-04-26
             var pitchers = new List<Pitcher>();
             TeamList = new Dictionary<string,Pitcher>();

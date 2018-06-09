@@ -1,4 +1,5 @@
-﻿using BeatTheStreak.Models;
+﻿using BeatTheStreak.Helpers;
+using BeatTheStreak.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace BeatTheStreak.Repositories
             {
                 AsOf = queryDate
             };
-            var strDate = UniversalDate(queryDate);
+            var strDate = Utility.UniversalDate(queryDate);
             var qp = new System.Text.StringBuilder();
             qp.Append("ranking=baseball_daily_player_hitter_ranking");
             qp.Append($"&on={strDate}");

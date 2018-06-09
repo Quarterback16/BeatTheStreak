@@ -1,4 +1,5 @@
-﻿using BeatTheStreak.Interfaces;
+﻿using BeatTheStreak.Helpers;
+using BeatTheStreak.Interfaces;
 using BeatTheStreak.Models;
 using Newtonsoft.Json;
 using System;
@@ -18,7 +19,7 @@ namespace BeatTheStreak.Repositories
             {
                 AsOf = queryDate
             };
-            var strDate = UniversalDate(queryDate);
+            var strDate = Utility.UniversalDate(queryDate);
             var qp = new System.Text.StringBuilder();
             qp.Append("season_id=mlb-2018");
             //qp.Append("&interval_type=today");

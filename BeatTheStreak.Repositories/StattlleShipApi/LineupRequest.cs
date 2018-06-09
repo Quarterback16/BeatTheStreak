@@ -6,6 +6,7 @@ using System.IO;
 using System;
 using System.Linq;
 using BeatTheStreak.Models;
+using BeatTheStreak.Helpers;
 
 namespace BeatTheStreak.Repositories
 {
@@ -30,7 +31,7 @@ namespace BeatTheStreak.Repositories
             };
             GameDate = queryDate;
 
-            var strDate = UniversalDate(queryDate);
+            var strDate = Utility.UniversalDate(queryDate);
             var lineup = new List<Batter>();
 
             var httpWebRequest = CreateRequest(
