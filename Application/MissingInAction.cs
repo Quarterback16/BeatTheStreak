@@ -80,7 +80,7 @@ namespace Application
 				batter.PlayerSlug);
 			batter.BattingAverage = BattingAverage(statsFrom, statsTo);
 			Console.WriteLine( $@"   bavg for {
-				batter.PlayerSlug
+				batter.PlayerSlug,-25
 				} was {oldAvg:#.000} now calculated as {batter.BattingAverage:#.000}");
 		}
 

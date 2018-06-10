@@ -22,7 +22,7 @@ namespace Application
 			Tests = new List<ILike>
 			{
 				new MissingInAction(lineupRepository,playerStatsRepository,options),
-				new HotBatter(options),
+				new HotBatter(options)
 			};
 		}
 
@@ -105,7 +105,9 @@ namespace Application
                             lineupQueryDate.ToShortDateString()
                             } team COLD";
                 }
-                Console.WriteLine(printLine);
+
+				//Console.WriteLine(printLine);
+
                 if (batters.Count == numberRequired)
                     break;
             }
@@ -133,7 +135,7 @@ namespace Application
 
         private ProbablePitcherViewModel GetProbablePitchers(DateTime gameDate)
         {
-            Console.WriteLine($"GameDate {gameDate.ToLongDateString()} (US)");
+            //Console.WriteLine($"GameDate {gameDate.ToLongDateString()} (US)");
             var pitchers = _pitcherRepository.Submit(
                 gameDate,
                 homeOnly: PickerOptions.OptionOn(Constants.Options.HomePitchersOnly));

@@ -23,6 +23,7 @@ namespace Application
 			if (selection.Batter.BattingAverage > _pickerOptions.DecimalOption(
 				Constants.Options.HotBattersMendozaLine))
 				return true;
+
 			reasonForDislike = $" {selection.Batter.PlayerSlug} Batting Avg too low";
 			return false;
 		}
