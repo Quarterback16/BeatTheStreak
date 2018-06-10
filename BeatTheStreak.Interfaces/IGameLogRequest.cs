@@ -5,6 +5,6 @@ namespace BeatTheStreak.Interfaces
 {
 	public interface IGameLogRequest
 	{
-		PlayerStatsViewModel Submit(DateTime queryDate, string playerSlug);
+		PlayerGameLogViewModel Submit(DateTime queryDate, string playerSlug);
 	}
 }

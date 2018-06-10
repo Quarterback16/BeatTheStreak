@@ -34,7 +34,7 @@ namespace BeatTheStreak.Repositories
             httpWebRequest.Headers.Add(
                 "Authorization",
                 apiKey);
-			//Console.WriteLine($"url:{url}");
+			Console.WriteLine($"url:{url}");
             return httpWebRequest;
         }
 

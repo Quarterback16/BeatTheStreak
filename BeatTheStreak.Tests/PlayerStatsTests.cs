@@ -47,12 +47,12 @@ namespace BeatTheStreak.Tests
         {
             var sut = new GameLogRequest();
             var result = sut.Submit(
-                queryDate: new DateTime(2018, 5, 11),
+                queryDate: new DateTime(2018, 5, 30),
                 playerSlug: "mlb-josh-bell");
-            result.Dump();
+            result.BatterLine();
             Assert.IsTrue(
-                result.BattingAverage.Equals(0.500M),
-                "Josh Bells Bavg on 2018-05-11 was .500");
+                result.BattingAverage.Equals(0.250M),
+                "Josh Bells Bavg on 2018-05-11 was .250 1 for 4");
         }
     }
 }

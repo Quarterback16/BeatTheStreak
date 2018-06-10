@@ -14,5 +14,13 @@ namespace BeatTheStreak.Helpers
 			var usUniversalDate = $"{year}-{day}-{month}";
 			return universalDate;
 		}
+
+		public static decimal BattingAverage(
+			decimal hits,
+			decimal atBats)
+		{
+			if (atBats == 0) return 0.0M;
+			return hits / atBats;
+		}
 	}
 }

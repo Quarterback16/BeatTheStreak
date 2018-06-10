@@ -81,5 +81,15 @@ namespace BeatTheStreak.Models
 				bavg,-5
 				}";
         }
-    }
+
+		public void BatterLine()
+		{
+			var line = $@"{
+				Player?.Name
+				} on {
+				AsOf.ToShortDateString()
+				} had {AtBats} AB {Hits} hits";
+			Console.WriteLine(line);
+		}
+	}
 }

@@ -45,6 +45,7 @@
     <Compile Include="BaseReport.cs" />
     <Compile Include="BatterReport.cs" />
     <Compile Include="LineupViewModel.cs" />
+    <Compile Include="PlayerGameLogViewModel.cs" />
     <Compile Include="PlayerStatsViewModel.cs" />
     <Compile Include="ProbablePitcherViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

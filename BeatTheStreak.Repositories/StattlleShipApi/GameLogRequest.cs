@@ -14,18 +14,19 @@ namespace BeatTheStreak.Repositories
     {
         public List<LogDto> Logs { get; set; }
 
-        public PlayerStatsViewModel Submit(DateTime queryDate, string playerSlug)
+        public PlayerGameLogViewModel Submit(DateTime queryDate, string playerSlug)
         {
-            var result = new PlayerStatsViewModel
+            var result = new PlayerGameLogViewModel
             {
                 AsOf = queryDate
             };
             var strDate = Utility.UniversalDate(queryDate);
             var qp = new StringBuilder();
-            qp.Append($"season_id=mlb-2018");
-            qp.Append($"&on={strDate}");
-            qp.Append($"&player_id={playerSlug}");
+            qp.Append("season_id=mlb-2018");
+			qp.Append("&interval_type=regularseason");
 			qp.Append("&status=ended");
+            qp.Append($"&player_id={playerSlug}");
+			qp.Append($"&on={strDate}");
 			var httpWebRequest = CreateRequest(
                 sport: "baseball",
                 league: "mlb",
@@ -42,12 +43,25 @@ namespace BeatTheStreak.Repositories
                 Teams = dto.Teams;
                 Logs = dto.Logs;
             }
-            result.Player = new Domain.Player
+			if (Logs.Count==1)
+			{
+				MapLogStats(Logs[0], result);
+			}
+			result.AsOf = queryDate;
+			result.Player = new Domain.Player
             {
                 Name = playerSlug
             };
 
             return result;
         }
-    }
+
+		private void MapLogStats(LogDto logDto, PlayerGameLogViewModel result)
+		{
+			result.Hits = Decimal.Parse(logDto.Hits);
+			result.AtBats = Int32.Parse(logDto.AtBats);
+			result.BattingAverage = Utility.BattingAverage(result.Hits, result.AtBats);
+			//TODO: all the other stats
+		}
+	}
 }
