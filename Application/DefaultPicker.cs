@@ -9,12 +9,14 @@ namespace Application
     public class DefaultPicker : BasePicker, IPicker
     {
 		private List<ILike> Tests;
+		private readonly ILineupProjector _lineupProjector;
 
         public DefaultPicker(
             IPickerOptions options,
             ILineupRepository lineupRepository,
             IPitcherRepository pitcherRepository,
-			IPlayerStatsRepository playerStatsRepository) 
+			IPlayerStatsRepository playerStatsRepository,
+			ILineupProjector lineupProjector) 
             : base(lineupRepository, pitcherRepository)
         {
             PickerName = "Default Picker";
@@ -24,6 +26,7 @@ namespace Application
 				new MissingInAction(lineupRepository,playerStatsRepository,options),
 				new HotBatter(options)
 			};
+			_lineupProjector = lineupProjector;
 		}
 
         public BatterReport Choose( DateTime gameDate, int numberRequired )
@@ -50,10 +53,12 @@ namespace Application
 				}
                 ++i;
                 var printLine = $"{i.ToString(),2} {pitcher}";
-				Console.WriteLine($"Looking for a batter facing {pitcher}");
+				Console.WriteLine($"Looking for a {pitcher.OpponentSlug} batter facing {pitcher}");
                 var lineupQueryDate = gameDate.AddDays(-1);
 
-                var opponents = GetOpponentsLineup(pitcher, lineupQueryDate);
+                var opponents = _lineupProjector.ProjectLineup(
+					pitcher, 
+					lineupQueryDate);
 
 				if (opponents.Lineup.Count.Equals(0))
 				{

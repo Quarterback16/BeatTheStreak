@@ -1,4 +1,5 @@
 ﻿using Application;
+using BeatTheStreak.Implementations;
 using BeatTheStreak.Repositories;
 using BeatTheStreak.Tests.Fakes;
 using Cache;
@@ -30,6 +31,7 @@ namespace BeatTheStreak.Tests
 			var statsRepo = new CachedPlayerStatsRepository(
 				new PlayerStatsRepository(),
 				cache );
+			var lineupProjector = new LineupProjector(lineupRepo);
 			var resultChecker = new ResultChecker(statsRepo);
 			var options = new Dictionary<string, string>
             {
@@ -46,7 +48,8 @@ namespace BeatTheStreak.Tests
 				pickerOptions, 
 				lineupRepo, 
 				pitcherRepo,
-				statsRepo);
+				statsRepo,
+				lineupProjector);
 			var gameDate = DateTime.Now.AddDays(0);  // US Date
 			var result = sut.Choose(
                 gameDate: gameDate,
