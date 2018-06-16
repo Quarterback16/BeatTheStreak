@@ -46,6 +46,7 @@
     <Compile Include="ILike.cs" />
     <Compile Include="ILineupProjector.cs" />
     <Compile Include="ILineupRepository.cs" />
+    <Compile Include="IOpposingPitcher.cs" />
     <Compile Include="IPicker.cs" />
     <Compile Include="IPickerOptions.cs" />
     <Compile Include="IPitcherRepository.cs" />

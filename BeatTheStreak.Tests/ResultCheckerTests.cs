@@ -1,10 +1,8 @@
 ﻿using Application;
-using BeatTheStreak.Models;
 using BeatTheStreak.Repositories;
 using BeatTheStreak.Tests.Fakes;
 using Cache;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
 
 namespace BeatTheStreak.Tests
 {

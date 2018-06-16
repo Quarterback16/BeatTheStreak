@@ -53,6 +53,7 @@
     <Compile Include="Fakes\FakeLogger.cs" />
     <Compile Include="LineupProjectorIntegrationTests.cs" />
     <Compile Include="LineupTests.cs" />
+    <Compile Include="OpposingPitcherTests.cs" />
     <Compile Include="PickBattersTests.cs" />
     <Compile Include="PlayerStatsTests.cs" />
     <Compile Include="ProbablePitcherTests.cs" />

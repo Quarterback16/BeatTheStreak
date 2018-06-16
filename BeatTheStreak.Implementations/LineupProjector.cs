@@ -9,10 +9,18 @@ namespace BeatTheStreak.Implementations
 	public class LineupProjector : ILineupProjector
 	{
 		private ILineupRepository _lineupRepository;
+		private IOpposingPitcher _opposingPitcher;
 
-		public LineupProjector(ILineupRepository lineupRepository)
+		public int DaysToGoBack { get; set; }
+
+		public LineupProjector(
+			ILineupRepository lineupRepository,
+			IOpposingPitcher opposingPitcher,
+			int daysToGoBack)
 		{
 			_lineupRepository = lineupRepository;
+			_opposingPitcher = opposingPitcher;
+			DaysToGoBack = daysToGoBack;
 		}
 
 		public LineupViewModel ProjectLineup(
@@ -47,50 +55,69 @@ namespace BeatTheStreak.Implementations
 		{
 			var opponentTeam = pitcher.OpponentSlug;
 			var pitcherThrows = pitcher.Throws;
+			if (pitcherThrows.Equals("L"))
+				DaysToGoBack = DaysToGoBack * 2;
 			var result = new LineupViewModel
 			{
 				TeamName = opponentTeam,
 				Lineup = new List<Batter>()
 			};
-			var batter = new Batter[3];
 			// workout the average lineup versus R or L
 			Dictionary<string, Batter> Roster = new Dictionary<string, Batter>();
 			Dictionary<int, Dictionary<string,int>> d = 
 				new Dictionary<int, Dictionary<string, int>>();
-			for (int i = 1; i < 5; i++)
+			var lineupCount = 0;
+			for (int i = 1; i < DaysToGoBack+1; i++)
 			{
+				var focusDate = lineupQueryDate.AddDays(-i);
 				var lineup = _lineupRepository.Submit(
-								queryDate: lineupQueryDate.AddDays(-i),
+								queryDate: focusDate,
 								teamSlug: opponentTeam);
 
 				if (lineup.Lineup.Count == 0)
 					continue;
 
-				for (int j = 1; j < 4; j++)
+				var lineupPitcher = _opposingPitcher.PitcherFacing(
+					opponentTeam, focusDate);
+				Console.WriteLine( $@"pitcher on {
+					focusDate
+					} is {
+					lineupPitcher.Name
+					} throws {lineupPitcher.Throws}");
+				if (lineupPitcher.Throws.Equals(pitcherThrows))
 				{
-					var batterAt = lineup.BattingAt(j.ToString());
-					AddBatter(d, j, batterAt);
-					AddToRoster(Roster, batterAt);
-				}
-			}
-			for (int j = 1; j < 4; j++)
-			{
-				var lastBest = 0;
-				var best = string.Empty;
-				var apps = d[j];
-				foreach (KeyValuePair<string, int> pair in apps)
-				{
-					if ( pair.Value > lastBest )
+					lineupCount++;
+					for (int j = 1; j < 4; j++)
 					{
-						best = pair.Key;
-						lastBest = pair.Value;
+						var batterAt = lineup.BattingAt(j.ToString());
+						AddBatter(d, j, batterAt);
+						AddToRoster(Roster, batterAt);
 					}
 				}
-				var bestBatter = Roster[best];
-				bestBatter.BattingOrder = j.ToString();
-				bestBatter.IsSub = false;
-				result.Lineup.Add(bestBatter);
 			}
+			if (lineupCount > 0)
+			{
+				for (int j = 1; j < 4; j++)
+				{
+					var lastBest = 0;
+					var best = string.Empty;
+					var apps = d[j];
+					foreach (KeyValuePair<string, int> pair in apps)
+					{
+						if (pair.Value > lastBest)
+						{
+							best = pair.Key;
+							lastBest = pair.Value;
+						}
+					}
+					var bestBatter = Roster[best];
+					bestBatter.BattingOrder = j.ToString();
+					bestBatter.IsSub = false;
+					result.Lineup.Add(bestBatter);
+				}
+			}
+			else
+				Console.WriteLine($"No lineups found going back {DaysToGoBack} days");
 			return result;
 		}
 

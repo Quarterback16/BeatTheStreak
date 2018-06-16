@@ -19,7 +19,9 @@ namespace BeatTheStreak.Repositories
 			_cache = cache;
 		}
 
-		public ProbablePitcherViewModel Submit(DateTime gameDate, bool homeOnly = false)
+		public ProbablePitcherViewModel Submit(
+			DateTime gameDate, 
+			bool homeOnly = false)
 		{
 			var homePara = homeOnly ? "home" : "all";
 			var keyValue = $"pitchers:{homePara}:{Utility.UniversalDate(gameDate)}";

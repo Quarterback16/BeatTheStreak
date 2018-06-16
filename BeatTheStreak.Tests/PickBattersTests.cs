@@ -3,7 +3,6 @@ using BeatTheStreak.Implementations;
 using BeatTheStreak.Repositories;
 using BeatTheStreak.Tests.Fakes;
 using Cache;
-using Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -23,15 +22,21 @@ namespace BeatTheStreak.Tests
 				serializer: new XmlSerializer(),
 				logger: new FakeLogger(),
 				expire: false);
-			const int numberDesired = 2;
-            var pitcherRepo = new PitcherRepository();
+            var pitcherRepo = new CachedPitcherRepository(
+				new PitcherRepository(),
+				cache);
             var lineupRepo = new CachedLineupRepository(
 				new LineupRepository(),
 				cache);
 			var statsRepo = new CachedPlayerStatsRepository(
 				new PlayerStatsRepository(),
 				cache );
-			var lineupProjector = new LineupProjector(lineupRepo);
+			var opposingPitcher = new OpposingPitcher(
+				pitcherRepo	);
+			var lineupProjector = new LineupProjector(
+				lineupRepo,
+				opposingPitcher,
+				daysToGoBack: 10);
 			var resultChecker = new ResultChecker(statsRepo);
 			var options = new Dictionary<string, string>
             {
@@ -53,7 +58,7 @@ namespace BeatTheStreak.Tests
 			var gameDate = DateTime.Now.AddDays(0);  // US Date
 			var result = sut.Choose(
                 gameDate: gameDate,
-                numberRequired: numberDesired);
+                numberRequired: 2);
 			if (GamePlayed(gameDate))
 			{
 				foreach (var selection in result.Selections)
@@ -65,14 +70,8 @@ namespace BeatTheStreak.Tests
 			}
             result.Dump();
             Assert.IsTrue(
-                result.Selections.Count == numberDesired,
-                $"There should be {numberDesired} batters returned");
-
-            foreach (var selection in result.Selections)
-            {
-                Assert.IsTrue(selection.Batter.IsBatter(),
-                    $"selection {selection.Batter.Name} is not a batter");
-            }
+                result.Selections.Count == 2,
+                "There should be 2 batters returned");
         }
 
 		private bool GamePlayed(DateTime gameDate)
