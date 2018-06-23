@@ -1,6 +1,7 @@
 ﻿using Application;
 using BeatTheStreak.Implementations;
 using BeatTheStreak.Repositories;
+using BeatTheStreak.Helpers;
 using BeatTheStreak.Tests.Fakes;
 using Cache;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -59,7 +60,7 @@ namespace BeatTheStreak.Tests
 			var result = sut.Choose(
                 gameDate: gameDate,
                 numberRequired: 2);
-			if (GamePlayed(gameDate))
+			if (Utility.GamePlayed(gameDate))
 			{
 				foreach (var selection in result.Selections)
 				{
@@ -73,14 +74,5 @@ namespace BeatTheStreak.Tests
                 result.Selections.Count == 2,
                 "There should be 2 batters returned");
         }
-
-		private bool GamePlayed(DateTime gameDate)
-		{
-			if ( DateTime.Now > gameDate.AddDays(1) )
-			{
-				return true;
-			}
-			return false;
-		}
 	}
 }

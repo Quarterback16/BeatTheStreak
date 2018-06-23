@@ -79,11 +79,11 @@ namespace BeatTheStreak.Implementations
 
 				var lineupPitcher = _opposingPitcher.PitcherFacing(
 					opponentTeam, focusDate);
-				Console.WriteLine( $@"pitcher on {
-					focusDate
-					} is {
-					lineupPitcher.Name
-					} throws {lineupPitcher.Throws}");
+				//Console.WriteLine( $@"pitcher on {
+				//	focusDate
+				//	} is {
+				//	lineupPitcher.Name
+				//	} throws {lineupPitcher.Throws}");
 				if (lineupPitcher.Throws.Equals(pitcherThrows))
 				{
 					lineupCount++;

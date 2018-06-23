@@ -78,6 +78,10 @@
       <Project>{f948ed1c-c645-4202-8242-31c42ed03f3a}</Project>
       <Name>Application</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BeatTheStreak.Helpers\BeatTheStreak.Helpers.csproj">
+      <Project>{0cc0ef82-ad0a-4706-beeb-318dac74a932}</Project>
+      <Name>BeatTheStreak.Helpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BeatTheStreak.Implementations\BeatTheStreak.Implementations.csproj">
       <Project>{3c767a7b-bb36-4c08-a6b7-0a12d76f252d}</Project>
       <Name>BeatTheStreak.Implementations</Name>

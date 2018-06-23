@@ -42,10 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IConfigReader.cs" />
     <Compile Include="IGameLogRequest.cs" />
     <Compile Include="ILike.cs" />
     <Compile Include="ILineupProjector.cs" />
     <Compile Include="ILineupRepository.cs" />
+    <Compile Include="IMailMan.cs" />
     <Compile Include="IOpposingPitcher.cs" />
     <Compile Include="IPicker.cs" />
     <Compile Include="IPickerOptions.cs" />

@@ -62,6 +62,14 @@
       <Project>{F948ED1C-C645-4202-8242-31C42ED03F3A}</Project>
       <Name>Application</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BeatTheStreak.Helpers\BeatTheStreak.Helpers.csproj">
+      <Project>{0cc0ef82-ad0a-4706-beeb-318dac74a932}</Project>
+      <Name>BeatTheStreak.Helpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BeatTheStreak.Implementations\BeatTheStreak.Implementations.csproj">
+      <Project>{3C767A7B-BB36-4C08-A6B7-0A12D76F252D}</Project>
+      <Name>BeatTheStreak.Implementations</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BeatTheStreak.Interfaces\BeatTheStreak.Interfaces.csproj">
       <Project>{BA85A4E6-810D-4058-8E53-A25D7DAB712F}</Project>
       <Name>BeatTheStreak.Interfaces</Name>
@@ -77,6 +85,10 @@
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{f753ba06-db2a-4634-9412-7fb92a383399}</Project>
       <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="E:\FileSync\SyncProjects\Cache\Cache.csproj">
+      <Project>{85BB16A5-3C53-4E4F-A342-1103AA6F967E}</Project>
+      <Name>Cache</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

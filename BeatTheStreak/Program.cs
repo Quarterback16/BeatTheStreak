@@ -1,41 +1,96 @@
 ﻿using Application;
-using BeatTheStreak.Interfaces;
+using BeatTheStreak.Implementations;
 using BeatTheStreak.Repositories;
+using BeatTheStreak.Helpers;
+using Cache;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace BeatTheStreak
 {
     class Program
     {
         static void Main(string[] args)
-        {
-            var pitcherRepo = new PitcherRepository();
-            var lineupRepo = new LineupRepository();
-			var statsRepo = new PlayerStatsRepository();
-            var pickers = new Dictionary<string, IPicker>();
-            var options = new Dictionary<string, string>
-            {
-                { Constants.Options.HomePitchersOnly, "on" },
-                { "dayOff", "on" }
-            };
+		{
+			CalculateVersionInfo(
+				out Version versionInfo, 
+				out DateTime computedDate);
+
+			var logger = new NLogAdaptor();
+			logger.Info("-------------------------------------------------------------------------------------");
+			logger.Info($@"Beat The Streak  ver:{
+				versionInfo
+				} built {
+				computedDate.ToLongDateString()
+				} Working Directory:{
+				Directory.GetCurrentDirectory()
+				}");
+
+			var cache = new RedisCacheRepository(
+				connectionString: "localhost,abortConnect=false",
+				environment: "local",
+				functionalArea: "bts",
+				serializer: new XmlSerializer(),
+				logger: logger,
+				expire: false);
+			var pitcherRepo = new CachedPitcherRepository(
+				new PitcherRepository(),
+				cache);
+			var lineupRepo = new CachedLineupRepository(
+				new LineupRepository(),
+				cache);
+			var statsRepo = new CachedPlayerStatsRepository(
+				new PlayerStatsRepository(),
+				cache);
+			var opposingPitcher = new OpposingPitcher(
+				pitcherRepo);
+			var lineupProjector = new LineupProjector(
+				lineupRepo,
+				opposingPitcher,
+				daysToGoBack: 10);
+			var resultChecker = new ResultChecker(statsRepo);
+			var options = new Dictionary<string, string>
+			{
+				{ Constants.Options.HomePitchersOnly, "on" },
+				{ Constants.Options.NoDaysOff, "off" },
+				{ Constants.Options.DaysOffDaysBack, "3" },
+				{ Constants.Options.HotBatters, "on" },
+				{ Constants.Options.HotBattersDaysBack, "30" },
+				{ Constants.Options.HotBattersMendozaLine, ".299" },
+				{ Constants.Options.PitchersMendozaLine, ".221" },
+			};
 			var pickerOptions = new PickerOptions(options);
-            var dp = new DefaultPicker(
-				pickerOptions, 
+			var sut = new DefaultPicker(
+				pickerOptions,
 				lineupRepo,
 				pitcherRepo,
-				statsRepo);
+				statsRepo,
+				lineupProjector);
+			var gameDate = DateTime.Now.AddDays(0);  // US Date
+			var result = sut.Choose(
+				gameDate: gameDate,
+				numberRequired: 2);
+			if (Utility.GamePlayed(gameDate))
+			{
+				foreach (var selection in result.Selections)
+				{
+					selection.Result = resultChecker.Result(
+						selection.Batter,
+						gameDate);
+				}
+			}
+			result.Dump();
+			logger.Info("-------------------------------------------------------------------------------------");
+		}
 
-            pickers.Add(dp.PickerName, dp);
-
-            foreach (var picker in pickers)
-            {
-                var response = picker.Value.Choose(
-                    gameDate: DateTime.Now.AddDays(0), 
-                    numberRequired: 2);
-                response.Dump();
-            }
-        }
-
-    }
+		private static void CalculateVersionInfo(out Version versionInfo, out DateTime computedDate)
+		{
+			versionInfo = System.Reflection.Assembly.GetExecutingAssembly()
+				.GetName().Version;
+			var startDate = new DateTime(2000, 1, 1);
+			var diffDays = versionInfo.Build;
+			computedDate = startDate.AddDays(diffDays);
+		}
+	}
 }

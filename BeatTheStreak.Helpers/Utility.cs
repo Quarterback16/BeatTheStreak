@@ -22,5 +22,14 @@ namespace BeatTheStreak.Helpers
 			if (atBats == 0) return 0.0M;
 			return hits / atBats;
 		}
+
+		public static bool GamePlayed(DateTime gameDate)
+		{
+			if (DateTime.Now > gameDate.AddDays(1))
+			{
+				return true;
+			}
+			return false;
+		}
 	}
 }
