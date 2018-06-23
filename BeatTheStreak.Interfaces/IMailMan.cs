@@ -16,6 +16,8 @@ namespace BeatTheStreak.Interfaces
 
         int RecipientCount();
 
-        void ClearRecipients();
+		string RecipientCsv();
+
+		void ClearRecipients();
     }
 }

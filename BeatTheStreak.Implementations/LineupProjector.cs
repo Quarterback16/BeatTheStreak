@@ -10,16 +10,19 @@ namespace BeatTheStreak.Implementations
 	{
 		private ILineupRepository _lineupRepository;
 		private IOpposingPitcher _opposingPitcher;
+		private ILog _logger;
 
 		public int DaysToGoBack { get; set; }
 
 		public LineupProjector(
 			ILineupRepository lineupRepository,
 			IOpposingPitcher opposingPitcher,
+			ILog logger,
 			int daysToGoBack)
 		{
 			_lineupRepository = lineupRepository;
 			_opposingPitcher = opposingPitcher;
+			_logger = logger;
 			DaysToGoBack = daysToGoBack;
 		}
 
@@ -79,11 +82,11 @@ namespace BeatTheStreak.Implementations
 
 				var lineupPitcher = _opposingPitcher.PitcherFacing(
 					opponentTeam, focusDate);
-				//Console.WriteLine( $@"pitcher on {
-				//	focusDate
-				//	} is {
-				//	lineupPitcher.Name
-				//	} throws {lineupPitcher.Throws}");
+				Log($@"pitcher on {
+					focusDate
+					} is {
+					lineupPitcher.Name
+					} throws {lineupPitcher.Throws}");
 				if (lineupPitcher.Throws.Equals(pitcherThrows))
 				{
 					lineupCount++;
@@ -117,8 +120,14 @@ namespace BeatTheStreak.Implementations
 				}
 			}
 			else
-				Console.WriteLine($"No lineups found going back {DaysToGoBack} days");
+				Log($"No lineups found going back {DaysToGoBack} days");
 			return result;
+		}
+
+		private void Log(string message)
+		{
+			Console.WriteLine(message);
+			_logger.Info(message);
 		}
 
 		private void AddToRoster(Dictionary<string, Batter> roster, Batter batterAt)
@@ -151,7 +160,5 @@ namespace BeatTheStreak.Implementations
 				d.Add( j, playerDict);
 			}
 		}
-
-
 	}
 }

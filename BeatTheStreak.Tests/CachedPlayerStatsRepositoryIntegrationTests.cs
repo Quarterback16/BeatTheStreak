@@ -20,7 +20,7 @@ namespace BeatTheStreak.Tests
 				environment: "local",
 				functionalArea: "bts",
 				serializer: new JsonSerialiser(),
-				logger: new FakeLogger(),
+				logger: new FakeCacheLogger(),
 				expire: false);
 			var normalPlayerStatsRepository = new PlayerStatsRepository();
 			_sut = new CachedPlayerStatsRepository(

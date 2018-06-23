@@ -21,7 +21,7 @@ namespace BeatTheStreak.Tests
 				environment: "local",
 				functionalArea: "bts",
 				serializer: new XmlSerializer(),
-				logger: new FakeLogger(),
+				logger: new FakeCacheLogger(),
 				expire: false);
 			var lineupRepo = new CachedLineupRepository(
 				new LineupRepository(),
@@ -35,6 +35,7 @@ namespace BeatTheStreak.Tests
 			_sut = new LineupProjector(
 				lineupRepo, 
 				opposingPitcher,
+				new FakeLogger(),
 				daysToGoBack: 10);
 		}
 

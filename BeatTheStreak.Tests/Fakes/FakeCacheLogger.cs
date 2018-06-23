@@ -1,9 +1,9 @@
-﻿using BeatTheStreak.Interfaces;
+﻿using Cache.Interfaces;
 using System;
 
 namespace BeatTheStreak.Tests.Fakes
 {
-	public class FakeLogger : ILog
+	public class FakeCacheLogger : ILog
 	{
 		public void Debug(string message)
 		{

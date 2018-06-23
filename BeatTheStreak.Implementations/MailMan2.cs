@@ -10,8 +10,9 @@ namespace BeatTheStreak.Implementations
         private const string K_MailServerKey = "MailServer";
         private const string K_MailUsername = "MailUsername";
         private const string K_MailPassword = "MailPassword";
+		private const string K_Recipients = "Recipients";
 
-        public Logger Logger { get; set; }
+		public ILog Logger { get; set; }
 
         public string MailServer { get; set; }
         private string UserId { get; set; }
@@ -23,16 +24,17 @@ namespace BeatTheStreak.Implementations
 
         private IConfigReader ConfigReader { get; set; }
 
-        public MailMan2(IConfigReader configReader)
+        public MailMan2(IConfigReader configReader,ILog logger)
         {
             ConfigReader = configReader;
-            Logger = LogManager.GetCurrentClassLogger();
+            Logger = logger;
             var result = Initialise();
         }
 
         private string Initialise()
         {
-            var result = GetMailSettings();
+			Recipients = new List<string>();
+			var result = GetMailSettings();
             if (!string.IsNullOrEmpty(result))
                 return result;
 
@@ -45,7 +47,7 @@ namespace BeatTheStreak.Implementations
 					userName: UserId,
 					password: Password)
 			};
-            Recipients = new List<string>();
+
             return string.Empty;
         }
 
@@ -53,16 +55,18 @@ namespace BeatTheStreak.Implementations
         {
             MailServer = ConfigReader.GetSetting(K_MailServerKey);
 			if (string.IsNullOrEmpty(MailServer))
-				return string.Format("Failed to read MailServer setting : {0}", K_MailServerKey);
+				return $"Failed to read MailServer setting : {K_MailServerKey}";
 			else
 				Logger.Info($"MailServer:{MailServer}");
             UserId = ConfigReader.GetSetting(K_MailUsername);
             if (string.IsNullOrEmpty(UserId))
-                return string.Format("Failed to read MailServer setting : {0}", K_MailUsername);
+                return $"Failed to read MailServer setting : {K_MailUsername}";
             Password = ConfigReader.GetSetting(K_MailPassword);
             if (string.IsNullOrEmpty(Password))
-                return string.Format("Failed to read MailServer setting : {0}", K_MailPassword);
-            return string.Empty;
+                return $"Failed to read MailServer setting : {K_MailPassword}";
+			var csvRecipients = ConfigReader.GetSetting(K_Recipients);
+			AddRecipients(csvRecipients);
+			return string.Empty;
         }
 
         public int RecipientCount()
@@ -99,6 +103,7 @@ namespace BeatTheStreak.Implementations
             {
                 using (var mail = new MailMessage())
                 {
+					mail.Body = message;
                     mail.From = new MailAddress(UserId);
                     foreach (var recipient in Recipients)
                     {
@@ -106,25 +111,31 @@ namespace BeatTheStreak.Implementations
                     }
                     mail.Subject = subject;
                     SmtpClient.Send(mail);
-                    Logger.Info("    mail sent to {0}", mail.To);
+                    Logger.Info($"    mail sent to {mail.To}");
                 }
             }
             catch (SmtpException ex)
             {
+				Logger.Error(ex.Message);
                 return ex.Message;
             }
-
             return string.Empty;
         }
 
-        public string SendMail(string message, string subject, string attachment)
+        public string SendMail(
+			string message, 
+			string subject, 
+			string attachment)
         {
             string[] attachments = new string[1];
             attachments[0] = attachment;
             return SendMail(message, subject, attachments);
         }
 
-        public string SendMail(string message, string subject, string[] attachments)
+        public string SendMail(
+			string message, 
+			string subject,
+			string[] attachments)
         {
             try
             {
@@ -141,11 +152,12 @@ namespace BeatTheStreak.Implementations
                         mail.Attachments.Add(new Attachment(attachment));
                     }
                     SmtpClient.Send(mail);
-                    Logger.Info("    mail sent to {0}", mail.To);
+                    Logger.Info($"    mail sent to {mail.To}" );
                 }
             }
             catch (SmtpException ex)
             {
+				Logger.Error(ex.Message);
                 return ex.Message;
             }
 
@@ -156,5 +168,15 @@ namespace BeatTheStreak.Implementations
         {
             Recipients.Clear();
         }
-    }
+
+		public string RecipientCsv()
+		{
+			var csv = string.Empty;
+			foreach (var recipient in Recipients)
+			{
+				csv += recipient + ",";
+			}
+			return csv;
+		}
+	}
 }

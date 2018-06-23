@@ -52,11 +52,17 @@
   <ItemGroup>
     <Compile Include="ConfigReader.cs" />
     <Compile Include="LineupProjector.cs" />
+    <Compile Include="MailBatterReport.cs" />
     <Compile Include="MailMan2.cs" />
+    <Compile Include="NLogAdaptor.cs" />
     <Compile Include="OpposingPitcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BeatTheStreak.Helpers\BeatTheStreak.Helpers.csproj">
+      <Project>{0cc0ef82-ad0a-4706-beeb-318dac74a932}</Project>
+      <Name>BeatTheStreak.Helpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BeatTheStreak.Interfaces\BeatTheStreak.Interfaces.csproj">
       <Project>{ba85a4e6-810d-4058-8e53-a25d7dab712f}</Project>
       <Name>BeatTheStreak.Interfaces</Name>

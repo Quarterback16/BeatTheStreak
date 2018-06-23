@@ -10,13 +10,16 @@ namespace Application
     {
 		private List<ILike> Tests;
 		private readonly ILineupProjector _lineupProjector;
+		private ILog _logger;
 
         public DefaultPicker(
             IPickerOptions options,
             ILineupRepository lineupRepository,
             IPitcherRepository pitcherRepository,
 			IPlayerStatsRepository playerStatsRepository,
-			ILineupProjector lineupProjector) 
+			ILineupProjector lineupProjector,
+			ILog logger
+			) 
             : base(lineupRepository, pitcherRepository)
         {
             PickerName = "Default Picker";
@@ -27,6 +30,7 @@ namespace Application
 				new HotBatter(options)
 			};
 			_lineupProjector = lineupProjector;
+			_logger = logger;
 		}
 
         public BatterReport Choose( DateTime gameDate, int numberRequired )
@@ -38,7 +42,9 @@ namespace Application
             return report;
         }
 
-        private List<Selection> SelectBatters(DateTime gameDate, int numberRequired)
+        private List<Selection> SelectBatters(
+			DateTime gameDate,
+			int numberRequired)
         {
             var batters = new List<Selection>();
             ProbablePitcherViewModel pitchers = GetProbablePitchers(gameDate);
@@ -48,12 +54,12 @@ namespace Application
 				if (pitcher.OpponentsBattingAverage < PickerOptions.DecimalOption(
 					Constants.Options.PitchersMendozaLine))
 				{
-					Console.WriteLine($"Pitcher {pitcher} has too good a Opp B Avg");
+					Log($"Pitcher {pitcher} has too good a Opp B Avg");
 					continue;
 				}
                 ++i;
                 var printLine = $"{i.ToString(),2} {pitcher}";
-				Console.WriteLine($"Looking for a {pitcher.OpponentSlug} batter facing {pitcher}");
+				Log($"Looking for a {pitcher.OpponentSlug} batter facing {pitcher}");
                 var lineupQueryDate = gameDate.AddDays(-1);
 
                 var opponents = _lineupProjector.ProjectLineup(
@@ -62,7 +68,7 @@ namespace Application
 
 				if (opponents.Lineup.Count.Equals(0))
 				{
-					Console.WriteLine("  cold team - skip this pitcher");
+					Log("  cold team - skip this pitcher");
 					continue;  //  cold team
 				}
 
@@ -111,15 +117,19 @@ namespace Application
                             } team COLD";
                 }
 
-				//Console.WriteLine(printLine);
-
                 if (batters.Count == numberRequired)
                     break;
             }
             return batters;
         }
 
-        private LineupViewModel GetOpponentsLineup(
+		private void Log(string message)
+		{
+			Console.WriteLine(message);
+			_logger.Info(message);
+		}
+
+		private LineupViewModel GetOpponentsLineup(
             Pitcher pitcher, 
             DateTime lineupQueryDate)
         {
@@ -138,15 +148,25 @@ namespace Application
 			return result;
         }
 
-        private ProbablePitcherViewModel GetProbablePitchers(DateTime gameDate)
+        private ProbablePitcherViewModel GetProbablePitchers(
+			DateTime gameDate)
         {
-            //Console.WriteLine($"GameDate {gameDate.ToLongDateString()} (US)");
             var pitchers = _pitcherRepository.Submit(
                 gameDate,
-                homeOnly: PickerOptions.OptionOn(Constants.Options.HomePitchersOnly));
-            pitchers.Dump();
+                homeOnly: PickerOptions.OptionOn(
+					Constants.Options.HomePitchersOnly));
+            var lines = pitchers.Dump();
+			LogLines(lines);
             return pitchers;
         }
 
-    }
+		private void LogLines(List<string> lines)
+		{
+			if (_logger == null) return;
+			foreach (var line in lines)
+			{
+				_logger.Info(line);
+			}
+		}
+	}
 }

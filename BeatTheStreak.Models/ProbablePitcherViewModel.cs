@@ -10,17 +10,18 @@ namespace BeatTheStreak.Models
         public DateTime GameDate { get; set; }
         public bool HomeOnly { get; set; }
 
-        public void Dump()
+        public List<string> Dump()
         {
+			var lines = new List<string>();
             var homeOnlyOut = HomeOnly ? "HOME" : string.Empty;
-            Console.WriteLine("-----------------------------------------------------");
-            Console.WriteLine($"PROBABLE {homeOnlyOut} PITCHERS  {GameDate.ToLongDateString()} US");
-            Console.WriteLine("-----------------------------------------------------");
+            AddLine(lines,"-----------------------------------------------------");
+			AddLine(lines, $"PROBABLE {homeOnlyOut} PITCHERS  {GameDate.ToLongDateString()} US");
+			AddLine(lines, "-----------------------------------------------------");
             var i = 0;
             foreach (var pitcher in ProbablePitchers)
             {
                 ++i;
-                Console.WriteLine($@"{i.ToString(),2} {
+				AddLine(lines, $@"{i.ToString(),2} {
                     pitcher
                     }  {
                     pitcher.OpponentSlug,-7
@@ -28,7 +29,14 @@ namespace BeatTheStreak.Models
                     pitcher.NextOpponent
                     }");
             }
-            Console.WriteLine("-----------------------------------------------------");
+			AddLine(lines, "-----------------------------------------------------");
+			return lines;
         }
-    }
+
+		private void AddLine(List<string> lines, string line)
+		{
+			Console.WriteLine(line);
+			lines.Add(line);
+		}
+	}
 }

@@ -21,7 +21,7 @@ namespace BeatTheStreak.Tests
 				environment: "local",
 				functionalArea: "bts",
 				serializer: new XmlSerializer(),
-				logger: new FakeLogger(),
+				logger: new FakeCacheLogger(),
 				expire: false);
             var pitcherRepo = new CachedPitcherRepository(
 				new PitcherRepository(),
@@ -37,6 +37,7 @@ namespace BeatTheStreak.Tests
 			var lineupProjector = new LineupProjector(
 				lineupRepo,
 				opposingPitcher,
+				new FakeLogger(),
 				daysToGoBack: 10);
 			var resultChecker = new ResultChecker(statsRepo);
 			var options = new Dictionary<string, string>
@@ -55,7 +56,8 @@ namespace BeatTheStreak.Tests
 				lineupRepo, 
 				pitcherRepo,
 				statsRepo,
-				lineupProjector);
+				lineupProjector,
+				new FakeLogger());
 			var gameDate = DateTime.Now.AddDays(0);  // US Date
 			var result = sut.Choose(
                 gameDate: gameDate,

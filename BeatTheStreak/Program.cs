@@ -17,7 +17,7 @@ namespace BeatTheStreak
 				out Version versionInfo, 
 				out DateTime computedDate);
 
-			var logger = new NLogAdaptor();
+			var logger = new Implementations.NLogAdaptor();
 			logger.Info("-------------------------------------------------------------------------------------");
 			logger.Info($@"Beat The Streak  ver:{
 				versionInfo
@@ -27,12 +27,13 @@ namespace BeatTheStreak
 				Directory.GetCurrentDirectory()
 				}");
 
+			var cacheLogger = new Cache.NLogAdaptor();
 			var cache = new RedisCacheRepository(
 				connectionString: "localhost,abortConnect=false",
 				environment: "local",
 				functionalArea: "bts",
 				serializer: new XmlSerializer(),
-				logger: logger,
+				logger: cacheLogger,
 				expire: false);
 			var pitcherRepo = new CachedPitcherRepository(
 				new PitcherRepository(),
@@ -48,8 +49,13 @@ namespace BeatTheStreak
 			var lineupProjector = new LineupProjector(
 				lineupRepo,
 				opposingPitcher,
+				logger,
 				daysToGoBack: 10);
 			var resultChecker = new ResultChecker(statsRepo);
+			var configReader = new ConfigReader();
+			var mm = new MailMan2(configReader,logger);
+			var mailer = new MailBatterReport(mailMan:mm,logger:logger);
+
 			var options = new Dictionary<string, string>
 			{
 				{ Constants.Options.HomePitchersOnly, "on" },
@@ -66,7 +72,8 @@ namespace BeatTheStreak
 				lineupRepo,
 				pitcherRepo,
 				statsRepo,
-				lineupProjector);
+				lineupProjector,
+				logger);
 			var gameDate = DateTime.Now.AddDays(0);  // US Date
 			var result = sut.Choose(
 				gameDate: gameDate,
@@ -81,6 +88,7 @@ namespace BeatTheStreak
 				}
 			}
 			result.Dump();
+			mailer.MailReport(result);
 			logger.Info("-------------------------------------------------------------------------------------");
 		}
 
@@ -88,7 +96,7 @@ namespace BeatTheStreak
 		{
 			versionInfo = System.Reflection.Assembly.GetExecutingAssembly()
 				.GetName().Version;
-			var startDate = new DateTime(2000, 1, 1);
+			var startDate = new DateTime(2018, 6, 23);
 			var diffDays = versionInfo.Build;
 			computedDate = startDate.AddDays(diffDays);
 		}

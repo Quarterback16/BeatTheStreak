@@ -47,6 +47,8 @@
     <Compile Include="ILike.cs" />
     <Compile Include="ILineupProjector.cs" />
     <Compile Include="ILineupRepository.cs" />
+    <Compile Include="ILog.cs" />
+    <Compile Include="IMailBatterReport.cs" />
     <Compile Include="IMailMan.cs" />
     <Compile Include="IOpposingPitcher.cs" />
     <Compile Include="IPicker.cs" />
