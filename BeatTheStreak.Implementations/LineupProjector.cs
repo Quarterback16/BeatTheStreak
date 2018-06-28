@@ -82,6 +82,12 @@ namespace BeatTheStreak.Implementations
 
 				var lineupPitcher = _opposingPitcher.PitcherFacing(
 					opponentTeam, focusDate);
+
+				if (string.IsNullOrEmpty(lineupPitcher.Name))
+				{
+					Log($@"pitcher on {focusDate} is unknown");
+					continue;
+				}
 				Log($@"pitcher on {
 					focusDate
 					} is {
