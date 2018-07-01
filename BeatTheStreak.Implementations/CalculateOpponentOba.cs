@@ -39,9 +39,9 @@ namespace BeatTheStreak.Implementations
 					if (!gameLog.GameStarted)
 						continue;
 
-					_logger.Trace(
+					_logger.Info(
 						$@" on {
-							focusDate.ToShortDateString()
+							Utility.UniversalDate(focusDate)
 							} {
 							gameLog.PitcherLine()
 							}");
@@ -50,6 +50,14 @@ namespace BeatTheStreak.Implementations
 				}
 				var oba = Utility.BattingAverage(
 					totalHits, totalOuts + totalHits);
+				_logger.Info(
+					$@" total outs {
+						totalOuts
+						} hits allowed {
+						totalHits
+						} oba {
+						oba
+						}");
 				return oba;
 			}
 			catch (Exception ex)

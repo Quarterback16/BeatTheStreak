@@ -52,6 +52,10 @@
     <Compile Include="Selection.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BeatTheStreak.Helpers\BeatTheStreak.Helpers.csproj">
+      <Project>{0cc0ef82-ad0a-4706-beeb-318dac74a932}</Project>
+      <Name>BeatTheStreak.Helpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{f753ba06-db2a-4634-9412-7fb92a383399}</Project>
       <Name>Domain</Name>

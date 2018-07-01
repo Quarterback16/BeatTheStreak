@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using BeatTheStreak.Helpers;
+using Domain;
 using System;
 
 namespace BeatTheStreak.Models
@@ -49,8 +50,8 @@ namespace BeatTheStreak.Models
 		{
 			return $@"{
 				Player?.Name
-				} Asof: {
-				AsOf.ToShortDateString()
+				} on: {
+				Utility.UniversalDate(AsOf)
 				} W:{
 				Wins,-2
 				} ERA:{
@@ -59,7 +60,7 @@ namespace BeatTheStreak.Models
 				OutsRecorded,-4
 				} Hits Allowed: {
 				HitsAllowed,-5
-				} GBR:{ GroundBallTpFlyBallRatio:#.000} OBA:{OpponentsBattingAverage:#.000}";
+				} OBA:{OpponentsBattingAverage:#.000}";
 		}
 
 		public override string ToString()
