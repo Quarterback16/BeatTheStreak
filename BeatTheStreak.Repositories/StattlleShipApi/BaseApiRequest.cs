@@ -88,6 +88,20 @@ namespace BeatTheStreak.Repositories
             return name;
         }
 
+		public string GetSlug(string playerId, List<PlayerDto> players)
+		{
+			string slug = "???";
+			foreach (var p in players)
+			{
+				if (p.Id == playerId)
+				{
+					slug = $"{p.Slug}";
+					break;
+				}
+			}
+			return slug;
+		}
+
 		public string GetHandedness(string playerId, List<PlayerDto> players)
 		{
 			string handedness = "???";

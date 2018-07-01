@@ -54,5 +54,33 @@ namespace BeatTheStreak.Tests
                 result.BattingAverage.Equals(0.250M),
                 "Josh Bells Bavg on 2018-05-11 was .250 1 for 4");
         }
-    }
+
+		[TestMethod]
+		public void PlayerStatsRequestOneDay_PitcherOk()
+		{
+			var sut = new GameLogRequest();
+			var result = sut.Submit(
+				queryDate: new DateTime(2018, 6, 27),
+				playerSlug: "mlb-ivan-nova");
+			result.DumpPitcher();
+			Assert.AreEqual(
+				4.5M,
+				result.Era,
+				"Ivan Novas ERA on 2018-06-27 was 4.5 for the game");
+		}
+
+		[TestMethod]
+		public void PlayerStatsRequestOneDay_NoPitcherDay()
+		{
+			var sut = new GameLogRequest();
+			var result = sut.Submit(
+				queryDate: new DateTime(2018, 6, 26),
+				playerSlug: "mlb-ivan-nova");
+			result.DumpPitcher();
+			Assert.AreEqual(
+				0,
+				result.InningsPitched,
+				"Ivan Novas ERA on 2018-06-27 was 4.5 for the game");
+		}
+	}
 }

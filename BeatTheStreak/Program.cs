@@ -55,16 +55,22 @@ namespace BeatTheStreak
 			var configReader = new ConfigReader();
 			var mm = new MailMan2(configReader,logger);
 			var mailer = new MailBatterReport(mailMan:mm,logger:logger);
-
+			var gameLogRepository = new CachedGameLogRepository(
+				new GameLogRepository(),
+				cache);
+			var obaCalculator = new CalculateOpponentOba(
+				logger: logger,
+				gameLogRepository: gameLogRepository);
 			var options = new Dictionary<string, string>
 			{
 				{ Constants.Options.HomePitchersOnly, "on" },
 				{ Constants.Options.NoDaysOff, "off" },
 				{ Constants.Options.DaysOffDaysBack, "3" },
 				{ Constants.Options.HotBatters, "on" },
-				{ Constants.Options.HotBattersDaysBack, "30" },
+				{ Constants.Options.HotBattersDaysBack, "25" },
 				{ Constants.Options.HotBattersMendozaLine, ".299" },
 				{ Constants.Options.PitchersMendozaLine, ".221" },
+				{ Constants.Options.PitcherDaysBack, "25" },
 			};
 			var pickerOptions = new PickerOptions(options);
 			var sut = new DefaultPicker(
@@ -73,6 +79,7 @@ namespace BeatTheStreak
 				pitcherRepo,
 				statsRepo,
 				lineupProjector,
+				obaCalculator,
 				logger);
 			var gameDate = DateTime.Now.AddDays(0);  // US Date
 			var result = sut.Choose(

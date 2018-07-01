@@ -21,6 +21,7 @@
 			//  dont touch these pitchers
 			public const string PitchersMendozaLine = "Pitchers-MendozaLine";
 
+			public const string PitcherDaysBack = "Pitchers-Days-Back";
 		}
 	}
 }

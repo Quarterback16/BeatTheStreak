@@ -1,9 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BeatTheStreak.Repositories
 {
@@ -11,6 +6,9 @@ namespace BeatTheStreak.Repositories
     {
         [JsonProperty("id")]
         public string Id { get; set; }
+
+		[JsonProperty("game_started")]
+		public string GameStarted { get; set; }
 
         [JsonProperty("at_bats")]
         public string AtBats { get; set; }
@@ -24,5 +22,17 @@ namespace BeatTheStreak.Repositories
         [JsonProperty("player_id")]
         public string PlayerId { get; set; }
 
-    }
+		[JsonProperty("earned_run_average")]
+		public string ERA { get; set; }
+
+		[JsonProperty("pitcher_earned_runs")]
+		public string EarnedRuns { get; set; }
+
+		[JsonProperty("pitcher_hits")]
+		public string HitsAllowed { get; set; }
+
+		[JsonProperty("outs_pitched")]
+		public string Outs { get; set; }
+
+	}
 }

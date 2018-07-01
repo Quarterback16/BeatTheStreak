@@ -58,10 +58,31 @@ namespace BeatTheStreak.Repositories
 
 		private void MapLogStats(LogDto logDto, PlayerGameLogViewModel result)
 		{
-			result.Hits = Decimal.Parse(logDto.Hits);
-			result.AtBats = Int32.Parse(logDto.AtBats);
+			result.GameStarted = Boolean.Parse(logDto.GameStarted);
+			result.Hits = SetDecimal(logDto.Hits);
+			result.AtBats = SetInt(logDto.AtBats);
 			result.BattingAverage = Utility.BattingAverage(result.Hits, result.AtBats);
-			//TODO: all the other stats
+			result.Era = SetDecimal(logDto.ERA);
+			result.HitsAllowed = SetInt(logDto.HitsAllowed);
+			result.OutsRecorded = SetInt(logDto.Outs);
+			result.OpponentsBattingAverage = Utility.BattingAverage(
+				result.HitsAllowed, result.OutsRecorded + result.HitsAllowed);
+		}
+
+		private decimal SetDecimal(string amount)
+		{
+			if (string.IsNullOrEmpty(amount))
+				return 0.0M;
+	
+			return Decimal.Parse(amount);
+		}
+
+		private int SetInt(string amount)
+		{
+			if (string.IsNullOrEmpty(amount))
+				return 0;
+
+			return Int32.Parse(amount);
 		}
 	}
 }

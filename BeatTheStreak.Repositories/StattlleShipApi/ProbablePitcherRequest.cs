@@ -101,6 +101,7 @@ namespace BeatTheStreak.Repositories
             var pitcher = new Pitcher
             {
                 Name = GetName(dto.PlayerId, Players),
+				Slug = GetSlug(dto.PlayerId, Players),
 				Throws = GetHandedness(dto.PlayerId, Players),
                 Wins = Int32.Parse(dto.Wins),
                 Losses = Int32.Parse(dto.Losses),

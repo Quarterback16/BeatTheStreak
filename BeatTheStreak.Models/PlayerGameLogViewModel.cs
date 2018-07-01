@@ -23,6 +23,8 @@ namespace BeatTheStreak.Models
 
 		public int Wins { get; set; }
 
+		public int OutsRecorded { get; set; }
+
 		public decimal InningsPitched { get; set; }
 
 		public decimal GroundBallTpFlyBallRatio { get; set; }
@@ -30,6 +32,8 @@ namespace BeatTheStreak.Models
 		public decimal OpponentsBattingAverage { get; set; }
 
 		public decimal Whip { get; set; }
+
+		public bool GameStarted { get; set; }
 
 		public void Dump()
 		{
@@ -51,8 +55,8 @@ namespace BeatTheStreak.Models
 				Wins,-2
 				} ERA:{
 				Era,-5
-				} IP:{
-				InningsPitched,-4
+				} Outs:{
+				OutsRecorded,-4
 				} Hits Allowed: {
 				HitsAllowed,-5
 				} GBR:{ GroundBallTpFlyBallRatio:#.000} OBA:{OpponentsBattingAverage:#.000}";

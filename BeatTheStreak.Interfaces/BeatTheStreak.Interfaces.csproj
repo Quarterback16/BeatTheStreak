@@ -42,7 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICalculateOpponentOba.cs" />
     <Compile Include="IConfigReader.cs" />
+    <Compile Include="IGameLogRepository.cs" />
     <Compile Include="IGameLogRequest.cs" />
     <Compile Include="ILike.cs" />
     <Compile Include="ILineupProjector.cs" />

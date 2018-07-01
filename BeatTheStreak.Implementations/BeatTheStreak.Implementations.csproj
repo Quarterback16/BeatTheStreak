@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalculateOpponentOba.cs" />
     <Compile Include="ConfigReader.cs" />
     <Compile Include="LineupProjector.cs" />
     <Compile Include="MailBatterReport.cs" />

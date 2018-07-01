@@ -133,7 +133,7 @@ namespace BeatTheStreak.Implementations
 		private void Log(string message)
 		{
 			Console.WriteLine(message);
-			_logger.Info(message);
+			_logger.Trace(message);
 		}
 
 		private void AddToRoster(Dictionary<string, Batter> roster, Batter batterAt)

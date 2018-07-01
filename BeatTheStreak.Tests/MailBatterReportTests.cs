@@ -16,8 +16,9 @@ namespace BeatTheStreak.Tests
 		public void Setup()
 		{
 			var configReader = new ConfigReader();
-			var mm = new MailMan2(configReader, new FakeLogger());
-			sut = new MailBatterReport(mm, logger: null);
+			var logger = new FakeLogger();
+			var mm = new MailMan2(configReader, logger);
+			sut = new MailBatterReport(mm, logger: logger);
 		}
 
 		[TestMethod]

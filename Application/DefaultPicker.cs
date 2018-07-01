@@ -3,6 +3,7 @@ using BeatTheStreak.Models;
 using Domain;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Application
 {
@@ -10,6 +11,7 @@ namespace Application
     {
 		private List<ILike> Tests;
 		private readonly ILineupProjector _lineupProjector;
+		private readonly ICalculateOpponentOba _calculateOpponentOba;
 		private ILog _logger;
 
         public DefaultPicker(
@@ -18,6 +20,7 @@ namespace Application
             IPitcherRepository pitcherRepository,
 			IPlayerStatsRepository playerStatsRepository,
 			ILineupProjector lineupProjector,
+			ICalculateOpponentOba calculateOpponentOba,
 			ILog logger
 			) 
             : base(lineupRepository, pitcherRepository)
@@ -30,6 +33,7 @@ namespace Application
 				new HotBatter(options)
 			};
 			_lineupProjector = lineupProjector;
+			_calculateOpponentOba = calculateOpponentOba;
 			_logger = logger;
 		}
 
@@ -47,7 +51,8 @@ namespace Application
 			int numberRequired)
         {
             var batters = new List<Selection>();
-            ProbablePitcherViewModel pitchers = GetProbablePitchers(gameDate);
+            ProbablePitcherViewModel pitchers = GetProbablePitchers(
+				gameDate);
             var i = 0;
             foreach (var pitcher in pitchers.ProbablePitchers)
             {
@@ -155,7 +160,31 @@ namespace Application
                 gameDate,
                 homeOnly: PickerOptions.OptionOn(
 					Constants.Options.HomePitchersOnly));
-            var lines = pitchers.Dump();
+			var lines = pitchers.Dump();
+			LogLines(lines);
+			foreach (var pitcher in pitchers.ProbablePitchers)
+			{
+				var oba = _calculateOpponentOba.CalculateOba(
+						pitcher.Slug,
+						gameDate,
+						PickerOptions.IntegerOption(
+							Constants.Options.PitcherDaysBack));
+				if (oba >= 0)
+				{
+					_logger.Trace($@"pitcher {
+						pitcher.Slug
+						} oba changed to {
+						oba
+						} from {
+						pitcher.OpponentsBattingAverage
+						}");
+					pitcher.OpponentsBattingAverage = oba;
+				}
+			}
+			pitchers.ProbablePitchers 
+				= pitchers.ProbablePitchers.OrderByDescending(
+						o => o.OpponentsBattingAverage).ToList();
+			lines = pitchers.Dump();
 			LogLines(lines);
             return pitchers;
         }

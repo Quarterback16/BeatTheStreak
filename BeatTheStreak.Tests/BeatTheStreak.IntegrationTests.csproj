@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="AlwaysLikePicker.cs" />
     <Compile Include="CachedPlayerStatsRepositoryIntegrationTests.cs" />
+    <Compile Include="CalculateOpponentObaTests.cs" />
     <Compile Include="Fakes\FakeCacheLogger.cs" />
     <Compile Include="Fakes\FakeLogger.cs" />
     <Compile Include="LineupProjectorIntegrationTests.cs" />

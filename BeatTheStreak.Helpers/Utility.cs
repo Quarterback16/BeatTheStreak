@@ -20,7 +20,9 @@ namespace BeatTheStreak.Helpers
 			decimal atBats)
 		{
 			if (atBats == 0) return 0.0M;
-			return hits / atBats;
+			var avg = hits / atBats;
+			avg = Math.Truncate(avg * 1000m) / 1000m;
+			return avg;
 		}
 
 		public static bool GamePlayed(DateTime gameDate)

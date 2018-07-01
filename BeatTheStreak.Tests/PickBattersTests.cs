@@ -39,6 +39,12 @@ namespace BeatTheStreak.Tests
 				opposingPitcher,
 				new FakeLogger(),
 				daysToGoBack: 10);
+			var gameLogRepository = new CachedGameLogRepository(
+				new GameLogRepository(),
+				cache);
+			var obaCalculator = new CalculateOpponentOba(
+				new FakeLogger(),
+				gameLogRepository);
 			var resultChecker = new ResultChecker(statsRepo);
 			var options = new Dictionary<string, string>
             {
@@ -46,9 +52,10 @@ namespace BeatTheStreak.Tests
                 { Constants.Options.NoDaysOff, "off" },
                 { Constants.Options.DaysOffDaysBack, "3" },
 				{ Constants.Options.HotBatters, "on" },
-				{ Constants.Options.HotBattersDaysBack, "30" },
+				{ Constants.Options.HotBattersDaysBack, "25" },
 				{ Constants.Options.HotBattersMendozaLine, ".299" },
 				{ Constants.Options.PitchersMendozaLine, ".221" },
+				{ Constants.Options.PitcherDaysBack, "25" },
 			};
 			var pickerOptions = new PickerOptions(options);
             var sut = new DefaultPicker(
@@ -57,8 +64,9 @@ namespace BeatTheStreak.Tests
 				pitcherRepo,
 				statsRepo,
 				lineupProjector,
+				obaCalculator,
 				new FakeLogger());
-			var gameDate = DateTime.Now.AddDays(0);  // US Date
+			var gameDate = DateTime.Now.AddDays(-1);  // US Date
 			var result = sut.Choose(
                 gameDate: gameDate,
                 numberRequired: 2);

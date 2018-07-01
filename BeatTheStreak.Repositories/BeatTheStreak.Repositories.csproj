@@ -45,9 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CachedGameLogRepository.cs" />
     <Compile Include="CachedLineupRepository.cs" />
     <Compile Include="CachedPitcherRepository.cs" />
     <Compile Include="CachedPlayerStatsRepository.cs" />
+    <Compile Include="GameLogRepository.cs" />
     <Compile Include="LineupRepository.cs" />
     <Compile Include="PitcherRepository.cs" />
     <Compile Include="PlayerStatsRepository.cs" />
@@ -105,6 +107,9 @@
       <Project>{85bb16a5-3c53-4e4f-a342-1103aa6f967e}</Project>
       <Name>Cache</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SampleFiles\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
