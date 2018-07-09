@@ -58,8 +58,9 @@ namespace BeatTheStreak.Implementations
 		{
 			var opponentTeam = pitcher.OpponentSlug;
 			var pitcherThrows = pitcher.Throws;
+			var daysToGoBack = DaysToGoBack;
 			if (pitcherThrows.Equals("L"))
-				DaysToGoBack = DaysToGoBack * 2;
+				daysToGoBack = daysToGoBack * 2;
 			var result = new LineupViewModel
 			{
 				TeamName = opponentTeam,
@@ -70,7 +71,7 @@ namespace BeatTheStreak.Implementations
 			Dictionary<int, Dictionary<string,int>> d = 
 				new Dictionary<int, Dictionary<string, int>>();
 			var lineupCount = 0;
-			for (int i = 1; i < DaysToGoBack+1; i++)
+			for (int i = 1; i < daysToGoBack + 1; i++)
 			{
 				var focusDate = lineupQueryDate.AddDays(-i);
 				var lineup = _lineupRepository.Submit(
@@ -85,14 +86,14 @@ namespace BeatTheStreak.Implementations
 
 				if (string.IsNullOrEmpty(lineupPitcher.Name))
 				{
-					Log($@"pitcher on {focusDate} is unknown");
+					//Log($@"pitcher on {focusDate} is unknown");
 					continue;
 				}
-				Log($@"pitcher on {
-					focusDate
-					} is {
-					lineupPitcher.Name
-					} throws {lineupPitcher.Throws}");
+				//Log($@"pitcher on {
+				//	focusDate
+				//	} is {
+				//	lineupPitcher.Name
+				//	} throws {lineupPitcher.Throws}");
 				if (lineupPitcher.Throws.Equals(pitcherThrows))
 				{
 					lineupCount++;

@@ -69,7 +69,7 @@ namespace BeatTheStreak
 				{ Constants.Options.HotBatters, "on" },
 				{ Constants.Options.HotBattersDaysBack, "25" },
 				{ Constants.Options.HotBattersMendozaLine, ".299" },
-				{ Constants.Options.PitchersMendozaLine, ".221" },
+				{ Constants.Options.PitchersMendozaLine, ".259" },
 				{ Constants.Options.PitcherDaysBack, "25" },
 			};
 			var pickerOptions = new PickerOptions(options);

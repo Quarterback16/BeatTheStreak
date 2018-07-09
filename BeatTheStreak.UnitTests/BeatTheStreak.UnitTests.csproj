@@ -61,6 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalculateStreakTests.cs" />
     <Compile Include="Fakes\FakeBatter.cs" />
     <Compile Include="HotBatterTests.cs" />
     <Compile Include="MissingInActionTests.cs" />
@@ -73,6 +74,10 @@
     <ProjectReference Include="..\Application\Application.csproj">
       <Project>{f948ed1c-c645-4202-8242-31c42ed03f3a}</Project>
       <Name>Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BeatTheStreak.Implementations\BeatTheStreak.Implementations.csproj">
+      <Project>{3c767a7b-bb36-4c08-a6b7-0a12d76f252d}</Project>
+      <Name>BeatTheStreak.Implementations</Name>
     </ProjectReference>
     <ProjectReference Include="..\BeatTheStreak.Interfaces\BeatTheStreak.Interfaces.csproj">
       <Project>{ba85a4e6-810d-4058-8e53-a25d7dab712f}</Project>

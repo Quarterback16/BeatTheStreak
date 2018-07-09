@@ -49,5 +49,15 @@ namespace BeatTheStreak.Tests
 				daysBack: 25);
 			Assert.AreEqual(0.289M, result);
 		}
+
+		[TestMethod]
+		public void Calculate_ForAntonioSenzatellaLast25days_ReturnsNewbie0()
+		{
+			var result = _sut.CalculateOba(
+				playerSlug: "mlb-antonio-senzatela",
+				gameDate: new DateTime(2018, 7, 3),
+				daysBack: 25);
+			Assert.AreEqual(0.0M, result);
+		}
 	}
 }

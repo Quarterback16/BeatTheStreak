@@ -39,25 +39,25 @@ namespace BeatTheStreak.Implementations
 					if (!gameLog.GameStarted)
 						continue;
 
-					_logger.Info(
-						$@" on {
-							Utility.UniversalDate(focusDate)
-							} {
-							gameLog.PitcherLine()
-							}");
+					//_logger.Info(
+					//	$@" on {
+					//		Utility.UniversalDate(focusDate)
+					//		} {
+					//		gameLog.PitcherLine()
+					//		}");
 					totalHits += gameLog.HitsAllowed;
 					totalOuts += gameLog.OutsRecorded;
 				}
 				var oba = Utility.BattingAverage(
 					totalHits, totalOuts + totalHits);
-				_logger.Info(
-					$@" total outs {
-						totalOuts
-						} hits allowed {
-						totalHits
-						} oba {
-						oba
-						}");
+				//_logger.Info(
+				//	$@" total outs {
+				//		totalOuts
+				//		} hits allowed {
+				//		totalHits
+				//		} oba {
+				//		oba
+				//		}");
 				return oba;
 			}
 			catch (Exception ex)

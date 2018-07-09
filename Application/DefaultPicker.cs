@@ -59,12 +59,12 @@ namespace Application
 				if (pitcher.OpponentsBattingAverage < PickerOptions.DecimalOption(
 					Constants.Options.PitchersMendozaLine))
 				{
-					Log($"Pitcher {pitcher} has too good a Opp B Avg");
+					//Log($"Pitcher {pitcher} has too good a Opp B Avg");
 					continue;
 				}
                 ++i;
                 var printLine = $"{i.ToString(),2} {pitcher}";
-				Log($"Looking for a {pitcher.OpponentSlug} batter facing {pitcher}");
+				//Log($"Looking for a {pitcher.OpponentSlug} batter facing {pitcher}");
                 var lineupQueryDate = gameDate.AddDays(-1);
 
                 var opponents = _lineupProjector.ProjectLineup(
@@ -73,7 +73,7 @@ namespace Application
 
 				if (opponents.Lineup.Count.Equals(0))
 				{
-					Log("  cold team - skip this pitcher");
+					//Log("  cold team - skip this pitcher");
 					continue;  //  cold team
 				}
 
@@ -160,8 +160,8 @@ namespace Application
                 gameDate,
                 homeOnly: PickerOptions.OptionOn(
 					Constants.Options.HomePitchersOnly));
-			var lines = pitchers.Dump();
-			LogLines(lines);
+			//var lines = pitchers.Dump();
+			//LogLines(lines);
 			foreach (var pitcher in pitchers.ProbablePitchers)
 			{
 				var oba = _calculateOpponentOba.CalculateOba(
@@ -169,23 +169,23 @@ namespace Application
 						gameDate,
 						PickerOptions.IntegerOption(
 							Constants.Options.PitcherDaysBack));
-				if (oba >= 0)
+				if (oba > 0.0M)
 				{
-					_logger.Trace($@"pitcher {
-						pitcher.Slug
-						} oba changed to {
-						oba
-						} from {
-						pitcher.OpponentsBattingAverage
-						}");
+					//_logger.Trace($@"pitcher {
+					//	pitcher.Slug
+					//	} oba changed to {
+					//	oba
+					//	} from {
+					//	pitcher.OpponentsBattingAverage
+					//	}");
 					pitcher.OpponentsBattingAverage = oba;
 				}
 			}
 			pitchers.ProbablePitchers 
 				= pitchers.ProbablePitchers.OrderByDescending(
 						o => o.OpponentsBattingAverage).ToList();
-			lines = pitchers.Dump();
-			LogLines(lines);
+			//lines = pitchers.Dump();
+			//LogLines(lines);
             return pitchers;
         }
 
@@ -194,8 +194,13 @@ namespace Application
 			if (_logger == null) return;
 			foreach (var line in lines)
 			{
-				_logger.Info(line);
+				_logger.Trace(line);
 			}
+		}
+
+		public IPickerOptions GetOptions()
+		{
+			return PickerOptions;
 		}
 	}
 }

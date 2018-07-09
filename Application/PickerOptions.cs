@@ -42,5 +42,15 @@ namespace Application
 
 			return false;
 		}
+
+		public List<string> OptionStrings()
+		{
+			var options = new List<string>();
+			foreach (var keyPair in Options)
+			{
+				options.Add($"{keyPair.Key}:{keyPair.Value}");
+			}
+			return options;
+		}
 	}
 }

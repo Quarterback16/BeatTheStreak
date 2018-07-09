@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CalculateOpponentOba.cs" />
+    <Compile Include="CalculateStreak.cs" />
     <Compile Include="ConfigReader.cs" />
     <Compile Include="LineupProjector.cs" />
     <Compile Include="MailBatterReport.cs" />

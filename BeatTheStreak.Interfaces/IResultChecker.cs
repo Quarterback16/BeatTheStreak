@@ -7,5 +7,6 @@ namespace BeatTheStreak.Interfaces
 	{
 		bool GotHit(Batter batter, DateTime gameDate);
 		bool HadAtBat(Batter batter, DateTime gameDate);
+		string Result(Batter batter, DateTime gameDate);
 	}
 }
