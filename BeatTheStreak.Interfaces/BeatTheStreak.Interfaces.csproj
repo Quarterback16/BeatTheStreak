@@ -64,6 +64,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BeatTheStreak.Helpers\BeatTheStreak.Helpers.csproj">
+      <Project>{0cc0ef82-ad0a-4706-beeb-318dac74a932}</Project>
+      <Name>BeatTheStreak.Helpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BeatTheStreak.Models\BeatTheStreak.Models.csproj">
       <Project>{7d93cb68-d680-4490-8888-4e55c45e4344}</Project>
       <Name>BeatTheStreak.Models</Name>

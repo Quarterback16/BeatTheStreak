@@ -58,10 +58,10 @@ namespace BeatTheStreak.Tests
 				{ Constants.Options.NoDaysOff, "off" },
 				{ Constants.Options.DaysOffDaysBack, "3" },
 				{ Constants.Options.HotBatters, "on" },
-				{ Constants.Options.HotBattersDaysBack, "25" },
+				{ Constants.Options.HotBattersDaysBack, "35" },
 				{ Constants.Options.HotBattersMendozaLine, ".299" },
 				{ Constants.Options.PitchersMendozaLine, ".259" },
-				{ Constants.Options.PitcherDaysBack, "25" },
+				{ Constants.Options.PitcherDaysBack, "35" },
 			};
 			var pickerOptions = new PickerOptions(options);
 			_picker = new DefaultPicker(

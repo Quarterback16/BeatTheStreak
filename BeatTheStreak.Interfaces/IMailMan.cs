@@ -1,14 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using BeatTheStreak.Helpers;
+using System.Collections.Generic;
 
 namespace BeatTheStreak.Interfaces
 {
     public interface IMailMan
     {
-        string SendMail(string message, string subject);
+        Result SendMail(string message, string subject);
 
-        string SendMail(string message, string subject, string attachment);
+        Result SendMail(string message, string subject, string attachment);
 
-        string SendMail(string message, string subject, string[] attachments);
+        Result SendMail(string message, string subject, string[] attachments);
 
         void AddRecipients(List<string> recipients);
 

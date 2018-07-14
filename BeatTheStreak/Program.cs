@@ -67,10 +67,10 @@ namespace BeatTheStreak
 				{ Constants.Options.NoDaysOff, "off" },
 				{ Constants.Options.DaysOffDaysBack, "3" },
 				{ Constants.Options.HotBatters, "on" },
-				{ Constants.Options.HotBattersDaysBack, "25" },
+				{ Constants.Options.HotBattersDaysBack, "30" },
 				{ Constants.Options.HotBattersMendozaLine, ".299" },
 				{ Constants.Options.PitchersMendozaLine, ".259" },
-				{ Constants.Options.PitcherDaysBack, "25" },
+				{ Constants.Options.PitcherDaysBack, "30" },
 			};
 			var pickerOptions = new PickerOptions(options);
 			var sut = new DefaultPicker(
@@ -82,24 +82,37 @@ namespace BeatTheStreak
 				obaCalculator,
 				logger);
 			var gameDate = DateTime.Now.AddDays(0);  // US Date
-			var result = sut.Choose(
-				gameDate: gameDate,
-				numberRequired: 2);
-			if (Utility.GamePlayed(gameDate))
+
+			try
 			{
-				foreach (var selection in result.Selections)
+				var result = sut.Choose(
+					gameDate: gameDate,
+					numberRequired: 2);
+				if (Utility.GamePlayed(gameDate))
 				{
-					selection.Result = resultChecker.Result(
-						selection.Batter,
-						gameDate);
+					foreach (var selection in result.Selections)
+					{
+						selection.Result = resultChecker.Result(
+							selection.Batter,
+							gameDate);
+					}
 				}
+				result.Dump();
+				mailer.MailReport(result);
+				logger.Info("-------------------------------------------------------------------------------------");
+
 			}
-			result.Dump();
-			mailer.MailReport(result);
-			logger.Info("-------------------------------------------------------------------------------------");
+			catch (Exception ex)
+			{
+				logger.Error(ex.Message);
+				Environment.FailFast(message: null);
+				throw;
+			}
 		}
 
-		private static void CalculateVersionInfo(out Version versionInfo, out DateTime computedDate)
+		private static void CalculateVersionInfo(
+			out Version versionInfo, 
+			out DateTime computedDate)
 		{
 			versionInfo = System.Reflection.Assembly.GetExecutingAssembly()
 				.GetName().Version;

@@ -1,5 +1,5 @@
-﻿using BeatTheStreak.Interfaces;
-using NLog;
+﻿using BeatTheStreak.Helpers;
+using BeatTheStreak.Interfaces;
 using System.Collections.Generic;
 using System.Net.Mail;
 
@@ -28,14 +28,14 @@ namespace BeatTheStreak.Implementations
         {
             ConfigReader = configReader;
             Logger = logger;
-            var result = Initialise();
+            Initialise();
         }
 
-        private string Initialise()
+        private Result Initialise()
         {
 			Recipients = new List<string>();
 			var result = GetMailSettings();
-            if (!string.IsNullOrEmpty(result))
+            if (result.IsFailure)
                 return result;
 
             SmtpClient = new SmtpClient(MailServer)
@@ -47,26 +47,23 @@ namespace BeatTheStreak.Implementations
 					userName: UserId,
 					password: Password)
 			};
-
-            return string.Empty;
+            return Result.Ok();
         }
 
-        private string GetMailSettings()
+        private Result GetMailSettings()
         {
             MailServer = ConfigReader.GetSetting(K_MailServerKey);
 			if (string.IsNullOrEmpty(MailServer))
-				return $"Failed to read MailServer setting : {K_MailServerKey}";
-			else
-				Logger.Info($"MailServer:{MailServer}");
+				return Result.Fail($"Failed to read MailServer setting : {K_MailServerKey}");
             UserId = ConfigReader.GetSetting(K_MailUsername);
             if (string.IsNullOrEmpty(UserId))
-                return $"Failed to read MailServer setting : {K_MailUsername}";
+                return Result.Fail($"Failed to read MailServer setting : {K_MailUsername}");
             Password = ConfigReader.GetSetting(K_MailPassword);
             if (string.IsNullOrEmpty(Password))
-                return $"Failed to read MailServer setting : {K_MailPassword}";
+                return Result.Fail($"Failed to read MailServer setting : {K_MailPassword}");
 			var csvRecipients = ConfigReader.GetSetting(K_Recipients);
 			AddRecipients(csvRecipients);
-			return string.Empty;
+			return Result.Ok();
         }
 
         public int RecipientCount()
@@ -97,7 +94,7 @@ namespace BeatTheStreak.Implementations
             }
         }
 
-        public string SendMail(string message, string subject)
+        public Result SendMail(string message, string subject)
         {
             try
             {
@@ -117,12 +114,12 @@ namespace BeatTheStreak.Implementations
             catch (SmtpException ex)
             {
 				Logger.Error(ex.Message);
-                return ex.Message;
+                return Result.Fail(ex.Message);
             }
-            return string.Empty;
+            return Result.Ok();
         }
 
-        public string SendMail(
+        public Result SendMail(
 			string message, 
 			string subject, 
 			string attachment)
@@ -132,7 +129,7 @@ namespace BeatTheStreak.Implementations
             return SendMail(message, subject, attachments);
         }
 
-        public string SendMail(
+        public Result SendMail(
 			string message, 
 			string subject,
 			string[] attachments)
@@ -158,10 +155,10 @@ namespace BeatTheStreak.Implementations
             catch (SmtpException ex)
             {
 				Logger.Error(ex.Message);
-                return ex.Message;
+                return Result.Fail(ex.Message);
             }
 
-            return string.Empty;
+            return Result.Ok();
         }
 
         public void ClearRecipients()
