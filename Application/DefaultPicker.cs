@@ -162,6 +162,8 @@ namespace Application
 					Constants.Options.HomePitchersOnly));
 			//var lines = pitchers.Dump();
 			//LogLines(lines);
+			if (pitchers.ProbablePitchers.Count == 0)
+				_logger.Info($"No games scheduled for {gameDate.ToShortDateString()}");
 			foreach (var pitcher in pitchers.ProbablePitchers)
 			{
 				var oba = _calculateOpponentOba.CalculateOba(

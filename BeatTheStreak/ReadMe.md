@@ -15,8 +15,8 @@ Basically the development process is one of designing Commands and testing them
 
 ### Commands so far 
  1. GetProbablePitchers
- 2. PickBatters; in progress
- 3. GetLineup; in progress
+ 2. PickBatters
+ 3. GetLineup
 
 ### Building
 
@@ -26,7 +26,7 @@ Basically the development process is one of designing Commands and testing them
 ### Deploying / Publishing
 
  1. shut down the app if running in Prod
- 1. xcopy deploy to Prod
+ 1. xcopy deploy to Prod, see .bat file in Deployment folder
  1. run it
 
 ## Features

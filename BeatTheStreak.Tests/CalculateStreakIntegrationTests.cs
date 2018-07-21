@@ -55,11 +55,11 @@ namespace BeatTheStreak.Tests
 			var options = new Dictionary<string, string>
 			{
 				{ Constants.Options.HomePitchersOnly, "on" },
-				{ Constants.Options.NoDaysOff, "off" },
+				{ Constants.Options.NoDaysOff, "on" },
 				{ Constants.Options.DaysOffDaysBack, "3" },
 				{ Constants.Options.HotBatters, "on" },
 				{ Constants.Options.HotBattersDaysBack, "35" },
-				{ Constants.Options.HotBattersMendozaLine, ".299" },
+				{ Constants.Options.HotBattersMendozaLine, ".289" },
 				{ Constants.Options.PitchersMendozaLine, ".259" },
 				{ Constants.Options.PitcherDaysBack, "35" },
 			};
@@ -174,7 +174,7 @@ namespace BeatTheStreak.Tests
 		{
 			var result = _sut.StreakFor(
 				new DateTime(2018, 4, 3),
-				new DateTime(2018, 7, 7));
+				new DateTime(2018, 7, 11));
 			result.Dump();
 
 			Assert.AreEqual(

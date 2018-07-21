@@ -39,7 +39,7 @@ namespace BeatTheStreak.Repositories
                 league: "mlb",
                 apiRequest: "lineups",
                 queryParms: $"season_id=mlb-2018&on={strDate}&team_id={teamSlug}");
-
+		
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
 
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
