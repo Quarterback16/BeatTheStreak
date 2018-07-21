@@ -40,7 +40,7 @@ Basically the development process is one of designing Commands and testing them
  2. Only pick 1, 2, 3 or 4 in the batting order
 
 ## Configuration
- 1. The Stattleship API key, currently hard coded
+ 1. The Stattleship API key from Environmental variable
 
 ## Solution Structure
  1.	Presentation (UI)
