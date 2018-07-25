@@ -31,13 +31,13 @@ Basically the development process is one of designing Commands and testing them
 
 ## Features
 
- 1. Load Season - will be a way to intialise a season with teams that have their
- positions initally assigned.
+ 1. Pick batters that will get a hit the next game they play.
 
 ## Backlog
 
  1. Allow for double headers
  2. Only pick 1, 2, 3 or 4 in the batting order
+ 3. Only pick from top teams (team mendoza line)
 
 ## Configuration
  1. The Stattleship API key from Environmental variable

@@ -75,13 +75,17 @@
     <Compile Include="StattlleShipApi\Model\ProbablePitchersDto.cs" />
     <Compile Include="StattlleShipApi\Model\SeasonDto.cs" />
     <Compile Include="StattlleShipApi\Model\TeamDto.cs" />
+    <Compile Include="StattlleShipApi\Model\TeamSeasonStatsDto.cs" />
+    <Compile Include="StattlleShipApi\Model\TeamStatsDto.cs" />
     <Compile Include="StattlleShipApi\Model\VenueDto.cs" />
     <Compile Include="StattlleShipApi\PlayerStatsRequest.cs" />
     <Compile Include="StattlleShipApi\ProbablePitcherRequest.cs" />
     <Compile Include="StattlleShipApi\StattleShipApi.cs" />
+    <Compile Include="StattlleShipApi\TeamStatsRequest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="SampleFiles\team_season_stats.json" />
     <None Include="StattlleShipApi\Model\packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -108,8 +112,6 @@
       <Name>Cache</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SampleFiles\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
