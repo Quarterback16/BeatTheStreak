@@ -1,4 +1,5 @@
 ﻿using System;
+using Application;
 using BeatTheStreak.Interfaces;
 using BeatTheStreak.Models;
 
@@ -31,12 +32,15 @@ namespace BeatTheStreak.Implementations
 			for (int i = 0; i < range.TotalDays+1; i++)
 			{
 				var gameDate = startDate.AddDays(i);
-				var selection = _picker.Choose(gameDate, 2);
+				var selection = _picker.Choose(
+					gameDate: gameDate,
+					numberRequired: NumberOfBattersRequired());
 				//selection.Dump();
 				if ( selection.Selections.Count > 0)
 				{
 					foreach (var batter in selection.Selections)
 					{
+						if (batter == null) continue;
 						batter.Result = _resultChecker.Result(
 							batter.Batter,
 							gameDate);
@@ -50,6 +54,18 @@ namespace BeatTheStreak.Implementations
 				result.GameDays.Add(gameDay);
 			}
 			return result;
+		}
+
+		private int NumberOfBattersRequired()
+		{
+			var options = _picker.GetOptions();
+			var numberOfBattersRequired = options.IntegerOption(
+				optionName: Constants.Options.BattersToPick);
+			if (numberOfBattersRequired == 0)
+			{
+				numberOfBattersRequired = 2;
+			};
+			return numberOfBattersRequired;
 		}
 	}
 }

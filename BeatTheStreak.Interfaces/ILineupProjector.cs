@@ -8,6 +8,7 @@ namespace BeatTheStreak.Interfaces
 	{
 		LineupViewModel ProjectLineup(
 			Pitcher pitcher,
-			DateTime lineupQueryDate);
+			DateTime lineupQueryDate,
+			int lineupPositions);
 	}
 }

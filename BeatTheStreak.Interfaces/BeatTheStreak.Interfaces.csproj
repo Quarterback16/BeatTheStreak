@@ -61,6 +61,7 @@
     <Compile Include="IPlayerStatsRequest.cs" />
     <Compile Include="IResultChecker.cs" />
     <Compile Include="IStattleShipApi.cs" />
+    <Compile Include="ITeamStatsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

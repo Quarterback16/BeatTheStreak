@@ -49,6 +49,7 @@
     <Compile Include="CachedLineupRepository.cs" />
     <Compile Include="CachedPitcherRepository.cs" />
     <Compile Include="CachedPlayerStatsRepository.cs" />
+    <Compile Include="CachedTeamStatsRepository.cs" />
     <Compile Include="GameLogRepository.cs" />
     <Compile Include="LineupRepository.cs" />
     <Compile Include="PitcherRepository.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="StattlleShipApi\ProbablePitcherRequest.cs" />
     <Compile Include="StattlleShipApi\StattleShipApi.cs" />
     <Compile Include="StattlleShipApi\TeamStatsRequest.cs" />
+    <Compile Include="TeamStatsRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

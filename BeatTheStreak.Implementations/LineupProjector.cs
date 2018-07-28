@@ -28,10 +28,11 @@ namespace BeatTheStreak.Implementations
 
 		public LineupViewModel ProjectLineup(
 			Pitcher pitcher, 
-			DateTime lineupQueryDate)
+			DateTime lineupQueryDate,
+			int lineupPositions)
 		{
 			//return BasicOpponentsLineup(pitcher,lineupQueryDate);
-			return SmartLineup(pitcher, lineupQueryDate);
+			return SmartLineup(pitcher, lineupQueryDate, lineupPositions);
 		}
 
 		private LineupViewModel BasicOpponentsLineup(
@@ -54,7 +55,8 @@ namespace BeatTheStreak.Implementations
 
 		private LineupViewModel SmartLineup(
 			Pitcher pitcher,
-			DateTime lineupQueryDate)
+			DateTime lineupQueryDate,
+			int lineupPositions)
 		{
 			var opponentTeam = pitcher.OpponentSlug;
 			var pitcherThrows = pitcher.Throws;
@@ -86,18 +88,22 @@ namespace BeatTheStreak.Implementations
 
 				if (string.IsNullOrEmpty(lineupPitcher.Name))
 				{
-					//Log($@"pitcher on {focusDate} is unknown");
+#if DEBUG2
+					Log($@"pitcher on {focusDate} is unknown");
+#endif
 					continue;
 				}
-				//Log($@"pitcher on {
-				//	focusDate
-				//	} is {
-				//	lineupPitcher.Name
-				//	} throws {lineupPitcher.Throws}");
+#if DEBUG2
+				Log($@"pitcher on {
+					focusDate
+					} is {
+					lineupPitcher.Name
+					} throws {lineupPitcher.Throws}");
+#endif
 				if (lineupPitcher.Throws.Equals(pitcherThrows))
 				{
 					lineupCount++;
-					for (int j = 1; j < 4; j++)
+					for (int j = 1; j < lineupPositions+1; j++)
 					{
 						var batterAt = lineup.BattingAt(j.ToString());
 						AddBatter(d, j, batterAt);
@@ -107,7 +113,7 @@ namespace BeatTheStreak.Implementations
 			}
 			if (lineupCount > 0)
 			{
-				for (int j = 1; j < 4; j++)
+				for (int j = 1; j < lineupPositions+1; j++)
 				{
 					var lastBest = 0;
 					var best = string.Empty;

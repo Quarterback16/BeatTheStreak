@@ -22,6 +22,21 @@
 			public const string PitchersMendozaLine = "Pitchers-MendozaLine";
 
 			public const string PitcherDaysBack = "Pitchers-Days-Back";
+
+			// number of Batters to pick
+			public const string BattersToPick = "Batters-to-pick";
+
+			//  Analyse the Team Clip
+			public const string TeamClip = "Use-Team-Clips";
+
+			//  dont challenge this team
+			public const string PitchersTeamMendozaLine = "Pitchers-Team-MendozaLine";
+
+			//  dont trust teams below this line
+			public const string BattersTeamMendozaLine = "Batters-Team-MendozaLine";
+
+			//  this is how many lineup positions to include
+			public const string LineupPositions = "Lineup-Positions-To-Examine";
 		}
 	}
 }

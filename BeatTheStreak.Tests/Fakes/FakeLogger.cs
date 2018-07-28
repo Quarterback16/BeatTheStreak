@@ -22,12 +22,12 @@ namespace BeatTheStreak.Tests.Fakes
 
 		public void Info(string message)
 		{
-			Console.WriteLine($"info:{message}");
+			//Console.WriteLine($"info:{message}");
 		}
 
 		public void Trace(string message)
 		{
-			Console.WriteLine($"trace:{message}");
+			//Console.WriteLine($"trace:{message}");
 		}
 
 		public void Warning(string message)

@@ -4,6 +4,7 @@ using System.IO;
 using System;
 using BeatTheStreak.Helpers;
 using System.Collections.Generic;
+using BeatTheStreak.Models;
 
 namespace BeatTheStreak.Repositories
 {
@@ -41,18 +42,11 @@ namespace BeatTheStreak.Repositories
 				teamSeasonStats = dto.TeamStats;
 				if (teamSeasonStats[0].Wins != null)
 					result.Wins = Int32.Parse(teamSeasonStats[0].Wins);
+				if (teamSeasonStats[0].Losses != null)
+					result.Losses = Int32.Parse(teamSeasonStats[0].Losses);
 			}
 			result.TeamName = teamSlug;
 			return result;
 		}
-
-
-	}
-
-	public class TeamStatsViewModel
-	{
-		public DateTime AsOf { get; set; }
-		public string TeamName { get; set; }
-		public int Wins { get; set; }
 	}
 }

@@ -12,6 +12,7 @@ namespace Application
 		private List<ILike> Tests;
 		private readonly ILineupProjector _lineupProjector;
 		private readonly ICalculateOpponentOba _calculateOpponentOba;
+		private readonly ITeamStatsRepository _teamStatsRepository;
 		private ILog _logger;
 
         public DefaultPicker(
@@ -19,6 +20,7 @@ namespace Application
             ILineupRepository lineupRepository,
             IPitcherRepository pitcherRepository,
 			IPlayerStatsRepository playerStatsRepository,
+			ITeamStatsRepository teamStatsRepository,
 			ILineupProjector lineupProjector,
 			ICalculateOpponentOba calculateOpponentOba,
 			ILog logger
@@ -34,6 +36,7 @@ namespace Application
 			};
 			_lineupProjector = lineupProjector;
 			_calculateOpponentOba = calculateOpponentOba;
+			_teamStatsRepository = teamStatsRepository;
 			_logger = logger;
 		}
 
@@ -59,27 +62,77 @@ namespace Application
 				if (pitcher.OpponentsBattingAverage < PickerOptions.DecimalOption(
 					Constants.Options.PitchersMendozaLine))
 				{
-					//Log($"Pitcher {pitcher} has too good a Opp B Avg");
+#if DEBUG
+					Log($"Pitcher {pitcher} has too good a Opp B Avg");
+#endif
 					continue;
 				}
-                ++i;
+				if (PickerOptions.OptionOn(Constants.Options.TeamClip))
+				{
+					var pitchersTeamClip = TeamClip(
+						statsDate: gameDate.AddDays(-1),
+						teamName: pitcher.TeamId);
+					if (pitchersTeamClip > PickerOptions.DecimalOption(
+							Constants.Options.PitchersTeamMendozaLine))
+					{
+#if DEBUG
+						Log($"Pitchers Team {pitcher.TeamName} has too good a Clip {pitchersTeamClip}");
+#endif
+						continue;
+					}
+					var battersTeamClip = TeamClip(
+						statsDate: gameDate.AddDays(-1),
+						teamName: pitcher.OpponentSlug);
+					if (battersTeamClip < PickerOptions.DecimalOption(
+							Constants.Options.BattersTeamMendozaLine))
+					{
+#if DEBUG
+						Log($@"Batters Team {
+							pitcher.OpponentSlug
+							} has not got a good enough Clip {
+							battersTeamClip
+							}");
+#endif
+						continue;
+					}
+				}
+				++i;
                 var printLine = $"{i.ToString(),2} {pitcher}";
-				//Log($"Looking for a {pitcher.OpponentSlug} batter facing {pitcher}");
-                var lineupQueryDate = gameDate.AddDays(-1);
+#if DEBUG
+				Log($"Looking for a {pitcher.OpponentSlug} batter facing {pitcher}");
+#endif
+				var lineupQueryDate = gameDate.AddDays(-1);
+				var lineupPositionsToExamine = PickerOptions.IntegerOption(
+					Constants.Options.LineupPositions);
 
-                var opponents = _lineupProjector.ProjectLineup(
+				var opponents = _lineupProjector.ProjectLineup(
 					pitcher, 
-					lineupQueryDate);
+					lineupQueryDate,
+					lineupPositionsToExamine);
 
 				if (opponents.Lineup.Count.Equals(0))
 				{
-					//Log("  cold team - skip this pitcher");
+#if DEBUG
+					Log("  cold team - skip this pitcher");
+#endif
 					continue;  //  cold team
 				}
-
+#if DEBUG
+				opponents.DumpLineup();
+#endif
                 var batter1 = opponents.BattingAt("1");
-                var batter2 = opponents.BattingAt("2");
-                var batter3 = opponents.BattingAt("3");
+				var batter2 = new Batter();
+				var batter3 = new Batter();
+				var batter4 = new Batter();
+
+				if (lineupPositionsToExamine > 1)
+				{
+					batter2 = opponents.BattingAt("2");
+					if (lineupPositionsToExamine > 2 )
+						batter3 = opponents.BattingAt("3");
+					if (lineupPositionsToExamine > 3)
+						batter4 = opponents.BattingAt("4");
+				}
                 if (batter1 != null)
                 {
                     var selection = new Selection
@@ -88,6 +141,7 @@ namespace Application
                         Batter1 = batter1,
                         Batter2 = batter2,
                         Batter3 = batter3,
+						Batter4 = batter4,
                         Pitcher = pitcher,
                         Game = new Game
                         {
@@ -103,13 +157,19 @@ namespace Application
 						{
 							printLine += reason;
 							like = false;
+#if DEBUG
+							Log($"{selection} no good :- {reason}");
+#endif
 							break;  // one strike and ur out
 						}
 					}
                     if (like)
                     {
                         batters.Add(selection);
-                        printLine += "  " + selection.Batter.ToString();
+#if DEBUG
+						Log($"{selection} good");
+#endif
+						printLine += "  " + selection.Batter.ToString();
                     }
                 }
                 else
@@ -127,6 +187,12 @@ namespace Application
             }
             return batters;
         }
+
+		private decimal TeamClip(DateTime statsDate, string teamName)
+		{
+			var results = _teamStatsRepository.Submit(statsDate, teamName);
+			return results.Clip();
+		}
 
 		private void Log(string message)
 		{
@@ -160,12 +226,17 @@ namespace Application
                 gameDate,
                 homeOnly: PickerOptions.OptionOn(
 					Constants.Options.HomePitchersOnly));
-			//var lines = pitchers.Dump();
-			//LogLines(lines);
+#if DEBUG
+			var lines = pitchers.Dump();
+			LogLines(lines);
+#endif
 			if (pitchers.ProbablePitchers.Count == 0)
 				_logger.Info($"No games scheduled for {gameDate.ToShortDateString()}");
 			foreach (var pitcher in pitchers.ProbablePitchers)
 			{
+				if (pitcher.TeamId == null) pitcher.TeamId = pitcher.TeamSlug;
+				if (pitcher.TeamSlug == null) pitcher.TeamSlug = pitcher.TeamId;
+
 				var oba = _calculateOpponentOba.CalculateOba(
 						pitcher.Slug,
 						gameDate,
@@ -173,22 +244,26 @@ namespace Application
 							Constants.Options.PitcherDaysBack));
 				if (oba > 0.0M)
 				{
-					//_logger.Trace($@"pitcher {
-					//	pitcher.Slug
-					//	} oba changed to {
-					//	oba
-					//	} from {
-					//	pitcher.OpponentsBattingAverage
-					//	}");
+#if DEBUG
+					_logger.Trace($@"pitcher {
+						pitcher.Slug
+						} oba changed to {
+						oba
+						} from {
+						pitcher.OpponentsBattingAverage
+						}");
+#endif
 					pitcher.OpponentsBattingAverage = oba;
 				}
 			}
 			pitchers.ProbablePitchers 
 				= pitchers.ProbablePitchers.OrderByDescending(
 						o => o.OpponentsBattingAverage).ToList();
-			//lines = pitchers.Dump();
-			//LogLines(lines);
-            return pitchers;
+#if DEBUG
+			lines = pitchers.Dump();
+			LogLines(lines);
+#endif
+			return pitchers;
         }
 
 		private void LogLines(List<string> lines)

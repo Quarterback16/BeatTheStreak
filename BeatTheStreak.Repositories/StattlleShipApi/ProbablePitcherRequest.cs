@@ -106,7 +106,8 @@ namespace BeatTheStreak.Repositories
                 Wins = Int32.Parse(dto.Wins),
                 Losses = Int32.Parse(dto.Losses),
                 Era = Decimal.Parse(dto.Era),
-                TeamId = TeamSlugFor(dto.TeamId, Teams),
+				TeamId = TeamSlugFor(dto.TeamId, Teams),  // did not want to clear the cache
+				TeamSlug = TeamSlugFor(dto.TeamId, Teams),
                 TeamName = TeamNameFor(dto.TeamId, Teams),
                 NextOpponent = GameFor(dto.GameId, Games),
                 OpponentId = oppId,

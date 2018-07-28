@@ -49,7 +49,8 @@ namespace BeatTheStreak.Tests
 			};
 			var lineup = _sut.ProjectLineup(
 				testPitcher,
-				lineupQueryDate: new System.DateTime(2018, 6, 13));
+				lineupQueryDate: new System.DateTime(2018, 6, 13),
+				lineupPositions: 3);
 			Assert.IsNotNull(lineup);
 			Assert.IsTrue(lineup.BattingAt("1").PlayerSlug.Equals("mlb-joe-panik"));
 			Assert.IsTrue(lineup.BattingAt("2").PlayerSlug.Equals("mlb-buster-posey"));
@@ -65,7 +66,8 @@ namespace BeatTheStreak.Tests
 			};
 			var lineup = _sut.ProjectLineup(
 				testPitcher,
-				lineupQueryDate: new System.DateTime(2018, 6, 16));
+				lineupQueryDate: new System.DateTime(2018, 6, 16),
+				lineupPositions: 3);
 			Assert.IsNotNull(lineup);
 			lineup.DumpLineup();
 			Assert.IsTrue(lineup.BattingAt("1").PlayerSlug.Equals("mlb-brandon-nimmo"));

@@ -38,6 +38,9 @@ namespace BeatTheStreak.Tests
 			var statsRepo = new CachedPlayerStatsRepository(
 				new PlayerStatsRepository(),
 				cache);
+			var teamStatsRepo = new CachedTeamStatsRepository(
+				new TeamStatsRepository(),
+				cache);
 			var opposingPitcher = new OpposingPitcher(
 				pitcherRepo);
 			var lineupProjector = new LineupProjector(
@@ -55,23 +58,28 @@ namespace BeatTheStreak.Tests
 			var options = new Dictionary<string, string>
 			{
 				{ Constants.Options.HomePitchersOnly, "on" },
+				{ Constants.Options.LineupPositions, "4" },
 				{ Constants.Options.NoDaysOff, "on" },
 				{ Constants.Options.DaysOffDaysBack, "3" },
-				{ Constants.Options.HotBatters, "on" },
-				{ Constants.Options.HotBattersDaysBack, "35" },
+				{ Constants.Options.HotBatters, "off" },
+				{ Constants.Options.HotBattersDaysBack, "30" },
 				{ Constants.Options.HotBattersMendozaLine, ".289" },
 				{ Constants.Options.PitchersMendozaLine, ".259" },
-				{ Constants.Options.PitcherDaysBack, "35" },
+				{ Constants.Options.PitcherDaysBack, "30" },
+				{ Constants.Options.TeamClip, "off" },
+				{ Constants.Options.PitchersTeamMendozaLine, ".555" },
+				{ Constants.Options.BattersTeamMendozaLine, ".399" },
 			};
 			var pickerOptions = new PickerOptions(options);
 			_picker = new DefaultPicker(
-				pickerOptions,
-				lineupRepo,
-				pitcherRepo,
-				statsRepo,
-				lineupProjector,
-				obaCalculator,
-				new FakeLogger());
+				options: pickerOptions,
+				lineupRepository: lineupRepo,
+				pitcherRepository: pitcherRepo,
+				playerStatsRepository: statsRepo,
+				teamStatsRepository: teamStatsRepo,
+				lineupProjector: lineupProjector,
+				calculateOpponentOba: obaCalculator,
+				logger: new FakeLogger());
 
 			_sut = new CalculateStreak(_picker, _resultChecker);
 		}
@@ -174,13 +182,13 @@ namespace BeatTheStreak.Tests
 		{
 			var result = _sut.StreakFor(
 				new DateTime(2018, 4, 3),
-				new DateTime(2018, 7, 11));
+				new DateTime(2018, 7, 15));
 			result.Dump();
 
 			Assert.AreEqual(
 				expected: 10,
 				actual: result.BestStreak,
-				message: "Score after many days was ten");
+				message: "Score for the first half of the season was ten");
 		}
 
 	}

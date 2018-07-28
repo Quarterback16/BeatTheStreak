@@ -10,7 +10,8 @@ namespace BeatTheStreak.Models
         public Batter Batter1 { get; set; }
         public Batter Batter2 { get; set; }
         public Batter Batter3 { get; set; }
-        public Pitcher Pitcher { get; set; }
+		public Batter Batter4 { get; set; }
+		public Pitcher Pitcher { get; set; }
         public Game Game { get; set; }
         public DateTime GameDate { get; set; }
 
@@ -23,11 +24,12 @@ namespace BeatTheStreak.Models
             return $"{Batter} vs. {Pitcher} : {Game}";
         }
 
-        internal void DumpTop3()
+        internal void DumpTop()
         {
             Console.WriteLine( Batter1 );
             Console.WriteLine( Batter2 );
             Console.WriteLine( Batter3 );
-        }
+			Console.WriteLine( Batter4);
+		}
     }
 }

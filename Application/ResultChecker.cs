@@ -37,6 +37,7 @@ namespace Application
 			var hadAtBat = false;
 			if (gameDate < DateTime.Now.AddDays(-2))
 			{
+				if (batter == null || batter.PlayerSlug == null) return false;
 				var statsAfterGame = _playerStatsRepository.Submit(
 					queryDate: gameDate.AddDays(1),
 					playerSlug: batter.PlayerSlug);

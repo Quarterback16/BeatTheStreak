@@ -30,7 +30,8 @@ namespace Application
 			{
 				selection.Batter1,
 				selection.Batter2,
-				selection.Batter3
+				selection.Batter3,
+				selection.Batter4
 			};
 			foreach (var batter in originalChoices)
 			{
@@ -61,6 +62,9 @@ namespace Application
 				}
 			}
 			selection.Batter = batterWithBestAvg;
+#if DEBUG
+			Console.WriteLine($"{selection.Batter} has the highest batting average");
+#endif
 			return true;
 		}
 
@@ -79,9 +83,11 @@ namespace Application
 					Constants.Options.HotBattersDaysBack)),
 				batter.PlayerSlug);
 			batter.BattingAverage = BattingAverage(statsFrom, statsTo);
-			//Console.WriteLine( $@"   bavg for {
-			//	batter.PlayerSlug,-25
-			//	} was {oldAvg:#.000} now calculated as {batter.BattingAverage:#.000}");
+#if DEBUG
+			Console.WriteLine($@"   bavg for {
+				batter.PlayerSlug,-25
+				} was {oldAvg:#.000} now calculated as {batter.BattingAverage:#.000}");
+#endif
 		}
 
 		private decimal BattingAverage(
@@ -119,6 +125,7 @@ namespace Application
 			DateTime gameDate,
 			Batter batter)
 		{
+			if (batter == null || batter.TeamSlug == null) return true;
 			var lineup = _lineupRepository.Submit(
 				gameDate,
 				batter.TeamSlug).Lineup;
