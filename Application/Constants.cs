@@ -2,6 +2,11 @@
 {
     public static class Constants
     {
+		public static class Mlb
+		{
+			public const string CurrentSeason = "2019";
+		}
+
         public static class Options
         {
             //  this option is ON will filter out away pitchers

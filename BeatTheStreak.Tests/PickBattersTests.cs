@@ -57,7 +57,7 @@ namespace BeatTheStreak.Tests
 			var options = new Dictionary<string, string>
 			{
 				{ Constants.Options.HomePitchersOnly, "on" },
-				{ Constants.Options.LineupPositions, "4" },
+				{ Constants.Options.LineupPositions, "3" },
 				{ Constants.Options.NoDaysOff, "off" },
 				{ Constants.Options.DaysOffDaysBack, "3" },
 				{ Constants.Options.HotBatters, "off" },

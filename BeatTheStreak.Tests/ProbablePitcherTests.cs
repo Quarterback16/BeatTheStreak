@@ -16,7 +16,7 @@ namespace BeatTheStreak.Tests
         public void ProbablePitchers_ReturnsMultiplePitchers()
         {
             var sut = new ProbablePitcherRequest();
-            var result = sut.Submit(new DateTime(2018,5,6));  // US
+            var result = sut.Submit(new DateTime(2019,3,29));  // US
             result.Dump();
             Assert.IsTrue(
                 result.ProbablePitchers.Count > 0, 

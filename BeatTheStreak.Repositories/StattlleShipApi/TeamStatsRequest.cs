@@ -27,7 +27,7 @@ namespace BeatTheStreak.Repositories
 				sport: "baseball",
 				league: "mlb",
 				apiRequest: "team_season_stats",
-				queryParms: $"season_id=mlb-2018&on={strDate}&team_id={teamSlug}");
+				queryParms: $"season_id=mlb-{queryDate.Year}&on={strDate}&team_id={teamSlug}");
 
 			var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
 			List<TeamSeasonStatsDto> teamSeasonStats;

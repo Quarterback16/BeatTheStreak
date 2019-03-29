@@ -21,7 +21,7 @@ namespace BeatTheStreak.Repositories
             };
             var strDate = Utility.UniversalDate(queryDate);
             var qp = new System.Text.StringBuilder();
-            qp.Append("season_id=mlb-2018");
+            qp.Append($"season_id=mlb-{queryDate.Year}");
             //qp.Append("&interval_type=today");
             qp.Append($"&on={strDate}");
             qp.Append($"&player_id={playerSlug}");

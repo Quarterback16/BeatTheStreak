@@ -43,14 +43,16 @@ namespace BeatTheStreak.Repositories
                 sport: "baseball",
                 league: "mlb",
                 apiRequest: "probable_pitchers",
-                queryParms: $"season_id=mlb-2018&on={strDate}");
+                queryParms: $"season_id=mlb-{queryDate.Year}&on={strDate}");
 
             var httpResponse = (HttpWebResponse) httpWebRequest.GetResponse();
 
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
-                var dto = JsonConvert.DeserializeObject<ProbablePitchersDto>(
-                    streamReader.ReadToEnd());
+				var json = streamReader.ReadToEnd();
+
+				var dto = JsonConvert.DeserializeObject<ProbablePitchersDto>(
+                    json);
 
                 Players = dto.Players;
                 Teams = dto.Teams;
