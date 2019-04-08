@@ -25,7 +25,10 @@ namespace BeatTheStreak.Repositories
         [JsonProperty("doubles")]
         public string Doubles { get; set; }
 
-        [JsonProperty("batting_average")]
+		[JsonProperty("total_bases")]
+		public string TotalBases { get; set; }
+
+		[JsonProperty("batting_average")]
         public string BattingAverage { get; set; }
 
         [JsonProperty("plate_appearence")]
@@ -54,5 +57,35 @@ namespace BeatTheStreak.Repositories
 
         [JsonProperty("whip")]
         public string Whip { get; set; }
-    }
+
+		[JsonProperty("at_bats_per_home_run")]
+		public string AbPerHr { get; set; }
+
+		[JsonProperty("at_bats_per_strike_out")]
+		public string AbPerSo { get; set; }
+
+		[JsonProperty("walks_per_plate_experience")]
+		public string WalkRatio { get; set; }
+
+		[JsonProperty("pitchers_games_played")]
+		public string PitcherGamesPlayed { get; set; }
+
+		[JsonProperty("batters_faced")]
+		public string BattersFaced { get; set; }
+
+		[JsonProperty("complete_games")]
+		public string CompleteGames { get; set; }
+
+		[JsonProperty("quality_starts")]
+		public string QualityStarts { get; set; }
+
+		[JsonProperty("save_opportunities")]
+		public string SaveOpportunities { get; set; }
+
+		[JsonProperty("saves")]
+		public string Saves { get; set; }
+
+		[JsonProperty("blown_save")]
+		public string BlownSaves { get; set; }
+	}
 }

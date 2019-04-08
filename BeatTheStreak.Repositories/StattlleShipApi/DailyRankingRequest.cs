@@ -21,7 +21,7 @@ namespace BeatTheStreak.Repositories
             var strDate = Utility.UniversalDate(queryDate);
             var qp = new System.Text.StringBuilder();
             qp.Append("ranking=baseball_daily_player_hitter_ranking");
-            qp.Append($"&on={strDate}");
+            qp.Append($"&season_id=mlb-{queryDate.Year}&on={strDate}&interval_type=regularseason");
             //qp.Append($"&player_id={playerSlug}");
             var httpWebRequest = CreateRankingsRequest(
                 queryParms: qp.ToString());

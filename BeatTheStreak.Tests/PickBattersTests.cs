@@ -93,7 +93,7 @@ namespace BeatTheStreak.Tests
 			}
 			Console.WriteLine();
 
-			var gameDate = DateTime.Now.AddDays(-1);  // US Date
+			var gameDate = DateTime.Now;  // US Date
 			var result = _sut.Choose(
                 gameDate: gameDate,
                 numberRequired: 2);

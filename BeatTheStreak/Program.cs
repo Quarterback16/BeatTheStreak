@@ -44,6 +44,9 @@ namespace BeatTheStreak
 			var statsRepo = new CachedPlayerStatsRepository(
 				new PlayerStatsRepository(),
 				cache);
+			var teamStatsRepo = new CachedTeamStatsRepository(
+				new TeamStatsRepository(),
+				cache);
 			var opposingPitcher = new OpposingPitcher(
 				pitcherRepo);
 			var lineupProjector = new LineupProjector(
@@ -64,13 +67,18 @@ namespace BeatTheStreak
 			var options = new Dictionary<string, string>
 			{
 				{ Constants.Options.HomePitchersOnly, "on" },
+				{ Constants.Options.LineupPositions, "3" },
 				{ Constants.Options.NoDaysOff, "off" },
 				{ Constants.Options.DaysOffDaysBack, "3" },
-				{ Constants.Options.HotBatters, "on" },
+				{ Constants.Options.HotBatters, "off" },
 				{ Constants.Options.HotBattersDaysBack, "30" },
-				{ Constants.Options.HotBattersMendozaLine, ".299" },
+				{ Constants.Options.HotBattersMendozaLine, ".289" },
 				{ Constants.Options.PitchersMendozaLine, ".259" },
 				{ Constants.Options.PitcherDaysBack, "30" },
+				{ Constants.Options.BattersToPick, "2" },
+				{ Constants.Options.TeamClip, "off" },
+				{ Constants.Options.PitchersTeamMendozaLine, ".555" },
+				{ Constants.Options.BattersTeamMendozaLine, ".455" },
 			};
 			var pickerOptions = new PickerOptions(options);
 			var sut = new DefaultPicker(
@@ -78,6 +86,7 @@ namespace BeatTheStreak
 				lineupRepo,
 				pitcherRepo,
 				statsRepo,
+				teamStatsRepo,
 				lineupProjector,
 				obaCalculator,
 				logger);

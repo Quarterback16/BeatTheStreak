@@ -14,13 +14,9 @@ namespace BeatTheStreak.Tests
 
 			var sut = new PlayerStatsRequest();
             var result = sut.Submit(
-                queryDate: new DateTime(2018, 5, 1),
+                queryDate: new DateTime(2019, 3, 30),
                 playerSlug: playerSlug );
             result.DumpPitcher();
-			var result2 = sut.Submit(
-				queryDate: new DateTime(2018, 5, 31),
-				playerSlug: playerSlug);
-			result2.DumpPitcher();
 		}
 
         [TestMethod]
@@ -81,6 +77,18 @@ namespace BeatTheStreak.Tests
 				0,
 				result.InningsPitched,
 				"Ivan Novas ERA on 2018-06-27 was 4.5 for the game");
+		}
+
+		[TestMethod]
+		public void DailyRankingRequest_Batters()
+		{
+			var playerSlug = "";
+
+			var sut = new DailyRankingRequest();
+			var result = sut.Submit(
+				queryDate: new DateTime(2018, 5, 4),
+				playerSlug: playerSlug);
+			result.Dump();
 		}
 	}
 }
