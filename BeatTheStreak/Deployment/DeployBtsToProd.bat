@@ -8,6 +8,10 @@ xcopy x:\bts\*.* x:\bts\backup\
 xcopy BeatTheStreak.*.dll x:\bts /y
 xcopy BeatTheStreak.*.pdb x:\bts /y
 
+xcopy FbbEventStore.dll x:\bts /y
+xcopy FbbEventStore.pdb x:\bts /y
+xcopy fbbEvents.json x:\bts /y
+
 xcopy bts.exe x:\bts /y
 xcopy bts.pdb x:\bts /y
 xcopy bts.bat x:\bts /y

@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BeatTheStreak.Repositories</RootNamespace>
     <AssemblyName>BeatTheStreak.Repositories</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -112,6 +112,10 @@
     <ProjectReference Include="E:\FileSync\SyncProjects\Cache\Cache.csproj">
       <Project>{85bb16a5-3c53-4e4f-a342-1103aa6f967e}</Project>
       <Name>Cache</Name>
+    </ProjectReference>
+    <ProjectReference Include="E:\FileSync\SyncProjects\FbbEventStore\FbbEventStore.csproj">
+      <Project>{a7bc3bf6-d5c2-45d1-899b-cc3a73ca10b8}</Project>
+      <Name>FbbEventStore</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

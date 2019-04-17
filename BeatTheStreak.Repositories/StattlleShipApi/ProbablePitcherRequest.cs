@@ -7,11 +7,13 @@ using System.Linq;
 using Domain;
 using BeatTheStreak.Models;
 using BeatTheStreak.Helpers;
+using FbbEventStore;
 
 namespace BeatTheStreak.Repositories
 {
     public class ProbablePitcherRequest : BaseApiRequest
     {
+		private readonly IRosterMaster _rosterMaster;
         public Dictionary<string,Pitcher> TeamList { get; set; }
 
         public PlayerStatsRequest PlayerStatsRequest { get; set; }
@@ -20,10 +22,13 @@ namespace BeatTheStreak.Repositories
 
         public bool HomeOnly { get; set; }
 
-        public ProbablePitcherRequest(bool homeOnly = false)
-        {
+        public ProbablePitcherRequest(
+			IRosterMaster rosterMaster,
+			bool homeOnly = false)
+		{
             PlayerStatsRequest = new PlayerStatsRequest();
             HomeOnly = homeOnly;
+			_rosterMaster = rosterMaster;
         }
 
         public ProbablePitcherViewModel Submit(DateTime queryDate)
@@ -98,30 +103,38 @@ namespace BeatTheStreak.Repositories
         }
 
         private Pitcher MapDtoToPitcher(PitcherDto dto)
-        {
-            var oppId = OpponentTeamId(dto.GameId, dto.TeamId, Games);
-            var pitcher = new Pitcher
-            {
-                Name = GetName(dto.PlayerId, Players),
+		{
+			var oppId = OpponentTeamId(dto.GameId, dto.TeamId, Games);
+			var pitcher = new Pitcher
+			{
+				Name = GetName(dto.PlayerId, Players),
 				Slug = GetSlug(dto.PlayerId, Players),
 				Throws = GetHandedness(dto.PlayerId, Players),
-                Wins = Int32.Parse(dto.Wins),
-                Losses = Int32.Parse(dto.Losses),
-                Era = Decimal.Parse(dto.Era),
+				Wins = int.Parse(dto.Wins),
+				Losses = int.Parse(dto.Losses),
+				Era = decimal.Parse(dto.Era),
 				TeamId = TeamSlugFor(dto.TeamId, Teams),  // did not want to clear the cache
 				TeamSlug = TeamSlugFor(dto.TeamId, Teams),
-                TeamName = TeamNameFor(dto.TeamId, Teams),
-                NextOpponent = GameFor(dto.GameId, Games),
-                OpponentId = oppId,
-                OpponentSlug = TeamSlugFor(oppId, Teams),
-                OpponentsBattingAverage = GetOpponentsBattingAverage(
-                    GetPlayerSlug(dto.PlayerId, Players) ),
-                Away = IsAway(dto.TeamId, dto.GameId, Games)
-            };
-            return pitcher;
-        }
+				TeamName = TeamNameFor(dto.TeamId, Teams),
+				NextOpponent = GameFor(dto.GameId, Games),
+				FantasyTeam = SetFantasyTeam(dto),
+				OpponentId = oppId,
+				OpponentSlug = TeamSlugFor(oppId, Teams),
+				OpponentsBattingAverage = GetOpponentsBattingAverage(
+					GetPlayerSlug(dto.PlayerId, Players)),
+				Away = IsAway(dto.TeamId, dto.GameId, Games)
+			};
+			return pitcher;
+		}
 
-        private bool IsAway(string teamId, string gameId, List<GameDto> games)
+		private string SetFantasyTeam(PitcherDto dto)
+		{
+			if (_rosterMaster == null)
+				return " ";
+			return _rosterMaster.GetOwnerOf(GetName(dto.PlayerId, Players));
+		}
+
+		private bool IsAway(string teamId, string gameId, List<GameDto> games)
         {
             foreach (var g in games)
             {

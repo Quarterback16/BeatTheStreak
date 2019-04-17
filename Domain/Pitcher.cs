@@ -32,13 +32,15 @@
 
         public bool Away { get; set; }
 
-        public override string ToString()
+		public string FantasyTeam { get; set; }
+
+		public override string ToString()
         {
             var oba = string.Format("{0:#0.000}", OpponentsBattingAverage);
             var era = string.Format("{0:#0.00}", Era);
             return $@"{Name,-20} {
 				Throws
-				}  {TeamName,-15} ({Wins,2}-{Losses,2}) {oba,5} {era,5} {
+				}  {TeamName,-15} {FantasyTeam,4} ({Wins,2}-{Losses,2}) {oba,5} {era,5} {
 				Slug
 				}";
         }

@@ -23,8 +23,7 @@ namespace Application
 			ITeamStatsRepository teamStatsRepository,
 			ILineupProjector lineupProjector,
 			ICalculateOpponentOba calculateOpponentOba,
-			ILog logger
-			) 
+			ILog logger	) 
             : base(lineupRepository, pitcherRepository)
         {
             PickerName = "Default Picker";
@@ -56,7 +55,9 @@ namespace Application
             var batters = new List<Selection>();
             ProbablePitcherViewModel pitchers = GetProbablePitchers(
 				gameDate);
-            var i = 0;
+			var lines = pitchers.Dump();
+			LogLines(lines);
+			var i = 0;
             foreach (var pitcher in pitchers.ProbablePitchers)
             {
 				if (pitcher.OpponentsBattingAverage < PickerOptions.DecimalOption(
@@ -271,7 +272,7 @@ namespace Application
 			if (_logger == null) return;
 			foreach (var line in lines)
 			{
-				_logger.Trace(line);
+				_logger.Info(line);
 			}
 		}
 

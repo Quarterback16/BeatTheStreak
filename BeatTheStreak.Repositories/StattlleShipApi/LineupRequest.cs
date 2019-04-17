@@ -103,7 +103,7 @@ namespace BeatTheStreak.Repositories
         private decimal GetBattingAverage(string batterSlug)
         {
             var result = PlayerStatsRequest.Submit(
-                queryDate: GameDate,
+                queryDate: GameDate.AddDays(1),  // SC0779
                 playerSlug: batterSlug);
             return result.BattingAverage;
         }

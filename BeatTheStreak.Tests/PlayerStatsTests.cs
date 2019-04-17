@@ -22,20 +22,17 @@ namespace BeatTheStreak.Tests
         [TestMethod]
         public void PlayerStatsRequest_BatterOk()
         {
-			var playerSlug = "mlb-josh-bell";
-
+			var playerSlug = "mlb-joc-pederson";
+			var queryDate = new DateTime(2019, 4, 8);
+			var actualBattingAverage = 0.25M;
 			var sut = new PlayerStatsRequest();
             var result = sut.Submit(
-                queryDate: new DateTime(2018, 5, 4),
+                queryDate: queryDate,
                 playerSlug: playerSlug);
             result.Dump();
             Assert.IsTrue(
-                result.BattingAverage.Equals(0.244M),
-                "Josh Bells Season Bavg on 2018-05-04 was .244");
-			var result2 = sut.Submit(
-				queryDate: new DateTime(2018, 5, 31),
-				playerSlug: playerSlug);
-			result2.Dump();
+                result.BattingAverage.Equals(actualBattingAverage),
+                $"Joc Pedersons Season Bavg on {queryDate:u} was {actualBattingAverage} not {result.BattingAverage}");
 		}
 
         [TestMethod]
@@ -43,8 +40,8 @@ namespace BeatTheStreak.Tests
         {
             var sut = new GameLogRequest();
             var result = sut.Submit(
-                queryDate: new DateTime(2018, 5, 30),
-                playerSlug: "mlb-josh-bell");
+                queryDate: new DateTime(2019, 4, 7),
+                playerSlug: "mlb-joc-pederson");
             result.BatterLine();
             Assert.IsTrue(
                 result.BattingAverage.Equals(0.250M),
@@ -86,7 +83,7 @@ namespace BeatTheStreak.Tests
 
 			var sut = new DailyRankingRequest();
 			var result = sut.Submit(
-				queryDate: new DateTime(2018, 5, 4),
+				queryDate: new DateTime(2019, 4, 9),
 				playerSlug: playerSlug);
 			result.Dump();
 		}

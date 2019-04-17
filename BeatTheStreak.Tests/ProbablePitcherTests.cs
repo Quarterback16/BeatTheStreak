@@ -1,4 +1,5 @@
 ﻿using BeatTheStreak.Repositories;
+using FbbEventStore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
@@ -15,7 +16,9 @@ namespace BeatTheStreak.Tests
         [TestMethod]
         public void ProbablePitchers_ReturnsMultiplePitchers()
         {
-            var sut = new ProbablePitcherRequest();
+			var es = new FbbEventStore.FbbEventStore();
+			var rm = new FbbRosters(es);
+            var sut = new ProbablePitcherRequest(rm);
             var result = sut.Submit(DateTime.Now);
             result.Dump();
             Assert.IsTrue(
@@ -26,8 +29,10 @@ namespace BeatTheStreak.Tests
         [TestMethod]
         public void ProbablePitchers_ReturnsMultipleHomePitchers()
         {
-            var sut = new ProbablePitcherRequest(homeOnly:true);
-            var result = sut.Submit(new DateTime(2018, 5, 6));  // US
+			var es = new FbbEventStore.FbbEventStore();
+			var rm = new FbbRosters(es);
+			var sut = new ProbablePitcherRequest(rm,homeOnly:true);
+            var result = sut.Submit(new DateTime(2019, 4, 17));  // US
             result.Dump();
             Assert.IsTrue(
                 result.ProbablePitchers.Count > 0,

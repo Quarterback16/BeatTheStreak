@@ -1,5 +1,6 @@
 ﻿using BeatTheStreak.Interfaces;
 using BeatTheStreak.Models;
+using FbbEventStore;
 using System;
 
 namespace BeatTheStreak.Repositories
@@ -10,7 +11,9 @@ namespace BeatTheStreak.Repositories
             DateTime gameDate,
             bool homeOnly = false)
         {
-            var pitcherRequest = new ProbablePitcherRequest(homeOnly);
+			var es = new FbbEventStore.FbbEventStore();
+			var rm = new FbbRosters(es);
+			var pitcherRequest = new ProbablePitcherRequest(rm,homeOnly);
             var pitchers = pitcherRequest.Submit(gameDate);
             return pitchers;
         }
