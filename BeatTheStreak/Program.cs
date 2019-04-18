@@ -90,7 +90,7 @@ namespace BeatTheStreak
 				lineupProjector,
 				obaCalculator,
 				logger);
-			var gameDate = DateTime.Now.AddDays(-1);  // US Date
+			var gameDate = DateTime.Now;  // US Date
 
 			try
 			{
