@@ -53,6 +53,7 @@
     <Compile Include="Selection.cs" />
     <Compile Include="StreakViewModel.cs" />
     <Compile Include="TeamStatsViewModel.cs" />
+    <Compile Include="TeamsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BeatTheStreak.Helpers\BeatTheStreak.Helpers.csproj">

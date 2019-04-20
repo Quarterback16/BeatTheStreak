@@ -17,5 +17,10 @@ namespace BeatTheStreak.Models
 			clip = Math.Truncate(clip * 1000m) / 1000m;
 			return clip;
 		}
+
+		public void DumpTeam()
+		{
+			Console.WriteLine( $"{TeamName} {Wins}-{Losses}  as of {AsOf}");
+		}
 	}
 }

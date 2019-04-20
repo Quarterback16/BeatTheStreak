@@ -19,7 +19,7 @@ namespace BeatTheStreak.Tests
 			var es = new FbbEventStore.FbbEventStore();
 			var rm = new FbbRosters(es);
             var sut = new ProbablePitcherRequest(rm);
-            var result = sut.Submit(DateTime.Now);
+            var result = sut.Submit(DateTime.Now.AddDays(-1));
             result.Dump();
             Assert.IsTrue(
                 result.ProbablePitchers.Count > 0, 
@@ -32,7 +32,7 @@ namespace BeatTheStreak.Tests
 			var es = new FbbEventStore.FbbEventStore();
 			var rm = new FbbRosters(es);
 			var sut = new ProbablePitcherRequest(rm,homeOnly:true);
-            var result = sut.Submit(new DateTime(2019, 4, 17));  // US
+            var result = sut.Submit(DateTime.Now.AddDays(-1));  // US
             result.Dump();
             Assert.IsTrue(
                 result.ProbablePitchers.Count > 0,

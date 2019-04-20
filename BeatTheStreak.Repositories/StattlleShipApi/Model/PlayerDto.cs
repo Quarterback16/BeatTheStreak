@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace BeatTheStreak.Repositories
 {
@@ -125,5 +126,36 @@ namespace BeatTheStreak.Repositories
         {
             return $"{FirstName} {LastName} {PositionAbbreviation}";
         }
-    }
+
+		public string FullName()
+		{
+			return $"{FirstName} {LastName}";
+		}
+
+		public string HeightInFeet()
+		{
+			if (string.IsNullOrEmpty(Height))
+				return "?";
+
+			var feet = Int32.Parse(Height) / 12;
+			var inches = Int32.Parse(Height) % 12;
+			return $"{feet} {inches}";
+		}
+
+		public string RosterLine()
+		{
+			return $@"{
+				UniformNumber,2} {
+				FullName(),-25} {
+				PositionAbbreviation,-3} {
+				HeightInFeet(),5
+				} {
+				Weight,5
+				} {
+				BirthDate,10
+				} {
+				Slug
+				}";
+		}
+	}
 }

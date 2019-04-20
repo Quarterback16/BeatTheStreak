@@ -1,13 +1,9 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BeatTheStreak.Repositories
 {
-    public class GameLogDto
+	public class GameLogDto
     {
         [JsonProperty("games")]
         public List<GameDto> Games { get; set; }
@@ -33,7 +29,5 @@ namespace BeatTheStreak.Repositories
         [JsonProperty("game_logs")]
         public List<LogDto> Logs { get; set; }
 
-
-
-    }
+	}
 }

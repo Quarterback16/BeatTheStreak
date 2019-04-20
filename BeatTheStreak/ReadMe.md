@@ -3,7 +3,12 @@
 # Beat The Streak
 > Crunches the numbers and comes up with 2 batters who are most likely to get a hit tomorrow.
 
-{VERBOSE DESCRIPTION}
+Utilises the Stattleship API
+ 1. Probable Pitchers
+ 2. Season Stats
+ 3. Game logs
+
+ Check the Repositories SampleFiles folder for samples of json
 
 ## Development approach
 

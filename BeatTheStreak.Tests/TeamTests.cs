@@ -12,11 +12,11 @@ namespace BeatTheStreak.Tests
 		{
 			var sut = new TeamStatsRequest();
 			var result = sut.Submit(
-				queryDate: new DateTime(2019, 3, 24),
+				queryDate: new DateTime(2019, 4, 19),
 				teamSlug: "mlb-pit");
-			//result.DumpTeam();
+			result.DumpTeam();
 			Assert.IsNotNull(result);
-			Assert.AreEqual(17, result.Wins);
+			Assert.AreEqual(10, result.Wins);
 		}
 
 		[TestMethod]
@@ -26,7 +26,7 @@ namespace BeatTheStreak.Tests
 			var result = sut.Submit(
 				queryDate: new DateTime(2018, 5, 4),
 				teamSlug: "mlb-pit");
-			//result.DumpTeam();
+			result.DumpTeam();
 			Assert.IsNotNull(result);
 			Assert.AreEqual(.531M, result.Clip());
 		}

@@ -62,6 +62,7 @@
     <Compile Include="IResultChecker.cs" />
     <Compile Include="IStattleShipApi.cs" />
     <Compile Include="ITeamStatsRepository.cs" />
+    <Compile Include="IWeekReport.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

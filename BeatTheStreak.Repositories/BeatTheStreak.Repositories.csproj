@@ -56,6 +56,7 @@
     <Compile Include="PlayerStatsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StattlleShipApi\BaseApiRequest.cs" />
+    <Compile Include="StattlleShipApi\Constants.cs" />
     <Compile Include="StattlleShipApi\DailyRankingRequest.cs" />
     <Compile Include="StattlleShipApi\GameLogRequest.cs" />
     <Compile Include="StattlleShipApi\LineupRequest.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="StattlleShipApi\Model\PlayerSeasonStatsDto.cs" />
     <Compile Include="StattlleShipApi\Model\PlayerStatsDto.cs" />
     <Compile Include="StattlleShipApi\Model\ProbablePitchersDto.cs" />
+    <Compile Include="StattlleShipApi\Model\RosteredPlayersDto.cs" />
     <Compile Include="StattlleShipApi\Model\SeasonDto.cs" />
     <Compile Include="StattlleShipApi\Model\TeamDto.cs" />
     <Compile Include="StattlleShipApi\Model\TeamSeasonStatsDto.cs" />
@@ -81,7 +83,9 @@
     <Compile Include="StattlleShipApi\Model\VenueDto.cs" />
     <Compile Include="StattlleShipApi\PlayerStatsRequest.cs" />
     <Compile Include="StattlleShipApi\ProbablePitcherRequest.cs" />
+    <Compile Include="StattlleShipApi\RosterRequest.cs" />
     <Compile Include="StattlleShipApi\StattleShipApi.cs" />
+    <Compile Include="StattlleShipApi\TeamsRequest.cs" />
     <Compile Include="StattlleShipApi\TeamStatsRequest.cs" />
     <Compile Include="TeamStatsRepository.cs" />
   </ItemGroup>

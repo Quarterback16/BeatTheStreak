@@ -50,5 +50,9 @@ namespace BeatTheStreak.Repositories
         [JsonProperty("league_id")]
         public string Leagueid { get; set; }
 
-    }
+		public override string ToString()
+		{
+			return $"{Name,-20}:{NickName,-15}:{Slug,-10}";
+		}
+	}
 }

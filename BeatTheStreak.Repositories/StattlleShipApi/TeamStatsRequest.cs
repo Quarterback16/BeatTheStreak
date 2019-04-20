@@ -40,10 +40,13 @@ namespace BeatTheStreak.Repositories
 
 				Teams = dto.Teams;
 				teamSeasonStats = dto.TeamStats;
-				if (teamSeasonStats[0].Wins != null)
-					result.Wins = Int32.Parse(teamSeasonStats[0].Wins);
-				if (teamSeasonStats[0].Losses != null)
-					result.Losses = Int32.Parse(teamSeasonStats[0].Losses);
+				if (teamSeasonStats.Count > 0)
+				{
+					if (teamSeasonStats[0].Wins != null)
+						result.Wins = Int32.Parse(teamSeasonStats[0].Wins);
+					if (teamSeasonStats[0].Losses != null)
+						result.Losses = Int32.Parse(teamSeasonStats[0].Losses);
+				}
 			}
 			result.TeamName = teamSlug;
 			return result;

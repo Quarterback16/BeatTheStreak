@@ -59,6 +59,8 @@
     <Compile Include="NLogAdaptor.cs" />
     <Compile Include="OpposingPitcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TeamReport.cs" />
+    <Compile Include="WeekReport.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Application\Application.csproj">
@@ -80,6 +82,10 @@
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{F753BA06-DB2A-4634-9412-7FB92A383399}</Project>
       <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="E:\FileSync\SyncProjects\FbbEventStore\FbbEventStore.csproj">
+      <Project>{a7bc3bf6-d5c2-45d1-899b-cc3a73ca10b8}</Project>
+      <Name>FbbEventStore</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -25,6 +25,16 @@ namespace BeatTheStreak.Helpers
 			return avg;
 		}
 
+		public static decimal Whip(
+			int hitsAllowed,
+			int walksAllowed,
+			decimal inningsPitched)
+		{
+			if (inningsPitched == 0.0M)
+				return inningsPitched;
+			return (hitsAllowed + walksAllowed) / inningsPitched;
+		}
+
 		public static bool GamePlayed(DateTime gameDate)
 		{
 			if (DateTime.Now > gameDate.AddDays(1))
@@ -32,6 +42,21 @@ namespace BeatTheStreak.Helpers
 				return true;
 			}
 			return false;
+		}
+
+		public static string PlayerSlug(string playerName)
+		{
+			if (playerName.Equals("Paul DeJong"))
+				return "paul-dejong";  //  no prefix for some reason
+			if (playerName.Equals("Ryon Healy"))
+				return "ryon-healy";
+
+			return $"mlb-{playerName.Replace(' ', '-').ToLower()}";
+		}
+
+		public static DateTime WeekStart( int weekNo )
+		{
+			return new DateTime(2019, 4, 1).AddDays((weekNo-1)*7);
 		}
 	}
 }
