@@ -91,6 +91,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="SampleFiles\gamelog.json" />
+    <None Include="SampleFiles\nova-gameLog.json" />
+    <None Include="SampleFiles\roster.json" />
     <None Include="SampleFiles\team_season_stats.json" />
     <None Include="StattlleShipApi\Model\packages.config">
       <SubType>Designer</SubType>

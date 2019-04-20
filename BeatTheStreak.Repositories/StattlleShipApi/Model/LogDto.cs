@@ -85,12 +85,12 @@ namespace BeatTheStreak.Repositories
 
 		public bool IsBatter()
 		{
-			return !IsPitcher();
+			return (InningsPitched == null);
 		}
 
 		public bool IsPitcher()
 		{
-			return (AtBats == null);
+			return !IsBatter();
 		}
 	}
 }

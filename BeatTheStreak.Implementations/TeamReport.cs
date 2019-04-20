@@ -9,6 +9,7 @@ namespace BeatTheStreak.Implementations
 	{
 		private WeekReport _weekReport;
 		private readonly IRosterMaster _rosterMaster;
+		public bool DoPitchers { get; set; }
 
 		public TeamReport(
 			WeekReport weekReport,
@@ -23,10 +24,11 @@ namespace BeatTheStreak.Implementations
 
 		public PlayerGameLogViewModel DumpWeek()
 		{
-			var totalLog = new PlayerGameLogViewModel();
-			var roster = _rosterMaster.GetBatters(
-				FantasyTeam,
-				WeekStarts);
+			var totalLog = new PlayerGameLogViewModel
+			{
+				HasGame = true
+			};
+			System.Collections.Generic.List<string> roster = GetRoster();
 			foreach (var p in roster)
 			{
 				_weekReport.Player = p;
@@ -36,6 +38,19 @@ namespace BeatTheStreak.Implementations
 			}
 			DisplayTotals(totalLog);
 			return totalLog;
+		}
+
+		private System.Collections.Generic.List<string> GetRoster()
+		{
+			if (DoPitchers)
+			{
+				return _rosterMaster.GetPitchers(
+					FantasyTeam,
+					WeekStarts);
+			}
+			return _rosterMaster.GetBatters(
+				FantasyTeam,
+				WeekStarts);
 		}
 
 		private static void DisplayTotals(PlayerGameLogViewModel totalLog)

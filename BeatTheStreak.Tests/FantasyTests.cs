@@ -11,7 +11,7 @@ namespace BeatTheStreak.Tests
 	public class FantasyTests
 	{
 		[TestMethod]
-		public void CanDumpABattersStatsForOneDay()
+		public void BattersStatsForOneDay()
 		{
 			var sut = new GameLogRequest();
 			var result = sut.Submit(
@@ -23,7 +23,7 @@ namespace BeatTheStreak.Tests
 		}
 
 		[TestMethod]
-		public void CanDumpABattersStatsForTheWeek()
+		public void BattersStatsForTheWeek()
 		{
 			var sut = new WeekReport(
 				new GameLogRequest())
@@ -35,7 +35,7 @@ namespace BeatTheStreak.Tests
 		}
 
 		[TestMethod]
-		public void CanDumpPlayersCutForTheWeek()
+		public void PlayersCutForTheWeek()
 		{
 			string[] playersDropped = new string[]
 			{
@@ -60,7 +60,7 @@ namespace BeatTheStreak.Tests
 		}
 
 		[TestMethod]
-		public void CanDumpAFantasyTeamHitterStatsForTheWeek()
+		public void FantasyTeamHitterStatsForTheWeek()
 		{
 			var sut = new TeamReport(
 				new WeekReport(
@@ -75,19 +75,19 @@ namespace BeatTheStreak.Tests
 		}
 
 		[TestMethod]
-		public void CanDumpAPitchersStatsForOneDay()
+		public void PitchersStatsForOneDay()
 		{
 			var sut = new GameLogRequest();
 			var result = sut.Submit(
-				queryDate: new DateTime(2019, 4, 17),
-				playerSlug: "mlb-nathan-eovaldi");
+				queryDate: new DateTime(2019, 4, 16),
+				playerSlug: "mlb-robbie-ray");
 
 			Console.WriteLine(result.DateHeaderLine());
 			Console.WriteLine(result.DateLine());
 		}
 
 		[TestMethod]
-		public void CanDumpAPitchersStatsForTheWeek()
+		public void PitchersStatsForTheWeek()
 		{
 			var sut = new WeekReport(
 				new GameLogRequest())
@@ -95,6 +95,22 @@ namespace BeatTheStreak.Tests
 				WeekStarts = Utility.WeekStart(3),
 				Player = "Nathan Eovaldi"
 			};
+			sut.DumpWeek();
+		}
+
+		[TestMethod]
+		public void FantasyTeamPitcherStatsForTheWeek()
+		{
+			var sut = new TeamReport(
+				new WeekReport(
+					new GameLogRequest()),
+				new FbbRosters(
+					new FbbEventStore.FbbEventStore()))
+			{
+				WeekStarts = Utility.WeekStart(3),
+				FantasyTeam = "CA"
+			};
+			sut.DoPitchers = true;
 			sut.DumpWeek();
 		}
 	}

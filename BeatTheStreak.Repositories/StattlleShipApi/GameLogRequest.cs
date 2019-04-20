@@ -14,14 +14,18 @@ namespace BeatTheStreak.Repositories
     {
         public List<LogDto> Logs { get; set; }
 
-        public PlayerGameLogViewModel Submit(DateTime queryDate, string playerSlug)
+        public PlayerGameLogViewModel Submit(
+			DateTime queryDate, 
+			string playerSlug)
 		{
 			var result = new PlayerGameLogViewModel
 			{
 				AsOf = queryDate
 			};
 
-			HttpWebRequest httpWebRequest = SetQueryParams(queryDate, playerSlug);
+			HttpWebRequest httpWebRequest = SetQueryParams(
+				queryDate, 
+				playerSlug);
 			HttpWebResponse httpResponse;
 			try
 			{
@@ -96,7 +100,7 @@ namespace BeatTheStreak.Repositories
 			result.AtBats = SetInt(logDto.AtBats);
 			result.BattingAverage = Utility.BattingAverage(result.Hits, result.AtBats);
 			result.Era = SetDecimal(logDto.ERA);
-			result.EarnedRuns = SetInt(logDto.EarnedRuns);
+			result.EarnedRuns = EarnedRuns(logDto);
 			result.HitsAllowed = SetInt(logDto.HitsAllowed);
 			result.OutsRecorded = SetInt(logDto.Outs);
 			result.BattersStruckOut = SetInt(logDto.BattersStruckOut);
@@ -109,6 +113,25 @@ namespace BeatTheStreak.Repositories
 			result.Whip = SetDecimal(logDto.Whip);
 			result.OpponentsBattingAverage = Utility.BattingAverage(
 				result.HitsAllowed, result.OutsRecorded + result.HitsAllowed);
+		}
+
+		private int EarnedRuns(LogDto logDto)
+		{
+			var outs = Outs(logDto.InningsPitched);
+			var era = Decimal.Parse(logDto.ERA);
+			var erPerOut =  era / 27.0M;
+			var er = erPerOut * (decimal) outs;
+			return (int) er;
+		}
+
+		private int Outs(string inningsPitched)
+		{
+			decimal ip = Decimal.Parse(inningsPitched);
+			var fullInnings = (int) ip;
+			var partInnings = ip - (decimal)fullInnings;
+			var outs = (int) ( partInnings * 10.0M );
+			var totalOuts = (fullInnings * 3) + outs;
+			return totalOuts;
 		}
 
 		private decimal SetDecimal(string amount)
