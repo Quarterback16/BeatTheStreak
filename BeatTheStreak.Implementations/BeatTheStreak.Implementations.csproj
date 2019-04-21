@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BeatTheStreak.Implementations</RootNamespace>
     <AssemblyName>BeatTheStreak.Implementations</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -58,8 +58,11 @@
     <Compile Include="MailMan2.cs" />
     <Compile Include="NLogAdaptor.cs" />
     <Compile Include="OpposingPitcher.cs" />
+    <Compile Include="PlayerReport.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SeasonReport.cs" />
     <Compile Include="TeamReport.cs" />
+    <Compile Include="TeamSeasonReport.cs" />
     <Compile Include="WeekReport.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,6 @@
 ﻿using Domain;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace BeatTheStreak.Models
@@ -18,7 +19,10 @@ namespace BeatTheStreak.Models
 			AddLine(lines, $"PROBABLE {homeOnlyOut} PITCHERS  {GameDate.ToLongDateString()} US");
 			AddLine(lines, "-----------------------------------------------------");
             var i = 0;
-            foreach (var pitcher in ProbablePitchers)
+			List<Pitcher> pitchers = ProbablePitchers
+				.OrderBy(x => x.TeamName)
+				.ToList();
+            foreach (var pitcher in pitchers)
             {
                 ++i;
 				AddLine(lines, $@"{i.ToString(),2} {

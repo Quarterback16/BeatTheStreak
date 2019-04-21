@@ -117,6 +117,9 @@ namespace BeatTheStreak.Repositories
 
 		private int EarnedRuns(LogDto logDto)
 		{
+			if (string.IsNullOrEmpty(logDto.ERA))
+				return 0;
+
 			var outs = Outs(logDto.InningsPitched);
 			var era = Decimal.Parse(logDto.ERA);
 			var erPerOut =  era / 27.0M;
@@ -126,6 +129,9 @@ namespace BeatTheStreak.Repositories
 
 		private int Outs(string inningsPitched)
 		{
+			if (string.IsNullOrEmpty(inningsPitched))
+				return 0;
+
 			decimal ip = Decimal.Parse(inningsPitched);
 			var fullInnings = (int) ip;
 			var partInnings = ip - (decimal)fullInnings;

@@ -5,11 +5,10 @@ using System;
 
 namespace BeatTheStreak.Implementations
 {
-	public class TeamReport : IWeekReport
+	public class TeamReport : PlayerReport, IWeekReport
 	{
 		private WeekReport _weekReport;
 		private readonly IRosterMaster _rosterMaster;
-		public bool DoPitchers { get; set; }
 
 		public TeamReport(
 			WeekReport weekReport,
@@ -28,7 +27,10 @@ namespace BeatTheStreak.Implementations
 			{
 				HasGame = true
 			};
-			System.Collections.Generic.List<string> roster = GetRoster();
+			var roster = GetRoster(
+				_rosterMaster,
+				FantasyTeam,
+				WeekStarts);
 			foreach (var p in roster)
 			{
 				_weekReport.Player = p;
@@ -40,24 +42,5 @@ namespace BeatTheStreak.Implementations
 			return totalLog;
 		}
 
-		private System.Collections.Generic.List<string> GetRoster()
-		{
-			if (DoPitchers)
-			{
-				return _rosterMaster.GetPitchers(
-					FantasyTeam,
-					WeekStarts);
-			}
-			return _rosterMaster.GetBatters(
-				FantasyTeam,
-				WeekStarts);
-		}
-
-		private static void DisplayTotals(PlayerGameLogViewModel totalLog)
-		{
-			Console.WriteLine(totalLog.HeaderLine());
-			Console.WriteLine(totalLog.DateLine("Total"));
-			Console.WriteLine(totalLog.HeaderLine());
-		}
 	}
 }

@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BeatTheStreak.Interfaces</RootNamespace>
     <AssemblyName>BeatTheStreak.Interfaces</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -60,6 +60,7 @@
     <Compile Include="IPlayerStatsRepository.cs" />
     <Compile Include="IPlayerStatsRequest.cs" />
     <Compile Include="IResultChecker.cs" />
+    <Compile Include="ISeasonReport.cs" />
     <Compile Include="IStattleShipApi.cs" />
     <Compile Include="ITeamStatsRepository.cs" />
     <Compile Include="IWeekReport.cs" />

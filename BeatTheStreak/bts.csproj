@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>BeatTheStreak</RootNamespace>
     <AssemblyName>bts</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
@@ -61,6 +61,10 @@
     <None Include="ReadMe.md" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Cache\Cache.csproj">
+      <Project>{85bb16a5-3c53-4e4f-a342-1103aa6f967e}</Project>
+      <Name>Cache</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Application\Application.csproj">
       <Project>{F948ED1C-C645-4202-8242-31C42ED03F3A}</Project>
       <Name>Application</Name>
@@ -88,10 +92,6 @@
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{f753ba06-db2a-4634-9412-7fb92a383399}</Project>
       <Name>Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="E:\FileSync\SyncProjects\Cache\Cache.csproj">
-      <Project>{85BB16A5-3C53-4E4F-A342-1103AA6F967E}</Project>
-      <Name>Cache</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

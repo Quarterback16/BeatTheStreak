@@ -4,6 +4,7 @@ using BeatTheStreak.Repositories;
 using FbbEventStore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 
 namespace BeatTheStreak.Tests
 {
@@ -112,6 +113,54 @@ namespace BeatTheStreak.Tests
 			};
 			sut.DoPitchers = true;
 			sut.DumpWeek();
+		}
+
+		[TestMethod]
+		public void PitcherStatsForTheSeason()
+		{
+			var sut = new SeasonReport(
+					new GameLogRequest())
+			{
+				SeasonStarts = Utility.WeekStart(1),
+				Player = "Luke Weaver"
+			};
+			sut.DumpSeason();
+		}
+
+		[TestMethod]
+		public void MultiplePitcherStatsForTheSeason()
+		{
+			var sut = new SeasonReport(
+					new GameLogRequest())
+			{
+				SeasonStarts = Utility.WeekStart(1),
+				PlayerList = new List<string>
+				{
+					"Jose Quintana",
+					"Collin McHugh",
+					"James Paxton",
+					"Spencer Turnbull",
+					"Luke Weaver"
+				}
+			};
+			sut.DumpPlayers();
+		}
+
+
+		[TestMethod]
+		public void FantasyTeamPitcherStatsForTheSeason()
+		{
+			var sut = new TeamSeasonReport(
+				new SeasonReport(
+					new GameLogRequest()),
+				new FbbRosters(
+					new FbbEventStore.FbbEventStore()))
+			{
+				SeasonStarts = Utility.WeekStart(1),
+				FantasyTeam = "CA"
+			};
+			sut.DoPitchers = true;
+			sut.DumpSeason();
 		}
 	}
 }

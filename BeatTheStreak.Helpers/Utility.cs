@@ -50,6 +50,8 @@ namespace BeatTheStreak.Helpers
 				return "paul-dejong";  //  no prefix for some reason
 			if (playerName.Equals("Ryon Healy"))
 				return "ryon-healy";
+			if (playerName.Equals("Luke Weaver"))
+				return "luke-weaver";
 
 			return $"mlb-{playerName.Replace(' ', '-').ToLower()}";
 		}

@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BeatTheStreak.Tests</RootNamespace>
     <AssemblyName>BeatTheStreak.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>
@@ -83,6 +83,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Cache\Cache.csproj">
+      <Project>{85bb16a5-3c53-4e4f-a342-1103aa6f967e}</Project>
+      <Name>Cache</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Application\Application.csproj">
       <Project>{f948ed1c-c645-4202-8242-31c42ed03f3a}</Project>
       <Name>Application</Name>
@@ -110,10 +114,6 @@
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{f753ba06-db2a-4634-9412-7fb92a383399}</Project>
       <Name>Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="E:\FileSync\SyncProjects\Cache\Cache.csproj">
-      <Project>{85BB16A5-3C53-4E4F-A342-1103AA6F967E}</Project>
-      <Name>Cache</Name>
     </ProjectReference>
     <ProjectReference Include="E:\FileSync\SyncProjects\FbbEventStore\FbbEventStore.csproj">
       <Project>{a7bc3bf6-d5c2-45d1-899b-cc3a73ca10b8}</Project>
