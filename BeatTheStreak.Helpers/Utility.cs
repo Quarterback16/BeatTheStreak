@@ -52,6 +52,18 @@ namespace BeatTheStreak.Helpers
 				return "ryon-healy";
 			if (playerName.Equals("Luke Weaver"))
 				return "luke-weaver";
+			if (playerName.Equals("Maxwell Scherzer"))
+				return "mlb-max-scherzer";
+			if (playerName.Equals("Robert Ray"))
+				return "mlb-robbie-ray";
+			if (playerName.Equals("Michael Fiers"))
+				return "mlb-mike-fiers";
+			if (playerName.Equals("Alexander Cobb"))
+				return "mlb-alex-cobb";
+			if (playerName.Equals("Carlos Rodón"))
+				return "mlb-carlos-rodon";
+			if (playerName.Equals("Daniel Duffy"))
+				return "mlb-danny-duffy";
 
 			return $"mlb-{playerName.Replace(' ', '-').ToLower()}";
 		}

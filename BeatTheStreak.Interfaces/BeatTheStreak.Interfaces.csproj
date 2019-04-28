@@ -61,6 +61,8 @@
     <Compile Include="IPlayerStatsRequest.cs" />
     <Compile Include="IResultChecker.cs" />
     <Compile Include="ISeasonReport.cs" />
+    <Compile Include="IStartingPitcher.cs" />
+    <Compile Include="IStartingPitchersRepository.cs" />
     <Compile Include="IStattleShipApi.cs" />
     <Compile Include="ITeamStatsRepository.cs" />
     <Compile Include="IWeekReport.cs" />

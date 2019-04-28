@@ -1,6 +1,10 @@
 ﻿using BeatTheStreak.Helpers;
 using BeatTheStreak.Implementations;
+using BeatTheStreak.Interfaces;
 using BeatTheStreak.Repositories;
+using BeatTheStreak.Tests.Fakes;
+using Cache;
+using Cache.Interfaces;
 using FbbEventStore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -11,6 +15,26 @@ namespace BeatTheStreak.Tests
 	[TestClass]
 	public class FantasyTests
 	{
+		private ICacheRepository _cache;
+		private IGameLogRepository _gameLogRepository;
+		private IGameLogRepository _cachedGameLogRepository;
+
+		[TestInitialize]
+		public void Setup()
+		{
+			_cache = new RedisCacheRepository(
+				connectionString: "localhost,abortConnect=false",
+				environment: "local",
+				functionalArea: "bts",
+				serializer: new XmlSerializer(),
+				logger: new FakeCacheLogger(),
+				expire: false);
+			_gameLogRepository = new GameLogRepository();
+			_cachedGameLogRepository = new CachedGameLogRepository(
+						_gameLogRepository,
+						_cache);
+		}
+
 		[TestMethod]
 		public void BattersStatsForOneDay()
 		{
@@ -26,11 +50,11 @@ namespace BeatTheStreak.Tests
 		[TestMethod]
 		public void BattersStatsForTheWeek()
 		{
-			var sut = new WeekReport(
-				new GameLogRequest())
+			var sut = new WeekReport(_cachedGameLogRepository)
 			{
-				WeekStarts = new DateTime(2019, 4, 15),
-				Player = "Michael Conforto"
+				WeekStarts = Utility.WeekStart(3),
+				Player = "Freddie Freeman",
+				Hitters = true
 			};
 			sut.DumpWeek();
 		}
@@ -40,21 +64,22 @@ namespace BeatTheStreak.Tests
 		{
 			string[] playersDropped = new string[]
 			{
-				"Paul DeJong",
+				"Enrique Hernandez",
 				"Nomar Mazara",
 				"Michael Brantley",
-				"Rafael Devers",
+				"Ryon Healy",
+				"Jonathan Villar",
 				"Ryan McMahon",
 				"Eric Hosmer",
-				"Kolten Wong"
+				"JD Davis"
 			};
 			foreach (var player in playersDropped)
 			{
-				var sut = new WeekReport(
-					new GameLogRequest())
+				var sut = new WeekReport(_cachedGameLogRepository)
 				{
-					WeekStarts = Utility.WeekStart(3),
-					Player = player
+					WeekStarts = Utility.WeekStart(4),
+					Player = player,
+					Hitters = true
 				};
 				sut.DumpWeek();
 			}
@@ -64,13 +89,13 @@ namespace BeatTheStreak.Tests
 		public void FantasyTeamHitterStatsForTheWeek()
 		{
 			var sut = new TeamReport(
-				new WeekReport(
-					new GameLogRequest()),
+				new WeekReport(_cachedGameLogRepository),
 				new FbbRosters(
 					new FbbEventStore.FbbEventStore()))
 			{
 				WeekStarts = Utility.WeekStart(3),
-				FantasyTeam = "CA"
+				FantasyTeam = "CA",
+				Hitters = true
 			};
 			sut.DumpWeek();
 		}
@@ -80,8 +105,8 @@ namespace BeatTheStreak.Tests
 		{
 			var sut = new GameLogRequest();
 			var result = sut.Submit(
-				queryDate: new DateTime(2019, 4, 16),
-				playerSlug: "mlb-robbie-ray");
+				queryDate: new DateTime(2019, 4, 26),
+				playerSlug: "mlb-max-scherzer");
 
 			Console.WriteLine(result.DateHeaderLine());
 			Console.WriteLine(result.DateLine());
@@ -90,11 +115,10 @@ namespace BeatTheStreak.Tests
 		[TestMethod]
 		public void PitchersStatsForTheWeek()
 		{
-			var sut = new WeekReport(
-				new GameLogRequest())
+			var sut = new WeekReport(_gameLogRepository)
 			{
-				WeekStarts = Utility.WeekStart(3),
-				Player = "Nathan Eovaldi"
+				WeekStarts = Utility.WeekStart(4),
+				Player = "Maxwell Scherzer"
 			};
 			sut.DumpWeek();
 		}
@@ -103,13 +127,13 @@ namespace BeatTheStreak.Tests
 		public void FantasyTeamPitcherStatsForTheWeek()
 		{
 			var sut = new TeamReport(
-				new WeekReport(
-					new GameLogRequest()),
+				new WeekReport(_cachedGameLogRepository),
 				new FbbRosters(
 					new FbbEventStore.FbbEventStore()))
 			{
-				WeekStarts = Utility.WeekStart(3),
-				FantasyTeam = "CA"
+				WeekStarts = Utility.WeekStart(4),
+				FantasyTeam = "CA",
+				Hitters = false
 			};
 			sut.DoPitchers = true;
 			sut.DumpWeek();

@@ -20,12 +20,16 @@ namespace BeatTheStreak.Implementations
 
 		public DateTime WeekStarts { get; set; }
 		public string FantasyTeam { get; set; }
+		public bool Hitters { get; set; }
 
 		public PlayerGameLogViewModel DumpWeek()
 		{
+			Console.WriteLine("<pre>");
 			var totalLog = new PlayerGameLogViewModel
 			{
-				HasGame = true
+				HasGame = true,
+				IsPitcher = ! Hitters,
+				IsBatter = Hitters
 			};
 			var roster = GetRoster(
 				_rosterMaster,
@@ -35,10 +39,15 @@ namespace BeatTheStreak.Implementations
 			{
 				_weekReport.Player = p;
 				_weekReport.WeekStarts = WeekStarts;
-				_weekReport.JerseyNumber = _rosterMaster.BatterNumber(FantasyTeam, p);
+				_weekReport.Hitters = Hitters;
+				_weekReport.JerseyNumber = _rosterMaster.JerseyNumber(
+					FantasyTeam, 
+					p,
+					Hitters);
 				totalLog.Add(_weekReport.DumpWeek());
 			}
 			DisplayTotals(totalLog);
+			Console.WriteLine("</pre>");
 			return totalLog;
 		}
 

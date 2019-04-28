@@ -23,7 +23,9 @@ namespace BeatTheStreak.Repositories
             PlayerStatsRequest = new PlayerStatsRequest();
         }
 
-        public LineupViewModel Submit(DateTime queryDate, string teamSlug)
+        public LineupViewModel Submit(
+			DateTime queryDate, 
+			string teamSlug)
         {
             var result = new LineupViewModel
             {

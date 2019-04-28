@@ -56,6 +56,7 @@
     <Compile Include="Fakes\FakeCacheLogger.cs" />
     <Compile Include="Fakes\FakeLogger.cs" />
     <Compile Include="FantasyTests.cs" />
+    <Compile Include="GameTests.cs" />
     <Compile Include="LineupProjectorIntegrationTests.cs" />
     <Compile Include="LineupTests.cs" />
     <Compile Include="MailBatterReportTests.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="ResultCheckerTests.cs" />
     <Compile Include="RosterTests.cs" />
     <Compile Include="SeasonTests.cs" />
+    <Compile Include="StartingPitcherTests.cs" />
     <Compile Include="TeamTests.cs" />
   </ItemGroup>
   <ItemGroup>

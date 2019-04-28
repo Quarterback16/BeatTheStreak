@@ -6,7 +6,9 @@ namespace BeatTheStreak.Repositories
 {
     public class LineupRepository : ILineupRepository
     {
-        public LineupViewModel Submit(DateTime queryDate, string teamSlug)
+        public LineupViewModel Submit(
+			DateTime queryDate, 
+			string teamSlug)
         {
             var result = new LineupViewModel
             {

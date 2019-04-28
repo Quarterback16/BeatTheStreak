@@ -13,7 +13,7 @@ namespace BeatTheStreak.Tests
             var sut = new LineupRequest();
             var result = sut.Submit(
                 queryDate: new DateTime(2019,4,17),
-                teamSlug: "mlb-sea");
+                teamSlug: "mlb-nym");
             result.DumpLineup();
             Assert.IsTrue(result.Lineup.Count > 0, 
                 "Lineup request should return batters");

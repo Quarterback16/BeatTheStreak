@@ -37,7 +37,8 @@ namespace BeatTheStreak.Repositories.StattlleShipApi
 					var dto = JsonConvert.DeserializeObject<RosteredPlayersDto>(
 						json);
 
-					Players.AddRange(dto.Players);
+					if (dto.Players != null)
+						Players.AddRange(dto.Players);
 				}
 			}
 

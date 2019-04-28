@@ -7,12 +7,14 @@ namespace BeatTheStreak.Implementations
 {
 	public class WeekReport : PlayerReport, IWeekReport
 	{
-		private readonly IGameLogRequest _gameLogRequestor;
+		private readonly IGameLogRepository _gameLogRepository;
+
+		public bool Hitters { get; set; }
 
 		public WeekReport(
-			IGameLogRequest gameLogRequestor)
+			IGameLogRepository gameLogRepository)
 		{
-			_gameLogRequestor = gameLogRequestor;
+			_gameLogRepository = gameLogRepository;
 		}
 
 		public DateTime WeekStarts { get; set; }
@@ -22,18 +24,22 @@ namespace BeatTheStreak.Implementations
 		{
 			var totalLog = new PlayerGameLogViewModel
 			{
-				HasGame = true
+				HasGame = true,
+			    IsBatter = Hitters,
+			    IsPitcher = !Hitters
 			};
 			var playerSlug = Utility.PlayerSlug(Player);
 			for (int d = 0; d < 7; d++)
 			{
 				var queryDate = WeekStarts.AddDays(d);
-				if (queryDate.Equals(DateTime.Now.Date.AddDays(-1)))
+				if (queryDate.Equals(DateTime.Now.Date.AddDays(0)))
 					break;
 
-				var log = _gameLogRequestor.Submit(
+				var log = _gameLogRepository.Submit(
 					queryDate: queryDate,
 					playerSlug: playerSlug);
+				log.IsBatter = Hitters;
+				log.IsPitcher = !Hitters;
 				totalLog.Add(log);
 				if (log.HasGame)
 				{

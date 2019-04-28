@@ -186,7 +186,12 @@ namespace BeatTheStreak.Models
 
 		public string PitcherEspnLine(string lineName = "")
 		{
-			var line = $@"{lineName,-10}  {
+			var line = $@"{lineName,-10}  {PitcherEspnLinePart2()}";
+			return line;
+		}
+		public string PitcherEspnLinePart2()
+		{
+			var line = $@"{
 				InningsPitched,4
 				} {
 				HitsAllowed,3
@@ -205,7 +210,7 @@ namespace BeatTheStreak.Models
 				} {
 				Saves,3
 				}  {
-				string.Format("{0:0.000}", Whip)}";
+				string.Format("{0:#0.000}", Whip),6}";
 			return line;
 		}
 
@@ -251,7 +256,7 @@ namespace BeatTheStreak.Models
 
 		private string LineFor(string v)
 		{
-			return new string('-',v.Length);
+			return new string('-',v.Length+1);
 		}
 
 		public string BatterHeaderLine()

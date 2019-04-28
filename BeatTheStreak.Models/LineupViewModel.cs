@@ -10,6 +10,7 @@ namespace BeatTheStreak.Models
         public List<Batter> Lineup { get; set; }
         public DateTime GameDate { get; set; }
         public string TeamName { get; set; }
+		//public Pitcher StartingPitcher { get; set; }
 
         public Batter BattingAt( string battingOrder )
         {

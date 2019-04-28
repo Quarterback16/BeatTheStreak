@@ -55,10 +55,12 @@
     <Compile Include="PitcherRepository.cs" />
     <Compile Include="PlayerStatsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StartingPitchersRepository.cs" />
     <Compile Include="StattlleShipApi\BaseApiRequest.cs" />
     <Compile Include="StattlleShipApi\Constants.cs" />
     <Compile Include="StattlleShipApi\DailyRankingRequest.cs" />
     <Compile Include="StattlleShipApi\GameLogRequest.cs" />
+    <Compile Include="StattlleShipApi\GamesRequest.cs" />
     <Compile Include="StattlleShipApi\LineupRequest.cs" />
     <Compile Include="StattlleShipApi\Model\ConferenceDto.cs" />
     <Compile Include="StattlleShipApi\Model\DivisionDto.cs" />
@@ -84,6 +86,9 @@
     <Compile Include="StattlleShipApi\PlayerStatsRequest.cs" />
     <Compile Include="StattlleShipApi\ProbablePitcherRequest.cs" />
     <Compile Include="StattlleShipApi\RosterRequest.cs" />
+    <Compile Include="StattlleShipApi\StarterDto.cs" />
+    <Compile Include="StattlleShipApi\StarterRequest.cs" />
+    <Compile Include="StattlleShipApi\StartingPitcherDto.cs" />
     <Compile Include="StattlleShipApi\StattleShipApi.cs" />
     <Compile Include="StattlleShipApi\TeamsRequest.cs" />
     <Compile Include="StattlleShipApi\TeamStatsRequest.cs" />
@@ -94,6 +99,7 @@
     <None Include="SampleFiles\gamelog.json" />
     <None Include="SampleFiles\nova-gameLog.json" />
     <None Include="SampleFiles\roster.json" />
+    <None Include="SampleFiles\Starters.json" />
     <None Include="SampleFiles\team_season_stats.json" />
     <None Include="StattlleShipApi\Model\packages.config">
       <SubType>Designer</SubType>

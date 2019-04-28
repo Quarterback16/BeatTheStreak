@@ -7,6 +7,9 @@ Utilises the Stattleship API
  1. Probable Pitchers
  2. Season Stats
  3. Game logs
+ 4. Lineups
+ 5. Games?  2019-04-27 : returns empty results
+ 6. Starting Pitchers Date only; with teamid 404, with team slug empty
 
  Check the Repositories SampleFiles folder for samples of json
 
