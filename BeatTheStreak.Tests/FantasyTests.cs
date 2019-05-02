@@ -40,8 +40,8 @@ namespace BeatTheStreak.Tests
 		{
 			var sut = new GameLogRequest();
 			var result = sut.Submit(
-				queryDate: new DateTime(2019, 4, 17),
-				playerSlug: "mlb-michael-conforto");
+				queryDate: new DateTime(2019, 5, 1),
+				playerSlug: "mlb-raul-mondesi");
 
 			Console.WriteLine(result.DateHeaderLine());
 			Console.WriteLine(result.DateLine());
@@ -93,7 +93,7 @@ namespace BeatTheStreak.Tests
 				new FbbRosters(
 					new FbbEventStore.FbbEventStore()))
 			{
-				WeekStarts = Utility.WeekStart(3),
+				WeekStarts = Utility.WeekStart(5),
 				FantasyTeam = "CA",
 				Hitters = true
 			};

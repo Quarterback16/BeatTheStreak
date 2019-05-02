@@ -50,9 +50,13 @@ namespace BeatTheStreak.Repositories
 				Teams = dto.Teams;
 				Logs = dto.Logs;
 			}
-			if (Logs.Count == 1)
+			if (Logs.Count > 0)
 			{
-				MapLogStats(Logs[0], result);
+				for (int i = 0; i < Logs.Count; i++)
+				{
+					MapLogStats(Logs[i], result);
+				}
+				CalculateAverages(result);
 				result.HasGame = true;
 			}
 
@@ -62,6 +66,16 @@ namespace BeatTheStreak.Repositories
 				Name = playerSlug
 			};
 			return result;
+		}
+
+		private void CalculateAverages(PlayerGameLogViewModel result)
+		{
+			result.BattingAverage += Utility.BattingAverage(
+				result.Hits, 
+				result.AtBats);
+			result.OpponentsBattingAverage = Utility.BattingAverage(
+				result.HitsAllowed, 
+				result.OutsRecorded + result.HitsAllowed);
 		}
 
 		private HttpWebRequest SetQueryParams(
@@ -88,31 +102,28 @@ namespace BeatTheStreak.Repositories
 			result.IsPitcher = logDto.IsPitcher();
 			result.IsBatter = logDto.IsBatter();
 			result.GameStarted = Boolean.Parse(logDto.GameStarted);
-			result.Hits = SetDecimal(logDto.Hits);
-			result.HomeRuns = SetDecimal(logDto.HomeRuns);
-			result.Runs = SetDecimal(logDto.Runs);
-			result.RunsBattedIn = SetDecimal(logDto.RunsBattedIn);
-			result.TotalBases = SetDecimal(logDto.TotalBases);
-			result.Walks = SetDecimal(logDto.Walks);
-			result.StrikeOuts = SetDecimal(logDto.StrikeOuts);
-			result.StolenBases = SetDecimal(logDto.StolenBases);
-			result.CaughtStealing = SetDecimal(logDto.CaughtStealing);
-			result.AtBats = SetInt(logDto.AtBats);
-			result.BattingAverage = Utility.BattingAverage(result.Hits, result.AtBats);
+			result.Hits += SetDecimal(logDto.Hits);
+			result.HomeRuns += SetDecimal(logDto.HomeRuns);
+			result.Runs += SetDecimal(logDto.Runs);
+			result.RunsBattedIn += SetDecimal(logDto.RunsBattedIn);
+			result.TotalBases += SetDecimal(logDto.TotalBases);
+			result.Walks += SetDecimal(logDto.Walks);
+			result.StrikeOuts += SetDecimal(logDto.StrikeOuts);
+			result.StolenBases += SetDecimal(logDto.StolenBases);
+			result.CaughtStealing += SetDecimal(logDto.CaughtStealing);
+			result.AtBats += SetInt(logDto.AtBats);
 			result.Era = SetDecimal(logDto.ERA);
-			result.EarnedRuns = EarnedRuns(logDto);
-			result.HitsAllowed = SetInt(logDto.HitsAllowed);
-			result.OutsRecorded = SetInt(logDto.Outs);
-			result.BattersStruckOut = SetInt(logDto.BattersStruckOut);
-			result.WalksAllowed = SetInt(logDto.WalksAllowed);
-			result.InningsPitched = SetDecimal(logDto.InningsPitched);
-			result.Wins = SetInt(logDto.Wins);
-			result.Losses = SetInt(logDto.Losses);
-			result.Saves = SetInt(logDto.Saves);
-			result.QualityStarts = SetInt(logDto.QualityStarts);
+			result.EarnedRuns += EarnedRuns(logDto);
+			result.HitsAllowed += SetInt(logDto.HitsAllowed);
+			result.OutsRecorded += SetInt(logDto.Outs);
+			result.BattersStruckOut += SetInt(logDto.BattersStruckOut);
+			result.WalksAllowed += SetInt(logDto.WalksAllowed);
+			result.InningsPitched += SetDecimal(logDto.InningsPitched);
+			result.Wins += SetInt(logDto.Wins);
+			result.Losses += SetInt(logDto.Losses);
+			result.Saves += SetInt(logDto.Saves);
+			result.QualityStarts += SetInt(logDto.QualityStarts);
 			result.Whip = SetDecimal(logDto.Whip);
-			result.OpponentsBattingAverage = Utility.BattingAverage(
-				result.HitsAllowed, result.OutsRecorded + result.HitsAllowed);
 		}
 
 		private int EarnedRuns(LogDto logDto)

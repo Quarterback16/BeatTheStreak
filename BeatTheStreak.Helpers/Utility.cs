@@ -64,6 +64,8 @@ namespace BeatTheStreak.Helpers
 				return "mlb-carlos-rodon";
 			if (playerName.Equals("Daniel Duffy"))
 				return "mlb-danny-duffy";
+			if (playerName.Equals("Cody Bellinger"))
+				return "cody-bellinger";
 
 			return $"mlb-{playerName.Replace(' ', '-').ToLower()}";
 		}
