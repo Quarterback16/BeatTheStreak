@@ -19,8 +19,35 @@ namespace BeatTheStreak.Repositories
         [JsonProperty("hits")]
         public string Hits { get; set; }
 
+		[JsonProperty("singles")]
+		public string Singles { get; set; }
+
+		[JsonProperty("doubles")]
+		public string Doubles { get; set; }
+
+		[JsonProperty("triples")]
+		public string Triples { get; set; }
+
 		[JsonProperty("home_runs")]
 		public string HomeRuns { get; set; }
+
+		[JsonProperty("hit_by_pitch")]
+		public string HitByPitch { get; set; }
+
+		[JsonProperty("sacrifice_flys")]
+		public string SacrificeFlys { get; set; }
+
+		[JsonProperty("sacrifice_hits")]
+		public string SacrificeHits { get; set; }
+
+		[JsonProperty("intentional_walks")]
+		public string IntentionalWalks { get; set; }
+
+		[JsonProperty("on_base_plus_slugging")]
+		public string OPS { get; set; }
+
+		[JsonProperty("on_base_percentage")]
+		public string OBP { get; set; }
 
 		[JsonProperty("runs")]
 		public string Runs { get; set; }
@@ -69,6 +96,12 @@ namespace BeatTheStreak.Repositories
 
 		[JsonProperty("pitcher_hits")]
 		public string HitsAllowed { get; set; }
+
+		[JsonProperty("pitcher_home_runs")]
+		public string HomeRunsAllowed { get; set; }
+
+		[JsonProperty("pitcher_hit_by_pitch")]
+		public string BattersHitByPitch { get; set; }
 
 		[JsonProperty("pitcher_strikeouts")]
 		public string BattersStruckOut { get; set; }

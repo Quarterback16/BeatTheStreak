@@ -37,9 +37,25 @@ namespace BeatTheStreak.Models
 
 		public int BattersStruckOut { get; set; }
 
+		public decimal BattersHitByPitch { get; set; }
+
+		public decimal HomeRunsAllowed { get; set; }
+
 		public decimal StolenBases { get; set; }
 
 		public decimal CaughtStealing { get; set; }
+
+		public decimal HitByPitch { get; set; }
+
+		public decimal Singles { get; set; }
+		public decimal Doubles { get; set; }
+
+		public decimal Triples { get; set; }
+		public decimal IntentionalWalks { get; set; }
+		public decimal Sacrifices { get; set; }
+
+		public decimal OPS { get; set; }
+		public decimal OBP { get; set; }
 
 		public decimal NetSteals()
 		{
@@ -69,11 +85,20 @@ namespace BeatTheStreak.Models
 			StolenBases += log.StolenBases;
 			CaughtStealing += log.CaughtStealing;
 			BattingAverage = Utility.BattingAverage( Hits, AtBats);
+			Singles += log.Singles;
+			Doubles += log.Doubles;
+			Triples += log.Triples;
+			Sacrifices += log.Sacrifices;
+			HitByPitch += log.HitByPitch;
+			IntentionalWalks += log.IntentionalWalks;
+			StrikeOutRate = Utility.StrikeOutRate(StrikeOuts, AtBats);
 			InningsPitched = AppInningsPitched(InningsPitched, log.InningsPitched);
 			HitsAllowed += log.HitsAllowed;
 			EarnedRuns += log.EarnedRuns;
 			WalksAllowed += log.WalksAllowed;
 			BattersStruckOut += log.BattersStruckOut;
+			BattersHitByPitch += log.BattersHitByPitch;
+			HomeRunsAllowed += log.HomeRunsAllowed;
 			QualityStarts += log.QualityStarts;
 			Wins += log.Wins;
 			Losses += log.Losses;
@@ -81,13 +106,17 @@ namespace BeatTheStreak.Models
 			Whip = Utility.Whip(HitsAllowed, WalksAllowed, InningsPitched);
 		}
 
-		private decimal AppInningsPitched(decimal inningsPitched1, decimal inningsPitched2)
+		private decimal AppInningsPitched(
+			decimal inningsPitched1, 
+			decimal inningsPitched2)
 		{
 			//TODO: 
 			return inningsPitched1 + inningsPitched2;
 		}
 
 		public decimal BattingAverage { get; set; }
+
+		public decimal StrikeOutRate { get; set; }
 
 		public decimal Era { get; set; }
 
@@ -191,6 +220,7 @@ namespace BeatTheStreak.Models
 			var line = $@"{lineName,-10}  {PitcherEspnLinePart2()}";
 			return line;
 		}
+
 		public string PitcherEspnLinePart2()
 		{
 			var line = $@"{
@@ -212,13 +242,20 @@ namespace BeatTheStreak.Models
 				} {
 				Saves,3
 				}  {
-				string.Format("{0:#0.000}", Whip),6}";
+				string.Format("{0:#0.000}", Whip),6
+				}  {
+				string.Format("{0:#0.00}", Utility.FIP(
+					HomeRunsAllowed,
+					BattersStruckOut,
+					WalksAllowed,
+					BattersHitByPitch,
+					InningsPitched))
+				}";
 			return line;
 		}
 
 		public string BatterLine(string lineName = "")
 		{
-
 			var line = $@"{lineName,-10}  {
 				Hits,3
 				} {
@@ -238,8 +275,32 @@ namespace BeatTheStreak.Models
 				} {
 				NetSteals(),3
 				}  {
-				string.Format("{0:#.000}", BattingAverage)}";
+				string.Format("{0:#.000}", BattingAverage),-5
+				} {
+				StrikeOutRateToString()
+				} {
+			string.Format("{0,-5:#.000}", Utility.WOBA(
+				Walks,
+				IntentionalWalks,
+				HitByPitch,
+				Singles,
+				Doubles,
+				Triples,
+				HomeRuns,
+				AtBats,
+				Sacrifices), -5)
+				}";
 			return line;
+		}
+
+		private string StrikeOutRateToString()
+		{
+			decimal soRate = Utility.StrikeOutRate(
+								StrikeOuts,
+								AtBats);
+			if (soRate == 1.0M)
+				return "1.00 ";
+			return $"{soRate,-5:#.000}";
 		}
 
 		public string DateHeaderLine()
@@ -263,13 +324,13 @@ namespace BeatTheStreak.Models
 
 		public string BatterHeaderLine()
 		{
-			var line = "Date          H  AB   R  HR  TB  BI  BB   K  SBN  AVG";
+			var line = "Date          H  AB   R  HR  TB  BI  BB   K  SBN  AVG   KR   WOBA";
 			return line;
 		}
 
 		public string PitcherHeaderLine()
 		{
-			var line = "Date          IP   H  ER  BB   K  QS   W  L  SV   WHIP";
+			var line = "Date          IP   H  ER  BB   K  QS   W  L  SV   WHIP   FIP";
 			return line;
 		}
 	}

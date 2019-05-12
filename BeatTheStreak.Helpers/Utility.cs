@@ -25,6 +25,16 @@ namespace BeatTheStreak.Helpers
 			return avg;
 		}
 
+		public static decimal StrikeOutRate(
+			decimal strikeouts,
+			decimal atBats)
+		{
+			if (atBats == 0) return 0.0M;
+			var avg = strikeouts / atBats;
+			avg = Math.Truncate(avg * 1000m) / 1000m;
+			return avg;
+		}
+
 		public static decimal Whip(
 			int hitsAllowed,
 			int walksAllowed,
@@ -84,6 +94,8 @@ namespace BeatTheStreak.Helpers
 				return "mlb-chris-paddack-1996-01-08";
 			if (playerName.Equals("Bradley Peacock"))
 				return "mlb-brad-peacock";
+			if (playerName.Equals("Niko Goodrum"))
+				return "mlb-cartier-goodrum";
 
 			return $"mlb-{playerName.Replace(' ', '-').ToLower()}";
 		}
@@ -91,6 +103,63 @@ namespace BeatTheStreak.Helpers
 		public static DateTime WeekStart( int weekNo )
 		{
 			return new DateTime(2019, 4, 1).AddDays((weekNo-1)*7);
+		}
+
+		public static decimal WOBA(
+			decimal walks, 
+			decimal intentionalWalks, 
+			decimal hitByPitch, 
+			decimal singles, 
+			decimal doubles, 
+			decimal triples, 
+			decimal homeRuns, 
+			decimal atBats, 
+			decimal sacrifices)
+		{
+			if (atBats == 0)
+				return 0.0M;
+			decimal divisor = atBats
+				+ walks
+				- intentionalWalks
+				+ sacrifices
+				+ hitByPitch;
+			decimal quotient = ((walks - intentionalWalks) * .69M)
+				+ hitByPitch * .72M
+				+ singles * .876M
+				+ doubles * 1.236M
+				+ triples * 1.56M
+				+ homeRuns * 1.995M;
+			return quotient / divisor;
+		}
+
+		public static decimal FIP(
+			decimal homeRunsAllowed,
+			decimal strikeOuts,
+			decimal walksAllowed,
+			decimal battersHitByPitch,
+			decimal inningsPitched )
+		{
+			if (inningsPitched == 0.0M)
+				return 0.0M;
+			decimal quotient = homeRunsAllowed * 13
+				+ (walksAllowed + battersHitByPitch) * 3
+				- strikeOuts * 2;
+			decimal divisor = FixIp(inningsPitched);
+			return Math.Round(
+				d: ( quotient / divisor ) + 3.161M,
+				decimals: 2 );
+		}
+
+		public static decimal FixIp(decimal inningsPitched)
+		{
+			var ipToString = inningsPitched.ToString();
+			string[] strArr = ipToString.Split('.');
+			
+			if (strArr[1] == "1")
+				return Decimal.Parse(strArr[0]+".333");
+			if (strArr[1] == "2")
+				return Decimal.Parse(strArr[0] + ".666");
+			return inningsPitched;
 		}
 	}
 }

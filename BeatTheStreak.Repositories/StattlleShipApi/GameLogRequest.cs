@@ -54,10 +54,11 @@ namespace BeatTheStreak.Repositories
 			{
 				for (int i = 0; i < Logs.Count; i++)
 				{
+					if (!EmptyLog(Logs[i]))
+						result.HasGame = true;
 					MapLogStats(Logs[i], result);
 				}
 				CalculateAverages(result);
-				result.HasGame = true;
 			}
 
 			result.AsOf = queryDate;
@@ -66,6 +67,20 @@ namespace BeatTheStreak.Repositories
 				Name = playerSlug
 			};
 			return result;
+		}
+
+		private bool EmptyLog(LogDto log)
+		{
+			var isEmpty = false;
+			if (log.InningsPitched == null
+				&& log.AtBats.Equals("0")
+				&& log.HitByPitch.Equals("0")
+				&& log.IntentionalWalks.Equals("0")
+				&& log.SacrificeFlys.Equals("0")
+				&& log.SacrificeHits.Equals("0")
+				&& log.Walks.Equals("0"))
+				isEmpty = true;
+			return isEmpty;
 		}
 
 		private void CalculateAverages(PlayerGameLogViewModel result)
@@ -97,7 +112,9 @@ namespace BeatTheStreak.Repositories
 			return httpWebRequest;
 		}
 
-		private void MapLogStats(LogDto logDto, PlayerGameLogViewModel result)
+		private void MapLogStats(
+			LogDto logDto, 
+			PlayerGameLogViewModel result)
 		{
 			result.IsPitcher = logDto.IsPitcher();
 			result.IsBatter = logDto.IsBatter();
@@ -124,6 +141,15 @@ namespace BeatTheStreak.Repositories
 			result.Saves += SetInt(logDto.Saves);
 			result.QualityStarts += SetInt(logDto.QualityStarts);
 			result.Whip = SetDecimal(logDto.Whip);
+			result.OBP = SetDecimal(logDto.OBP);
+			result.OPS = SetDecimal(logDto.OPS);
+			result.Singles = SetDecimal(logDto.Singles);
+			result.Doubles = SetDecimal(logDto.Doubles);
+			result.Triples = SetDecimal(logDto.Triples);
+			result.IntentionalWalks = SetDecimal(logDto.IntentionalWalks);
+			result.HitByPitch = SetDecimal(logDto.HitByPitch);
+			result.Sacrifices = SetDecimal(logDto.SacrificeFlys)
+				+ SetDecimal(logDto.SacrificeHits);
 		}
 
 		private int EarnedRuns(LogDto logDto)
