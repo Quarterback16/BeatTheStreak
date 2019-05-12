@@ -14,7 +14,7 @@ namespace BeatTheStreak.Tests
 			var sut = new RosterRequest();
 			var result = sut.LoadData(
 				Constants.MlbSeasons.Season2019,
-				"mlb-la");
+				"mlb-hou");
 			Assert.IsNotNull(result);
 			Assert.IsTrue(result.Count > 0);
 			DumpPlayerDto(result);

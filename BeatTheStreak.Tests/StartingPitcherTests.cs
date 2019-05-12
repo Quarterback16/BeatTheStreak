@@ -57,7 +57,7 @@ namespace BeatTheStreak.Tests
 		public void StartersReport_ReturnsAllThePitchersForTheDay()
 		{
 			var result = _sut.PitcherReport(
-				new DateTime(2019, 4, 25));
+				new DateTime(2019, 5, 10));
 
 			result.Dump();
 			Assert.IsNotNull(result);
@@ -67,7 +67,7 @@ namespace BeatTheStreak.Tests
 		public void HottiesReport_ReturnsAllTheHotFreeAgentPitchersForTheWeek()
 		{
 			var result = _sut.HotList(
-				weekNo: 4);
+				weekNo: 6);
 
 			result.DumpHotList();
 			Assert.IsNotNull(result);

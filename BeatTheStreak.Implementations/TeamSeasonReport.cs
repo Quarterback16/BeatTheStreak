@@ -10,7 +10,6 @@ namespace BeatTheStreak.Implementations
 		private SeasonReport _seasonReport;
 		private readonly IRosterMaster _rosterMaster;
 		public DateTime SeasonStarts { get; set; }
-		public string FantasyTeam { get; set; }
 
 		public TeamSeasonReport(
 			SeasonReport seasonReport,

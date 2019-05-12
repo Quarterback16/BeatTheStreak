@@ -2,25 +2,29 @@
 using BeatTheStreak.Helpers;
 using BeatTheStreak.Interfaces;
 using BeatTheStreak.Models;
+using FbbEventStore;
 
 namespace BeatTheStreak.Implementations
 {
 	public class WeekReport : PlayerReport, IWeekReport
 	{
 		private readonly IGameLogRepository _gameLogRepository;
+		private readonly IRosterMaster _rosterMaster;
 
 		public bool Hitters { get; set; }
 
 		public WeekReport(
-			IGameLogRepository gameLogRepository)
+			IGameLogRepository gameLogRepository,
+			IRosterMaster rosterMaster)
 		{
 			_gameLogRepository = gameLogRepository;
+			_rosterMaster = rosterMaster;
 		}
 
 		public DateTime WeekStarts { get; set; }
 
 
-		public PlayerGameLogViewModel DumpWeek()
+		public PlayerGameLogViewModel DumpWeek(int playerNo)
 		{
 			var totalLog = new PlayerGameLogViewModel
 			{
@@ -29,6 +33,8 @@ namespace BeatTheStreak.Implementations
 			    IsPitcher = !Hitters
 			};
 			var playerSlug = Utility.PlayerSlug(Player);
+			FantasyTeam = _rosterMaster.GetOwnerOf(Player);
+			if (playerNo > 0) JerseyNumber = playerNo;
 			for (int d = 0; d < 7; d++)
 			{
 				var queryDate = WeekStarts.AddDays(d);
@@ -55,8 +61,6 @@ namespace BeatTheStreak.Implementations
 			DisplayTotals(totalLog);
 			return totalLog;
 		}
-
-
 
 	}
 }

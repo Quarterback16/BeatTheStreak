@@ -9,19 +9,28 @@ namespace BeatTheStreak.Implementations
 {
 	public class SeasonReport : PlayerReport, ISeasonReport
 	{
-		private readonly IGameLogRequest _gameLogRequestor;
+		private readonly IGameLogRepository _gameLogRepository;
+		private readonly IRosterMaster _rosterMaster;
+
 		public DateTime SeasonStarts { get; set; }
 
 		public List<string> PlayerList { get; set; }
 
 		public SeasonReport(
-			IGameLogRequest gameLogRequestor)
+			IGameLogRepository gameLogRepository,
+			IRosterMaster rosterMaster)
 		{
-			_gameLogRequestor = gameLogRequestor;
+			_gameLogRepository = gameLogRepository;
+			_rosterMaster = rosterMaster;
 		}
 
 		public void DumpPlayers()
 		{
+			if (PlayerList == null)
+			{
+				PlayerList = _rosterMaster.GetPitchers(
+					FantasyTeam, DateTime.Now);
+			}
 			foreach (var player in PlayerList)
 			{
 				Player = player;
@@ -31,6 +40,7 @@ namespace BeatTheStreak.Implementations
 
 		public PlayerGameLogViewModel DumpSeason()
 		{
+			SetFantasyTeam();
 			var totalLog = new PlayerGameLogViewModel
 			{
 				HasGame = true
@@ -42,7 +52,7 @@ namespace BeatTheStreak.Implementations
 				if (queryDate.Equals(DateTime.Now.Date.AddDays(-1)))
 					break;
 
-				var log = _gameLogRequestor.Submit(
+				var log = _gameLogRepository.Submit(
 					queryDate: queryDate,
 					playerSlug: playerSlug);
 				totalLog.Add(log);
@@ -52,16 +62,17 @@ namespace BeatTheStreak.Implementations
 					totalLog.IsBatter = log.IsBatter;
 				}
 				if (d == 0)
-				{
 					DisplayHeading(log);
-				}
 				if (log.HasGame)
-				{
 					Console.WriteLine(log.DateLine());
-				}
 			}
 			DisplayTotals(totalLog);
 			return totalLog;
+		}
+
+		private void SetFantasyTeam()
+		{
+			FantasyTeam = _rosterMaster.GetOwnerOf(Player); ;
 		}
 	}
 }

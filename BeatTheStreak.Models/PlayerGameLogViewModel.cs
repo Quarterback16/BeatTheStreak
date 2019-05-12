@@ -6,6 +6,8 @@ namespace BeatTheStreak.Models
 {
 	public class PlayerGameLogViewModel
 	{
+		public string FantasyTeam { get; set; }
+
 		public bool HasGame { get; set; }
 
 		public bool IsPitcher { get; set; }

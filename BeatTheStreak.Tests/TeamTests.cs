@@ -13,7 +13,7 @@ namespace BeatTheStreak.Tests
 			var sut = new TeamStatsRequest();
 			var result = sut.Submit(
 				queryDate: new DateTime(2019, 4, 19),
-				teamSlug: "mlb-pit");
+				teamSlug: "mlb-chc");
 			result.DumpTeam();
 			Assert.IsNotNull(result);
 			Assert.AreEqual(10, result.Wins);

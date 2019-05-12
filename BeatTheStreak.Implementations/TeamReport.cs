@@ -19,10 +19,9 @@ namespace BeatTheStreak.Implementations
 		}
 
 		public DateTime WeekStarts { get; set; }
-		public string FantasyTeam { get; set; }
 		public bool Hitters { get; set; }
 
-		public PlayerGameLogViewModel DumpWeek()
+		public PlayerGameLogViewModel DumpWeek(int playerNo)
 		{
 			Console.WriteLine("<pre>");
 			var totalLog = new PlayerGameLogViewModel
@@ -44,7 +43,7 @@ namespace BeatTheStreak.Implementations
 					FantasyTeam, 
 					p,
 					Hitters);
-				totalLog.Add(_weekReport.DumpWeek());
+				totalLog.Add(_weekReport.DumpWeek(0));
 			}
 			DisplayTotals(totalLog);
 			Console.WriteLine("</pre>");

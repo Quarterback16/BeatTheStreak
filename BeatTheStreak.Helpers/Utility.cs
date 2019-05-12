@@ -66,6 +66,24 @@ namespace BeatTheStreak.Helpers
 				return "mlb-danny-duffy";
 			if (playerName.Equals("Cody Bellinger"))
 				return "cody-bellinger";
+			if (playerName.Equals("Franmil Reyes"))
+				return "mlb-04fea9c7-bf92-44e5-9589-58ecd343cc61";
+			if (playerName.Equals("Dwight Smith"))
+				return "mlb-john-smith-jr";
+			if (playerName.Equals("Mitch Garver"))
+				return "mitchell-garver";
+			if (playerName.Equals("Hunter Dozier"))
+				return "hunter-dozier";
+			if (playerName.Equals("Dansby Swanson"))
+				return "dansby-swanson";
+			if (playerName.Equals("Juan Soto"))
+				return "mlb-245cb216-9fdc-4814-b3c8-b7982c23c082";
+			if (playerName.Equals("Nicholas Castellanos"))
+				return "mlb-nick-castellanos";
+			if (playerName.Equals("Christopher Paddack"))
+				return "mlb-chris-paddack-1996-01-08";
+			if (playerName.Equals("Bradley Peacock"))
+				return "mlb-brad-peacock";
 
 			return $"mlb-{playerName.Replace(' ', '-').ToLower()}";
 		}

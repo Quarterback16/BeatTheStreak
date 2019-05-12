@@ -7,13 +7,16 @@ namespace BeatTheStreak.Implementations
 	public class PlayerReport
 	{
 		public string Player { get; set; }
+
+		public string FantasyTeam { get; set; }
+
 		public int JerseyNumber { get; set; }
 		public bool DoPitchers { get; set; }
 
 		protected void DisplayHeading(PlayerGameLogViewModel log)
 		{
 			Console.WriteLine(log.HeaderLine());
-			Console.WriteLine($"({JerseyNumber}) {Player}");
+			Console.WriteLine($"({JerseyNumber}) {Player} {FantasyTeam}");
 			Console.WriteLine(log.HeaderLine());
 			Console.WriteLine(log.DateHeaderLine());
 		}
@@ -30,6 +33,7 @@ namespace BeatTheStreak.Implementations
 			string fantasyTeam,
 			DateTime asOf)
 		{
+			FantasyTeam = fantasyTeam;
 			if (DoPitchers)
 			{
 				return rosterMaster.GetPitchers(

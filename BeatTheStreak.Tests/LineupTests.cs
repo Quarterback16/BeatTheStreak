@@ -12,8 +12,8 @@ namespace BeatTheStreak.Tests
         {
             var sut = new LineupRequest();
             var result = sut.Submit(
-                queryDate: new DateTime(2019,4,17),
-                teamSlug: "mlb-nym");
+                queryDate: new DateTime(2019,5,8),
+                teamSlug: "mlb-min");
             result.DumpLineup();
             Assert.IsTrue(result.Lineup.Count > 0, 
                 "Lineup request should return batters");

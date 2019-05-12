@@ -4,6 +4,6 @@ namespace BeatTheStreak.Interfaces
 {
 	public interface IWeekReport
 	{
-		PlayerGameLogViewModel DumpWeek();
+		PlayerGameLogViewModel DumpWeek(int i);
 	}
 }
