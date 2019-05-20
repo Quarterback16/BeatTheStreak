@@ -38,7 +38,8 @@ namespace BeatTheStreak.Implementations
 			for (int d = 0; d < 7; d++)
 			{
 				var queryDate = WeekStarts.AddDays(d);
-				if (queryDate.Equals(DateTime.Now.Date.AddDays(0)))
+				if (queryDate.Equals(DateTime.Now.Date.AddDays(-1))
+					&& ItsBeforeFour())
 					break;
 
 				var log = _gameLogRepository.Submit(
@@ -54,7 +55,7 @@ namespace BeatTheStreak.Implementations
 				}
 				if (d == 0)
 				{
-					DisplayHeading(log);
+					DisplayHeading(log,_rosterMaster);
 				}
 				Console.WriteLine(log.DateLine());
 			}
@@ -62,5 +63,10 @@ namespace BeatTheStreak.Implementations
 			return totalLog;
 		}
 
+		private bool ItsBeforeFour()
+		{
+			var hr = DateTime.Now.Hour;  // 0 to 23
+			return (hr < 16);
+		}
 	}
 }

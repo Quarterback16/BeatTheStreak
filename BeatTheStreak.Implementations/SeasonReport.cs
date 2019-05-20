@@ -62,7 +62,7 @@ namespace BeatTheStreak.Implementations
 					totalLog.IsBatter = log.IsBatter;
 				}
 				if (d == 0)
-					DisplayHeading(log);
+					DisplayHeading(log,_rosterMaster);
 				if (log.HasGame)
 					Console.WriteLine(log.DateLine());
 			}

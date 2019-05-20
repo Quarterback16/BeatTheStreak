@@ -19,6 +19,18 @@ namespace BeatTheStreak.UnitTests
 		}
 
 		[TestMethod]
+		public void Fip_Calculation2_Works()
+		{
+			var result = Utility.FIP(
+				homeRunsAllowed: 0.0M,
+				strikeOuts: 8.0M,
+				walksAllowed: 6.0M,
+				battersHitByPitch: 0.0M,
+				inningsPitched: 7.0M);
+			Assert.AreEqual(3.45M, result);
+		}
+
+		[TestMethod]
 		public void FixIp_WithWholeInnings_Works()
 		{
 			var result = Utility.FixIp(9.0M);

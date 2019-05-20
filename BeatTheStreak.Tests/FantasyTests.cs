@@ -15,6 +15,7 @@ namespace BeatTheStreak.Tests
 	[TestClass]
 	public class FantasyTests
 	{
+		const int K_CurrentWeek = 7;
 		private ICacheRepository _cache;
 		private IGameLogRepository _gameLogRepository;
 		private IGameLogRepository _cachedGameLogRepository;
@@ -57,8 +58,8 @@ namespace BeatTheStreak.Tests
 				_gameLogRepository,
 				_rosterMaster)
 			{
-				WeekStarts = Utility.WeekStart(6),
-				Player = "Brandon Lowe",
+				WeekStarts = Utility.WeekStart(K_CurrentWeek),
+				Player = "Josh Reddick",
 				Hitters = true
 			};
 			sut.DumpWeek(1);
@@ -69,14 +70,15 @@ namespace BeatTheStreak.Tests
 		{
 			string[] streamers = new string[]
 			{
-				"Jose Martinez",
-				"Alex Verdugo",
-				"Carter Kieboom",
-				"Kolten Wong",
-				"Yonder Alonso",
-				"Jorge Alfaro",
-				"Jose Peraza",
-				"Ryon Healy"
+				"Chris Davis",
+				"Pablo Sandoval",
+				"Scooter Gennett",
+				"Austin Riley",
+				"Mitch Moreland",
+				"Oscar Mercado",
+				"Kyle Schwarber",
+				"Amed Rosario",
+				"Randal Grichuk"
 			};
 			var i = 0;
 			foreach (var player in streamers)
@@ -85,7 +87,7 @@ namespace BeatTheStreak.Tests
 					_cachedGameLogRepository,
 					_rosterMaster)
 				{
-					WeekStarts = Utility.WeekStart(5),
+					WeekStarts = Utility.WeekStart(K_CurrentWeek),
 					Player = player,
 					Hitters = true
 				};
@@ -110,7 +112,7 @@ namespace BeatTheStreak.Tests
 					_cachedGameLogRepository,
 					_rosterMaster)
 				{
-					WeekStarts = Utility.WeekStart(5),
+					WeekStarts = Utility.WeekStart(K_CurrentWeek),
 					Player = player,
 					Hitters = true
 				};
@@ -127,7 +129,7 @@ namespace BeatTheStreak.Tests
 				"Christian Yelich",
 				"Cody Bellinger",
 				"Mookie Betts",
-				"J.D. Martinez",
+				"J D Martinez",
 				"Ronald Acuna Jr.",
 				"Bryce Harper",
 				"Whit Merrifield",
@@ -171,7 +173,7 @@ namespace BeatTheStreak.Tests
 					_cachedGameLogRepository,
 					_rosterMaster)
 				{
-					WeekStarts = Utility.WeekStart(6),
+					WeekStarts = Utility.WeekStart(K_CurrentWeek),
 					Player = player,
 					Hitters = true
 				};
@@ -198,7 +200,7 @@ namespace BeatTheStreak.Tests
 					_cachedGameLogRepository,
 					_rosterMaster)
 				{
-					WeekStarts = Utility.WeekStart(6),
+					WeekStarts = Utility.WeekStart(K_CurrentWeek),
 					Player = player,
 					Hitters = true
 				};
@@ -211,6 +213,10 @@ namespace BeatTheStreak.Tests
 		{
 			string[] playersDropped = new string[]
 			{
+				"Omar Narvaez",
+				"Brandon Lowe",
+				"Dansby Swanson",
+				"Ryan Braun",
 				"Enrique Hernandez",
 				"Nomar Mazara",
 				"Michael Brantley",
@@ -231,7 +237,7 @@ namespace BeatTheStreak.Tests
 					_cachedGameLogRepository,
 					_rosterMaster)
 				{
-					WeekStarts = Utility.WeekStart(5),
+					WeekStarts = Utility.WeekStart(K_CurrentWeek),
 					Player = player,
 					Hitters = true
 				};
@@ -245,10 +251,11 @@ namespace BeatTheStreak.Tests
 			var sut = new TeamReport(
 				new WeekReport(
 					_gameLogRepository,
+					//_cachedGameLogRepository,
 					_rosterMaster),
 				_rosterMaster)
 			{
-				WeekStarts = Utility.WeekStart(6),
+				WeekStarts = Utility.WeekStart(K_CurrentWeek),
 				FantasyTeam = "CA",
 				Hitters = true
 			};
@@ -274,7 +281,7 @@ namespace BeatTheStreak.Tests
 				_gameLogRepository,
 				_rosterMaster)
 			{
-				WeekStarts = Utility.WeekStart(4),
+				WeekStarts = Utility.WeekStart(K_CurrentWeek),
 				Player = "Maxwell Scherzer"
 			};
 			sut.DumpWeek(1);
@@ -289,7 +296,8 @@ namespace BeatTheStreak.Tests
 				    _rosterMaster),
 				_rosterMaster)
 			{
-				WeekStarts = Utility.WeekStart(6),
+				WeekStarts = Utility.WeekStart(K_CurrentWeek),
+				//WeekStarts = Utility.WeekStart(7),
 				FantasyTeam = "CA",
 				Hitters = false
 			};
@@ -305,7 +313,7 @@ namespace BeatTheStreak.Tests
 					_rosterMaster	)
 			{
 				SeasonStarts = Utility.WeekStart(1),
-				Player = "Caleb Smith"
+				Player = "Anthony DeSclafani"
 			};
 			sut.DumpSeason();
 		}
@@ -340,13 +348,14 @@ namespace BeatTheStreak.Tests
 				SeasonStarts = Utility.WeekStart(1),
 				PlayerList = new List<string>
 				{
+					"Jordan Lyles",
+					"Tyler Mahle",
 					"Bradley Peacock",
+					"Charles Morton",
 					"Mike Fiers",
 					"Christopher Paddack",
-					"Jose Berrios",
 					"Martin Perez",
-					"Mike Minor",
-					"Anthony De Sclafani"
+					"Anthony DeSclafani"
 				}
 			};
 			sut.DumpPlayers();
@@ -362,8 +371,12 @@ namespace BeatTheStreak.Tests
 				SeasonStarts = Utility.WeekStart(1),
 				PlayerList = new List<string>
 				{
-					"Jose Berrios",
-					"Steve Cishek"
+				    "Wade Miley",
+					"Corbin Martin",
+					"Shaun Anderson",
+					"Spencer Turnbull",
+					"Julio Teheran",
+					"Daniel Norris"
 				}
 			};
 			sut.DumpPlayers();
@@ -374,6 +387,13 @@ namespace BeatTheStreak.Tests
 		{
 			string[] prospects = new string[]
 			{
+				"Asdrubal Cabrera",
+				"Jonathan Schoop",
+				"Jorge Polanco",
+				"Anthony Kemp",
+				"Josh Reddick",
+				"Ronny Rodriguez",
+				"Brendan Rodgers",
 				"Eric Sogard",
 				"Kolten Wong",
 				"DJ LeMahieu",
@@ -394,7 +414,7 @@ namespace BeatTheStreak.Tests
 					_cachedGameLogRepository,
 					_rosterMaster)
 				{
-					WeekStarts = Utility.WeekStart(6),
+					WeekStarts = Utility.WeekStart(K_CurrentWeek),
 					Player = player,
 					Hitters = true
 				};
@@ -425,7 +445,7 @@ namespace BeatTheStreak.Tests
 				new FakeLogger());
 
 			var result = _sut.HotList(
-				weekNo: 6);
+				weekNo: K_CurrentWeek);
 
 			result.DumpHotList();
 			Assert.IsNotNull(result);

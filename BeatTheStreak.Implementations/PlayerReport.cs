@@ -13,10 +13,22 @@ namespace BeatTheStreak.Implementations
 		public int JerseyNumber { get; set; }
 		public bool DoPitchers { get; set; }
 
-		protected void DisplayHeading(PlayerGameLogViewModel log)
+		protected void DisplayHeading(
+			PlayerGameLogViewModel log,
+			IRosterMaster rosterMaster)
 		{
 			Console.WriteLine(log.HeaderLine());
-			Console.WriteLine($"({JerseyNumber}) {Player} {FantasyTeam}");
+			Console.WriteLine($@"({
+				JerseyNumber
+				}) {
+				Player
+				} {
+				FantasyTeam
+				} {
+				rosterMaster.GetMlbTeam(Player)
+				} {
+				rosterMaster.GetPosition(Player)
+				}");
 			Console.WriteLine(log.HeaderLine());
 			Console.WriteLine(log.DateHeaderLine());
 		}

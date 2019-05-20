@@ -96,6 +96,22 @@ namespace BeatTheStreak.Helpers
 				return "mlb-brad-peacock";
 			if (playerName.Equals("Niko Goodrum"))
 				return "mlb-cartier-goodrum";
+			if (playerName.Equals("Ronny Rodriguez"))
+				return "ronny-rodriguez";
+			if (playerName.Equals("Brendan Rodgers"))
+				return "mlb-441341d5-e864-421f-860c-abc2df728b8f";
+			if (playerName.Equals("Ronald Acuna Jr."))
+				return "mlb-90806bda-a8be-4b6b-902e-25a0e1dda47a";
+			if (playerName.Equals("Shohei Ohtani"))
+				return "mlb-2b02b25f-ca1e-48f2-9043-09243be07c60";
+			if (playerName.Equals("Shohei Ohtani"))
+				return "mlb-d23115ea-11b3-40d3-9a07-eeb58d052097";
+			if (playerName.Equals("Corbin Martin"))
+				return "mlb-e7a12cf4-b89a-498c-b8d3-efbabf6654ca";
+			if (playerName.Equals("Shaun Anderson"))
+				return "mlb-d6cd8581-8619-4279-887f-90472191046d";
+			if (playerName.Equals("Austin Riley"))
+				return "mlb-fa7d06c8-a047-45a9-9f0b-874ad3bc6d21";
 
 			return $"mlb-{playerName.Replace(' ', '-').ToLower()}";
 		}
@@ -123,6 +139,9 @@ namespace BeatTheStreak.Helpers
 				- intentionalWalks
 				+ sacrifices
 				+ hitByPitch;
+			if (divisor == 0.0M)
+				return 0.0M;
+
 			decimal quotient = ((walks - intentionalWalks) * .69M)
 				+ hitByPitch * .72M
 				+ singles * .876M
@@ -141,9 +160,9 @@ namespace BeatTheStreak.Helpers
 		{
 			if (inningsPitched == 0.0M)
 				return 0.0M;
-			decimal quotient = homeRunsAllowed * 13
-				+ (walksAllowed + battersHitByPitch) * 3
-				- strikeOuts * 2;
+			decimal quotient = ( homeRunsAllowed * 13 )
+				+ ((walksAllowed + battersHitByPitch) * 3)
+				- (strikeOuts * 2);
 			decimal divisor = FixIp(inningsPitched);
 			return Math.Round(
 				d: ( quotient / divisor ) + 3.161M,
