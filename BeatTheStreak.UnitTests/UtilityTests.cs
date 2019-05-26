@@ -7,6 +7,23 @@ namespace BeatTheStreak.UnitTests
 	public class UtilityTests
 	{
 		[TestMethod]
+		public void Woba_Calculation_Works()
+		{
+			var result = Utility.WOBA(
+				walks: 0.0M,
+				intentionalWalks: 0.0M,
+				hitByPitch: 0.0M,
+				singles: 2.0M,
+				doubles: 2.0M,
+				triples: 0.0M,
+				homeRuns: 0.0M,
+				atBats: 9.0M,
+				sacrifices: 0.0M);
+
+			Assert.AreEqual(0.469M, result);
+		}
+
+		[TestMethod]
 		public void Fip_Calculation_Works()
 		{
 			var result = Utility.FIP(

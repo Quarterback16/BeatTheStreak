@@ -61,7 +61,6 @@ namespace BeatTheStreak.Implementations
 						hotties.Add(sp, gl);
 				}
 			}
-
 			return hotties;
 		}
 

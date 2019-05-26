@@ -57,6 +57,8 @@ namespace BeatTheStreak.Models
 		public decimal OPS { get; set; }
 		public decimal OBP { get; set; }
 
+		public decimal WOBA { get; set; }
+
 		public decimal NetSteals()
 		{
 			return StolenBases - CaughtStealing;

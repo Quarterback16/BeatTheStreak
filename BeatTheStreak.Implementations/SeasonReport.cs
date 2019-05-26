@@ -26,6 +26,7 @@ namespace BeatTheStreak.Implementations
 
 		public void DumpPlayers()
 		{
+			SetOutput();
 			if (PlayerList == null)
 			{
 				PlayerList = _rosterMaster.GetPitchers(
@@ -36,6 +37,7 @@ namespace BeatTheStreak.Implementations
 				Player = player;
 				DumpSeason();
 			}
+			CloseOutput();
 		}
 
 		public PlayerGameLogViewModel DumpSeason()

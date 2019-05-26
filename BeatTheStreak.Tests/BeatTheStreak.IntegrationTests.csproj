@@ -75,6 +75,7 @@
     <Compile Include="SeasonTests.cs" />
     <Compile Include="StartingPitcherTests.cs" />
     <Compile Include="TeamTests.cs" />
+    <Compile Include="TestHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

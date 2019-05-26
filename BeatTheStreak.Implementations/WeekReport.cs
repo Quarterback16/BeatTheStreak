@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using BeatTheStreak.Helpers;
 using BeatTheStreak.Interfaces;
 using BeatTheStreak.Models;
@@ -13,6 +14,8 @@ namespace BeatTheStreak.Implementations
 
 		public bool Hitters { get; set; }
 
+		public bool IncludePriorWeek { get; set; }
+
 		public WeekReport(
 			IGameLogRepository gameLogRepository,
 			IRosterMaster rosterMaster)
@@ -26,6 +29,9 @@ namespace BeatTheStreak.Implementations
 
 		public PlayerGameLogViewModel DumpWeek(int playerNo)
 		{
+			SetOutput();
+			if (IncludePriorWeek)
+				WeekStarts = WeekStarts.AddDays(-7);
 			var totalLog = new PlayerGameLogViewModel
 			{
 				HasGame = true,
@@ -35,7 +41,10 @@ namespace BeatTheStreak.Implementations
 			var playerSlug = Utility.PlayerSlug(Player);
 			FantasyTeam = _rosterMaster.GetOwnerOf(Player);
 			if (playerNo > 0) JerseyNumber = playerNo;
-			for (int d = 0; d < 7; d++)
+			var daysToReport = 7;
+			if (IncludePriorWeek)
+				daysToReport += 7;
+			for (int d = 0; d < daysToReport; d++)
 			{
 				var queryDate = WeekStarts.AddDays(d);
 				if (queryDate.Equals(DateTime.Now.Date.AddDays(-1))
@@ -60,6 +69,7 @@ namespace BeatTheStreak.Implementations
 				Console.WriteLine(log.DateLine());
 			}
 			DisplayTotals(totalLog);
+			CloseOutput();
 			return totalLog;
 		}
 

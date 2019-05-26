@@ -1,6 +1,7 @@
 ﻿using BeatTheStreak.Models;
 using FbbEventStore;
 using System;
+using System.IO;
 
 namespace BeatTheStreak.Implementations
 {
@@ -12,6 +13,10 @@ namespace BeatTheStreak.Implementations
 
 		public int JerseyNumber { get; set; }
 		public bool DoPitchers { get; set; }
+
+		public StreamWriter Writer { get; set; }
+		public FileStream OutStream { get; set; }
+		public string OutputFile { get; set; }
 
 		protected void DisplayHeading(
 			PlayerGameLogViewModel log,
@@ -55,6 +60,38 @@ namespace BeatTheStreak.Implementations
 			return rosterMaster.GetBatters(
 				fantasyTeam,
 				asOf);
+		}
+
+		protected void SetOutput()
+		{
+			if (string.IsNullOrEmpty(OutputFile))
+				return;
+			try
+			{
+				OutStream = new FileStream(
+					path: OutputFile,
+					mode: FileMode.OpenOrCreate,
+					access: FileAccess.Write);
+
+				Writer = new StreamWriter(OutStream);
+				Console.SetOut(Writer);
+				Console.WriteLine("<pre>");
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"Cannot open {OutputFile} for writing");
+				Console.WriteLine(ex.Message);
+				return;
+			}
+		}
+
+		protected void CloseOutput()
+		{
+			if (string.IsNullOrEmpty(OutputFile))
+				return;
+			Console.WriteLine("</pre>");
+			Writer.Close();
+			OutStream.Close();
 		}
 	}
 }

@@ -2,6 +2,7 @@
 using BeatTheStreak.Models;
 using FbbEventStore;
 using System;
+using System.IO;
 
 namespace BeatTheStreak.Implementations
 {
@@ -23,7 +24,7 @@ namespace BeatTheStreak.Implementations
 
 		public PlayerGameLogViewModel DumpWeek(int playerNo)
 		{
-			Console.WriteLine("<pre>");
+			SetOutput();
 			var totalLog = new PlayerGameLogViewModel
 			{
 				HasGame = true,
@@ -46,7 +47,7 @@ namespace BeatTheStreak.Implementations
 				totalLog.Add(_weekReport.DumpWeek(0));
 			}
 			DisplayTotals(totalLog);
-			Console.WriteLine("</pre>");
+			CloseOutput();
 			return totalLog;
 		}
 

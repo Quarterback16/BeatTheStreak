@@ -65,6 +65,7 @@
     <Compile Include="TeamReport.cs" />
     <Compile Include="TeamSeasonReport.cs" />
     <Compile Include="WeekReport.cs" />
+    <Compile Include="WeekReportMulti.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Application\Application.csproj">

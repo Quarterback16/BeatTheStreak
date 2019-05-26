@@ -52,6 +52,7 @@ namespace BeatTheStreak.Repositories
 			}
 			if (Logs.Count > 0)
 			{
+				//  can play a double header
 				for (int i = 0; i < Logs.Count; i++)
 				{
 					if (!EmptyLog(Logs[i]))
@@ -91,6 +92,16 @@ namespace BeatTheStreak.Repositories
 			result.OpponentsBattingAverage = Utility.BattingAverage(
 				result.HitsAllowed, 
 				result.OutsRecorded + result.HitsAllowed);
+			result.WOBA = Utility.WOBA(
+				walks: result.Walks,
+				intentionalWalks: result.IntentionalWalks,
+				hitByPitch: result.HitByPitch,
+				singles: result.Singles,
+				doubles: result.Doubles,
+				triples: result.Triples,
+				homeRuns: result.HomeRuns,
+				atBats: result.AtBats,
+				sacrifices: result.Sacrifices);
 		}
 
 		private HttpWebRequest SetQueryParams(
@@ -143,12 +154,12 @@ namespace BeatTheStreak.Repositories
 			result.Whip = SetDecimal(logDto.Whip);
 			result.OBP = SetDecimal(logDto.OBP);
 			result.OPS = SetDecimal(logDto.OPS);
-			result.Singles = SetDecimal(logDto.Singles);
-			result.Doubles = SetDecimal(logDto.Doubles);
-			result.Triples = SetDecimal(logDto.Triples);
-			result.IntentionalWalks = SetDecimal(logDto.IntentionalWalks);
-			result.HitByPitch = SetDecimal(logDto.HitByPitch);
-			result.Sacrifices = SetDecimal(logDto.SacrificeFlys)
+			result.Singles += SetDecimal(logDto.Singles);
+			result.Doubles += SetDecimal(logDto.Doubles);
+			result.Triples += SetDecimal(logDto.Triples);
+			result.IntentionalWalks += SetDecimal(logDto.IntentionalWalks);
+			result.HitByPitch += SetDecimal(logDto.HitByPitch);
+			result.Sacrifices += SetDecimal(logDto.SacrificeFlys)
 				+ SetDecimal(logDto.SacrificeHits);
 		}
 

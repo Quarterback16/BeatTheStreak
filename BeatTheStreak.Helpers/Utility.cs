@@ -112,6 +112,8 @@ namespace BeatTheStreak.Helpers
 				return "mlb-d6cd8581-8619-4279-887f-90472191046d";
 			if (playerName.Equals("Austin Riley"))
 				return "mlb-fa7d06c8-a047-45a9-9f0b-874ad3bc6d21";
+			if (playerName.Equals("Alex Verdugo"))
+				return "alex-verdugo";
 
 			return $"mlb-{playerName.Replace(' ', '-').ToLower()}";
 		}
@@ -148,7 +150,7 @@ namespace BeatTheStreak.Helpers
 				+ doubles * 1.236M
 				+ triples * 1.56M
 				+ homeRuns * 1.995M;
-			return quotient / divisor;
+			return Math.Round(quotient / divisor, 3);
 		}
 
 		public static decimal FIP(
