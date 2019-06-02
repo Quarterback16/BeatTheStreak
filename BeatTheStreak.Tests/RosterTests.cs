@@ -16,7 +16,7 @@ namespace BeatTheStreak.Tests
 		[TestMethod]
 		public void TeamRoster_ForSeason2019_ReturnsDto()
 		{
-			var team = "mlb-la";
+			var team = "mlb-chw";
 			var sut = new RosterRequest();
 			var result = sut.LoadData(
 				Constants.MlbSeasons.Season2019,

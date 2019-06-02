@@ -32,6 +32,7 @@ namespace BeatTheStreak.Implementations
 			SetOutput();
 			if (IncludePriorWeek)
 				WeekStarts = WeekStarts.AddDays(-7);
+
 			var totalLog = new PlayerGameLogViewModel
 			{
 				HasGame = true,

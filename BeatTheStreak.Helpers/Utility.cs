@@ -114,6 +114,18 @@ namespace BeatTheStreak.Helpers
 				return "mlb-fa7d06c8-a047-45a9-9f0b-874ad3bc6d21";
 			if (playerName.Equals("Alex Verdugo"))
 				return "alex-verdugo";
+			if (playerName.Equals("Clint Frazier"))
+				return "clint-frazier";
+			if (playerName.Equals("Trey Mancini"))
+				return "trey-mancini";
+			if (playerName.Equals("Christopher Cron"))
+				return "mlb-c-j-cron";
+			if (playerName.Equals("Devin Smeltzer"))
+				return "mlb-adb72afe-8a88-4cb0-991d-185e3c596718";
+			if (playerName.Equals("Shane Bieber"))
+				return "mlb-52cf752a-7dbf-4d92-a15b-01488acd3abd";
+			if (playerName.Equals("Welington Castillo"))
+				return "mlb-welington-castillo";
 
 			return $"mlb-{playerName.Replace(' ', '-').ToLower()}";
 		}

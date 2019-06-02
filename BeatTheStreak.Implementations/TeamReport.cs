@@ -2,7 +2,6 @@
 using BeatTheStreak.Models;
 using FbbEventStore;
 using System;
-using System.IO;
 
 namespace BeatTheStreak.Implementations
 {
@@ -22,9 +21,15 @@ namespace BeatTheStreak.Implementations
 		public DateTime WeekStarts { get; set; }
 		public bool Hitters { get; set; }
 
+		private void DateLine()
+		{
+			Console.WriteLine($"Week starting {WeekStarts:yyyy-MM-dd}");
+		}
+
 		public PlayerGameLogViewModel DumpWeek(int playerNo)
 		{
 			SetOutput();
+			DateLine();
 			var totalLog = new PlayerGameLogViewModel
 			{
 				HasGame = true,

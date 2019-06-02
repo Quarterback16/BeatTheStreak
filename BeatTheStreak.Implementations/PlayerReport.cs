@@ -68,6 +68,9 @@ namespace BeatTheStreak.Implementations
 				return;
 			try
 			{
+				if (File.Exists(OutputFile))
+					File.Delete(OutputFile);
+
 				OutStream = new FileStream(
 					path: OutputFile,
 					mode: FileMode.OpenOrCreate,

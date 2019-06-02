@@ -15,7 +15,7 @@ namespace BeatTheStreak.Tests
 	[TestClass]
 	public class FantasyTests
 	{
-		const int K_CurrentWeek = 8;
+		const int K_CurrentWeek = 9;
 		private ICacheRepository _cache;
 		private IGameLogRepository _gameLogRepository;
 		private IGameLogRepository _cachedGameLogRepository;
@@ -78,21 +78,19 @@ namespace BeatTheStreak.Tests
 			//  lets us see how good a predictor is "Streamers of the Week"
 			string[] streamers = new string[]
 			{
-				"Chris Davis",
-				"Pablo Sandoval",
-				"Scooter Gennett",
-				"Austin Riley",
+				"Gregory Polanco",
+				"Brendan Rodgers",
+				"Adam Frazier",
+				"Alex Verdugo",
+				"Christian Walker",
 				"Mitch Moreland",
-				"Oscar Mercado",
-				"Kyle Schwarber",
-				"Amed Rosario",
-				"Randal Grichuk"
+				"Jarrod Dyson"
 			};
 			var sut = new WeekReportMulti(
 					_cachedGameLogRepository,
 					_rosterMaster,
 					streamers,
-					K_CurrentWeek-1)
+					K_CurrentWeek)
 			{
 				OutputFile = TestHelper.FileName(
 					"Hitters",
@@ -248,8 +246,10 @@ namespace BeatTheStreak.Tests
 		{
 			string[] playersDropped = new string[]
 			{
+				"Franmil Reyes",
+				"Adam Jones",
+				"Gregory Polanco",
 				"Rafael Devers",
-				"Omar Narvaez",
 				"Mitch Garver",
 				"Brandon Lowe",
 				"Dansby Swanson",
@@ -285,21 +285,22 @@ namespace BeatTheStreak.Tests
 		[TestMethod]
 		public void FantasyTeamHitterStatsForTheWeek()
 		{
+			var week = K_CurrentWeek;
 			var sut = new TeamReport(
 				new WeekReport(
-					_gameLogRepository,
-					//_cachedGameLogRepository,
+					//_gameLogRepository,
+					_cachedGameLogRepository,
 					_rosterMaster),
 				_rosterMaster)
 			{
-				WeekStarts = Utility.WeekStart(K_CurrentWeek),
+				WeekStarts = Utility.WeekStart(week),
 				FantasyTeam = "CA",
 				Hitters = true
 			};
 			sut.OutputFile = TestHelper.FileName(
 					"Hitters",
 					"CA-Hitters",
-					K_CurrentWeek);
+					week);
 			sut.DumpWeek(0);
 		}
 
@@ -393,11 +394,16 @@ namespace BeatTheStreak.Tests
 				SeasonStarts = Utility.WeekStart(1),
 				PlayerList = new List<string>
 				{
+					"Nick Pavetta",
+					"Griffin Canning",
+					"Jeff Hoffman",
+					"Tanner Roark",
+					"Felix Pena",
+					"Trevor Richards",
+					"Devin Smeltzer",
 					"Corbin Martin",
-					"Jordan Lyles",
 					"Tyler Mahle",
 					"Bradley Peacock",
-					"Charlie Morton",
 					"Mike Fiers",
 					"Christopher Paddack",
 					"Martin Perez",
@@ -422,24 +428,9 @@ namespace BeatTheStreak.Tests
 				SeasonStarts = Utility.WeekStart(1),
 				PlayerList = new List<string>
 				{
-					"Mike Soroka",
-				    "Wade Miley",
 					"Corbin Martin",
-					"Trevor Richards",
-					"Daniel Mengden",
-					"Chase Anderson",
-					"Tyler Skaggs",
-					"Kyle Gibson",
-					"Cal Quantrill",
-					"Danny Duffy",
-					"Jose Urena",
-					"Lance Lynn",
-					"Aaron Sanchez",
-					"Daniel Norris",
-					"Cole Hamels",
-					"Rick Porcello",
-					"Rick Hill",
-					"Jordan Lyles"
+					"Devin Smeltzer",
+					"Chase Anderson"
 				},
 				OutputFile = TestHelper.FileName(
 					"Pitchers",
@@ -450,17 +441,23 @@ namespace BeatTheStreak.Tests
 		}
 
 		[TestMethod]
-		public void HittingProspects_ForTheWeek()
+		public void HittingProspects()
 		{
 			string[] prospects = new string[]
 			{
+				"Christopher Cron",
+				"Adam Jones",
+				"Joc Pederson",
+				"Clint Frazier",
+				"Kyle Tucker",
+				"Byron Buxton",
+				"Kris Bryant",
 				"Dexter Fowler",
-				"Dan Vogelbach",
+				"Daniel Vogelbach",
 				"Shin-Soo Choo",
 				"Trey Mancini",
 				"Christian Vazquez",
 				"Jonathan Schoop",
-				"Jorge Polanco",
 				"Anthony Kemp",
 				"Josh Reddick",
 				"Ronny Rodriguez",
@@ -472,9 +469,7 @@ namespace BeatTheStreak.Tests
 				"Nick Markakis",
 				"John Smith Jr",
 				"Adam Frazier",
-				"Odubel Herrera",
-				"Marwin Gonzalez",
-				"C J Cron"
+				"Marwin Gonzalez"
 			};
 			var sut = new WeekReportMulti(
 					_cachedGameLogRepository,
@@ -490,6 +485,50 @@ namespace BeatTheStreak.Tests
 			};
 			sut.Execute();
 		}
+
+		[TestMethod]
+		public void TheCatchers()
+		{
+			string[] prospects = new string[]
+			{
+				"Jonathon Lucroy",  //  LAA
+				"Mike Zunino",      //  TB
+				"Danny Jansen",     //  Tor
+				"Josh Phegley",     //  Oak
+				"Robinson Chirinos",//  Hou
+				"Austin Hedges",    //  SD
+				"Christian Vazquez",//  Bos
+				"James McCann",     //  CwS
+				"Willians Astudillo",// MT
+				"Yan Gomes",         // Wsh
+				"Wellington Castillo",// ChW
+				"Jason Castro",       // MT
+				"Brian McCann",       // Atl
+				"Isiah Kiner-Falefa", // Tex
+				"Kurt Suzuki",        // Wsh
+				"Tyler Flowers",      // Atl
+				"Tony Wolters",       //  Col
+				"Matt Wieters",       //  StL
+				"Carson Kelly",       //  Ari
+				"Roberto Perez",      // Cle
+				"Grayson Greiner",    //  Det
+				"Jeff Mathis",        // Tex
+			};
+			var sut = new WeekReportMulti(
+					_cachedGameLogRepository,
+					_rosterMaster,
+					prospects,
+					K_CurrentWeek)
+			{
+				OutputFile = TestHelper.FileName(
+					"Hitters",
+					"Catchers",
+					K_CurrentWeek),
+				IncludePriorWeek = true
+			};
+			sut.Execute();
+		}
+
 		[TestMethod]
 		public void FantasyTeamPitcherStatsForTheSeason()
 		{
@@ -531,17 +570,17 @@ namespace BeatTheStreak.Tests
 			{
 				new Closer("Greg Holland",       "AD", "medium"),
 				new Closer( "A.J. Minter",       "AB", "committee" ),
-				new Closer( "Mychal Givens",     "BO", "medium" ),
-				new Closer( "Ryan Brasier",      "BRS",  "weak" ),
-				new Closer( "Steve Cishek",       "CHC", "committee" ),
+				new Closer( "Shawn Armstrong",     "BO", "committee" ),
+				new Closer( "Ryan Brasier",      "BRS",  "committee" ),
+				new Closer( "Steve Cishek",       "CHC", "weak" ),
 				new Closer( "Raisel Iglesias",   "CR", "strong" ),
 				new Closer( "Brad Hand",         "CI", "strong" ),
-				new Closer( "Wade Davis",        "COL", "strong" ),
+				new Closer( "Scott Oberg",        "COL", "Weak" ),
 				new Closer( "Alex Colome",       "CWS", "strong" ),
 				new Closer( "Shane Greene",       "DT", "strong" ),
 				new Closer( "Roberto Osuna",     "HA", "strong" ),
 				new Closer( "Ian Kennedy",       "KC", "committee" ),
-				new Closer( "Hansel Robles",     "LAA", "medium" ),
+				new Closer( "Hansel Robles",     "LAA", "committee" ),
 				new Closer( "Kenley Jansen",     "LAD", "strong" ),
 				new Closer( "Sergio Romo",       "MIA", "medium" ),
 				new Closer( "Josh Hader",        "MB", "medium" ),
@@ -549,14 +588,14 @@ namespace BeatTheStreak.Tests
 				new Closer( "Edwin Diaz",        "NYM", "strong" ),
 				new Closer( "Aroldis Chapman",   "NYY", "strong" ),
 				new Closer( "Blake Trienen",     "OA", "strong" ),
-				new Closer( "Hector Neris",      "PHP", "weak" ),
+				new Closer( "Hector Neris",      "PHP", "medium" ),
 				new Closer( "Felipe Vazquez",    "PIT", "strong" ),
 				new Closer( "Kirby Yates",       "SD", "strong" ),
 				new Closer( "Anthony Swarzak",   "SM", "committee" ),
 				new Closer( "Will Smith",        "SF", "strong" ),
 				new Closer( "Jordan Hicks",      "SLC", "medium" ),
 				new Closer( "Jose Alvarado",     "Tam", "committee" ),
-				new Closer( "Chris Martin",       "TR", "weak" ),
+				new Closer( "Shawn Kelley",       "TR", "weak" ),
 				new Closer( "Ken Giles",         "TB", "strong" ),
 				new Closer( "Sean Doolittle",    "Wsh", "strong" )
 			};
