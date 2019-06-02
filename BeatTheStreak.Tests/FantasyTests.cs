@@ -154,7 +154,7 @@ namespace BeatTheStreak.Tests
 		}
 
 		[TestMethod]
-		public void Top40_Outfielders_ForTheWeek()
+		public void TheOutfielders()
 		{
 			string[] outfielders = new string[]
 			{
@@ -207,7 +207,7 @@ namespace BeatTheStreak.Tests
 			{
 				OutputFile = TestHelper.FileName(
 					"Hitters",
-					"Top40-Outfielders",
+					"Outfielders",
 					K_CurrentWeek),
 				IncludePriorWeek = false
 			};
@@ -242,30 +242,33 @@ namespace BeatTheStreak.Tests
 		}
 
 		[TestMethod]
-		public void ExPlayers_ForTheWeek()
+		public void ExHitters_ForTheWeek()
 		{
 			string[] playersDropped = new string[]
 			{
 				"Franmil Reyes",
 				"Adam Jones",
 				"Gregory Polanco",
-				"Rafael Devers",
+				"Robinson Chirinos",
 				"Mitch Garver",
 				"Brandon Lowe",
 				"Dansby Swanson",
 				"Enrique Hernandez",
-				"Nomar Mazara",
-				"Michael Brantley",
 				"Ryon Healy",
-				"Jonathan Villar",
+				"Brandon Lowe",
 				"Shin-Soo Choo",
-				"Ryan McMahon",
-				"Eric Hosmer",
 				"Niko Goodrum",
-				"Francisco Cervelli",
 				"Kolten Wong",
 				"Maikel Franco",
-				"Jonathan Davis"
+				"Jonathan Davis",
+				"Ryan McMahon",
+				"Rafael Devers",
+				"Coery Dickerson",
+				"Michael Brantley",
+				"Nomar Mazara",
+				"Eric Hosmer",
+				"Jonathan Villar",
+				"Francisco Cervelli",
 			};
 			var sut = new WeekReportMulti(
 					_cachedGameLogRepository,
@@ -288,8 +291,8 @@ namespace BeatTheStreak.Tests
 			var week = K_CurrentWeek;
 			var sut = new TeamReport(
 				new WeekReport(
-					//_gameLogRepository,
-					_cachedGameLogRepository,
+					_gameLogRepository,
+					//_cachedGameLogRepository,
 					_rosterMaster),
 				_rosterMaster)
 			{
@@ -385,6 +388,35 @@ namespace BeatTheStreak.Tests
 		}
 
 		[TestMethod]
+		public void ExPitchers_StatsForTheSeason()
+		{
+			var sut = new SeasonReport(
+					_cachedGameLogRepository,
+					_rosterMaster)
+			{
+				SeasonStarts = Utility.WeekStart(1),
+				PlayerList = new List<string>
+				{
+					"Luke Weaver",
+					"Jordan Lyles",
+					"Alex Colome",
+					"Jerad Eickhoff",
+					"Spencer Turnbull",
+					"Mike Fiers",
+					"Jameson Taillon",
+					"Matt Shoemaker",
+					"Tyler Skaggs",
+					"Eduardo Rodriguez"
+				},
+				DoPitchers = true,
+				OutputFile = TestHelper.FileName(
+					"Pitchers",
+					"Ex-Pitchers",
+					K_CurrentWeek)
+			};
+			sut.DumpPlayers();
+		}
+		[TestMethod]
 		public void PitchingProspects_StatsForTheSeason()
 		{
 			var sut = new SeasonReport(
@@ -396,7 +428,7 @@ namespace BeatTheStreak.Tests
 				{
 					"Nick Pavetta",
 					"Griffin Canning",
-					"Jeff Hoffman",
+					"Jeffrey Hoffman",
 					"Tanner Roark",
 					"Felix Pena",
 					"Trevor Richards",

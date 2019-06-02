@@ -126,6 +126,12 @@ namespace BeatTheStreak.Helpers
 				return "mlb-52cf752a-7dbf-4d92-a15b-01488acd3abd";
 			if (playerName.Equals("Welington Castillo"))
 				return "mlb-welington-castillo";
+			if (playerName.Equals("Griffin Canning"))
+				return "mlb-5cfeb235-4f55-479b-9643-abaf676e4167";
+			if (playerName.Equals("Felix Pena"))
+				return "felix-pena";
+			if (playerName.Equals("Trevor Richards"))
+				return "mlb-201ad9a5-9194-46b6-aac0-ee8080dbb4ee";
 
 			return $"mlb-{playerName.Replace(' ', '-').ToLower()}";
 		}
