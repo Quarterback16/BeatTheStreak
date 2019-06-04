@@ -416,6 +416,32 @@ namespace BeatTheStreak.Tests
 			};
 			sut.DumpPlayers();
 		}
+
+		[TestMethod]
+		public void Pick4_StatsForTheSeason()
+		{
+			var sut = new SeasonReport(
+					_cachedGameLogRepository,
+					_rosterMaster)
+			{
+				SeasonStarts = Utility.WeekStart(1),
+				PlayerList = new List<string>
+				{
+					"Trevor Bauer",
+					"Griffin Canning",
+					"Devin Smeltzer",
+					"Bradley Peacock",
+					"Caleb Smith"
+				},
+				DoPitchers = true,
+				OutputFile = TestHelper.FileName(
+					"Pitchers",
+					"Lineup-Pick4",
+					K_CurrentWeek)
+			};
+			sut.DumpPlayers();
+		}
+
 		[TestMethod]
 		public void PitchingProspects_StatsForTheSeason()
 		{
@@ -512,6 +538,31 @@ namespace BeatTheStreak.Tests
 				OutputFile = TestHelper.FileName(
 					"Hitters",
 					"Prospects",
+					K_CurrentWeek),
+				IncludePriorWeek = true
+			};
+			sut.Execute();
+		}
+
+		[TestMethod]
+		public void LineupHittersChoice()
+		{
+			string[] prospects = new string[]
+			{
+				"Nomar Mazara",
+				"Michael Conforto",
+				"Joc Pederson",
+
+			};
+			var sut = new WeekReportMulti(
+					_cachedGameLogRepository,
+					_rosterMaster,
+					prospects,
+					K_CurrentWeek)
+			{
+				OutputFile = TestHelper.FileName(
+					"Hitters",
+					"LineupChoice",
 					K_CurrentWeek),
 				IncludePriorWeek = true
 			};
