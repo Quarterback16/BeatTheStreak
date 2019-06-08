@@ -32,13 +32,23 @@ namespace BeatTheStreak.Implementations
 					if (battersOnly)
 					{
 						if (player.IsBatter())
-							result.Add(player.Name);
+							AddPlayerIfNew(result, player);
 					}
 					else
-						result.Add(player.Name);
+						AddPlayerIfNew(result, player);
 				}
 			}
 			return result;
+		}
+
+		private static void AddPlayerIfNew(
+			List<string> result, 
+			Domain.Batter player)
+		{
+			if (result.Contains(player.Name))
+				return;
+
+			result.Add(player.Name);
 		}
 
 		public List<string> GetActualRoster(
