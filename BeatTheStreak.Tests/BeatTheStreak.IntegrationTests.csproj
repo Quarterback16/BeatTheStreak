@@ -49,6 +49,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActualRosterTests.cs" />
     <Compile Include="AlwaysLikePicker.cs" />
     <Compile Include="CachedPlayerStatsRepositoryIntegrationTests.cs" />
     <Compile Include="CalculateOpponentObaTests.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="Fakes\FakeLogger.cs" />
     <Compile Include="FantasyTests.cs" />
     <Compile Include="GameTests.cs" />
+    <Compile Include="HotListTests.cs" />
     <Compile Include="LineupProjectorIntegrationTests.cs" />
     <Compile Include="LineupTests.cs" />
     <Compile Include="MailBatterReportTests.cs" />
@@ -74,6 +76,7 @@
     <Compile Include="RosterTests.cs" />
     <Compile Include="SeasonTests.cs" />
     <Compile Include="StartingPitcherTests.cs" />
+    <Compile Include="StatCalculatorTests.cs" />
     <Compile Include="TeamTests.cs" />
     <Compile Include="TestHelper.cs" />
   </ItemGroup>

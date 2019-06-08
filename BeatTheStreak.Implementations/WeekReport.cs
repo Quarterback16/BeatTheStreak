@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using BeatTheStreak.Helpers;
 using BeatTheStreak.Interfaces;
 using BeatTheStreak.Models;
@@ -49,7 +48,7 @@ namespace BeatTheStreak.Implementations
 			{
 				var queryDate = WeekStarts.AddDays(d);
 				if (queryDate.Equals(DateTime.Now.Date.AddDays(-1))
-					&& ItsBeforeFour())
+					&& Utility.ItsBeforeFour())
 					break;
 
 				var log = _gameLogRepository.Submit(
@@ -74,10 +73,6 @@ namespace BeatTheStreak.Implementations
 			return totalLog;
 		}
 
-		private bool ItsBeforeFour()
-		{
-			var hr = DateTime.Now.Hour;  // 0 to 23
-			return (hr < 16);
-		}
+
 	}
 }

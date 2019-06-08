@@ -200,5 +200,11 @@ namespace BeatTheStreak.Helpers
 				return Decimal.Parse(strArr[0] + ".666");
 			return inningsPitched;
 		}
+
+		public static bool ItsBeforeFour()
+		{
+			var hr = DateTime.Now.Hour;  // 0 to 23
+			return (hr < 16);
+		}
 	}
 }

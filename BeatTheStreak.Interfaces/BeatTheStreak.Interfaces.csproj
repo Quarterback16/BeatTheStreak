@@ -42,11 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IActualRoster.cs" />
     <Compile Include="ICalculateOpponentOba.cs" />
     <Compile Include="ICalculateStreak.cs" />
     <Compile Include="IConfigReader.cs" />
     <Compile Include="IGameLogRepository.cs" />
     <Compile Include="IGameLogRequest.cs" />
+    <Compile Include="IHotList.cs" />
     <Compile Include="ILike.cs" />
     <Compile Include="ILineupProjector.cs" />
     <Compile Include="ILineupRepository.cs" />
@@ -63,6 +65,7 @@
     <Compile Include="ISeasonReport.cs" />
     <Compile Include="IStartingPitcher.cs" />
     <Compile Include="IStartingPitchersRepository.cs" />
+    <Compile Include="IStatCalculator.cs" />
     <Compile Include="IStattleShipApi.cs" />
     <Compile Include="ITeamStatsRepository.cs" />
     <Compile Include="IWeekReport.cs" />

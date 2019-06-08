@@ -42,19 +42,25 @@ namespace BeatTheStreak.Implementations
 				WeekStarts);
 			foreach (var p in roster)
 			{
-				_weekReport.Player = p;
-				_weekReport.WeekStarts = WeekStarts;
-				_weekReport.Hitters = Hitters;
-				_weekReport.JerseyNumber = _rosterMaster.JerseyNumber(
-					FantasyTeam, 
-					p,
-					Hitters);
-				totalLog.Add(_weekReport.DumpWeek(0));
+				PlayerDump(totalLog, p);
 			}
 			DisplayTotals(totalLog);
 			CloseOutput();
 			return totalLog;
 		}
 
+		private void PlayerDump(
+			PlayerGameLogViewModel totalLog, 
+			string p)
+		{
+			_weekReport.Player = p;
+			_weekReport.WeekStarts = WeekStarts;
+			_weekReport.Hitters = Hitters;
+			_weekReport.JerseyNumber = _rosterMaster.JerseyNumber(
+				FantasyTeam,
+				p,
+				Hitters);
+			totalLog.Add(_weekReport.DumpWeek(0));
+		}
 	}
 }

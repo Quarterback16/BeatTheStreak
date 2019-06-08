@@ -2709,7 +2709,7 @@
         "Trans": "IN"
     },
     {
-        "date": "2019-05-26",
+        "date": "2019-05-27",
         "fteam": "CA",
         "player": "Gregory Polanco",
         "team": "Pit",
@@ -2717,13 +2717,13 @@
         "Trans": "OUT"
     },
     {
-        "date": "2019-05-26",
+        "date": "2019-05-27",
         "fteam": "CA",
         "player": "Jorge Polanco",
         "team": "Min",
         "pos": "SS",
         "Trans": "IN"
-    },  
+    },
     {
         "date": "2019-05-27",
         "fteam": "CA",
@@ -2739,7 +2739,7 @@
         "team": "Pit",
         "pos": "SP",
         "Trans": "IN"
-    },        
+    },
     {
         "date": "2019-05-27",
         "fteam": "CA",
@@ -2755,7 +2755,7 @@
         "team": "Tex",
         "pos": "SP",
         "Trans": "IN"
-    }, 
+    },
     {
         "date": "2019-05-27",
         "fteam": "CA",
@@ -2771,7 +2771,7 @@
         "team": "Sea",
         "pos": "C",
         "Trans": "IN"
-    }, 
+    },
     {
         "date": "2019-05-27",
         "fteam": "CA",
@@ -2787,7 +2787,7 @@
         "team": "NYY",
         "pos": "3B",
         "Trans": "OUT"
-    },  
+    },
     {
         "date": "2019-05-31",
         "fteam": "TC",
@@ -2795,7 +2795,7 @@
         "team": "ChC",
         "pos": "SP",
         "Trans": "OUT"
-    },      
+    },
     {
         "date": "2019-05-31",
         "fteam": "TC",
@@ -2803,7 +2803,7 @@
         "team": "Mil",
         "pos": "SP",
         "Trans": "IN"
-    }, 
+    },
     {
         "date": "2019-05-31",
         "fteam": "TC",
@@ -2811,7 +2811,7 @@
         "team": "Pit",
         "pos": "SP",
         "Trans": "OUT"
-    },      
+    },
     {
         "date": "2019-05-31",
         "fteam": "TC",
@@ -2819,7 +2819,7 @@
         "team": "ChW",
         "pos": "SP",
         "Trans": "IN"
-    }, 
+    },
     {
         "date": "2019-05-31",
         "fteam": "TC",
@@ -2827,7 +2827,7 @@
         "team": "StL",
         "pos": "3B",
         "Trans": "OUT"
-    },      
+    },
     {
         "date": "2019-05-31",
         "fteam": "TC",
@@ -2835,7 +2835,7 @@
         "team": "KC",
         "pos": "3B",
         "Trans": "IN"
-    }, 
+    },
     {
         "date": "2019-05-31",
         "fteam": "STTM",
@@ -2843,7 +2843,7 @@
         "team": "NYY",
         "pos": "SP",
         "Trans": "OUT"
-    },      
+    },
     {
         "date": "2019-05-31",
         "fteam": "STTM",
@@ -2851,7 +2851,7 @@
         "team": "Phi",
         "pos": "SP",
         "Trans": "IN"
-    },    
+    },
     {
         "date": "2019-05-31",
         "fteam": "STTM",
@@ -2859,7 +2859,7 @@
         "team": "LAA",
         "pos": "3B",
         "Trans": "IN"
-    },  
+    },
     {
         "date": "2019-05-31",
         "fteam": "STTM",
@@ -2867,7 +2867,7 @@
         "team": "LAA",
         "pos": "SS",
         "Trans": "OUT"
-    },      
+    },
     {
         "date": "2019-05-31",
         "fteam": "STTM",
@@ -2875,6 +2875,134 @@
         "team": "Bos",
         "pos": "3B",
         "Trans": "IN"
-    }                                  
+    },
+    {
+        "date": "2019-06-03",
+        "fteam": "CA",
+        "player": "Luke Weaver",
+        "team": "Ari",
+        "pos": "SP",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-06-03",
+        "fteam": "CA",
+        "player": "Devin Smeltzer",
+        "team": "Min",
+        "pos": "RP",
+        "Trans": "IN"
+    },
+    {
+        "date": "2019-06-03",
+        "fteam": "CA",
+        "player": "Jordan Lyles",
+        "team": "Pit",
+        "pos": "SP",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-06-03",
+        "fteam": "CA",
+        "player": "Bradley Peacock",
+        "team": "Hou",
+        "pos": "RP",
+        "Trans": "IN"
+    },
+    {
+        "date": "2019-06-03",
+        "fteam": "CA",
+        "player": "Lance Lynn",
+        "team": "Tex",
+        "pos": "SP",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-06-03",
+        "fteam": "CA",
+        "player": "Griffin Canning",
+        "team": "LAA",
+        "pos": "SP",
+        "Trans": "IN"
+    },
+    {
+        "date": "2019-06-03",
+        "fteam": "CA",
+        "player": "Ryan Braun",
+        "team": "Mil",
+        "pos": "LF",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-06-03",
+        "fteam": "CA",
+        "player": "Joc Pederson",
+        "team": "LAD",
+        "pos": "LF",
+        "Trans": "IN"
+    },
+    {
+        "date": "2019-06-03",
+        "fteam": "CA",
+        "player": "Domingo Santana",
+        "team": "Sea",
+        "pos": "RF",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-06-03",
+        "fteam": "CA",
+        "player": "Nomar Mazara",
+        "team": "Tex",
+        "pos": "LF",
+        "Trans": "IN"
+    },
+    {
+        "date": "2019-06-03",
+        "fteam": "CA",
+        "player": "Omar Narvaez",
+        "team": "Sea",
+        "pos": "C",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-06-03",
+        "fteam": "CA",
+        "player": "Matt Wieters",
+        "team": "Tex",
+        "pos": "LF",
+        "Trans": "IN"
+    },
+    {
+        "date": "2019-06-03",
+        "fteam": "STTM",
+        "player": "Jurickson Profar",
+        "team": "Oak",
+        "pos": "SS",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-06-03",
+        "fteam": "STTM",
+        "player": "Eduardo Escobar",
+        "team": "Ari",
+        "pos": "SS",
+        "Trans": "IN"
+    },
+    {
+        "date": "2019-06-03",
+        "fteam": "STTM",
+        "player": "Jose Alvarado",
+        "team": "TB",
+        "pos": "RP",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-06-03",
+        "fteam": "STTM",
+        "player": "Jon Lester",
+        "team": "ChC",
+        "pos": "SP",
+        "Trans": "IN"
+    }
 ]    
 

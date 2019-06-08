@@ -6,6 +6,7 @@ namespace FbbEventStore
 	public interface IRosterMaster
 	{
 		string GetOwnerOf(string player);
+
 		List<string> GetRoster(string fteam);
 
 		List<string> GetBatters(

@@ -281,18 +281,23 @@ namespace BeatTheStreak.Models
 				} {
 				StrikeOutRateToString()
 				} {
-			string.Format("{0,-5:#.000}", Utility.WOBA(
-				Walks,
-				IntentionalWalks,
-				HitByPitch,
-				Singles,
-				Doubles,
-				Triples,
-				HomeRuns,
-				AtBats,
-				Sacrifices), -5)
+			string.Format("{0,-5:#.000}", Woba(), -5)
 				}";
 			return line;
+		}
+
+		public decimal Woba()
+		{
+			return Utility.WOBA(
+							Walks,
+							IntentionalWalks,
+							HitByPitch,
+							Singles,
+							Doubles,
+							Triples,
+							HomeRuns,
+							AtBats,
+							Sacrifices);
 		}
 
 		private string StrikeOutRateToString()

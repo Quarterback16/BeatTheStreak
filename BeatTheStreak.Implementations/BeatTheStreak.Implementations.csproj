@@ -50,9 +50,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActualRoster.cs" />
     <Compile Include="CalculateOpponentOba.cs" />
     <Compile Include="CalculateStreak.cs" />
     <Compile Include="ConfigReader.cs" />
+    <Compile Include="HotList.cs" />
     <Compile Include="LineupProjector.cs" />
     <Compile Include="MailBatterReport.cs" />
     <Compile Include="MailMan2.cs" />
@@ -62,6 +64,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SeasonReport.cs" />
     <Compile Include="StartingPitchers.cs" />
+    <Compile Include="StatCalculator.cs" />
     <Compile Include="TeamReport.cs" />
     <Compile Include="TeamSeasonReport.cs" />
     <Compile Include="WeekReport.cs" />
