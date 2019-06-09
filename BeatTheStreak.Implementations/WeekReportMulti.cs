@@ -1,8 +1,9 @@
 ﻿using BeatTheStreak.Helpers;
 using BeatTheStreak.Interfaces;
+using BeatTheStreak.Models;
 using FbbEventStore;
 using System;
-using System.IO;
+using System.Collections.Generic;
 
 namespace BeatTheStreak.Implementations
 {
@@ -25,6 +26,30 @@ namespace BeatTheStreak.Implementations
 			_rosterMaster = rosterMaster;
 			_players = players;
 			_week = week;
+		}
+
+		public WeekReportMulti(
+			IGameLogRepository gameLogRepository,
+			IRosterMaster rosterMaster,
+			List<HotListViewModel> players,
+			int week)
+		{
+			_gameLogRepository = gameLogRepository;
+			_rosterMaster = rosterMaster;
+			_players = AsPlayerNames(players);
+			_week = week;
+		}
+
+		private string[] AsPlayerNames(List<HotListViewModel> players)
+		{
+			var playerArray = new string[players.Count];
+			var index = 0;
+			foreach (var player in players)
+			{
+				playerArray[index] = player.Player.Name;
+				index++;
+			}
+			return playerArray;
 		}
 
 		public void Execute()

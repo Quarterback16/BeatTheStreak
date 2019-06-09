@@ -5,6 +5,7 @@ using Cache;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BeatTheStreak.Tests
 {
@@ -38,7 +39,10 @@ namespace BeatTheStreak.Tests
 				teamSlug: "mlb-pit",
 				queryDate: new DateTime(2019,6,6),
 				gamesBack: 1);
-			Assert.IsTrue(result.Contains("Joshua Bell"));
+
+			Assert.IsTrue(
+				result
+					.Where(item => item.Name.Equals("Joshua Bell")).Any());
 		}
 
 		[TestMethod]
@@ -50,9 +54,11 @@ namespace BeatTheStreak.Tests
 				gamesBack: 1,
 				battersOnly: true);
 			Assert.IsTrue(
-				result.Contains("Joshua Bell"));
+				result
+					.Where(item => item.Name.Equals("Joshua Bell")).Any());
 			Assert.IsFalse(
-				result.Contains("Christopher Archer"));
+				result
+					.Where(item => item.Name.Equals("Christopher Archer")).Any());
 		}
 
 		[TestMethod]
@@ -68,11 +74,14 @@ namespace BeatTheStreak.Tests
 				gamesBack: 1,
 				battersOnly: true);
 			Assert.IsTrue(
-				result.Contains("Joshua Bell"));
+				result
+					.Where(item => item.Name.Equals("Joshua Bell")).Any());
 			Assert.IsTrue(
-				result.Contains("Christian Yelich"));
+				result
+					.Where(item => item.Name.Equals("Christian Yelich")).Any());
 			Assert.IsFalse(
-				result.Contains("Christopher Archer"));
+				result
+					.Where(item => item.Name.Equals("Christopher Archer")).Any());
 		}
 	}
 }

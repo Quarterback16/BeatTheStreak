@@ -46,6 +46,7 @@
     <Compile Include="BatterReport.cs" />
     <Compile Include="GameDayModel.cs" />
     <Compile Include="GamesViewModel.cs" />
+    <Compile Include="HotListViewModel.cs" />
     <Compile Include="LineupViewModel.cs" />
     <Compile Include="PlayerGameLogViewModel.cs" />
     <Compile Include="PlayerStatsViewModel.cs" />

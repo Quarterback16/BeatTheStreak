@@ -1,4 +1,5 @@
 ﻿using BeatTheStreak.Interfaces;
+using Domain;
 using System;
 using System.Collections.Generic;
 
@@ -14,13 +15,13 @@ namespace BeatTheStreak.Implementations
 			_lineupRepo = lineupRepo;
 		}
 
-		public List<string> GetActualRoster(
+		public List<Player> GetActualRoster(
 			string teamSlug,
 			DateTime queryDate,
 			int gamesBack,
 			bool battersOnly = false)
 		{
-			var result = new List<string>();
+			var result = new List<Player>();
 			for (int d = 0; d < gamesBack; d++)
 			{
 				var lineupDate = queryDate.AddDays(-d);
@@ -32,32 +33,50 @@ namespace BeatTheStreak.Implementations
 					if (battersOnly)
 					{
 						if (player.IsBatter())
-							AddPlayerIfNew(result, player);
+						{
+							Player thisPlayer = CastToPlayer(player);
+							AddPlayerIfNew(result, thisPlayer);
+						}
 					}
 					else
-						AddPlayerIfNew(result, player);
+					{
+						Player thisPlayer = CastToPlayer(player);
+						AddPlayerIfNew(result, thisPlayer);
+					}
 				}
 			}
 			return result;
 		}
 
-		private static void AddPlayerIfNew(
-			List<string> result, 
-			Domain.Batter player)
+		private static Player CastToPlayer(Batter player)
 		{
-			if (result.Contains(player.Name))
-				return;
-
-			result.Add(player.Name);
+			return new Player
+			{
+				Name = player.Name,
+				Slug = player.PlayerSlug
+			};
 		}
 
-		public List<string> GetActualRoster(
+		private static void AddPlayerIfNew(
+			List<Player> players, 
+			Player player)
+		{
+			foreach (var p in players)
+			{
+				if (p.Name.Equals(player.Name))
+					return;
+			}
+
+			players.Add(player);
+		}
+
+		public List<Player> GetActualRoster(
 			List<string> teamSlugs,
 			DateTime queryDate, 
 			int gamesBack, 
 			bool battersOnly = false)
 		{
-			var result = new List<string>();
+			var result = new List<Player>();
 			foreach (var team in teamSlugs)
 			{
 				result.AddRange(

@@ -1,4 +1,6 @@
 ﻿using BeatTheStreak.Interfaces;
+using BeatTheStreak.Models;
+using Domain;
 using FbbEventStore;
 using System;
 using System.Collections.Generic;
@@ -21,7 +23,7 @@ namespace BeatTheStreak.Implementations
 			_statCalculator = statCalculator;
 		}
 
-		public List<string> GetHotList(
+		public List<HotListViewModel> GetHotList(
 			List<string> teamSlugs,
 			DateTime queryDate, 
 			int gamesBack)
@@ -49,33 +51,59 @@ namespace BeatTheStreak.Implementations
 			return endDate.AddDays(0-(gamesBack+1));
 		}
 
-		private List<string> FilterOutPlayersBelow(
+		private List<HotListViewModel> FilterOutPlayersBelow(
 			decimal threshold, 
-			List<string> freeAgents,
+			List<Player> freeAgents,
 			DateTime startDate,
 			DateTime endDate)
 		{
-			var hotList = new List<string>();
+			var hotList = new List<HotListViewModel>();
 			foreach (var player in freeAgents)
 			{
-				var woba = _statCalculator.Woba(
-					player,
+				var woba = _statCalculator.WobaBySlug(
+					player.Slug,
 					startDate,
 					endDate);
-				if (woba >= threshold)
-					hotList.Add(player);
+				var ab = _statCalculator.AbBySlug(
+					player.Slug,
+					startDate,
+					endDate);
+				if (woba >= threshold && ab > AbsToQualify(startDate,endDate))
+					hotList.Add(ViewModelFor(player, woba, ab));
 			}
 			return hotList;
 		}
 
-		private List<string> FilterOutSignedPlayers(
-			List<string> rostered)
+		private int AbsToQualify(
+			DateTime startDate,
+			DateTime endDate)
 		{
-			var freeAgents = new List<string>();
+			TimeSpan difference = endDate - startDate;
+			return (int) (difference.TotalDays + 1) * 3;
+		}
+
+		private HotListViewModel ViewModelFor(
+			Player player,
+			decimal woba,
+			decimal ab)
+		{
+			var vm = new HotListViewModel
+			{
+				Player = player,
+				Woba = woba,
+				AtBats = ab
+			};
+			return vm;
+		}
+
+		private List<Player> FilterOutSignedPlayers(
+			List<Player> rostered)
+		{
+			var freeAgents = new List<Player>();
 			foreach (var player in rostered)
 			{
 				if (_rosterMaster
-					.GetOwnerOf(player).Equals("FA"))
+					.GetOwnerOf(player.Name).Equals("FA"))
 				{
 					freeAgents.Add(player);
 				}

@@ -1,17 +1,18 @@
-﻿using System;
+﻿using Domain;
+using System;
 using System.Collections.Generic;
 
 namespace BeatTheStreak.Interfaces
 {
 	public interface IActualRoster
 	{
-		List<string> GetActualRoster(
+		List<Player> GetActualRoster(
 			string teamSlug,
 			DateTime queryDate,
 			int gamesBack,
 			bool battersOnly = false);
 
-		List<string> GetActualRoster(
+		List<Player> GetActualRoster(
 			List<string> teamSlugs,
 			DateTime queryDate,
 			int gamesBack,

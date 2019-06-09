@@ -1,6 +1,7 @@
 ﻿using BeatTheStreak.Helpers;
 using BeatTheStreak.Interfaces;
 using BeatTheStreak.Models;
+using Domain;
 using System;
 
 
@@ -21,7 +22,6 @@ namespace BeatTheStreak.Implementations
 			DateTime startDate, 
 			DateTime endDate)
 		{
-			decimal stat = 0.0M;
 			var totalLog = new PlayerGameLogViewModel
 			{
 				HasGame = true,
@@ -29,6 +29,59 @@ namespace BeatTheStreak.Implementations
 				IsPitcher = false
 			};
 			var playerSlug = Utility.PlayerSlug(playerName);
+			decimal stat = TallyLogs(
+				startDate, 
+				endDate, 
+				totalLog, 
+				playerSlug);
+			return stat;
+		}
+
+		public decimal WobaBySlug(
+			string playerSlug,
+			DateTime startDate,
+			DateTime endDate)
+		{
+			var totalLog = new PlayerGameLogViewModel
+			{
+				HasGame = true,
+				IsBatter = true,
+				IsPitcher = false
+			};
+			decimal stat = TallyLogs(
+				startDate,
+				endDate,
+				totalLog,
+				playerSlug);
+			return stat;
+		}
+
+		public decimal AbBySlug(
+			string playerSlug,
+			DateTime startDate,
+			DateTime endDate)
+		{
+			var totalLog = new PlayerGameLogViewModel
+			{
+				HasGame = true,
+				IsBatter = true,
+				IsPitcher = false
+			};
+			TallyLogs(
+				startDate,
+				endDate,
+				totalLog,
+				playerSlug);
+			return totalLog.AtBats;
+		}
+
+		private decimal TallyLogs(
+			DateTime startDate,
+			DateTime endDate, 
+			PlayerGameLogViewModel totalLog, 
+			string playerSlug)
+		{
+			decimal stat;
 			var daysToReport = DaysInRange(
 				endDate,
 				startDate);
@@ -53,6 +106,17 @@ namespace BeatTheStreak.Implementations
 			totalLog.WOBA = totalLog.Woba();
 			stat = totalLog.WOBA;
 			return stat;
+		}
+
+		public decimal Woba(
+			Player player, 
+			DateTime startDate,
+			DateTime endDate)
+		{
+			return Woba(
+				player.Name,
+				startDate,
+				endDate);
 		}
 
 		private double DaysInRange(

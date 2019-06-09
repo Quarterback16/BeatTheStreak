@@ -60,7 +60,24 @@ namespace BeatTheStreak.Tests
 				},
 				queryDate: Utility.WeekStart(10).AddDays(-1),
 				gamesBack: 3);
+			foreach (var item in result)
+			{
+				System.Console.WriteLine(item);
+			}
 			Assert.IsTrue(result.Count > 1);
+			var sut = new WeekReportMulti(
+					_cachedGameLogRepository,
+					_rosterMaster,
+					result,
+					Utility.CurrentWeek())
+			{
+				OutputFile = TestHelper.FileName(
+					"Hitters",
+					"HotList",
+					Utility.CurrentWeek()),
+				IncludePriorWeek = true
+			};
+			sut.Execute();
 		}
 	}
 }

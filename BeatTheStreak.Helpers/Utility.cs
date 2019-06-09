@@ -132,8 +132,15 @@ namespace BeatTheStreak.Helpers
 				return "felix-pena";
 			if (playerName.Equals("Trevor Richards"))
 				return "mlb-201ad9a5-9194-46b6-aac0-ee8080dbb4ee";
+			if (playerName.Equals("Brian Reynolds"))
+				return "mlb-28968740-3ac9-4ed2-bd6f-f36829d8090a";
 
 			return $"mlb-{playerName.Replace(' ', '-').ToLower()}";
+		}
+
+		public static int CurrentWeek()
+		{
+			return 10;
 		}
 
 		public static DateTime WeekStart( int weekNo )
