@@ -14,7 +14,7 @@ namespace BeatTheStreak.Repositories
     {
         public List<LogDto> Logs { get; set; }
 
-        public PlayerGameLogViewModel Submit(
+        public Result<PlayerGameLogViewModel> Submit(
 			DateTime queryDate, 
 			string playerSlug)
 		{
@@ -35,11 +35,13 @@ namespace BeatTheStreak.Repositories
 			{
 				if (ex.Message.Contains("404"))
 				{
-					Console.WriteLine($"Cant find {playerSlug}");
-					return result;
+					var errMsg = $"Cant find {playerSlug}";
+					Console.WriteLine(errMsg);
+					return Result.Fail<PlayerGameLogViewModel>(errMsg);
 				}
 				else
-					throw;
+					return Result.Fail<PlayerGameLogViewModel>(
+						ex.Message);
 			}
 
 			using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
@@ -67,7 +69,7 @@ namespace BeatTheStreak.Repositories
 			{
 				Name = playerSlug
 			};
-			return result;
+			return Result.Ok(result);
 		}
 
 		private bool EmptyLog(LogDto log)

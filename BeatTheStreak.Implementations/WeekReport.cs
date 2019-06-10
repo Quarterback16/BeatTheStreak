@@ -51,22 +51,27 @@ namespace BeatTheStreak.Implementations
 					&& Utility.ItsBeforeFour())
 					break;
 
-				var log = _gameLogRepository.Submit(
+				var result = _gameLogRepository.Submit(
 					queryDate: queryDate,
 					playerSlug: playerSlug);
-				log.IsBatter = Hitters;
-				log.IsPitcher = !Hitters;
-				totalLog.Add(log);
-				if (log.HasGame)
+
+				if (result.IsSuccess)
 				{
-					totalLog.IsPitcher = log.IsPitcher;
-					totalLog.IsBatter = log.IsBatter;
+					var log = result.Value;
+					log.IsBatter = Hitters;
+					log.IsPitcher = !Hitters;
+					totalLog.Add(log);
+					if (log.HasGame)
+					{
+						totalLog.IsPitcher = log.IsPitcher;
+						totalLog.IsBatter = log.IsBatter;
+					}
+					if (d == 0)
+					{
+						DisplayHeading(log, _rosterMaster);
+					}
+					Console.WriteLine(log.DateLine());
 				}
-				if (d == 0)
-				{
-					DisplayHeading(log,_rosterMaster);
-				}
-				Console.WriteLine(log.DateLine());
 			}
 			DisplayTotals(totalLog);
 			CloseOutput();

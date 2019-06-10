@@ -88,15 +88,19 @@ namespace BeatTheStreak.Implementations
 			var queryDate = startDate;
 			for (int d = 0; d < daysToReport; d++)
 			{
-				var log = _gameLogRepository.Submit(
+				var result = _gameLogRepository.Submit(
 					queryDate: queryDate,
 					playerSlug: playerSlug);
 
-				totalLog.Add(log);
-				if (log.HasGame)
+				if (result.IsSuccess)
 				{
-					totalLog.IsPitcher = log.IsPitcher;
-					totalLog.IsBatter = log.IsBatter;
+					var log = result.Value;
+					totalLog.Add(log);
+					if (log.HasGame)
+					{
+						totalLog.IsPitcher = log.IsPitcher;
+						totalLog.IsBatter = log.IsBatter;
+					}
 				}
 				queryDate = queryDate.AddDays(1);
 				if (queryDate.Equals(DateTime.Now.Date.AddDays(-1))

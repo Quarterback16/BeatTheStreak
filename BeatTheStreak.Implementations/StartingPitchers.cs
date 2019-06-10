@@ -28,10 +28,14 @@ namespace BeatTheStreak.Implementations
 			var result = _startersRepository.Submit(gameDate);
 			foreach (var sp in result.Pitchers)
 			{
-				var gl = _gameLogRepository.Submit(
+				var logResult = _gameLogRepository.Submit(
 					gameDate,
 					sp.Slug	);
-				result.Add(gl, sp.Slug);
+				if (logResult.IsSuccess)
+				{
+					var gl = logResult.Value;
+					result.Add(gl, sp.Slug);
+				}
 			}
 			return result;
 		}
@@ -53,12 +57,16 @@ namespace BeatTheStreak.Implementations
 				var result = _startersRepository.Submit(queryDate);
 				foreach (var sp in result.Pitchers)
 				{
-					var gl = _gameLogRepository.Submit(
+					var logResult = _gameLogRepository.Submit(
 						queryDate,
 						sp.Slug);
-					result.Add(gl, sp.Slug);
-					if (IsHottie(sp, gl))
-						hotties.Add(sp, gl);
+					if (logResult.IsSuccess)
+					{
+						var gl = logResult.Value;
+						result.Add(gl, sp.Slug);
+						if (IsHottie(sp, gl))
+							hotties.Add(sp, gl);
+					}
 				}
 			}
 			return hotties;

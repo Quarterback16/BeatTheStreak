@@ -54,19 +54,24 @@ namespace BeatTheStreak.Implementations
 				if (queryDate.Equals(DateTime.Now.Date.AddDays(-1)))
 					break;
 
-				var log = _gameLogRepository.Submit(
+				var logResult = _gameLogRepository.Submit(
 					queryDate: queryDate,
 					playerSlug: playerSlug);
-				totalLog.Add(log);
-				if (log.HasGame)
+
+				if (logResult.IsSuccess)
 				{
-					totalLog.IsPitcher = log.IsPitcher;
-					totalLog.IsBatter = log.IsBatter;
+					var log = logResult.Value;
+					totalLog.Add(log);
+					if (log.HasGame)
+					{
+						totalLog.IsPitcher = log.IsPitcher;
+						totalLog.IsBatter = log.IsBatter;
+					}
+					if (d == 0)
+						DisplayHeading(log, _rosterMaster);
+					if (log.HasGame)
+						Console.WriteLine(log.DateLine());
 				}
-				if (d == 0)
-					DisplayHeading(log,_rosterMaster);
-				if (log.HasGame)
-					Console.WriteLine(log.DateLine());
 			}
 			DisplayTotals(totalLog);
 			return totalLog;

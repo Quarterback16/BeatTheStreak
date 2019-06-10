@@ -1,12 +1,13 @@
 ﻿using System;
 using BeatTheStreak.Interfaces;
 using BeatTheStreak.Models;
+using BeatTheStreak.Helpers;
 
 namespace BeatTheStreak.Repositories
 {
 	public class GameLogRepository : IGameLogRepository
 	{
-		public PlayerGameLogViewModel Submit(
+		public Result<PlayerGameLogViewModel> Submit(
 			DateTime queryDate, 
 			string playerSlug)
 		{

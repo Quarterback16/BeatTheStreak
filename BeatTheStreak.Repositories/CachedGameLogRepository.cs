@@ -19,20 +19,32 @@ namespace BeatTheStreak.Repositories
 			_cache = cache;
 		}
 
-		public PlayerGameLogViewModel Submit(
+		public Result<PlayerGameLogViewModel> Submit(
 			DateTime queryDate, 
 			string playerSlug)
 		{
+			var result = Result.Fail<PlayerGameLogViewModel>("empty");
 			var keyValue = $@"gamelog:{
 				playerSlug
 				}:{
 				Utility.UniversalDate(queryDate)}";
-			if (!_cache.TryGet(keyValue, out PlayerGameLogViewModel viewModel))
+			if (!_cache.TryGet(
+				keyValue,
+				out PlayerGameLogViewModel viewModel))
 			{
-				viewModel = _decoratedComponent.Submit(queryDate, playerSlug);
-				_cache.Set(keyValue, viewModel);
+				result = _decoratedComponent.Submit(
+					queryDate,
+					playerSlug);
+				if (result.IsSuccess)
+				{
+					viewModel = result.Value;
+					_cache.Set(keyValue, viewModel);
+				}
+				else
+					return result;
 			}
-			return viewModel;
+			result = Result.Ok(viewModel);
+			return result;
 		}
 	}
 }

@@ -15,7 +15,7 @@ namespace BeatTheStreak.Tests
 	[TestClass]
 	public class FantasyTests
 	{
-		const int K_CurrentWeek = 9;
+		const int K_CurrentWeek = 10;
 		private ICacheRepository _cache;
 		private IGameLogRepository _gameLogRepository;
 		private IGameLogRepository _cachedGameLogRepository;
@@ -46,9 +46,11 @@ namespace BeatTheStreak.Tests
 			var result = sut.Submit(
 				queryDate: new DateTime(2019, 5, 1),
 				playerSlug: "mlb-raul-mondesi");
-
-			Console.WriteLine(result.DateHeaderLine());
-			Console.WriteLine(result.DateLine());
+			if (result.IsSuccess)
+			{
+				Console.WriteLine(result.Value.DateHeaderLine());
+				Console.WriteLine(result.Value.DateLine());
+			}
 		}
 
 		[TestMethod]
@@ -314,9 +316,11 @@ namespace BeatTheStreak.Tests
 			var result = sut.Submit(
 				queryDate: new DateTime(2019, 4, 20),
 				playerSlug: "mlb-max-scherzer");
-
-			Console.WriteLine(result.DateHeaderLine());
-			Console.WriteLine(result.DateLine());
+			if (result.IsSuccess)
+			{
+				Console.WriteLine(result.Value.DateHeaderLine());
+				Console.WriteLine(result.Value.DateLine());
+			}
 		}
 
 		[TestMethod]
@@ -652,7 +656,7 @@ namespace BeatTheStreak.Tests
 			var plyrs = new List<Closer>
 			{
 				new Closer("Greg Holland",       "AD", "medium"),
-				new Closer( "A.J. Minter",       "AB", "committee" ),
+				new Closer( "Luke Jackson",       "AB", "medium" ),
 				new Closer( "Shawn Armstrong",     "BO", "committee" ),
 				new Closer( "Ryan Brasier",      "BRS",  "committee" ),
 				new Closer( "Steve Cishek",       "CHC", "weak" ),
@@ -663,14 +667,14 @@ namespace BeatTheStreak.Tests
 				new Closer( "Shane Greene",       "DT", "strong" ),
 				new Closer( "Roberto Osuna",     "HA", "strong" ),
 				new Closer( "Ian Kennedy",       "KC", "committee" ),
-				new Closer( "Hansel Robles",     "LAA", "committee" ),
+				new Closer( "Hansel Robles",     "LAA", "medium" ),
 				new Closer( "Kenley Jansen",     "LAD", "strong" ),
 				new Closer( "Sergio Romo",       "MIA", "medium" ),
 				new Closer( "Josh Hader",        "MB", "medium" ),
 				new Closer( "Blake Parker",      "MT", "committee" ),
 				new Closer( "Edwin Diaz",        "NYM", "strong" ),
 				new Closer( "Aroldis Chapman",   "NYY", "strong" ),
-				new Closer( "Blake Trienen",     "OA", "strong" ),
+				new Closer( "Blake Treinen",     "OA", "strong" ),
 				new Closer( "Hector Neris",      "PHP", "medium" ),
 				new Closer( "Felipe Vazquez",    "PIT", "strong" ),
 				new Closer( "Kirby Yates",       "SD", "strong" ),

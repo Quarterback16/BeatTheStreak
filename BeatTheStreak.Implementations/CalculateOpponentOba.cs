@@ -32,21 +32,24 @@ namespace BeatTheStreak.Implementations
 				for (int i = 1; i < daysBack + 1; i++)
 				{
 					focusDate = gameDate.AddDays(-i);
-					var gameLog = _gameLogRepository.Submit(
+					var gameLogResult = _gameLogRepository.Submit(
 									queryDate: focusDate,
 									playerSlug: playerSlug);
+					if (gameLogResult.IsSuccess)
+					{
+						var gameLog = gameLogResult.Value;
+						if (!gameLog.GameStarted)
+							continue;
 
-					if (!gameLog.GameStarted)
-						continue;
-
-					//_logger.Info(
-					//	$@" on {
-					//		Utility.UniversalDate(focusDate)
-					//		} {
-					//		gameLog.PitcherLine()
-					//		}");
-					totalHits += gameLog.HitsAllowed;
-					totalOuts += gameLog.OutsRecorded;
+						//_logger.Info(
+						//	$@" on {
+						//		Utility.UniversalDate(focusDate)
+						//		} {
+						//		gameLog.PitcherLine()
+						//		}");
+						totalHits += gameLog.HitsAllowed;
+						totalOuts += gameLog.OutsRecorded;
+					}
 				}
 				var oba = Utility.BattingAverage(
 					totalHits, totalOuts + totalHits);
@@ -62,7 +65,11 @@ namespace BeatTheStreak.Implementations
 			}
 			catch (Exception ex)
 			{
-				_logger.Error($"{playerSlug} : {focusDate.ToShortDateString()}");
+				_logger.Error($@"{
+					playerSlug
+					} : {
+					focusDate.ToShortDateString()
+					}");
 				_logger.Error(ex.Message);
 				throw;
 			}
