@@ -8,6 +8,7 @@ namespace BeatTheStreak.Implementations
 	public class PlayerReport
 	{
 		public string Player { get; set; }
+		public string PlayerSlug { get; set; }
 
 		public string FantasyTeam { get; set; }
 

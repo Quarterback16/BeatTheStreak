@@ -56,15 +56,25 @@ namespace BeatTheStreak.Tests
 			var result = _sut.GetHotList(
 				teamSlugs: new List<string>
 				{
-					"mlb-pit"
+					"mlb-min",
+					"mlb-la",
+					"mlb-hou",
+					"mlb-nyy",
+					"mlb-tb",
+					"mlb-mil",
+					"mlb-phi",
+					"mlb-chc",
+					"mlb-atl",
+					"mlb-col",
+					"mlb-tex",
 				},
-				queryDate: Utility.WeekStart(10).AddDays(-1),
-				gamesBack: 3);
+				queryDate: Utility.WeekStart(11).AddDays(-1),
+				gamesBack: 14);
 			foreach (var item in result)
 			{
 				System.Console.WriteLine(item);
 			}
-			Assert.IsTrue(result.Count > 1);
+			Assert.IsTrue(result.Count > 0);
 			var sut = new WeekReportMulti(
 					_cachedGameLogRepository,
 					_rosterMaster,

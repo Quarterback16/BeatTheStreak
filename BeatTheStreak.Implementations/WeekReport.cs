@@ -38,7 +38,10 @@ namespace BeatTheStreak.Implementations
 			    IsBatter = Hitters,
 			    IsPitcher = !Hitters
 			};
-			var playerSlug = Utility.PlayerSlug(Player);
+			if (string.IsNullOrEmpty(PlayerSlug))
+			{
+				PlayerSlug = Utility.PlayerSlug(Player);
+			}
 			FantasyTeam = _rosterMaster.GetOwnerOf(Player);
 			if (playerNo > 0) JerseyNumber = playerNo;
 			var daysToReport = 7;
@@ -53,7 +56,7 @@ namespace BeatTheStreak.Implementations
 
 				var result = _gameLogRepository.Submit(
 					queryDate: queryDate,
-					playerSlug: playerSlug);
+					playerSlug: PlayerSlug);
 
 				if (result.IsSuccess)
 				{
@@ -77,7 +80,5 @@ namespace BeatTheStreak.Implementations
 			CloseOutput();
 			return totalLog;
 		}
-
-
 	}
 }

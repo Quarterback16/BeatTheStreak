@@ -68,7 +68,8 @@ namespace BeatTheStreak.Implementations
 					player.Slug,
 					startDate,
 					endDate);
-				if (woba >= threshold && ab > AbsToQualify(startDate,endDate))
+				var abCap = AbsToQualify(startDate, endDate);
+				if (woba >= threshold && ab > abCap)
 					hotList.Add(ViewModelFor(player, woba, ab));
 			}
 			return hotList;
@@ -79,7 +80,7 @@ namespace BeatTheStreak.Implementations
 			DateTime endDate)
 		{
 			TimeSpan difference = endDate - startDate;
-			return (int) (difference.TotalDays + 1) * 3;
+			return (int) (difference.TotalDays + 1) * 2;
 		}
 
 		private HotListViewModel ViewModelFor(

@@ -1,6 +1,7 @@
 ﻿using BeatTheStreak.Helpers;
 using BeatTheStreak.Interfaces;
 using BeatTheStreak.Models;
+using Domain;
 using FbbEventStore;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ namespace BeatTheStreak.Implementations
 		private readonly string[] _players;
 		private readonly int _week;
 
+		public List<Player> Players { get; set; }
+
 		public bool IncludePriorWeek { get; set; }
 
 		public WeekReportMulti(
@@ -25,7 +28,22 @@ namespace BeatTheStreak.Implementations
 			_gameLogRepository = gameLogRepository;
 			_rosterMaster = rosterMaster;
 			_players = players;
+			Players = AsPlayers(players);
 			_week = week;
+		}
+
+		private List<Player> AsPlayers(string[] players)
+		{
+			Players = new List<Player>();
+			foreach (var item in players)
+			{
+				Players.Add(
+					new Player
+					{
+						Name = item
+					});
+			}
+			return Players;
 		}
 
 		public WeekReportMulti(
@@ -37,7 +55,23 @@ namespace BeatTheStreak.Implementations
 			_gameLogRepository = gameLogRepository;
 			_rosterMaster = rosterMaster;
 			_players = AsPlayerNames(players);
+			Players = AsPlayers(players);
 			_week = week;
+		}
+
+		private List<Player> AsPlayers(List<HotListViewModel> players)
+		{
+			Players = new List<Player>();
+			foreach (var item in players)
+			{
+				Players.Add(
+					new Player
+					{
+						Name = item.Player.Name,
+						Slug = item.Player.Slug
+					});
+			}
+			return Players;
 		}
 
 		private string[] AsPlayerNames(List<HotListViewModel> players)
@@ -56,14 +90,15 @@ namespace BeatTheStreak.Implementations
 		{
 			SetOutput();
 			var i = 0;
-			foreach (var player in _players)
+			foreach (var player in Players)
 			{
 				var sut = new WeekReport(
 					_gameLogRepository,
 					_rosterMaster)
 				{
 					WeekStarts = Utility.WeekStart(_week),
-					Player = player,
+					Player = player.Name,
+					PlayerSlug = player.Slug,
 					Hitters = true,
 					IncludePriorWeek = IncludePriorWeek
 				};
