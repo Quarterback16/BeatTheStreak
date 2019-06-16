@@ -134,13 +134,23 @@ namespace BeatTheStreak.Helpers
 				return "mlb-201ad9a5-9194-46b6-aac0-ee8080dbb4ee";
 			if (playerName.Equals("Brian Reynolds"))
 				return "mlb-28968740-3ac9-4ed2-bd6f-f36829d8090a";
+			if (playerName.Equals("Yordan Alvarez"))
+				return "mlb-0ec6c395-d965-455f-9260-8e357ca5355c";
+			if (playerName.Equals("Michael Moustakas"))
+				return "mlb-mike-moustakas";
+			if (playerName.Equals("Frederick Freeman"))
+				return "mlb-freddie-freeman";
+			if (playerName.Equals("David LeMahieu"))
+				return "mlb-dj-lemahieu";
+			if (playerName.Equals("David LeMahieu"))
+				return "mlb-dj-lemahieu";
 
 			return $"mlb-{playerName.Replace(' ', '-').ToLower()}";
 		}
 
 		public static int CurrentWeek()
 		{
-			return 10;
+			return 11;
 		}
 
 		public static DateTime WeekStart( int weekNo )

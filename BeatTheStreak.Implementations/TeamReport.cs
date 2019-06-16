@@ -54,6 +54,7 @@ namespace BeatTheStreak.Implementations
 			string p)
 		{
 			_weekReport.Player = p;
+			_weekReport.PlayerSlug = string.Empty;
 			_weekReport.WeekStarts = WeekStarts;
 			_weekReport.Hitters = Hitters;
 			_weekReport.JerseyNumber = _rosterMaster.JerseyNumber(

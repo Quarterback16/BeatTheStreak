@@ -477,7 +477,7 @@
     },
     {
         "fteam": "ABG",
-        "player": "Mike Moustakas",
+        "player": "Michael Moustakas",
         "team": "Mil",
         "pos": "3B",
         "trans": "IN"
@@ -715,7 +715,7 @@
     },
     {
         "fteam": "CA",
-        "player": "Freddie Freeman",
+        "player": "Frederick Freeman",
         "team": "Atl",
         "pos": "1B",
         "trans": "IN"
@@ -890,7 +890,7 @@
     },
     {
         "fteam": "BBJ",
-        "player": "Alex Bregman",
+        "player": "Alexander Bregman",
         "team": "Hou",
         "pos": "SS",
         "trans": "IN"
@@ -1261,7 +1261,7 @@
     },
     {
         "fteam": "TC",
-        "player": "Ozzie Albies",
+        "player": "Ozhanio Albies",
         "team": "Atl",
         "pos": "2B",
         "trans": "IN"
@@ -1359,7 +1359,7 @@
     },
     {
         "fteam": "TC",
-        "player": "Max Muncy",
+        "player": "Maxwell Muncy",
         "team": "LAD",
         "pos": "3B",
         "trans": "IN"
@@ -2247,7 +2247,7 @@
     {
         "date": "2019-05-01",
         "fteam": "ABG",
-        "player": "Max Kepler",
+        "player": "Maximilian Kepler",
         "team": "Min",
         "pos": "RF",
         "trans": "IN"
@@ -2455,7 +2455,7 @@
     {
         "date": "2019-05-13",
         "fteam": "CA",
-        "player": "DJ LeMahieu",
+        "player": "David LeMahieu",
         "team": "NYY",
         "pos": "2B",
         "Trans": "IN"
@@ -2723,7 +2723,7 @@
         "team": "Min",
         "pos": "SS",
         "Trans": "IN"
-    },
+    },  
     {
         "date": "2019-05-27",
         "fteam": "CA",
@@ -2739,7 +2739,7 @@
         "team": "Pit",
         "pos": "SP",
         "Trans": "IN"
-    },
+    },        
     {
         "date": "2019-05-27",
         "fteam": "CA",
@@ -2755,7 +2755,7 @@
         "team": "Tex",
         "pos": "SP",
         "Trans": "IN"
-    },
+    }, 
     {
         "date": "2019-05-27",
         "fteam": "CA",
@@ -2771,7 +2771,7 @@
         "team": "Sea",
         "pos": "C",
         "Trans": "IN"
-    },
+    }, 
     {
         "date": "2019-05-27",
         "fteam": "CA",
@@ -2787,7 +2787,7 @@
         "team": "NYY",
         "pos": "3B",
         "Trans": "OUT"
-    },
+    },  
     {
         "date": "2019-05-31",
         "fteam": "TC",
@@ -2795,7 +2795,7 @@
         "team": "ChC",
         "pos": "SP",
         "Trans": "OUT"
-    },
+    },      
     {
         "date": "2019-05-31",
         "fteam": "TC",
@@ -2803,7 +2803,7 @@
         "team": "Mil",
         "pos": "SP",
         "Trans": "IN"
-    },
+    }, 
     {
         "date": "2019-05-31",
         "fteam": "TC",
@@ -2811,7 +2811,7 @@
         "team": "Pit",
         "pos": "SP",
         "Trans": "OUT"
-    },
+    },      
     {
         "date": "2019-05-31",
         "fteam": "TC",
@@ -2819,7 +2819,7 @@
         "team": "ChW",
         "pos": "SP",
         "Trans": "IN"
-    },
+    }, 
     {
         "date": "2019-05-31",
         "fteam": "TC",
@@ -2827,7 +2827,7 @@
         "team": "StL",
         "pos": "3B",
         "Trans": "OUT"
-    },
+    },      
     {
         "date": "2019-05-31",
         "fteam": "TC",
@@ -2835,7 +2835,7 @@
         "team": "KC",
         "pos": "3B",
         "Trans": "IN"
-    },
+    }, 
     {
         "date": "2019-05-31",
         "fteam": "STTM",
@@ -2843,7 +2843,7 @@
         "team": "NYY",
         "pos": "SP",
         "Trans": "OUT"
-    },
+    },      
     {
         "date": "2019-05-31",
         "fteam": "STTM",
@@ -2851,7 +2851,7 @@
         "team": "Phi",
         "pos": "SP",
         "Trans": "IN"
-    },
+    },    
     {
         "date": "2019-05-31",
         "fteam": "STTM",
@@ -2859,7 +2859,7 @@
         "team": "LAA",
         "pos": "3B",
         "Trans": "IN"
-    },
+    },  
     {
         "date": "2019-05-31",
         "fteam": "STTM",
@@ -2867,7 +2867,7 @@
         "team": "LAA",
         "pos": "SS",
         "Trans": "OUT"
-    },
+    },      
     {
         "date": "2019-05-31",
         "fteam": "STTM",
@@ -2891,7 +2891,7 @@
         "team": "Min",
         "pos": "RP",
         "Trans": "IN"
-    },
+    },      
     {
         "date": "2019-06-03",
         "fteam": "CA",
@@ -2907,7 +2907,7 @@
         "team": "Hou",
         "pos": "RP",
         "Trans": "IN"
-    },
+    },                                  
     {
         "date": "2019-06-03",
         "fteam": "CA",
@@ -2923,7 +2923,7 @@
         "team": "LAA",
         "pos": "SP",
         "Trans": "IN"
-    },
+    },     
     {
         "date": "2019-06-03",
         "fteam": "CA",
@@ -2939,7 +2939,7 @@
         "team": "LAD",
         "pos": "LF",
         "Trans": "IN"
-    },
+    },     
     {
         "date": "2019-06-03",
         "fteam": "CA",
@@ -2955,7 +2955,7 @@
         "team": "Tex",
         "pos": "LF",
         "Trans": "IN"
-    },
+    },      
     {
         "date": "2019-06-03",
         "fteam": "CA",
@@ -2971,7 +2971,7 @@
         "team": "Tex",
         "pos": "LF",
         "Trans": "IN"
-    },
+    },     
     {
         "date": "2019-06-03",
         "fteam": "STTM",
@@ -2987,7 +2987,7 @@
         "team": "Ari",
         "pos": "SS",
         "Trans": "IN"
-    },
+    }, 
     {
         "date": "2019-06-03",
         "fteam": "STTM",
@@ -3002,6 +3002,150 @@
         "player": "Jon Lester",
         "team": "ChC",
         "pos": "SP",
+        "Trans": "IN"
+    },
+    {
+        "date": "2019-06-05",
+        "fteam": "STTM",
+        "player": "Andrew McCutchen",
+        "team": "Phi",
+        "pos": "RF",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-06-05",
+        "fteam": "CA",
+        "player": "Caleb Smith",
+        "team": "Mia",
+        "pos": "SP",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-06-05",
+        "fteam": "CA",
+        "player": "Alex Colome",
+        "team": "ChW",
+        "pos": "RP",
+        "Trans": "IN"
+    },      
+    {
+        "date": "2019-06-05",
+        "fteam": "STTM",
+        "player": "Jesus Aguilar",
+        "team": "Mil",
+        "pos": "1B",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-06-05",
+        "fteam": "STTM",
+        "player": "David Fletcher",
+        "team": "LAA",
+        "pos": "2B",
+        "Trans": "IN"
+    },
+    {
+        "date": "2019-06-05",
+        "fteam": "STTM",
+        "player": "Adam Jones",
+        "team": "Ari",
+        "pos": "CF",
+        "Trans": "IN"
+    },           
+    {
+        "date": "2019-06-05",
+        "fteam": "CA",
+        "player": "Griffin Canning",
+        "team": "LAA",
+        "pos": "SP",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-06-05",
+        "fteam": "CA",
+        "player": "Craig Kimbrel",
+        "team": "ChC",
+        "pos": "RP",
+        "Trans": "IN"
+    },  
+    {
+        "date": "2019-06-10",
+        "fteam": "TT",
+        "player": "Michael Chavis",
+        "team": "Bos",
+        "pos": "3B",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-06-10",
+        "fteam": "TT",
+        "player": "Didi Gregorius",
+        "team": "NYY",
+        "pos": "SS",
+        "Trans": "IN"
+    },  
+    {
+        "date": "2019-06-10",
+        "fteam": "GH",
+        "player": "Travis Shaw",
+        "team": "Mil",
+        "pos": "2B",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-06-10",
+        "fteam": "GH",
+        "player": "Omar Narvaez",
+        "team": "Sea",
+        "pos": "C",
+        "Trans": "IN"
+    },
+    {
+        "date": "2019-06-10",
+        "fteam": "CA",
+        "player": "Matt Wieters",
+        "team": "StL",
+        "pos": "C",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-06-10",
+        "fteam": "CA",
+        "player": "Mitch Garver",
+        "team": "Min",
+        "pos": "C",
+        "Trans": "IN"
+    },  
+    {
+        "date": "2019-06-10",
+        "fteam": "CA",
+        "player": "Devin Smeltzer",
+        "team": "Min",
+        "pos": "RP",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-06-10",
+        "fteam": "CA",
+        "player": "Luke Jackson",
+        "team": "Atl",
+        "pos": "RP",
+        "Trans": "IN"
+    }, 
+    {
+        "date": "2019-06-13",
+        "fteam": "CA",
+        "player": "Nomar Mazara",
+        "team": "Tex",
+        "pos": "RF",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-06-13",
+        "fteam": "CA",
+        "player": "Yordan Alvarez",
+        "team": "Hou",
+        "pos": "LF",
         "Trans": "IN"
     }
 ]    

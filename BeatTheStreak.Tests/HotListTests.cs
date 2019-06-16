@@ -56,19 +56,19 @@ namespace BeatTheStreak.Tests
 			var result = _sut.GetHotList(
 				teamSlugs: new List<string>
 				{
-					"mlb-min",
 					"mlb-la",
+					"mlb-min",
 					"mlb-hou",
 					"mlb-nyy",
 					"mlb-tb",
+					"mlb-chc",
 					"mlb-mil",
 					"mlb-phi",
-					"mlb-chc",
 					"mlb-atl",
-					"mlb-col",
 					"mlb-tex",
+					"mlb-col",
 				},
-				queryDate: Utility.WeekStart(11).AddDays(-1),
+				queryDate: Utility.WeekStart(12).AddDays(-1),
 				gamesBack: 14);
 			foreach (var item in result)
 			{

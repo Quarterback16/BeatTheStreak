@@ -15,7 +15,7 @@ namespace BeatTheStreak.Tests
 	[TestClass]
 	public class FantasyTests
 	{
-		const int K_CurrentWeek = 10;
+		const int K_CurrentWeek = 11;
 		private ICacheRepository _cache;
 		private IGameLogRepository _gameLogRepository;
 		private IGameLogRepository _cachedGameLogRepository;
@@ -56,7 +56,7 @@ namespace BeatTheStreak.Tests
 		[TestMethod]
 		public void BattersStatsForTheWeek()
 		{
-			var player = "Jorge Polanco";
+			var player = "Nomar Mazara";
 			var sut = new WeekReport(
 //				_cachedGameLogRepository,
 				_gameLogRepository,
@@ -65,7 +65,7 @@ namespace BeatTheStreak.Tests
 				WeekStarts = Utility.WeekStart(K_CurrentWeek),
 				Player = player,
 				Hitters = true,
-				IncludePriorWeek = true,
+				IncludePriorWeek = false,
 				OutputFile = TestHelper.FileName(
 						"Hitters",
 						$"Batter-{player}",
@@ -249,10 +249,10 @@ namespace BeatTheStreak.Tests
 			string[] playersDropped = new string[]
 			{
 				"Franmil Reyes",
+				"Joc Pederson",
 				"Adam Jones",
 				"Gregory Polanco",
 				"Robinson Chirinos",
-				"Mitch Garver",
 				"Brandon Lowe",
 				"Dansby Swanson",
 				"Enrique Hernandez",
@@ -290,7 +290,7 @@ namespace BeatTheStreak.Tests
 		[TestMethod]
 		public void FantasyTeamHitterStatsForTheWeek()
 		{
-			var week = K_CurrentWeek;
+			var week = 10; // K_CurrentWeek;
 			var sut = new TeamReport(
 				new WeekReport(
 					_gameLogRepository,
@@ -507,31 +507,13 @@ namespace BeatTheStreak.Tests
 		{
 			string[] prospects = new string[]
 			{
-				"Christopher Cron",
-				"Adam Jones",
-				"Joc Pederson",
-				"Clint Frazier",
-				"Kyle Tucker",
-				"Byron Buxton",
-				"Kris Bryant",
-				"Dexter Fowler",
-				"Daniel Vogelbach",
-				"Shin-Soo Choo",
-				"Trey Mancini",
-				"Christian Vazquez",
-				"Jonathan Schoop",
-				"Anthony Kemp",
-				"Josh Reddick",
-				"Ronny Rodriguez",
-				"Brendan Rodgers",
-				"Eric Sogard",
-				"Kolten Wong",
-				"Niko Goodrum",
-				"Hunter Dozier",
-				"Nick Markakis",
-				"John Smith Jr",
-				"Adam Frazier",
-				"Marwin Gonzalez"
+				"Yordan Alvarez",
+				"Ji-Man Choi",
+				"Michael Moustakas",
+				"Eric Thames",
+				"Jay Bruce",
+				"David Bote",
+				"Asdrubal Cabrera",
 			};
 			var sut = new WeekReportMulti(
 					_cachedGameLogRepository,
@@ -543,7 +525,7 @@ namespace BeatTheStreak.Tests
 					"Hitters",
 					"Prospects",
 					K_CurrentWeek),
-				IncludePriorWeek = true
+				IncludePriorWeek = false
 			};
 			sut.Execute();
 		}
@@ -655,19 +637,19 @@ namespace BeatTheStreak.Tests
 		{
 			var plyrs = new List<Closer>
 			{
-				new Closer("Greg Holland",       "AD", "medium"),
+				new Closer( "Greg Holland",       "AD", "medium"),
 				new Closer( "Luke Jackson",       "AB", "medium" ),
 				new Closer( "Shawn Armstrong",     "BO", "committee" ),
 				new Closer( "Ryan Brasier",      "BRS",  "committee" ),
-				new Closer( "Steve Cishek",       "CHC", "weak" ),
+				new Closer( "Steve Cishek",       "CHC", "committee" ),
 				new Closer( "Raisel Iglesias",   "CR", "strong" ),
 				new Closer( "Brad Hand",         "CI", "strong" ),
-				new Closer( "Scott Oberg",        "COL", "Weak" ),
+				new Closer( "Wade Davis",        "COL", "strong" ),
 				new Closer( "Alex Colome",       "CWS", "strong" ),
 				new Closer( "Shane Greene",       "DT", "strong" ),
 				new Closer( "Roberto Osuna",     "HA", "strong" ),
-				new Closer( "Ian Kennedy",       "KC", "committee" ),
-				new Closer( "Hansel Robles",     "LAA", "medium" ),
+				new Closer( "Ian Kennedy",       "KC", "medium" ),
+				new Closer( "Hansel Robles",     "LAA", "committee" ),
 				new Closer( "Kenley Jansen",     "LAD", "strong" ),
 				new Closer( "Sergio Romo",       "MIA", "medium" ),
 				new Closer( "Josh Hader",        "MB", "medium" ),
@@ -683,7 +665,7 @@ namespace BeatTheStreak.Tests
 				new Closer( "Jordan Hicks",      "SLC", "medium" ),
 				new Closer( "Jose Alvarado",     "Tam", "committee" ),
 				new Closer( "Shawn Kelley",       "TR", "weak" ),
-				new Closer( "Ken Giles",         "TB", "strong" ),
+				new Closer( "Joe Biagni",         "TB", "weak" ),
 				new Closer( "Sean Doolittle",    "Wsh", "strong" )
 			};
 
