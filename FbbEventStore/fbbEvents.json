@@ -2723,7 +2723,7 @@
         "team": "Min",
         "pos": "SS",
         "Trans": "IN"
-    },  
+    },
     {
         "date": "2019-05-27",
         "fteam": "CA",
@@ -2739,7 +2739,7 @@
         "team": "Pit",
         "pos": "SP",
         "Trans": "IN"
-    },        
+    },
     {
         "date": "2019-05-27",
         "fteam": "CA",
@@ -2755,7 +2755,7 @@
         "team": "Tex",
         "pos": "SP",
         "Trans": "IN"
-    }, 
+    },
     {
         "date": "2019-05-27",
         "fteam": "CA",
@@ -2771,7 +2771,7 @@
         "team": "Sea",
         "pos": "C",
         "Trans": "IN"
-    }, 
+    },
     {
         "date": "2019-05-27",
         "fteam": "CA",
@@ -2787,7 +2787,7 @@
         "team": "NYY",
         "pos": "3B",
         "Trans": "OUT"
-    },  
+    },
     {
         "date": "2019-05-31",
         "fteam": "TC",
@@ -2795,7 +2795,7 @@
         "team": "ChC",
         "pos": "SP",
         "Trans": "OUT"
-    },      
+    },
     {
         "date": "2019-05-31",
         "fteam": "TC",
@@ -2803,7 +2803,7 @@
         "team": "Mil",
         "pos": "SP",
         "Trans": "IN"
-    }, 
+    },
     {
         "date": "2019-05-31",
         "fteam": "TC",
@@ -2811,7 +2811,7 @@
         "team": "Pit",
         "pos": "SP",
         "Trans": "OUT"
-    },      
+    },
     {
         "date": "2019-05-31",
         "fteam": "TC",
@@ -2819,7 +2819,7 @@
         "team": "ChW",
         "pos": "SP",
         "Trans": "IN"
-    }, 
+    },
     {
         "date": "2019-05-31",
         "fteam": "TC",
@@ -2827,7 +2827,7 @@
         "team": "StL",
         "pos": "3B",
         "Trans": "OUT"
-    },      
+    },
     {
         "date": "2019-05-31",
         "fteam": "TC",
@@ -2835,7 +2835,7 @@
         "team": "KC",
         "pos": "3B",
         "Trans": "IN"
-    }, 
+    },
     {
         "date": "2019-05-31",
         "fteam": "STTM",
@@ -2843,7 +2843,7 @@
         "team": "NYY",
         "pos": "SP",
         "Trans": "OUT"
-    },      
+    },
     {
         "date": "2019-05-31",
         "fteam": "STTM",
@@ -2851,7 +2851,7 @@
         "team": "Phi",
         "pos": "SP",
         "Trans": "IN"
-    },    
+    },
     {
         "date": "2019-05-31",
         "fteam": "STTM",
@@ -2859,7 +2859,7 @@
         "team": "LAA",
         "pos": "3B",
         "Trans": "IN"
-    },  
+    },
     {
         "date": "2019-05-31",
         "fteam": "STTM",
@@ -2867,7 +2867,7 @@
         "team": "LAA",
         "pos": "SS",
         "Trans": "OUT"
-    },      
+    },
     {
         "date": "2019-05-31",
         "fteam": "STTM",
@@ -2891,7 +2891,7 @@
         "team": "Min",
         "pos": "RP",
         "Trans": "IN"
-    },      
+    },
     {
         "date": "2019-06-03",
         "fteam": "CA",
@@ -2907,7 +2907,7 @@
         "team": "Hou",
         "pos": "RP",
         "Trans": "IN"
-    },                                  
+    },
     {
         "date": "2019-06-03",
         "fteam": "CA",
@@ -2923,7 +2923,7 @@
         "team": "LAA",
         "pos": "SP",
         "Trans": "IN"
-    },     
+    },
     {
         "date": "2019-06-03",
         "fteam": "CA",
@@ -2939,7 +2939,7 @@
         "team": "LAD",
         "pos": "LF",
         "Trans": "IN"
-    },     
+    },
     {
         "date": "2019-06-03",
         "fteam": "CA",
@@ -2955,7 +2955,7 @@
         "team": "Tex",
         "pos": "LF",
         "Trans": "IN"
-    },      
+    },
     {
         "date": "2019-06-03",
         "fteam": "CA",
@@ -2971,7 +2971,7 @@
         "team": "Tex",
         "pos": "LF",
         "Trans": "IN"
-    },     
+    },
     {
         "date": "2019-06-03",
         "fteam": "STTM",
@@ -2987,7 +2987,7 @@
         "team": "Ari",
         "pos": "SS",
         "Trans": "IN"
-    }, 
+    },
     {
         "date": "2019-06-03",
         "fteam": "STTM",
@@ -3027,7 +3027,7 @@
         "team": "ChW",
         "pos": "RP",
         "Trans": "IN"
-    },      
+    },
     {
         "date": "2019-06-05",
         "fteam": "STTM",
@@ -3051,7 +3051,7 @@
         "team": "Ari",
         "pos": "CF",
         "Trans": "IN"
-    },           
+    },
     {
         "date": "2019-06-05",
         "fteam": "CA",
@@ -3067,7 +3067,7 @@
         "team": "ChC",
         "pos": "RP",
         "Trans": "IN"
-    },  
+    },
     {
         "date": "2019-06-10",
         "fteam": "TT",
@@ -3083,7 +3083,7 @@
         "team": "NYY",
         "pos": "SS",
         "Trans": "IN"
-    },  
+    },
     {
         "date": "2019-06-10",
         "fteam": "GH",
@@ -3115,7 +3115,7 @@
         "team": "Min",
         "pos": "C",
         "Trans": "IN"
-    },  
+    },
     {
         "date": "2019-06-10",
         "fteam": "CA",
@@ -3131,7 +3131,7 @@
         "team": "Atl",
         "pos": "RP",
         "Trans": "IN"
-    }, 
+    },
     {
         "date": "2019-06-13",
         "fteam": "CA",
@@ -3147,6 +3147,101 @@
         "team": "Hou",
         "pos": "LF",
         "Trans": "IN"
+    },
+    {
+        "date": "2019-06-14",
+        "fteam": "TC",
+        "player": "Nick Senzel",
+        "team": "Cin",
+        "pos": "2B",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-06-14",
+        "fteam": "TC",
+        "player": "Jarrod Dyson",
+        "team": "Ari",
+        "pos": "CF",
+        "Trans": "IN"
+    },
+    {
+        "date": "2019-06-17",
+        "fteam": "CA",
+        "player": "Brad Peacock",
+        "team": "Hou",
+        "pos": "RP",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-06-17",
+        "fteam": "CA",
+        "player": "Michael Wacha",
+        "team": "StL",
+        "pos": "SP",
+        "Trans": "IN"
+    },
+    {
+        "date": "2019-06-17",
+        "fteam": "CA",
+        "player": "Joc Pederson",
+        "team": "LAD",
+        "pos": "LF",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-06-17",
+        "fteam": "CA",
+        "player": "Scott Kingery",
+        "team": "Phi",
+        "pos": "SS",
+        "Trans": "IN"
+    },
+    {
+        "date": "2019-06-17",
+        "fteam": "GH",
+        "player": "Buster Posey",
+        "team": "SF",
+        "pos": "C",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-06-17",
+        "fteam": "GH",
+        "player": "Dansby Swanson",
+        "team": "Atl",
+        "pos": "SS",
+        "Trans": "IN"
+    },
+    {
+        "date": "2019-06-17",
+        "fteam": "TC",
+        "player": "Zach Davies",
+        "team": "Mil",
+        "pos": "SP",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-06-17",
+        "fteam": "TC",
+        "player": "Griffin Canning",
+        "team": "LAA",
+        "pos": "SP",
+        "Trans": "IN"
+    },
+    {
+        "date": "2019-06-17",
+        "fteam": "TC",
+        "player": "Nick Markakis",
+        "team": "Atl",
+        "pos": "RF",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-06-17",
+        "fteam": "TC",
+        "player": "Frankie Montas",
+        "team": "Oak",
+        "pos": "SP",
+        "Trans": "IN"
     }
-]    
-
+]

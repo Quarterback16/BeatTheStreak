@@ -15,7 +15,7 @@ namespace BeatTheStreak.Tests
 	[TestClass]
 	public class FantasyTests
 	{
-		const int K_CurrentWeek = 11;
+		const int K_CurrentWeek = 12;
 		private ICacheRepository _cache;
 		private IGameLogRepository _gameLogRepository;
 		private IGameLogRepository _cachedGameLogRepository;
@@ -56,10 +56,10 @@ namespace BeatTheStreak.Tests
 		[TestMethod]
 		public void BattersStatsForTheWeek()
 		{
-			var player = "Nomar Mazara";
+			var player = "Scott Kingery";
 			var sut = new WeekReport(
-//				_cachedGameLogRepository,
-				_gameLogRepository,
+				_cachedGameLogRepository,
+//				_gameLogRepository,
 				_rosterMaster)
 			{
 				WeekStarts = Utility.WeekStart(K_CurrentWeek),
@@ -290,7 +290,7 @@ namespace BeatTheStreak.Tests
 		[TestMethod]
 		public void FantasyTeamHitterStatsForTheWeek()
 		{
-			var week = 10; // K_CurrentWeek;
+			var week = K_CurrentWeek;
 			var sut = new TeamReport(
 				new WeekReport(
 					_gameLogRepository,

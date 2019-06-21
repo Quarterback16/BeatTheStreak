@@ -35,6 +35,16 @@ namespace BeatTheStreak.Helpers
 			return avg;
 		}
 
+		public static decimal WalkRate(
+			decimal walks,
+			decimal atBats)
+		{
+			if (atBats == 0) return 0.0M;
+			var avg = walks / atBats;
+			avg = Math.Truncate(avg * 1000m) / 1000m;
+			return avg;
+		}
+
 		public static decimal Whip(
 			int hitsAllowed,
 			int walksAllowed,
@@ -144,6 +154,8 @@ namespace BeatTheStreak.Helpers
 				return "mlb-dj-lemahieu";
 			if (playerName.Equals("David LeMahieu"))
 				return "mlb-dj-lemahieu";
+			if (playerName.Equals("Scott Kingery"))
+				return "mlb-4c20774e-c58d-4b6e-9b6d-c84fd50e188a";
 
 			return $"mlb-{playerName.Replace(' ', '-').ToLower()}";
 		}

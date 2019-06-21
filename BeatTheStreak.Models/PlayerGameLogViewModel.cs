@@ -281,6 +281,8 @@ namespace BeatTheStreak.Models
 				} {
 				StrikeOutRateToString()
 				} {
+				WalkRateToString()
+				} {
 			string.Format("{0,-5:#.000}", Woba(), -5)
 				}";
 			return line;
@@ -310,6 +312,16 @@ namespace BeatTheStreak.Models
 			return $"{soRate,-5:#.000}";
 		}
 
+		private string WalkRateToString()
+		{
+			decimal bbRate = Utility.WalkRate(
+								Walks,
+								AtBats);
+			if (bbRate == 1.0M)
+				return "1.00 ";
+			return $"{bbRate,-5:#.000}";
+		}
+
 		public string DateHeaderLine()
 		{
 			if (IsBatter)
@@ -331,7 +343,7 @@ namespace BeatTheStreak.Models
 
 		public string BatterHeaderLine()
 		{
-			var line = "Date          H  AB   R  HR  TB  BI  BB   K  SBN  AVG   KR   WOBA";
+			var line = "Date          H  AB   R  HR  TB  BI  BB   K  SBN  AVG   KR    WR   WOBA";
 			return line;
 		}
 
