@@ -51,9 +51,11 @@
   <ItemGroup>
     <Compile Include="ActualRosterTests.cs" />
     <Compile Include="AlwaysLikePicker.cs" />
+    <Compile Include="BtsBaseTests.cs" />
     <Compile Include="CachedPlayerStatsRepositoryIntegrationTests.cs" />
     <Compile Include="CalculateOpponentObaTests.cs" />
     <Compile Include="CalculateStreakIntegrationTests.cs" />
+    <Compile Include="CsvTests.cs" />
     <Compile Include="Fakes\FakeCacheLogger.cs" />
     <Compile Include="Fakes\FakeLogger.cs" />
     <Compile Include="FantasyTests.cs" />
@@ -125,6 +127,9 @@
       <Project>{a7bc3bf6-d5c2-45d1-899b-cc3a73ca10b8}</Project>
       <Name>FbbEventStore</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

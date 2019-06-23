@@ -1,10 +1,7 @@
 ﻿using BeatTheStreak.Helpers;
 using BeatTheStreak.Implementations;
-using BeatTheStreak.Interfaces;
 using BeatTheStreak.Repositories;
 using BeatTheStreak.Tests.Fakes;
-using Cache;
-using Cache.Interfaces;
 using FbbEventStore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -13,30 +10,12 @@ using System.Collections.Generic;
 namespace BeatTheStreak.Tests
 {
 	[TestClass]
-	public class FantasyTests
+	public class FantasyTests : BtsBaseTests
 	{
-		const int K_CurrentWeek = 12;
-		private ICacheRepository _cache;
-		private IGameLogRepository _gameLogRepository;
-		private IGameLogRepository _cachedGameLogRepository;
-		private IRosterMaster _rosterMaster;
-
 		[TestInitialize]
 		public void Setup()
 		{
-			_cache = new RedisCacheRepository(
-				connectionString: "localhost,abortConnect=false",
-				environment: "local",
-				functionalArea: "bts",
-				serializer: new XmlSerializer(),
-				logger: new FakeCacheLogger(),
-				expire: false);
-			_gameLogRepository = new GameLogRepository();
-			_cachedGameLogRepository = new CachedGameLogRepository(
-						_gameLogRepository,
-						_cache);
-			_rosterMaster = new FbbRosters(
-				new FbbEventStore.FbbEventStore());
+			Initialize();
 		}
 
 		[TestMethod]
@@ -44,13 +23,15 @@ namespace BeatTheStreak.Tests
 		{
 			var sut = new GameLogRequest();
 			var result = sut.Submit(
-				queryDate: new DateTime(2019, 5, 1),
-				playerSlug: "mlb-raul-mondesi");
+				queryDate: new DateTime(2019, 6, 20),
+				playerSlug: "mlb-christian-yelich");
 			if (result.IsSuccess)
 			{
 				Console.WriteLine(result.Value.DateHeaderLine());
 				Console.WriteLine(result.Value.DateLine());
 			}
+			else
+				Console.WriteLine(result.Error);
 		}
 
 		[TestMethod]
@@ -58,8 +39,8 @@ namespace BeatTheStreak.Tests
 		{
 			var player = "Scott Kingery";
 			var sut = new WeekReport(
-				_cachedGameLogRepository,
-//				_gameLogRepository,
+//				_cachedGameLogRepository,
+				_gameLogRepository,
 				_rosterMaster)
 			{
 				WeekStarts = Utility.WeekStart(K_CurrentWeek),
@@ -290,7 +271,7 @@ namespace BeatTheStreak.Tests
 		[TestMethod]
 		public void FantasyTeamHitterStatsForTheWeek()
 		{
-			var week = K_CurrentWeek;
+			var week = Utility.CurrentWeek();
 			var sut = new TeamReport(
 				new WeekReport(
 					_gameLogRepository,
@@ -507,13 +488,11 @@ namespace BeatTheStreak.Tests
 		{
 			string[] prospects = new string[]
 			{
-				"Yordan Alvarez",
-				"Ji-Man Choi",
-				"Michael Moustakas",
-				"Eric Thames",
+				"Marwin Gonzalez",
+				"Robinson Chirinos",
+				"Louis Voit",
+				"Brandon Lowe",
 				"Jay Bruce",
-				"David Bote",
-				"Asdrubal Cabrera",
 			};
 			var sut = new WeekReportMulti(
 					_cachedGameLogRepository,
@@ -525,7 +504,7 @@ namespace BeatTheStreak.Tests
 					"Hitters",
 					"Prospects",
 					K_CurrentWeek),
-				IncludePriorWeek = false
+				IncludePriorWeek = true
 			};
 			sut.Execute();
 		}
@@ -637,7 +616,7 @@ namespace BeatTheStreak.Tests
 		{
 			var plyrs = new List<Closer>
 			{
-				new Closer( "Greg Holland",       "AD", "medium"),
+				new Closer( "Greg Holland",       "AD", "strong"),
 				new Closer( "Luke Jackson",       "AB", "medium" ),
 				new Closer( "Shawn Armstrong",     "BO", "committee" ),
 				new Closer( "Ryan Brasier",      "BRS",  "committee" ),

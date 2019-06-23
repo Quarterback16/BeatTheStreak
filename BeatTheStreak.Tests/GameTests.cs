@@ -14,9 +14,7 @@ namespace BeatTheStreak.Tests
 			var sut = new GamesRequest();
 			var result = sut.Submit(
 				"mlb-was",
-				new DateTime(2019, 4, 25));
-
-
+				new DateTime(2019, 6, 19));
 			Assert.IsNotNull(result);
 		}
 	}

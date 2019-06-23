@@ -24,7 +24,8 @@ namespace BeatTheStreak.Repositories.StattlleShipApi
 				sport: "baseball",
 				league: "mlb",
 				apiRequest: "games",
-				queryParms: $"season_id=mlb-{queryDate.Year}&on={strDate}&team_id={teamSlug}");
+				queryParms: $"season_id=mlb-{queryDate.Year}&on={strDate}&team_id={teamSlug}&status=ended");
+		//		queryParms: $"season_id=mlb-{queryDate.Year}&status=ended");
 
 			var httpResponse 
 				= (HttpWebResponse)httpWebRequest.GetResponse();

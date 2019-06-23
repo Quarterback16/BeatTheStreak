@@ -42,12 +42,12 @@ namespace FbbEventStore.Tests
 
 
 		[TestMethod]
-		public void FbbEventStore_KnowsRosterForTc()
+		public void FbbEventStore_KnowsRosterForARamrodTeam()
 		{
-			var result = _sut.GetRoster("TC");
+			var result = _sut.GetRoster("STTM");
 			Assert.IsNotNull(result);
 			Assert.IsTrue(result.Count > 0);
-			_sut.DumpRoster("TC");
+			_sut.DumpRoster("STTM");
 		}
 
 		[TestMethod]
@@ -61,11 +61,11 @@ namespace FbbEventStore.Tests
 		[TestMethod]
 		public void FbbEventStore_KnowsWhoOwnsPlayer()
 		{
-			var plyr = "Kirby Yates";
+			var plyr = "Charles Blackmon";
 			var result = _sut.GetOwnerOf(plyr);
 			Assert.IsNotNull(result);
 			System.Console.WriteLine($"{result} owns {plyr}");
-			Assert.IsTrue(result.Equals("BBJ"));
+			Assert.IsTrue(result.Equals("STTM"));
 		}
 
 		[TestMethod]

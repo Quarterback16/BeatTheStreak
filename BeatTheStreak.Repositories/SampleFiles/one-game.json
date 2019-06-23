@@ -1,0 +1,250 @@
+{
+    "home_teams": [
+        {
+            "id": "84e287b3-8aa1-4cb5-bcce-6a0e8ba97f91",
+            "created_at": "2016-03-18T20:56:45-04:00",
+            "updated_at": "2016-07-12T19:34:14-04:00",
+            "abbreviation": "CIN",
+            "color": "C6011F",
+            "colors": [
+                "C6011F",
+                "000000"
+            ],
+            "hashtag": "Reds",
+            "hashtags": [
+                "Reds"
+            ],
+            "location": "Cincinnati",
+            "name": "Cincinnati",
+            "nickname": "Reds",
+            "latitude": 39.1031182,
+            "longitude": -84.5120196,
+            "slug": "mlb-cin",
+            "division_id": "920b37d3-9fd8-45c6-a1fb-047748240732",
+            "league_id": "cb399a17-e581-4f1a-9535-ea3bcb09fa1f"
+        }
+    ],
+    "leagues": [
+        {
+            "id": "cb399a17-e581-4f1a-9535-ea3bcb09fa1f",
+            "created_at": "2016-03-18T20:56:43-04:00",
+            "updated_at": "2016-07-12T19:34:12-04:00",
+            "abbreviation": "MLB",
+            "color": null,
+            "minutes_per_period": 1,
+            "name": "Major League Baseball",
+            "periods": 9,
+            "slug": "mlb",
+            "sport": "baseball"
+        }
+    ],
+    "away_teams": [
+        {
+            "id": "9ebc3cf3-9559-4b74-b8ad-f15f2c5eae71",
+            "created_at": "2016-03-18T20:56:45-04:00",
+            "updated_at": "2016-07-12T19:34:15-04:00",
+            "abbreviation": "WAS",
+            "color": "AB0003",
+            "colors": [
+                "AB0003",
+                "11225B"
+            ],
+            "hashtag": "Nats",
+            "hashtags": [
+                "Nats",
+                "Nationals"
+            ],
+            "location": "Washington",
+            "name": "Washington",
+            "nickname": "Nationals",
+            "latitude": 38.8787421,
+            "longitude": -77.0074421,
+            "slug": "mlb-was",
+            "division_id": "cbf6f7d2-4f6f-4fe9-b838-cf35bf9385b2",
+            "league_id": "cb399a17-e581-4f1a-9535-ea3bcb09fa1f"
+        }
+    ],
+    "winning_teams": [
+        {
+            "id": "9ebc3cf3-9559-4b74-b8ad-f15f2c5eae71",
+            "created_at": "2016-03-18T20:56:45-04:00",
+            "updated_at": "2016-07-12T19:34:15-04:00",
+            "abbreviation": "WAS",
+            "color": "AB0003",
+            "colors": [
+                "AB0003",
+                "11225B"
+            ],
+            "hashtag": "Nats",
+            "hashtags": [
+                "Nats",
+                "Nationals"
+            ],
+            "location": "Washington",
+            "name": "Washington",
+            "nickname": "Nationals",
+            "latitude": 38.8787421,
+            "longitude": -77.0074421,
+            "slug": "mlb-was",
+            "division_id": "cbf6f7d2-4f6f-4fe9-b838-cf35bf9385b2",
+            "league_id": "cb399a17-e581-4f1a-9535-ea3bcb09fa1f"
+        }
+    ],
+    "seasons": [
+        {
+            "id": "36a3cc89-aa83-4391-b0b5-2bf8905393d8",
+            "created_at": "2017-02-14T19:00:00-05:00",
+            "updated_at": "2017-03-07T09:02:50-05:00",
+            "name": "2019",
+            "current_interval_type": "regularseason",
+            "starts_on": "2019-02-21",
+            "ends_on": "2019-11-30",
+            "stats_coverage": "season_stat_and_boxscore_play_by_play",
+            "slug": "mlb-2019",
+            "league_id": "cb399a17-e581-4f1a-9535-ea3bcb09fa1f"
+        },
+        {
+            "id": "508f7fd8-a4a0-4047-a60d-3e9e7f1eebb0",
+            "created_at": "2016-03-18T20:56:43-04:00",
+            "updated_at": "2017-03-07T09:02:50-05:00",
+            "name": "2016",
+            "current_interval_type": "regularseason",
+            "starts_on": "2016-01-02",
+            "ends_on": "2016-11-30",
+            "stats_coverage": "season_stat_and_boxscore_play_by_play",
+            "slug": "mlb-2016",
+            "league_id": "cb399a17-e581-4f1a-9535-ea3bcb09fa1f"
+        }
+    ],
+    "venues": [
+        {
+            "id": "423023e8-3bf7-44a4-91d5-9d9d4e7f7e83",
+            "created_at": "2016-03-18T20:56:45-04:00",
+            "updated_at": "2016-07-13T06:37:01-04:00",
+            "abbreviation": "Great American Ball Park",
+            "capacity": 42319,
+            "city": "Cincinnati",
+            "country": "USA",
+            "field_type": "grass",
+            "name": "Great American Ball Park",
+            "slug": "gabp",
+            "state": "OH",
+            "stadium_type": null,
+            "time_zone": "US/Eastern",
+            "latitude": 39.1031182,
+            "longitude": -84.5120196,
+            "league_id": "cb399a17-e581-4f1a-9535-ea3bcb09fa1f",
+            "season_id": "508f7fd8-a4a0-4047-a60d-3e9e7f1eebb0"
+        }
+    ],
+    "officials": [
+        {
+            "id": "0556efeb-3bf2-4532-993f-cc8e7ee54a44",
+            "created_at": "2016-04-03T02:35:23-04:00",
+            "updated_at": "2019-06-20T14:05:17-04:00",
+            "first_name": "Joe",
+            "last_name": "West",
+            "name": "Joe West",
+            "role": "2B",
+            "role_label": "Second Base",
+            "slug": "mlb-joe-west",
+            "uniform_number": "22",
+            "league_id": "cb399a17-e581-4f1a-9535-ea3bcb09fa1f"
+        },
+        {
+            "id": "a2b05332-6ce0-4ad9-aeeb-a5eb1244fb8c",
+            "created_at": "2016-04-03T02:35:22-04:00",
+            "updated_at": "2019-06-20T14:05:17-04:00",
+            "first_name": "Eric",
+            "last_name": "Cooper",
+            "name": "Eric Cooper",
+            "role": "3B",
+            "role_label": "Third Base",
+            "slug": "mlb-eric-cooper",
+            "uniform_number": "56",
+            "league_id": "cb399a17-e581-4f1a-9535-ea3bcb09fa1f"
+        },
+        {
+            "id": "ee0e5350-bc15-4b0f-80f2-79e793f18d68",
+            "created_at": "2016-04-03T02:35:22-04:00",
+            "updated_at": "2019-06-20T14:05:50-04:00",
+            "first_name": "Nic",
+            "last_name": "Lentz",
+            "name": "Nic Lentz",
+            "role": "HP",
+            "role_label": "Home",
+            "slug": "mlb-nic-lentz",
+            "uniform_number": "59",
+            "league_id": "cb399a17-e581-4f1a-9535-ea3bcb09fa1f"
+        },
+        {
+            "id": "bf13f606-2a12-4847-8b79-d96188ef420c",
+            "created_at": "2016-04-03T02:35:23-04:00",
+            "updated_at": "2019-06-13T14:03:12-04:00",
+            "first_name": "Andy",
+            "last_name": "Fletcher",
+            "name": "Andy Fletcher",
+            "role": "3B",
+            "role_label": "Third Base",
+            "slug": "mlb-andy-fletcher",
+            "uniform_number": "49",
+            "league_id": "cb399a17-e581-4f1a-9535-ea3bcb09fa1f"
+        }
+    ],
+    "games": [
+        {
+            "id": "adb9ccea-1bcc-4f0a-a083-8d7407d41bdb",
+            "created_at": "2019-02-23T14:59:21-05:00",
+            "updated_at": "2019-06-01T19:23:27-04:00",
+            "at_neutral_site": null,
+            "attendance": 27748,
+            "away_team_outcome": "win",
+            "away_team_score": 5,
+            "broadcast": "FS-OH",
+            "clock": ":30",
+            "clock_secs": 30,
+            "daytime": true,
+            "duration": 10740,
+            "ended_at": "2019-06-01T19:09:00-04:00",
+            "home_team_outcome": "loss",
+            "home_team_score": 2,
+            "humidity": null,
+            "interval": "Regular Season",
+            "interval_number": 1,
+            "interval_type": "regularseason",
+            "label": "Nationals vs Reds",
+            "name": "Nationals vs Reds June  1, 2019 at  4:10pm",
+            "on": "on June  1, 2019",
+            "period": 9,
+            "period_label": "Inning",
+            "score": "5-2",
+            "score_differential": 3,
+            "scoreline": "Nationals 5 - Reds 2",
+            "slug": "mlb-2019-was-cin-2019-06-1-1610",
+            "started_at": "2019-06-01T16:10:00-04:00",
+            "status": "closed",
+            "internet_coverage": null,
+            "satellite_coverage": null,
+            "television_coverage": "FS-OH",
+            "temperature": null,
+            "temperature_unit": null,
+            "timestamp": 1559419800,
+            "title": "Nationals vs Reds",
+            "weather_conditions": null,
+            "wind_direction": null,
+            "wind_speed": null,
+            "wind_speed_unit": null,
+            "home_team_id": "84e287b3-8aa1-4cb5-bcce-6a0e8ba97f91",
+            "away_team_id": "9ebc3cf3-9559-4b74-b8ad-f15f2c5eae71",
+            "winning_team_id": "9ebc3cf3-9559-4b74-b8ad-f15f2c5eae71",
+            "season_id": "36a3cc89-aa83-4391-b0b5-2bf8905393d8",
+            "venue_id": "423023e8-3bf7-44a4-91d5-9d9d4e7f7e83",
+            "official_ids": [
+                "0556efeb-3bf2-4532-993f-cc8e7ee54a44",
+                "a2b05332-6ce0-4ad9-aeeb-a5eb1244fb8c",
+                "ee0e5350-bc15-4b0f-80f2-79e793f18d68",
+                "bf13f606-2a12-4847-8b79-d96188ef420c"
+            ]
+        }
+    ]
+}

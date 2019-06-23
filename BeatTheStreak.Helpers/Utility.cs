@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace BeatTheStreak.Helpers
 {
@@ -162,7 +163,7 @@ namespace BeatTheStreak.Helpers
 
 		public static int CurrentWeek()
 		{
-			return 11;
+			return 12;
 		}
 
 		public static DateTime WeekStart( int weekNo )
@@ -234,6 +235,19 @@ namespace BeatTheStreak.Helpers
 		{
 			var hr = DateTime.Now.Hour;  // 0 to 23
 			return (hr < 16);
+		}
+
+		public static void EnsureDirectory(string destFile)
+		{
+			var directoryInfo = new FileInfo(destFile).Directory;
+			if (directoryInfo != null)
+			{
+				if (!Directory.Exists(directoryInfo.ToString()))
+				{
+					Directory.CreateDirectory(
+						path: directoryInfo.ToString());
+				}
+			}
 		}
 	}
 }
