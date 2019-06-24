@@ -52,7 +52,7 @@ namespace BeatTheStreak.Repositories
 
 		public override string ToString()
 		{
-			return $"{Name,-20}:{NickName,-15}:{Slug,-10}";
+			return $"{Slug,-8}:{Name} {NickName}";
 		}
 	}
 }

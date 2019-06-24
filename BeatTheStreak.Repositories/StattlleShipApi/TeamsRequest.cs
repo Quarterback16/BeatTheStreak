@@ -11,26 +11,58 @@ namespace BeatTheStreak.Repositories.StattlleShipApi
 	{
 		public List<TeamDto> LoadData(string seasonSlug)
 		{
-			var response = new TeamsViewModel();
+			Teams = new List<TeamDto>();
+			for (int page = 1; page < 3; page++)
+			{ 
+				var httpWebRequest = CreateRequest(
+					sport: "baseball",
+					league: "mlb",
+					apiRequest: "team_season_stats",
+					queryParms: $"season_id={seasonSlug}&page={page}");
 
-			var httpWebRequest = CreateRequest(
-				sport: "baseball",
-				league: "mlb",
-				apiRequest: "team_season_stats",
-				queryParms: $"season_id={seasonSlug}");
+				var httpResponse = (HttpWebResponse)httpWebRequest
+					.GetResponse();
 
-			var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+				using (var streamReader = new StreamReader(
+					httpResponse.GetResponseStream()))
+				{
+					var json = streamReader.ReadToEnd();
+					var dto = JsonConvert.DeserializeObject<TeamStatsDto>(
+						json);
 
-			using (var streamReader = new StreamReader(
-				httpResponse.GetResponseStream()))
-			{
-				var json = streamReader.ReadToEnd();
-				var dto = JsonConvert.DeserializeObject<TeamStatsDto>(
-					json);
-
-				Teams = dto.Teams;
+					MergeTeams(Teams,dto.Teams);
+				}
 			}
 			return Teams;
+		}
+
+		private void MergeTeams(
+			List<TeamDto> teams1, 
+			List<TeamDto> teams2)
+		{
+			foreach (var team in teams2)
+			{
+				if (!TeamListHas(teams1,team))
+				{
+					teams1.Add(team);
+				}
+			}
+		}
+
+		private bool TeamListHas(
+			List<TeamDto> teams1, 
+			TeamDto team)
+		{
+			var hasIt = false;
+			foreach (var t in teams1)
+			{
+				if (t.Slug.Equals(team.Slug))
+				{
+					hasIt = true;
+					break;
+				}
+			}
+			return hasIt;
 		}
 	}
 }
