@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -418,12 +419,24 @@ namespace FbbEventStore.Tests
 				};
 			var result = _sut.GetOwnersOf(plyr);
 			Assert.IsNotNull(result);
+			var ftDict = new Dictionary<string, int>();
 			foreach (var item in result)
 			{
 				var lastWord = item.Split(' ').Last();
 				if ( lastWord.Equals("FA"))
-					System.Console.WriteLine(item);
+					Console.WriteLine(item);
+				if (ftDict.ContainsKey(lastWord))
+					ftDict[lastWord]++;
+				else
+					ftDict.Add(key: lastWord, value: 1);
 			}
+			foreach (KeyValuePair<string, int> pair in ftDict)
+			{
+				Console.WriteLine("{0}, {1}",
+					pair.Key,
+					pair.Value);
+			}
+
 		}
 
 		[TestMethod]
