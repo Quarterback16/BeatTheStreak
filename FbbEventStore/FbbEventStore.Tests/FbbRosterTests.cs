@@ -345,6 +345,88 @@ namespace FbbEventStore.Tests
 		}
 
 		[TestMethod]
+		public void FbbEventStore_KnowsWhoOwnsTheAllStars()
+		{
+			string[] plyr =
+				{
+				    //  national league
+					"Willson Contreras",     // C
+					"Frederick Freeman",       //  1B
+					"Ketel Marte",   // 2B
+					"Javier Baez",     //  SS
+					"Nolan Arenado",         //  3B
+					"Christian Yelich",       // OF
+					"Cody Bellinger",         // OF
+					"Ronald Acuna Jr.",      //  OF
+					"Pete Alonso",
+					"Josh Bell",
+					"Anthony Rendon",
+					"Paul DeJong",
+					"Trevor Story",
+					"Kris Bryant",
+					"Michael Moustakas",
+					"Yasmani Grandal",
+					"J.T. Realmuto",
+					"Charles Blackmon",
+					"David Dahl",
+					"Jeff McNeil",
+					"Maxwell Scherzer",
+					"Hyun-Jin Ryu",
+					"Mike Soroka",
+					"Zack Greinke",
+					"Luis Castillo",
+					"Walker Buehler",
+					"Jacob deGrom",
+					"Clayton Kershaw",
+					"Sandy Alcantara",
+					"Will Smith",
+					"Josh Hader",
+					"Kirby Yates",
+					//american league
+					"Gary Sanchez",   // C
+					"Carlos Santana",  // 1B
+					"David LeMahieu",  // 2B
+					"Jorge Polanco",   // SS
+					"Alexander Bregman",    // 3B
+					"Mike Trout",      // OF
+					"George Springer",      // OF
+					"Michael Brantley",      // OF
+					"Hunter Pence",         //  DH
+					"Mookie Betts",
+					"Matt Chapman",
+					"Tommy La Stella",
+					"James McCann",
+					"Daniel Vogelbach",
+					"Whit Merrifield",
+					"Jose Abreu",
+					"Francisco Lindor",
+					"J D Martinez",
+					"Austin Meadows",
+					"Joey Gallo",
+					"Justin Verlander",
+					"Lucas Giolito",
+					"Gerrit Cole",
+					"Mike Minor",
+					"Jake Odorizzi",
+					"Marcus Stroman",
+					"John Means",
+					"Charlie Morton",
+					"Shane Greene",
+					"Aroldis Chapman",
+					"Brad Hand",
+					"Ryan Pressly"
+				};
+			var result = _sut.GetOwnersOf(plyr);
+			Assert.IsNotNull(result);
+			foreach (var item in result)
+			{
+				var lastWord = item.Split(' ').Last();
+				if ( lastWord.Equals("FA"))
+					System.Console.WriteLine(item);
+			}
+		}
+
+		[TestMethod]
 		public void Prospects()
 		{
 			string[] plyr =
@@ -362,5 +444,7 @@ namespace FbbEventStore.Tests
 				System.Console.WriteLine(item);
 			}
 		}
+
+
 	}
 }

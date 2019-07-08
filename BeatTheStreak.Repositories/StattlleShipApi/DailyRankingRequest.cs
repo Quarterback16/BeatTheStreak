@@ -22,7 +22,7 @@ namespace BeatTheStreak.Repositories
             var qp = new System.Text.StringBuilder();
             qp.Append("ranking=baseball_daily_player_hitter_ranking");
             qp.Append($"&season_id=mlb-{queryDate.Year}&on={strDate}&interval_type=regularseason");
-            //qp.Append($"&player_id={playerSlug}");
+            qp.Append($"&player_id={playerSlug}");
             var httpWebRequest = CreateRankingsRequest(
                 queryParms: qp.ToString());
 

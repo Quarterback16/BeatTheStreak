@@ -3229,7 +3229,7 @@
         "Trans": "IN"
     },
     {
-        "date": "2019-06-17",
+        "date": "2019-06-21",
         "fteam": "TC",
         "player": "Nick Markakis",
         "team": "Atl",
@@ -3237,11 +3237,245 @@
         "Trans": "OUT"
     },
     {
-        "date": "2019-06-17",
+        "date": "2019-06-21",
         "fteam": "TC",
         "player": "Frankie Montas",
         "team": "Oak",
         "pos": "SP",
         "Trans": "IN"
+    },
+    {
+        "date": "2019-06-23",
+        "fteam": "TC",
+        "player": "Frankie Montas",
+        "team": "Oak",
+        "pos": "SP",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-06-24",
+        "fteam": "TT",
+        "player": "Byron Buxton",
+        "team": "Min",
+        "pos": "OF",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-06-24",
+        "fteam": "TT",
+        "player": "Zach Eflin",
+        "team": "Phi",
+        "pos": "SP",
+        "Trans": "IN"
+    },
+    {
+        "date": "2019-06-24",
+        "fteam": "CA",
+        "player": "James McCann",
+        "team": "ChW",
+        "pos": "C",
+        "Trans": "IN"
+    },
+    {
+        "date": "2019-06-24",
+        "fteam": "ABG",
+        "player": "Mike Foltynewicz",
+        "team": "Atl",
+        "pos": "SP",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-06-24",
+        "fteam": "ABG",
+        "player": "J.A. Happ",
+        "team": "NYY",
+        "pos": "SP",
+        "Trans": "IN"
+    },
+    {
+        "date": "2019-06-24",
+        "fteam": "CA",
+        "player": "Mitch Garver",
+        "team": "Min",
+        "pos": "C",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-06-24",
+        "fteam": "CA",
+        "player": "Robinson Chirinos",
+        "team": "Hou",
+        "pos": "C",
+        "Trans": "IN"
+    },
+    {
+        "date": "2019-06-26",
+        "fteam": "STTM",
+        "player": "Stephen Piscotty",
+        "team": "Oak",
+        "pos": "RF",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-06-26",
+        "fteam": "STTM",
+        "player": "Domingo Santana",
+        "team": "Sea",
+        "pos": "RF",
+        "Trans": "IN"
+    },
+    {
+        "date": "2019-06-26",
+        "fteam": "STTM",
+        "player": "Jose Quintana",
+        "team": "ChC",
+        "pos": "SP",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-06-26",
+        "fteam": "STTM",
+        "player": "Hansel Robles",
+        "team": "LAA",
+        "pos": "RP",
+        "Trans": "IN"
+    },
+    {
+        "date": "2019-06-26",
+        "fteam": "CA",
+        "player": "Robinson Chirinos",
+        "team": "Hou",
+        "pos": "C",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-06-26",
+        "fteam": "CA",
+        "player": "Ramon Laureano",
+        "team": "Oak",
+        "pos": "CF",
+        "Trans": "IN"
+    },
+    {
+        "date": "2019-06-26",
+        "fteam": "CA",
+        "player": "John Gant",
+        "team": "StL",
+        "pos": "SP",
+        "Trans": "IN"
+    },
+    {
+        "date": "2019-06-26",
+        "fteam": "STTM",
+        "player": "David Fletcher",
+        "team": "LAA",
+        "pos": "2B",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-06-26",
+        "fteam": "STTM",
+        "player": "Lourdes Gurriel Jr.",
+        "team": "Tor",
+        "pos": "SS",
+        "Trans": "IN"
+    },
+    {
+        "date": "2019-06-28",
+        "fteam": "TC",
+        "player": "Jordan Hicks",
+        "team": "StL",
+        "pos": "RP",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-06-28",
+        "fteam": "TC",
+        "player": "Liam Hendriks",
+        "team": "Oak",
+        "pos": "RP",
+        "Trans": "IN"
+    },
+    {
+        "date": "2019-07-01",
+        "fteam": "TC",
+        "player": "John Gant",
+        "team": "StL",
+        "pos": "SP",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-07-01",
+        "fteam": "TC",
+        "player": "Christian Vazquez",
+        "team": "Bos",
+        "pos": "C",
+        "Trans": "IN"
+    },
+    {
+        "date": "2019-07-01",
+        "fteam": "CA",
+        "player": "Michael Wacha",
+        "team": "StL",
+        "pos": "SP",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-07-01",
+        "fteam": "CA",
+        "player": "Carlos Martinez",
+        "team": "Stl",
+        "pos": "SP",
+        "Trans": "IN"
+    },
+    {
+        "date": "2019-07-05",
+        "fteam": "TC",
+        "player": "Griffin Canning",
+        "team": "LAA",
+        "pos": "SP",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-07-05",
+        "fteam": "TC",
+        "player": "Caleb Smith",
+        "team": "Mia",
+        "pos": "SP",
+        "Trans": "IN"
+    },
+    {
+        "date": "2019-07-05",
+        "fteam": "TT",
+        "player": "Sony Gray",
+        "team": "Cin",
+        "pos": "SP",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-07-08",
+        "fteam": "TC",
+        "player": "Liam Hendriks",
+        "team": "Oak",
+        "pos": "RP",
+        "Trans": "OUT"
+    },
+    {
+        "date": "2019-07-08",
+        "fteam": "TC",
+        "player": "Sergio Romo",
+        "team": "Mia",
+        "pos": "RP",
+        "Trans": "IN"
+    },
+    {
+        "date": "2019-07-08",
+        "fteam": "CA",
+        "player": "Paul DeJong",
+        "team": "Stl",
+        "pos": "SS",
+        "Trans": "OUT"
     }
+
+
 ]

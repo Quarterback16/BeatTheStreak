@@ -616,45 +616,47 @@ namespace BeatTheStreak.Tests
 		{
 			var plyrs = new List<Closer>
 			{
-				new Closer( "Greg Holland",       "AD", "strong"),
-				new Closer( "Luke Jackson",       "AB", "medium" ),
-				new Closer( "Shawn Armstrong",     "BO", "committee" ),
-				new Closer( "Ryan Brasier",      "BRS",  "committee" ),
-				new Closer( "Steve Cishek",       "CHC", "committee" ),
-				new Closer( "Raisel Iglesias",   "CR", "strong" ),
-				new Closer( "Brad Hand",         "CI", "strong" ),
-				new Closer( "Wade Davis",        "COL", "strong" ),
-				new Closer( "Alex Colome",       "CWS", "strong" ),
-				new Closer( "Shane Greene",       "DT", "strong" ),
-				new Closer( "Roberto Osuna",     "HA", "strong" ),
-				new Closer( "Ian Kennedy",       "KC", "medium" ),
-				new Closer( "Hansel Robles",     "LAA", "committee" ),
-				new Closer( "Kenley Jansen",     "LAD", "strong" ),
-				new Closer( "Sergio Romo",       "MIA", "medium" ),
 				new Closer( "Josh Hader",        "MB", "medium" ),
-				new Closer( "Blake Parker",      "MT", "committee" ),
-				new Closer( "Edwin Diaz",        "NYM", "strong" ),
-				new Closer( "Aroldis Chapman",   "NYY", "strong" ),
-				new Closer( "Blake Treinen",     "OA", "strong" ),
-				new Closer( "Hector Neris",      "PHP", "medium" ),
-				new Closer( "Felipe Vazquez",    "PIT", "strong" ),
 				new Closer( "Kirby Yates",       "SD", "strong" ),
-				new Closer( "Anthony Swarzak",   "SM", "committee" ),
+				new Closer( "Brad Hand",         "CI", "strong" ),
+				new Closer( "Aroldis Chapman",   "NYY", "strong" ),
+				new Closer( "Kenley Jansen",     "LAD", "strong" ),
+				new Closer( "Felipe Vazquez",    "PIT", "strong" ),
+				new Closer( "Roberto Osuna",     "HA", "strong" ),
+				new Closer( "Craig Kimbrel",       "CHC", "committee" ),
 				new Closer( "Will Smith",        "SF", "strong" ),
-				new Closer( "Jordan Hicks",      "SLC", "medium" ),
-				new Closer( "Jose Alvarado",     "Tam", "committee" ),
+				new Closer( "Ken Giles",         "Tor", "weak" ),
+				new Closer( "Sean Doolittle",    "Wsh", "strong" ),
+				new Closer( "Hector Neris",      "PHP", "medium" ),
+				new Closer( "Shane Greene",       "DT", "strong" ),
+				new Closer( "Alex Colome",       "CWS", "strong" ),
+				new Closer( "Edwin Diaz",        "NYM", "strong" ),
+				new Closer( "Hansel Robles",     "LAA", "committee" ),
+				new Closer( "Carlos Martinez",    "SLC", "weak" ),
+				new Closer( "Greg Holland",       "AD", "strong"),
+				new Closer( "Ian Kennedy",       "KC", "medium" ),
+				new Closer( "Raisel Iglesias",   "CR", "strong" ),
 				new Closer( "Shawn Kelley",       "TR", "weak" ),
-				new Closer( "Joe Biagni",         "TB", "weak" ),
-				new Closer( "Sean Doolittle",    "Wsh", "strong" )
+				new Closer( "Luke Jackson",       "AB", "medium" ),
+				new Closer( "Roenis Elias",   "SM", "committee" ),
+				new Closer( "Liam Hendricks",     "OA", "strong" ),
+				new Closer( "Ryan Brasier",      "BRS",  "committee" ),
+				new Closer( "Blake Parker",      "MT", "committee" ),
+				new Closer( "Jose Alvarado",     "Tam", "committee" ),
+				new Closer( "Wade Davis",        "COL", "strong" ),
+				new Closer( "Sergio Romo",       "MIA", "medium" ),
+				new Closer( "Shawn Armstrong",     "BO", "committee" ),
 			};
 
+			var i = 0;
 			foreach (var p in plyrs)
 			{
+				i++;
 				var owner = _rosterMaster.GetOwnerOf(p.Name);
 				Assert.IsNotNull(owner);
 				if (owner=="FA")
-					System.Console.WriteLine(
-						$"{owner} owns {p} {p.Hold.ToUpper()}");
+					Console.WriteLine(
+						$"{p} {p.Hold.ToUpper()} ({i}) is available");
 			}
 		}
 	}
